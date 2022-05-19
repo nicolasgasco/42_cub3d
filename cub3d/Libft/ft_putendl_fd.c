@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsolinis <jsolinis@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/18 23:29:00 by jsolinis          #+#    #+#             */
-/*   Updated: 2022/05/18 23:30:22 by jsolinis         ###   ########.fr       */
+/*   Created: 2021/06/26 15:43:47 by jsolinis          #+#    #+#             */
+/*   Updated: 2021/07/01 11:21:01 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE3D_H
-# define CUBE3D_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <unistd.h>
+void	ft_putendl_fd(char *s, int fd)
+{
+	int	i;
 
-/* Scene description file validation */
-void    ft_check_num_args(int argc);
-
-#endif
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
+	ft_putchar_fd('\n', fd);
+}
