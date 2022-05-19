@@ -10,13 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE3D_H
-# define CUBE3D_H
+#ifndef PHILO_H
+# define PHILO_H
 
-#include <stdio.h>
-#include <unistd.h>
 
-/* Scene description file validation */
-void    ft_check_num_args(int argc);
 
 #endif

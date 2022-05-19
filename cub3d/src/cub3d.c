@@ -14,6 +14,5 @@
 
 int	main(int argc, char **argv)
 {
-	ft_check_num_args(argc);
 	return (0);
 }
