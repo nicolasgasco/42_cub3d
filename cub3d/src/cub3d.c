@@ -15,5 +15,6 @@
 int	main(int argc, char **argv)
 {
 	ft_check_num_args(argc);
+	ft_scene_desc_file_validation(argv[1]);
 	return (0);
 }
