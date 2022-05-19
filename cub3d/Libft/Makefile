@@ -1,5 +1,7 @@
 SRCS =	ft_strlen.c		\
-
+        ft_putchar_fd.c \
+		ft_putendl_fd.c \
+		
 NAME = libft.a
 
 OBJS_DIR = objs/
