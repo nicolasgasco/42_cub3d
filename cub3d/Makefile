@@ -4,14 +4,17 @@ SANITIZE = -g -fsanitize=address
 VALGRIND = -g -Og -std=gnu99
 INC = -I%.h -I$(LIB_DIR)%.h
 
-SRC_NAME =	cub3d.c	\
-		error_management/ft_args_check.c \
+SRC_NAME =	cub3d.c\
+		scene_desc_file_validation/ft_check_num_args.c\
+		scene_desc_file_validation/ft_scene_desc_file_validation.c\
+		scene_desc_file_validation/ft_scene_desc_file_validation-file_ext.c\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR),$(OBJ_NAME))
 
 LIB_DIR = ./Libft/
 SRC_DIR = ./src/
+SCN_DIR = scene_desc_file_validation/
 OBJ_DIR = ./obj/
 
 all: $(NAME)
@@ -22,7 +25,7 @@ $(NAME): $(OBJ)
 	@echo "##### cub3d compiling finished! #####"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)$(SCN_DIR)
 	@echo "##### Creating" [ $@ ] " #####"
 	@gcc $(FLAGS) -g -o $@ -c $< $(INC)
 
