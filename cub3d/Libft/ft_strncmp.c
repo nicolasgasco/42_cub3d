@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsolinis <jsolinis@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/04 19:07:31 by jsolinis          #+#    #+#             */
-/*   Updated: 2021/12/04 21:41:45 by jsolinis         ###   ########.fr       */
+/*   Created: 2021/06/08 12:08:28 by jsolinis          #+#    #+#             */
+/*   Updated: 2021/07/01 11:24:42 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t			i;
+	unsigned char	*str1;
+	unsigned char	*str2;
 
-size_t	ft_strlen(const char *s);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putendl_fd(char *s, int fd);
-int	    ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-
-#endif
+	str1 = (unsigned char *) s1;
+	str2 = (unsigned char *) s2;
+	i = 0;
+	while (str1[i] != '\0' && str2[i] != '\0' && n > 0)
+	{
+		if (str1[i] != str2[i])
+			break ;
+		i++;
+		n--;
+	}
+	if (n == 0)
+		return (0);
+	return (str1[i] - str2[i]);
+} 
