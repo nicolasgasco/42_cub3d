@@ -8,6 +8,8 @@ SRC_NAME =	cub3d.c\
 		scene_desc_file_validation/ft_check_num_args.c\
 		scene_desc_file_validation/ft_scene_desc_file_validation.c\
 		scene_desc_file_validation/ft_scene_desc_file_validation-file_ext.c\
+		../gnl/get_next_line.c\
+		../gnl/get_next_line_utils.c\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR),$(OBJ_NAME))
