@@ -1,0 +1,6 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory '/home/ngasco/Documents/42_cube3d'
+make: Leaving directory '/home/ngasco/Documents/42_cube3d'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+

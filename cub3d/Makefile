@@ -8,6 +8,7 @@ SRC_NAME =	cub3d.c\
 		scene_desc_file_validation/ft_check_num_args.c\
 		scene_desc_file_validation/ft_scene_desc_file_validation.c\
 		scene_desc_file_validation/ft_scene_desc_file_validation-file_ext.c\
+		scene_desc_file_validation/ft_scene_desc_file_validation-type_ids.c\
 		../gnl/get_next_line.c\
 		../gnl/get_next_line_utils.c\
 		utils/ft_utils.c\

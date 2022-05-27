@@ -17,6 +17,7 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 /* Utils */
 int     ft_isspace(char c);
@@ -26,5 +27,7 @@ void    ft_skip_to_non_space_char(char *line, int *iterator);
 void    ft_check_num_args(int argc);
 void    ft_scene_desc_file_validation(char *file_path);
 void    ft_file_extension_validation(char *file_path);
+void    ft_type_ids_validation(char *file_path);
+int    ft_open_scene_file(char *file_path);
 
 #endif
