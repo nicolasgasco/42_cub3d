@@ -24,7 +24,43 @@ void    ft_type_ids_validation(char *file_path)
         line = get_next_line(scene_file_fd);
         if (line == NULL)
             break ;
-        printf("%s\n", line);
+        ft_validate_scene_file_line(line);
+        break;
     }
     close(scene_file_fd);
+}
+
+void    ft_validate_scene_file_line(char *line)
+{
+    int i;
+
+    i = 0;
+    while(line[i] != '\0')
+    {
+        ft_skip_to_non_space_char(line, &i);
+        printf("%c", line[i]);
+        if (line[i] == '1')
+        {
+            printf("Logic for map\n");
+            return ;
+        }
+        else if (line[i] == 'N' || line[i] == 'S'
+            || line[i] == 'W' || line[i] == 'E')
+        {
+            printf("Logic for Orientation paths");
+            break;
+        }
+        else if (line[i] == 'F' || line[i] == 'C')
+        {
+            printf("Logic for Color validation");
+            break;
+        }
+        else
+        {
+            ft_putendl_fd("Error: invalid identifier", STDERR_FILENO);
+            exit(5);
+        }
+        i++;
+    }
+    printf("\n");
 }

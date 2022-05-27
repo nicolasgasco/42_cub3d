@@ -29,5 +29,6 @@ void    ft_scene_desc_file_validation(char *file_path);
 void    ft_file_extension_validation(char *file_path);
 void    ft_type_ids_validation(char *file_path);
 int    ft_open_scene_file(char *file_path);
+void    ft_validate_scene_file_line(char *line);
 
 #endif
