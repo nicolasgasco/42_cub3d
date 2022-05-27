@@ -11,6 +11,7 @@ SRC_NAME =	cub3d.c\
 		scene_desc_file_validation/ft_type_ids_validation.c\
 		../gnl/get_next_line.c\
 		../gnl/get_next_line_utils.c\
+		utils/ft_utils.c\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR),$(OBJ_NAME))
@@ -18,6 +19,7 @@ OBJ = $(addprefix $(OBJ_DIR),$(OBJ_NAME))
 LIB_DIR = ./Libft/
 SRC_DIR = ./src/
 SCN_DIR = scene_desc_file_validation/
+UTL_DIR = utils/
 OBJ_DIR = ./obj/
 
 all: $(NAME)
@@ -29,6 +31,7 @@ $(NAME): $(OBJ)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)$(SCN_DIR)
+	@mkdir -p $(OBJ_DIR)$(UTL_DIR)
 	@echo "##### Creating" [ $@ ] " #####"
 	@gcc $(FLAGS) -g -o $@ -c $< $(INC)
 
