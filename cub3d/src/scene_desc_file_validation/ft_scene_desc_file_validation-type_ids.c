@@ -47,7 +47,7 @@ void    ft_validate_scene_file_line(char *line)
         else if (line[i] == 'N' || line[i] == 'S'
             || line[i] == 'W' || line[i] == 'E')
         {
-            printf("Logic for Orientation paths");
+            ft_validate_orientation_path(line, &i);
             break;
         }
         else if (line[i] == 'F' || line[i] == 'C')
