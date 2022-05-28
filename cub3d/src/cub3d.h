@@ -18,6 +18,15 @@
 #include <stdio.h>
 #include <unistd.h>
 
+/* Utils */
+int     ft_open_file(char *file_path);
+int     ft_isspace(char c);
+void    ft_skip_to_non_space_char(char *line, int *iterator);
+
+/* Common errors */
+void    ft_malloc_error(void);
+void    ft_open_file_error(void);
+
 /* Scene description file validation */
 void    ft_check_num_args(int argc);
 void    ft_scene_desc_file_validation(char *file_path);
