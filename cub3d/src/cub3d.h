@@ -13,16 +13,16 @@
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
-#include "../gnl/get_next_line.h"
-
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <fcntl.h>
 
 /* Utils */
 int     ft_open_file(char *file_path);
 int     ft_isspace(char c);
 void    ft_skip_to_non_space_char(char *line, int *iterator);
+char	*get_next_line(int fd);
 
 /* Common errors */
 void    ft_malloc_error(void);
