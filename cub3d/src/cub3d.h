@@ -13,6 +13,8 @@
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
+#include "../gnl/get_next_line.h"
+
 #include <stdio.h>
 #include <unistd.h>
 
