@@ -1,7 +1,7 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-void    ft_type_ids_validation(char *file_path)
+void    ft_type_ids_validation(char *file_path, t_map_data *map)
 {
     int     scene_file_fd;
     char    *line;
@@ -9,28 +9,28 @@ void    ft_type_ids_validation(char *file_path)
     
     is_file_empty = 1;
     scene_file_fd = ft_open_file(file_path);
-    while (1) {
-        line = get_next_line(scene_file_fd);
-        if (line == NULL)
-            break ;
+    line = get_next_line(scene_file_fd);
+    while (line) {
         is_file_empty = 0;
         if (*line == '\n')
         {
             free(line);
             continue ;
         }
-        ft_validate_scene_file_line(line);
-        free(line);
+        ft_validate_scene_file_line(line, map);
+	free(line);
+	line = get_next_line(scene_file_fd);
     }
     if (is_file_empty == 1)
     {
+	free(line);
         printf("Error: emtpy scene file\n");
         exit(6) ;
     }
     close(scene_file_fd);
 }
 
-void    ft_validate_scene_file_line(char *line)
+void    ft_validate_scene_file_line(char *line, t_map_data *map)
 {
     int i;
 
@@ -41,9 +41,8 @@ void    ft_validate_scene_file_line(char *line)
         ft_skip_to_non_space_char(line, &i);
         if (line[i] == '1')
         {
-            printf("Logic for map\n");
-            free(line); // TODO delete this
-            exit(101) ; // TODO delete this
+            ft_map_validation(line, map);
+	    break;
         }
         else if (line[i] == 'N' || line[i] == 'S'
             || line[i] == 'W' || line[i] == 'E')

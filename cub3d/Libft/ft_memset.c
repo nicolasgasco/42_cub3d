@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   memset.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsolinis <jsolinis@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/18 23:15:12 by jsolinis          #+#    #+#             */
-/*   Updated: 2022/05/22 23:15:59 by jsolinis         ###   ########.fr       */
+/*   Created: 2021/06/04 11:41:35 by jsolinis          #+#    #+#             */
+/*   Updated: 2021/07/01 11:20:29 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	*ft_memset(void *l, int c, size_t len)
 {
-	t_map_data    map;
+	size_t	i;
 
-	ft_memset(&map, 0, sizeof(t_map_data));
-	ft_check_num_args(argc);
-	ft_scene_desc_file_validation(argv[1], &map);
-	return (0);
+	i = 0;
+	while (i < len)
+	{
+		*(unsigned char *)(l + i) = (unsigned char)c;
+		i++;
+	}
+	return (l);
 }

@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsolinis <jsolinis@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/18 23:15:12 by jsolinis          #+#    #+#             */
-/*   Updated: 2022/05/22 23:15:59 by jsolinis         ###   ########.fr       */
+/*   Created: 2021/06/12 21:46:29 by jsolinis          #+#    #+#             */
+/*   Updated: 2021/11/06 21:30:50 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_strdup(const char *s1)
 {
-	t_map_data    map;
+	char	*ptr;
+	int	size;
 
-	ft_memset(&map, 0, sizeof(t_map_data));
-	ft_check_num_args(argc);
-	ft_scene_desc_file_validation(argv[1], &map);
-	return (0);
+	size = ft_strlen(s1);
+	ptr = (char *) malloc (sizeof(char) * size + 1);
+	if (ptr == NULL)
+		return (0);
+	ft_strlcpy(ptr, s1, size + 1);
+	return (ptr);
 }

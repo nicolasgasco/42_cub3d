@@ -31,3 +31,10 @@ void    ft_skip_to_non_space_char(char *line, int *iterator)
             return;
     }
 }
+
+int ft_is_map_content_char(char c)
+{
+    if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	return (1);
+    return(0);
+}
