@@ -25,6 +25,7 @@ void    ft_skip_to_non_space_char(char *line, int *iterator);
 char	*get_next_line(int fd);
 char    *ft_substr_no_leaks(char *s, unsigned int start, size_t len);
 char    *ft_strtrim_no_leaks(char *s1, const char *set);
+int     ft_str_is_numeric(char *str);
 
 /* Common errors */
 void    ft_malloc_error(void);
