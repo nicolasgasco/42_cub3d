@@ -31,3 +31,21 @@ void    ft_skip_to_non_space_char(char *line, int *iterator)
             return;
     }
 }
+
+char    *ft_substr_no_leaks(char *s, unsigned int start, size_t len)
+{
+    char    *temp;
+
+    temp = ft_substr(s, start, len);
+    free(s);
+    return (temp);
+}
+
+char *ft_strtrim_no_leaks(char *s1, const char *set)
+{
+    char    *temp;
+
+    temp = ft_strtrim(s1, set);
+    free(s1);
+    return (temp);
+}
