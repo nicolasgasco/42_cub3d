@@ -58,9 +58,22 @@ executeErrorTest() {
         echo "\n$(less $SCRIPT_PATH$VALGRIND_OUTPUT)"
         exit 1
     fi
+    echo "\n==========================================================================================================\n"
 }
 
-echo "\nCOLORS CODES:"
+echo "\nCOLORS CODES ERRORS:"
+
+
+MAP_CONTENT="F"
+ERR_MESSAGE="Error: invalid color statement"
+DESCRIPTION="No color statement"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="F     "
+ERR_MESSAGE="Error: invalid color statement"
+DESCRIPTION="No color statement (trailing spaces)"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
 MAP_CONTENT="F -20,20,20"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Negative color code"
@@ -71,9 +84,19 @@ ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Color code > 255"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
+MAP_CONTENT="F 256,20,20,"
+ERR_MESSAGE="Error: invalid color code"
+DESCRIPTION="Color code > 255 (trailing comma)"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
 MAP_CONTENT="F 2a0,20,20"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Non-numeric color code"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="F 2a0,20,20"
+ERR_MESSAGE="Error: invalid color code"
+DESCRIPTION="Non-numeric color code (trailing comma)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="F 225,200"
@@ -81,17 +104,27 @@ ERR_MESSAGE="Error: invalid color statement"
 DESCRIPTION="One color code missing"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 225"
-ERR_MESSAGE="Error: invalid color statement"
-DESCRIPTION="Two color codes missing"
-executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
-
 MAP_CONTENT="F 225,200,"
 ERR_MESSAGE="Error: invalid color statement"
 DESCRIPTION="One color code missing (trailing comma)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
+MAP_CONTENT="F 225"
+ERR_MESSAGE="Error: invalid color statement"
+DESCRIPTION="Two color codes missing"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="F 225,"
+ERR_MESSAGE="Error: invalid color statement"
+DESCRIPTION="Two color codes missing (trailing comma)"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
 MAP_CONTENT="F 225,200,200,200"
 ERR_MESSAGE="Error: invalid color statement"
 DESCRIPTION="Four color codes"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="F 225,200,200,200,"
+ERR_MESSAGE="Error: invalid color statement"
+DESCRIPTION="Four color codes (trailing comma)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
