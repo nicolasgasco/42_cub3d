@@ -53,7 +53,7 @@ void    ft_validate_scene_file_line(char *line)
         }
         else if (line[i] == 'F' || line[i] == 'C')
         {
-            printf("Logic for Color validation\n");
+            ft_parse_colors(line, &i);
             break;
         }
         else
