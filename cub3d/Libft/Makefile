@@ -8,6 +8,8 @@ SRCS =	ft_strlen.c		\
 		ft_strchr.c     \
 		ft_atoi.c 		\
 		ft_isdigit.c    \
+		ft_memset.c     \
+		ft_strdup.c     \
 		
 NAME = libft.a
 
