@@ -31,6 +31,13 @@ void    ft_validate_orientation_path(char *o_path_acronym, char *line, int *i)
     char    *o_path;
     int     o_file_fd;
 
+    if (!ft_isspace(line[*i]))
+    {
+        free(o_path_acronym);
+        free(line);
+        ft_putendl_fd("Error: invalid identifier", STDERR_FILENO);
+        exit(5);
+    }
     ft_skip_to_non_space_char(line, i);
     if (line[*i] == '\0')
     {
