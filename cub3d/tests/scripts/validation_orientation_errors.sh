@@ -122,5 +122,3 @@ MAP_CONTENT="NO ./fold/path_to_file"
 ERR_MESSAGE="Error: file opening failed"
 DESCRIPTION="Invalid path (nested)"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
-
-exit 1
