@@ -49,4 +49,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+test:
+	@sh tests/validation_tests.sh
+
+.PHONY: all clean fclean re test
