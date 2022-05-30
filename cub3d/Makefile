@@ -13,6 +13,7 @@ SRC_NAME =	cub3d.c\
 		scene_desc_file_validation/ft_map_validation.c\
 		../gnl/get_next_line.c\
 		../gnl/get_next_line_utils.c\
+		utils/get_next_line.c\
 		utils/ft_utils.c\
 		utils/ft_common_errs.c\
 

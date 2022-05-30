@@ -13,10 +13,9 @@
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
-#include "../gnl/get_next_line.h"
-
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <fcntl.h>
 
 typedef struct s_map_data
@@ -30,7 +29,12 @@ typedef struct s_map_data
 int     ft_open_file(char *file_path);
 int     ft_isspace(char c);
 void    ft_skip_to_non_space_char(char *line, int *iterator);
-int	ft_ismapchar(char c);
+int	    ft_ismapchar(char c);
+char	  *get_next_line(int fd);
+char    *ft_substr_no_leaks(char *s, unsigned int start, size_t len);
+char    *ft_strtrim_no_leaks(char *s1, const char *set);
+int     ft_str_is_numeric(char *str);
+
 
 /* Common errors */
 void    ft_malloc_error(void);
@@ -46,6 +50,6 @@ void    ft_validate_scene_file_line(char *line, t_map_data *map);
 void    ft_parse_orientation_path(char *line, int *i);
 void    ft_validate_orientation_path(char *o_path_acronym, char *line, int *i);
 int     ft_calc_path_length(char *line, int i);
-int	ft_map_validation(char *line, t_map_data *map);
+int	    ft_map_validation(char *line, t_map_data *map);
 
 #endif

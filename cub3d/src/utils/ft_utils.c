@@ -32,9 +32,28 @@ void    ft_skip_to_non_space_char(char *line, int *iterator)
     }
 }
 
+
 int ft_is_map_content_char(char c)
 {
     if (c == '1' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	return (1);
     return(0);
+}
+
+char    *ft_substr_no_leaks(char *s, unsigned int start, size_t len)
+{
+    char    *temp;
+
+    temp = ft_substr(s, start, len);
+    free(s);
+    return (temp);
+}
+
+char *ft_strtrim_no_leaks(char *s1, const char *set)
+{
+    char    *temp;
+
+    temp = ft_strtrim(s1, set);
+    free(s1);
+    return (temp);
 }
