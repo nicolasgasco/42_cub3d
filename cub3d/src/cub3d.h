@@ -42,5 +42,10 @@ void    ft_parse_orientation_path(char *line, int *i);
 void    ft_validate_orientation_path(char *o_path_acronym, char *line, int *i);
 int     ft_calc_path_length(char *line, int i);
 int     ft_open_file_path_validation(char *o_path, char *line, char *o_path_acronym);
+void    ft_parse_colors(char *line, int *i);
+void    ft_validate_colors(char *color_char, char *line, int *i);
+int     ft_parse_color_codes(char *line, int *i);
+void    ft_validate_color_code_str(char *color_code_str, char *line);
+int     ft_parse_single_color_code(char *line, int *iterator);
 
 #endif
