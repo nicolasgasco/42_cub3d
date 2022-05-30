@@ -79,6 +79,11 @@ ERR_MESSAGE="Error: invalid color statement"
 DESCRIPTION="No color statement (trailing spaces)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
+MAP_CONTENT="F20,20,20"
+ERR_MESSAGE="Error: invalid identifier"
+DESCRIPTION="No space before color"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
 MAP_CONTENT="F -20,20,20"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Negative color code"

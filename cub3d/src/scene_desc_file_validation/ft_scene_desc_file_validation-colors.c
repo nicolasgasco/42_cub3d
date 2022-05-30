@@ -18,8 +18,14 @@ void    ft_validate_colors(char *color_char, char *line, int *i)
     int     codes_count;
 
     codes_count = 0;
-    ft_skip_to_non_space_char(line, i);
     free(color_char);
+    if (!ft_isspace(line[*i]) && line[*i] != '\0')
+    {
+        free(line);
+        ft_putendl_fd("Error: invalid identifier", STDERR_FILENO);
+        exit(5);
+    }
+    ft_skip_to_non_space_char(line, i);
     codes_count = ft_parse_color_codes(line, i);
     if (codes_count != 3)
     {
