@@ -27,7 +27,6 @@ void    ft_parse_orientation_path(char *line, int *i)
 
 void    ft_validate_orientation_path(char *o_path_acronym, char *line, int *i)
 {
-    char    *o_path_untrimmed;
     char    *o_path;
     int     o_file_fd;
 
@@ -46,12 +45,10 @@ void    ft_validate_orientation_path(char *o_path_acronym, char *line, int *i)
         ft_putendl_fd("Error: missing file path", STDERR_FILENO);
         exit(7);
     }
-    o_path_untrimmed = ft_substr(line, *i, ft_calc_path_length(line, *i));
-    o_path = ft_strtrim(o_path_untrimmed, " \n");
-    free(o_path_untrimmed);
-    o_file_fd = ft_open_file(o_path);
+    o_path = ft_substr(line, *i, ft_calc_path_length(line, *i));
+    o_path = ft_strtrim_no_leaks(o_path, " \n");
+    o_file_fd = ft_open_file_path_validation(o_path, line, o_path_acronym);
     free(o_path);
-    printf("Line is validated ✅\n");
     close(o_file_fd);
 }
 
@@ -60,7 +57,7 @@ int ft_calc_path_length(char *line, int i)
     int len;
 
     len = 0;
-    while (ft_isspace(line[i]) == 0)
+    while (ft_isspace(line[i]) == 0 && line[i])
     {
         len++;
         i++;
@@ -68,3 +65,17 @@ int ft_calc_path_length(char *line, int i)
     return (len);
 }
 
+int ft_open_file_path_validation(char *o_path, char *line, char *o_path_acronym)
+{
+    int     file_fd;
+
+    file_fd = open(o_path, O_RDONLY);
+    if (file_fd == -1)
+    {
+        free(o_path);
+        free(line);
+        free(o_path_acronym);
+        ft_open_file_error();
+    }
+    return(file_fd);
+}

@@ -41,5 +41,6 @@ void    ft_validate_scene_file_line(char *line);
 void    ft_parse_orientation_path(char *line, int *i);
 void    ft_validate_orientation_path(char *o_path_acronym, char *line, int *i);
 int     ft_calc_path_length(char *line, int i);
+int     ft_open_file_path_validation(char *o_path, char *line, char *o_path_acronym);
 
 #endif
