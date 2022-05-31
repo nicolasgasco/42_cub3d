@@ -10,11 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../Libft/libft.h"
 #include "cub3d.h"
 
 int	main(int argc, char **argv)
 {
+	t_map    map;
+
+	ft_memset(&map, 0, sizeof(t_map));
 	ft_check_num_args(argc);
-	ft_scene_desc_file_validation(argv[1]);
+	ft_scene_desc_file_validation(argv[1], &map);
 	return (0);
 }
