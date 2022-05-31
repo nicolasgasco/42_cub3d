@@ -1,19 +1,19 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-void    ft_parse_colors(char *line, int *i)
+void    ft_parse_colors(char *line, int *i, t_map *map)
 {
     char    *color_char;
 
     color_char = ft_substr(line, *i, 1);
     *i = *i + 1;
     if (ft_strncmp(color_char, "F", 1) == 0)
-        ft_validate_colors(color_char, line, i);
+        ft_validate_colors(color_char, line, i, map);
     else if (ft_strncmp(color_char, "C", 1) == 0)
-        ft_validate_colors(color_char, line, i);
+        ft_validate_colors(color_char, line, i, map);
 }
 
-void    ft_validate_colors(char *color_char, char *line, int *i)
+void    ft_validate_colors(char *color_char, char *line, int *i, t_map *map)
 {
     int     codes_count;
 
@@ -32,6 +32,10 @@ void    ft_validate_colors(char *color_char, char *line, int *i)
         free(line);
         ft_putendl_fd("Error: invalid color statement", STDERR_FILENO);
         exit(8);
+    }
+    if (map)
+    {
+        //continue
     }
 }
 
