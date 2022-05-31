@@ -12,6 +12,7 @@ SRC_NAME =	cub3d.c\
 		scene_desc_file_validation/ft_scene_desc_file_validation-type_ids-orientation-paths.c\
 		scene_desc_file_validation/ft_scene_desc_file_validation-colors.c\
 		scene_desc_file_validation/ft_map_content_validation.c\
+		scene_desc_file_validation/ft_scene_desc_file_validation-completeness-check.c\
 		utils/get_next_line.c\
 		utils/ft_utils.c\
 		utils/ft_utils_1.c\
