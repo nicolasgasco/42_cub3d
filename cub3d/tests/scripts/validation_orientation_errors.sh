@@ -73,7 +73,7 @@ executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 # This skips checks and goes to map validation
 MAP_CONTENT="1 invalid_path"
-ERR_MESSAGE=""
+ERR_MESSAGE="Error: incomplete scene info"
 DESCRIPTION="1 as first letter"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
