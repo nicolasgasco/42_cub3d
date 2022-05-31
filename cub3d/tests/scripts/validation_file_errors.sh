@@ -11,8 +11,6 @@ TEST_OUTPUT="test_output"
 VALGRIND_OUTPUT="valgrind_output"
 TEST_FILE="test_map.cub"
 
-make re > /dev/null 2> /dev/null
-
 executeFileErrorTest() {
     ./cub3d $3 $4 $5 > /dev/null 2> "$SCRIPT_PATH$TEST_OUTPUT"
 
