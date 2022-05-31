@@ -6,7 +6,7 @@ GREEN='\033[0;32m'
 NC='\033[0m'
 
 SCRIPT_PATH="./tests/scripts/"
-VALGRIND="valgrind --leak-check=full"
+VALGRIND="valgrind --leak-check=full --show-leak-kinds=all"
 TEST_OUTPUT="test_output"
 VALGRIND_OUTPUT="valgrind_output"
 TEST_FILE="test_map.cub"
