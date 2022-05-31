@@ -53,14 +53,18 @@ void    ft_type_ids_validation(char *file_path, t_map *map);
 int     ft_open_scene_file(char *file_path);
 int     ft_validate_scene_file_line(char *line, t_map *map);
 void    ft_parse_orientation_path(char *line, int *i, t_map *map);
-void    ft_validate_orientation_path(char *o_path_acronym, char *line, int *i, t_map *map);
+char    *ft_validate_orientation_path(char *o_path_acronym, char *line, int *i);
 int     ft_calc_path_length(char *line, int i);
 int     ft_open_file_path_validation(char *o_path, char *line, char *o_path_acronym);
 void    ft_parse_colors(char *line, int *i, t_map *map);
-void    ft_validate_colors(char *color_char, char *line, int *i, t_map *map);
+char    *ft_validate_colors(char *color_char, char *line, int *i);
 int     ft_parse_color_codes(char *line, int *i);
 void    ft_validate_color_code_str(char *color_code_str, char *line);
 int     ft_parse_single_color_code(char *line, int *iterator);
 void    ft_map_content_validation(char *file_path, t_map *map);
+void    ft_type_ids_completeness_check(t_map *map);
+void    ft_completeness_check_colors(t_map *map);
+void    ft_completeness_check_o_paths(t_map *map);
+void    ft_check_o_paths_duplicates(t_map *map);
 
 #endif
