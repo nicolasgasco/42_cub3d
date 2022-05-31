@@ -8,13 +8,13 @@ void    ft_parse_orientation_path(char *line, int *i, t_map *map)
     o_path_acronym = ft_substr(line, *i, 2);
     *i = *i + 2;
     if (ft_strncmp(o_path_acronym, "NO", 2) == 0)
-        ft_validate_orientation_path(o_path_acronym, line, i,  map);
+        map->no_path = ft_validate_orientation_path(o_path_acronym, line, i);
     else if (ft_strncmp(o_path_acronym, "SO", 2) == 0)
-        ft_validate_orientation_path(o_path_acronym, line, i, map);
+        map->so_path = ft_validate_orientation_path(o_path_acronym, line, i);
     else if (ft_strncmp(o_path_acronym, "WE", 2) == 0)
-        ft_validate_orientation_path(o_path_acronym, line, i, map);
+        map->we_path = ft_validate_orientation_path(o_path_acronym, line, i);
     else if (ft_strncmp(o_path_acronym, "EA", 2) == 0)
-        ft_validate_orientation_path(o_path_acronym, line, i, map);
+        map->ea_path = ft_validate_orientation_path(o_path_acronym, line, i);
     else
     {
         ft_putendl_fd("Error: invalid identifier", STDERR_FILENO);
@@ -25,7 +25,7 @@ void    ft_parse_orientation_path(char *line, int *i, t_map *map)
     free(o_path_acronym);
 }
 
-void    ft_validate_orientation_path(char *o_path_acronym, char *line, int *i, t_map *map)
+char    *ft_validate_orientation_path(char *o_path_acronym, char *line, int *i)
 {
     char    *o_path;
     int     o_file_fd;
@@ -48,12 +48,8 @@ void    ft_validate_orientation_path(char *o_path_acronym, char *line, int *i, t
     o_path = ft_substr(line, *i, ft_calc_path_length(line, *i));
     o_path = ft_strtrim_no_leaks(o_path, " \n");
     o_file_fd = ft_open_file_path_validation(o_path, line, o_path_acronym);
-    if (map) 
-    {
-        //continue
-    }
-    free(o_path);
     close(o_file_fd);
+    return (o_path);
 }
 
 int ft_calc_path_length(char *line, int i)
