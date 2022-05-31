@@ -20,5 +20,7 @@ int	main(int argc, char **argv)
 	ft_memset(&map, 0, sizeof(t_map));
 	ft_check_num_args(argc);
 	ft_scene_desc_file_validation(argv[1], &map);
+	free(map.c_color); // TODO free when opportune
+	free(map.f_color); // TODO free when opportune
 	return (0);
 }
