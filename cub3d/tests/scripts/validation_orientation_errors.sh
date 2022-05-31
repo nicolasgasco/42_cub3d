@@ -7,7 +7,7 @@ NC='\033[0m'
 
 MAP_PATH="./tests/maps/color_codes/"
 SCRIPT_PATH="./tests/scripts/"
-VALGRIND="valgrind --leak-check=full"
+VALGRIND="valgrind --leak-check=full --show-leak-kinds=all"
 TEST_OUTPUT="test_output"
 VALGRIND_OUTPUT="valgrind_output"
 TEST_FILE="test_map.cub"
@@ -64,6 +64,17 @@ echo "\nORIENTATION ERRORS:"
 MAP_CONTENT="A"
 ERR_MESSAGE="Error: invalid identifier"
 DESCRIPTION="Wrong first letter"
+executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="0 invalid_path"
+ERR_MESSAGE="Error: invalid identifier"
+DESCRIPTION="0 as first letter"
+executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+# This skips checks and goes to map validation
+MAP_CONTENT="1 invalid_path"
+ERR_MESSAGE=""
+DESCRIPTION="1 as first letter"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="V  \t"
