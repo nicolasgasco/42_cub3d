@@ -64,5 +64,7 @@ int     ft_parse_single_color_code(char *line, int *iterator);
 void    ft_map_content_validation(char *file_path, t_map *map);
 void    ft_type_ids_completeness_check(t_map *map);
 void    ft_completeness_check_colors(t_map *map);
+void    ft_completeness_check_o_paths(t_map *map);
+void    ft_check_o_paths_duplicates(t_map *map);
 
 #endif

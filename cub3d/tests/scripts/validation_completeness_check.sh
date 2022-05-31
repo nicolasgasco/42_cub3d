@@ -116,3 +116,104 @@ MAP_CONTENT="NO path_to_the_north_texture
 ERR_MESSAGE="Error: duplicated scene info"
 DESCRIPTION="All orientations, F is equal C"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+echo "\nORIENTATION PATHS COMPLETENESS CHECKS:"
+
+MAP_CONTENT="SO path_to_the_south_texture
+            WE path_to_the_west_texture
+            EA path_to_the_east_texture"
+ERR_MESSAGE="Error: incomplete scene info"
+DESCRIPTION="NO is missing"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="NO path_to_the_south_texture
+            WE path_to_the_west_texture
+            EA path_to_the_east_texture"
+ERR_MESSAGE="Error: incomplete scene info"
+DESCRIPTION="SO is missing"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="NO path_to_the_south_texture
+            SO path_to_the_west_texture
+            EA path_to_the_east_texture"
+ERR_MESSAGE="Error: incomplete scene info"
+DESCRIPTION="WE is missing"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="NO path_to_the_south_texture
+            SO path_to_the_west_texture
+            WE path_to_the_east_texture"
+ERR_MESSAGE="Error: incomplete scene info"
+DESCRIPTION="EA is missing"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="NO path_to_the_south_texture"
+ERR_MESSAGE="Error: incomplete scene info"
+DESCRIPTION="All missing except NO"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="SO path_to_the_south_texture"
+ERR_MESSAGE="Error: incomplete scene info"
+DESCRIPTION="All missing except SO"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="WE path_to_the_south_texture"
+ERR_MESSAGE="Error: incomplete scene info"
+DESCRIPTION="All missing except WE"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="EA path_to_the_south_texture"
+ERR_MESSAGE="Error: incomplete scene info"
+DESCRIPTION="All missing except EA"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="NO path_to_the_north_texture
+            SO path_to_the_south_texture
+            WE path_to_the_west_texture
+            EA path_to_the_west_texture
+            F 0,0,0
+            C 0,10,0"
+ERR_MESSAGE="Error: duplicated scene info"
+DESCRIPTION="Duplicate path_to_the_west_texture"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="NO path_to_the_south_texture
+            SO path_to_the_south_texture
+            WE path_to_the_east_texture
+            EA path_to_the_west_texture
+            F 0,0,0
+            C 0,10,0"
+ERR_MESSAGE="Error: duplicated scene info"
+DESCRIPTION="Duplicate path_to_the_south_texture"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="NO path_to_the_north_texture
+            SO path_to_the_north_texture
+            WE path_to_the_east_texture
+            EA path_to_the_west_texture
+            F 0,0,0
+            C 0,10,0"
+ERR_MESSAGE="Error: duplicated scene info"
+DESCRIPTION="Duplicate path_to_the_north_texture"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="NO path_to_the_east_texture
+            SO path_to_the_east_texture
+            WE path_to_the_north_texture
+            EA path_to_the_west_texture
+            F 0,0,0
+            C 0,10,0"
+ERR_MESSAGE="Error: duplicated scene info"
+DESCRIPTION="Duplicate path_to_the_east_texture"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+
+MAP_CONTENT="NO path_to_the_east_texture
+            SO path_to_the_east_texture
+            WE path_to_the_east_texture
+            EA path_to_the_west_texture
+            F 0,0,0
+            C 0,10,0"
+ERR_MESSAGE="Error: duplicated scene info"
+DESCRIPTION="Triplicated path_to_the_east_texture"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
