@@ -12,3 +12,10 @@ void    ft_open_file_error(void)
     ft_putendl_fd("Error: file opening failed", STDERR_FILENO);
     exit(3);
 }
+
+void    ft_invalid_id_error_exit(char *line)
+{
+    free(line);
+    ft_putendl_fd("Error: invalid identifier", STDERR_FILENO);
+    exit(5);
+}

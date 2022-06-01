@@ -17,10 +17,8 @@ void    ft_parse_orientation_path(char *line, int *i, t_map *map)
         map->ea_path = ft_validate_orientation_path(o_path_acronym, line, i);
     else
     {
-        ft_putendl_fd("Error: invalid identifier", STDERR_FILENO);
-        free(line);
         free(o_path_acronym);
-        exit(5);
+        ft_invalid_id_error_exit(line);
     }
     free(o_path_acronym);
 }
@@ -33,9 +31,7 @@ char    *ft_validate_orientation_path(char *o_path_acronym, char *line, int *i)
     if (!ft_isspace(line[*i]))
     {
         free(o_path_acronym);
-        free(line);
-        ft_putendl_fd("Error: invalid identifier", STDERR_FILENO);
-        exit(5);
+        ft_invalid_id_error_exit(line);
     }
     ft_skip_to_non_space_char(line, i);
     if (line[*i] == '\0')

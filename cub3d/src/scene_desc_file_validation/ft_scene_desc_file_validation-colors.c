@@ -41,11 +41,7 @@ char    *ft_validate_colors(char *color_char, char *line, int *i, t_map *map)
     codes_count = 0;
     free(color_char);
     if (!ft_isspace(line[*i]) && line[*i] != '\0')
-    {
-        free(line);
-        ft_putendl_fd("Error: invalid identifier", STDERR_FILENO);
-        exit(5);
-    }
+        ft_invalid_id_error_exit(line);
     ft_skip_to_non_space_char(line, i);
     c_stat_start = *i;
     codes_count = ft_parse_color_codes(line, i, map);
