@@ -3,6 +3,7 @@
 # Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
 NC='\033[0m'
 
 SCRIPT_PATH="./tests/scripts/"
@@ -17,11 +18,11 @@ executeFileErrorTest() {
     # Output check
     if [ "$(cat $SCRIPT_PATH$TEST_OUTPUT)" = "$1" ]
     then
-        echo "\n\n    ${GREEN}- $2: ok ✅${NC}"
+        echo "    ${GREEN}- $2: ok ✅${NC}"
         echo "        Message:"
         echo "            $1\n"
     else
-        echo "\n\n    ${RED}- $2: not ok ❌${NC}"
+        echo "    ${RED}- $2: not ok ❌${NC}"
         echo "========================================================================================="
         echo "    Expected:"
         echo "        |$1|\n"
@@ -54,10 +55,10 @@ executeFileErrorTest() {
         echo "\n$(less $SCRIPT_PATH$VALGRIND_OUTPUT)"
         exit 1
     fi
-    echo "\n==========================================================================================================\n"
+    echo "=========================================================================================================="
 }
 
-echo "\nFILE ERRORS:"
+echo "\n${YELLOW}ARGUMENTS ERRORS:${NC}\n"
 
 DESC="No arguments"
 ERR_MESSAGE="Error: arguments"
@@ -71,30 +72,48 @@ DESC="Three arguments"
 ERR_MESSAGE="Error: arguments"
 executeFileErrorTest "$ERR_MESSAGE" "$DESC" "arg1" "arg2" "arg3"
 
-DESC="One argument no extension"
+echo "\n${YELLOW}EXTENSION ERRORS:${NC}\n"
+
+DESC="One argument no extension (arg1)"
 ERR_MESSAGE="Error: invalid extension"
 executeFileErrorTest "$ERR_MESSAGE" "$DESC" "arg1"
 
-DESC="One argument only dot (.)"
+DESC="One argument with dot (arg1.)"
 ERR_MESSAGE="Error: invalid extension"
 executeFileErrorTest "$ERR_MESSAGE" "$DESC" "arg1."
 
-DESC="One argument wrong extension (.txt)"
+DESC="One argument wrong extension (arg1.txt)"
 ERR_MESSAGE="Error: invalid extension"
 executeFileErrorTest "$ERR_MESSAGE" "$DESC" "arg1.txt"
 
-DESC="One argument wrong extension (.cubb)"
+DESC="One argument wrong extension (arg1.cubb)"
 ERR_MESSAGE="Error: invalid extension"
 executeFileErrorTest "$ERR_MESSAGE" "$DESC" "arg1.cubb"
 
-DESC="One argument wrong extension (.cu)"
+DESC="One argument wrong extension (arg1.cu)"
 ERR_MESSAGE="Error: invalid extension"
 executeFileErrorTest "$ERR_MESSAGE" "$DESC" "arg1.cu"
 
-DESC="One argument wrong extension (cub)"
+DESC="One argument extension without dot (arg1cub)"
 ERR_MESSAGE="Error: invalid extension"
 executeFileErrorTest "$ERR_MESSAGE" "$DESC" "arg1cub"
 
-DESC="One argument no filename"
+DESC="One argument extension without dot (cubcub)"
+ERR_MESSAGE="Error: invalid extension"
+executeFileErrorTest "$ERR_MESSAGE" "$DESC" "cubcub"
+
+DESC="One argument no filename (.cub)"
 ERR_MESSAGE="Error: invalid extension"
 executeFileErrorTest "$ERR_MESSAGE" "$DESC" ".cub"
+
+DESC="One argument dot (.)"
+ERR_MESSAGE="Error: invalid extension"
+executeFileErrorTest "$ERR_MESSAGE" "$DESC" ".cub"
+
+DESC="One argument only newline (\n)"
+ERR_MESSAGE="Error: invalid extension"
+executeFileErrorTest "$ERR_MESSAGE" "$DESC" "\n"
+
+DESC="One argument only space ( )"
+ERR_MESSAGE="Error: arguments"
+executeFileErrorTest "$ERR_MESSAGE" "$DESC" " "

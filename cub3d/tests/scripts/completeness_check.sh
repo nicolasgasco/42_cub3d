@@ -257,3 +257,14 @@ MAP_CONTENT="F 10,20,30
 ERR_MESSAGE="Error: duplicated scene info"
 DESCRIPTION="F correct, C is duplicated (+ same value)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="NO path_to_the_north_texture
+            SO path_to_the_south_texture
+            WE path_to_the_west_texture
+            EA path_to_the_east_texture
+            1 path_to_the_invalid_texture
+            F 0,0,0
+            C 0,10,0"
+ERR_MESSAGE="Error: incomplete scene info"
+DESCRIPTION="1 as first letter, otherwise all OK"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
