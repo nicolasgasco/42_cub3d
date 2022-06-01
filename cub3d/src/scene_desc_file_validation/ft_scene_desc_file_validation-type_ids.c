@@ -54,7 +54,7 @@ int    ft_validate_scene_file_line(char *line, t_map *map)
         {
             free(line);
             ft_putendl_fd("Error: invalid identifier", STDERR_FILENO);
-            exit(4);
+            //exit(4);
         }
         i++;
     }
