@@ -25,3 +25,10 @@ void    ft_duplicate_scene_info_error_exit(void)
     ft_putendl_fd("Error: duplicated scene info", STDERR_FILENO);
     exit(10);
 }
+
+void    ft_invalid_col_statement_error_exit(char *line)
+{
+    free(line);
+    ft_putendl_fd("Error: invalid color statement", STDERR_FILENO);
+    exit(8);
+}

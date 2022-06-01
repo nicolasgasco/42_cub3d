@@ -47,6 +47,7 @@ void    ft_malloc_error(void);
 void    ft_open_file_error(void);
 void    ft_invalid_id_error_exit(char *line);
 void    ft_duplicate_scene_info_error_exit(void);
+void    ft_invalid_col_statement_error_exit(char *line);
 
 /* Scene description file validation */
 void    ft_check_num_args(int argc);

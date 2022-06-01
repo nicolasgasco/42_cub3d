@@ -44,11 +44,7 @@ char    *ft_validate_colors(char *color_char, char *line, int *i, t_map *map)
     c_stat_start = *i;
     codes_count = ft_parse_color_codes(line, i, map);
     if (codes_count != 3)
-    {
-        free(line);
-        ft_putendl_fd("Error: invalid color statement", STDERR_FILENO);
-        exit(8);
-    }
+        ft_invalid_col_statement_error_exit(line);
     return (ft_substr(line, c_stat_start, *i - c_stat_start));
 }
 
@@ -70,9 +66,7 @@ int ft_parse_color_codes(char *line, int *iterator, t_map *map)
     if (!ft_isdigit(line[*iterator - 1]))
     {
         ft_free_allocated_map_data(map);
-        free(line);
-        ft_putendl_fd("Error: invalid color statement", STDERR_FILENO);
-        exit(8);
+        ft_invalid_col_statement_error_exit(line);
     }
     return (counter);
 }
