@@ -28,8 +28,7 @@ void    ft_completeness_check_colors(t_map *map)
         free(map->so_path); // TODO refactor this
         free(map->c_color); // TODO refactor this
         free(map->f_color); // TODO refactor this
-        ft_putendl_fd("Error: duplicated scene info", STDERR_FILENO);
-        exit(10);       
+        ft_duplicate_scene_info_error_exit();
     }
 }
 
@@ -76,8 +75,7 @@ void    ft_check_o_paths_duplicates(t_map *map)
                 free(map->c_color); // TODO refactor this
                 free(map->f_color); // TODO refactor this
                 free(path_arr);
-                ft_putendl_fd("Error: duplicated scene info", STDERR_FILENO);
-                exit(10);       
+                ft_duplicate_scene_info_error_exit();     
             }
             j++;
         }

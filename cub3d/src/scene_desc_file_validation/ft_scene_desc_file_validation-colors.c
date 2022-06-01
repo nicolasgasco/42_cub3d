@@ -14,8 +14,7 @@ void    ft_parse_colors(char *line, int *i, t_map *map)
             ft_free_allocated_map_data(map);
             free(color_char);
             free(line);
-            ft_putendl_fd("Error: duplicated scene info", STDERR_FILENO);
-            exit(10);
+            ft_duplicate_scene_info_error_exit();     
         }
         map->f_color = ft_validate_colors(color_char, line, i, map);
     }
@@ -26,8 +25,7 @@ void    ft_parse_colors(char *line, int *i, t_map *map)
             ft_free_allocated_map_data(map);
             free(color_char);
             free(line);
-            ft_putendl_fd("Error: duplicated scene info", STDERR_FILENO);
-            exit(10);
+            ft_duplicate_scene_info_error_exit();     
         }
         map->c_color = ft_validate_colors(color_char, line, i, map);
     }
@@ -41,20 +39,12 @@ char    *ft_validate_colors(char *color_char, char *line, int *i, t_map *map)
     codes_count = 0;
     free(color_char);
     if (!ft_isspace(line[*i]) && line[*i] != '\0')
-    {
-        free(line);
-        ft_putendl_fd("Error: invalid identifier", STDERR_FILENO);
-        exit(5);
-    }
+        ft_invalid_id_error_exit(line);
     ft_skip_to_non_space_char(line, i);
     c_stat_start = *i;
     codes_count = ft_parse_color_codes(line, i, map);
     if (codes_count != 3)
-    {
-        free(line);
-        ft_putendl_fd("Error: invalid color statement", STDERR_FILENO);
-        exit(8);
-    }
+        ft_invalid_col_statement_error_exit(line);
     return (ft_substr(line, c_stat_start, *i - c_stat_start));
 }
 
@@ -76,9 +66,7 @@ int ft_parse_color_codes(char *line, int *iterator, t_map *map)
     if (!ft_isdigit(line[*iterator - 1]))
     {
         ft_free_allocated_map_data(map);
-        free(line);
-        ft_putendl_fd("Error: invalid color statement", STDERR_FILENO);
-        exit(8);
+        ft_invalid_col_statement_error_exit(line);
     }
     return (counter);
 }
