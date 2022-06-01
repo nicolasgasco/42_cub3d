@@ -8,12 +8,32 @@ void    ft_parse_colors(char *line, int *i, t_map *map)
     color_char = ft_substr(line, *i, 1);
     *i = *i + 1;
     if (ft_strncmp(color_char, "F", 1) == 0)
-        map->f_color = ft_validate_colors(color_char, line, i);
+    {
+        if (map->f_color)
+        {
+            ft_free_allocated_map_data(map);
+            free(color_char);
+            free(line);
+            ft_putendl_fd("Error: duplicated scene info", STDERR_FILENO);
+            exit(10);
+        }
+        map->f_color = ft_validate_colors(color_char, line, i, map);
+    }
     else if (ft_strncmp(color_char, "C", 1) == 0)
-        map->c_color = ft_validate_colors(color_char, line, i);
+    {
+        if (map->c_color)
+        {
+            ft_free_allocated_map_data(map);
+            free(color_char);
+            free(line);
+            ft_putendl_fd("Error: duplicated scene info", STDERR_FILENO);
+            exit(10);
+        }
+        map->c_color = ft_validate_colors(color_char, line, i, map);
+    }
 }
 
-char    *ft_validate_colors(char *color_char, char *line, int *i)
+char    *ft_validate_colors(char *color_char, char *line, int *i, t_map *map)
 {
     int     codes_count;
     int     c_stat_start;
@@ -28,7 +48,7 @@ char    *ft_validate_colors(char *color_char, char *line, int *i)
     }
     ft_skip_to_non_space_char(line, i);
     c_stat_start = *i;
-    codes_count = ft_parse_color_codes(line, i);
+    codes_count = ft_parse_color_codes(line, i, map);
     if (codes_count != 3)
     {
         free(line);
@@ -38,7 +58,7 @@ char    *ft_validate_colors(char *color_char, char *line, int *i)
     return (ft_substr(line, c_stat_start, *i - c_stat_start));
 }
 
-int ft_parse_color_codes(char *line, int *iterator)
+int ft_parse_color_codes(char *line, int *iterator, t_map *map)
 {
     int counter;
 
@@ -55,6 +75,7 @@ int ft_parse_color_codes(char *line, int *iterator)
     }
     if (!ft_isdigit(line[*iterator - 1]))
     {
+        ft_free_allocated_map_data(map);
         free(line);
         ft_putendl_fd("Error: invalid color statement", STDERR_FILENO);
         exit(8);
