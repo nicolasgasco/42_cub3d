@@ -53,6 +53,12 @@ int ft_parse_color_codes(char *line, int *iterator)
             break;
         *iterator += 1;
     }
+    if (!ft_isdigit(line[*iterator - 1]))
+    {
+        free(line);
+        ft_putendl_fd("Error: invalid color statement", STDERR_FILENO);
+        exit(8);
+    }
     return (counter);
 }
 
