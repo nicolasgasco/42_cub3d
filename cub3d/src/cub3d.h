@@ -34,6 +34,13 @@ char	*get_next_line(int fd);
 char    *ft_substr_no_leaks(char *s, unsigned int start, size_t len);
 char    *ft_strtrim_no_leaks(char *s1, const char *set);
 int     ft_str_is_numeric(char *str);
+int     ft_is_map_start(char *line);
+void    ft_get_map_width(char *line, t_map *map);
+char    *ft_skip_to_map_start(char *line, int fd);
+void	ft_skip_to_non_space_char_backwards(char *line, int *iterator);
+void    ft_free_map_struct(t_map *map);
+int     ft_is_player_char(char c);
+int     ft_is_valid_map_char(char c);
 
 /* Common errors */
 void    ft_malloc_error(void);
@@ -44,7 +51,7 @@ void    ft_check_num_args(int argc);
 void    ft_scene_desc_file_validation(char *file_path, t_map *map);
 void    ft_file_extension_validation(char *file_path);
 void    ft_type_ids_validation(char *file_path);
-int    ft_open_scene_file(char *file_path);
+int     ft_open_scene_file(char *file_path);
 void    ft_validate_scene_file_line(char *line);
 void    ft_parse_orientation_path(char *line, int *i);
 void    ft_validate_orientation_path(char *o_path_acronym, char *line, int *i);
@@ -56,5 +63,8 @@ int     ft_parse_color_codes(char *line, int *i);
 void    ft_validate_color_code_str(char *color_code_str, char *line);
 int     ft_parse_single_color_code(char *line, int *iterator);
 void    ft_map_content_validation(char *file_path, t_map *map);
+void	ft_validate_size(t_map *map);
+void	ft_validate_walls(t_map *map);
+void	ft_validate_content(t_map *map);
 
 #endif

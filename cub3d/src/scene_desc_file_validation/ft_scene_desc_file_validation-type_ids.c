@@ -42,8 +42,8 @@ void    ft_validate_scene_file_line(char *line)
         if (line[i] == '1')
         {
             printf("Logic for map\n");
-            free(line); // TODO delete this
-            exit(101) ; // TODO delete this
+            //free(line); // TODO delete this
+            //exit(101) ; // TODO delete this
         }
         else if (line[i] == 'N' || line[i] == 'S'
             || line[i] == 'W' || line[i] == 'E')
@@ -60,7 +60,7 @@ void    ft_validate_scene_file_line(char *line)
         {
             free(line);
             ft_putendl_fd("Error: invalid identifier", STDERR_FILENO);
-            exit(4);
+            //exit(4);
         }
         i++;
     }
