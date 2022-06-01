@@ -1,3 +1,5 @@
+make re > /dev/null 2> /dev/null
+
 for file in ./tests/scripts/*.sh
 do
     sh "$file"

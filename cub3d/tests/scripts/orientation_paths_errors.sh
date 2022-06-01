@@ -3,16 +3,15 @@
 # Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
 NC='\033[0m'
 
 MAP_PATH="./tests/maps/color_codes/"
 SCRIPT_PATH="./tests/scripts/"
-VALGRIND="valgrind --leak-check=full"
+VALGRIND="valgrind --leak-check=full --show-leak-kinds=all"
 TEST_OUTPUT="test_output"
 VALGRIND_OUTPUT="valgrind_output"
 TEST_FILE="test_map.cub"
-
-make re > /dev/null 2> /dev/null
 
 executeOrientationErrors() {
     echo "$2" > $SCRIPT_PATH$TEST_FILE
@@ -61,16 +60,26 @@ executeOrientationErrors() {
     echo "\n==========================================================================================================\n"
 }
 
-echo "\nORIENTATION ERRORS:"
+echo "\n${GREEN}ORIENTATION ERRORS${NC}:\n"
 
 MAP_CONTENT="A"
 ERR_MESSAGE="Error: invalid identifier"
-DESCRIPTION="Wrong first letter"
+DESCRIPTION="Wrong first letter (A)"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="V  \t"
+MAP_CONTENT="     a\t\t"
 ERR_MESSAGE="Error: invalid identifier"
-DESCRIPTION="Wrong first letter (with space)"
+DESCRIPTION="Wrong first letter (a) with spaces"
+executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="0 invalid_path"
+ERR_MESSAGE="Error: invalid identifier"
+DESCRIPTION="0 as first letter"
+executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="1 invalid_path"
+ERR_MESSAGE="Error: incomplete scene info"
+DESCRIPTION="1 as first letter"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="SE"
@@ -78,7 +87,7 @@ ERR_MESSAGE="Error: invalid identifier"
 DESCRIPTION="Wrong second letter"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="SE   \t"
+MAP_CONTENT="   SE   \t"
 ERR_MESSAGE="Error: invalid identifier"
 DESCRIPTION="Wrong second letter (with space)"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
@@ -93,7 +102,7 @@ ERR_MESSAGE="Error: invalid identifier"
 DESCRIPTION="Wrong second letter"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="EO"
+MAP_CONTENT="EO valid_path"
 ERR_MESSAGE="Error: invalid identifier"
 DESCRIPTION="Wrong second letter"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
@@ -122,3 +131,19 @@ MAP_CONTENT="NO ./fold/path_to_file"
 ERR_MESSAGE="Error: file opening failed"
 DESCRIPTION="Invalid path (nested)"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="NO ../../../../fold/path_to_file"
+ERR_MESSAGE="Error: file opening failed"
+DESCRIPTION="Invalid path (more nested)"
+executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="NO '\''"
+ERR_MESSAGE="Error: file opening failed"
+DESCRIPTION="Invalid path (\')"
+executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+# This case at the moment is not contemplated
+# MAP_CONTENT="NO path_to_the_east_texture path_to_file"
+# ERR_MESSAGE="Error: invalid"
+# DESCRIPTION="Double path"
+# executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"

@@ -1,31 +1,29 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-void    ft_parse_orientation_path(char *line, int *i)
+void    ft_parse_orientation_path(char *line, int *i, t_map *map)
 {
     char *o_path_acronym;
 
     o_path_acronym = ft_substr(line, *i, 2);
     *i = *i + 2;
     if (ft_strncmp(o_path_acronym, "NO", 2) == 0)
-        ft_validate_orientation_path(o_path_acronym, line, i);
+        map->no_path = ft_validate_orientation_path(o_path_acronym, line, i);
     else if (ft_strncmp(o_path_acronym, "SO", 2) == 0)
-        ft_validate_orientation_path(o_path_acronym, line, i);
+        map->so_path = ft_validate_orientation_path(o_path_acronym, line, i);
     else if (ft_strncmp(o_path_acronym, "WE", 2) == 0)
-        ft_validate_orientation_path(o_path_acronym, line, i);
+        map->we_path = ft_validate_orientation_path(o_path_acronym, line, i);
     else if (ft_strncmp(o_path_acronym, "EA", 2) == 0)
-        ft_validate_orientation_path(o_path_acronym, line, i);
+        map->ea_path = ft_validate_orientation_path(o_path_acronym, line, i);
     else
     {
-        ft_putendl_fd("Error: invalid identifier", STDERR_FILENO);
-        free(line);
         free(o_path_acronym);
-        exit(5);
+        ft_invalid_id_error_exit(line);
     }
     free(o_path_acronym);
 }
 
-void    ft_validate_orientation_path(char *o_path_acronym, char *line, int *i)
+char    *ft_validate_orientation_path(char *o_path_acronym, char *line, int *i)
 {
     char    *o_path;
     int     o_file_fd;
@@ -33,9 +31,7 @@ void    ft_validate_orientation_path(char *o_path_acronym, char *line, int *i)
     if (!ft_isspace(line[*i]))
     {
         free(o_path_acronym);
-        free(line);
-        ft_putendl_fd("Error: invalid identifier", STDERR_FILENO);
-        exit(5);
+        ft_invalid_id_error_exit(line);
     }
     ft_skip_to_non_space_char(line, i);
     if (line[*i] == '\0')
@@ -48,8 +44,8 @@ void    ft_validate_orientation_path(char *o_path_acronym, char *line, int *i)
     o_path = ft_substr(line, *i, ft_calc_path_length(line, *i));
     o_path = ft_strtrim_no_leaks(o_path, " \n");
     o_file_fd = ft_open_file_path_validation(o_path, line, o_path_acronym);
-    free(o_path);
     close(o_file_fd);
+    return (o_path);
 }
 
 int ft_calc_path_length(char *line, int i)

@@ -21,5 +21,11 @@ int	main(int argc, char **argv)
 	ft_check_num_args(argc);
 	ft_scene_desc_file_validation(argv[1], &map);
 	ft_free_map_struct(&map);
+	free(map.ea_path); // TODO free when opportune
+	free(map.we_path); // TODO free when opportune
+	free(map.no_path); // TODO free when opportune
+	free(map.so_path); // TODO free when opportune
+	free(map.c_color); // TODO free when opportune
+	free(map.f_color); // TODO free when opportune
 	return (0);
 }

@@ -1,7 +1,7 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-void    ft_type_ids_validation(char *file_path)
+void    ft_type_ids_validation(char *file_path, t_map *map)
 {
     int     scene_file_fd;
     char    *line;
@@ -14,12 +14,11 @@ void    ft_type_ids_validation(char *file_path)
         if (line == NULL)
             break ;
         is_file_empty = 0;
-        if (*line == '\n')
+        if (*line == '\n' || !ft_validate_scene_file_line(line, map))
         {
             free(line);
-            continue ;
+            return ;
         }
-        ft_validate_scene_file_line(line);
         free(line);
     }
     if (is_file_empty == 1)
@@ -30,32 +29,27 @@ void    ft_type_ids_validation(char *file_path)
     close(scene_file_fd);
 }
 
-void    ft_validate_scene_file_line(char *line)
+int    ft_validate_scene_file_line(char *line, t_map *map)
 {
     int i;
 
     i = 0;
-    printf("Validating line |%s| -> ", line);
     while(line[i] != '\0')
     {
         ft_skip_to_non_space_char(line, &i);
-        if (line[i] == '1')
-        {
-            printf("Logic for map\n");
-            //free(line); // TODO delete this
-            //exit(101) ; // TODO delete this
-        }
-        else if (line[i] == 'N' || line[i] == 'S'
+        if (line[i] == 'N' || line[i] == 'S'
             || line[i] == 'W' || line[i] == 'E')
         {
-            ft_parse_orientation_path(line, &i);
+            ft_parse_orientation_path(line, &i, map);
             break;
         }
         else if (line[i] == 'F' || line[i] == 'C')
         {
-            ft_parse_colors(line, &i);
+            ft_parse_colors(line, &i, map);
             break;
         }
+        else if (line[i] == '1')
+            return (0);
         else
         {
             free(line);
@@ -64,5 +58,5 @@ void    ft_validate_scene_file_line(char *line)
         }
         i++;
     }
-    printf("\n");
+    return (1);
 }
