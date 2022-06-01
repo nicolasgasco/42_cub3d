@@ -70,5 +70,6 @@ void    ft_type_ids_completeness_check(t_map *map);
 void    ft_completeness_check_colors(t_map *map);
 void    ft_completeness_check_o_paths(t_map *map);
 void    ft_check_o_paths_duplicates(t_map *map);
+void    ft_find_o_paths_duplicates(char **path_arr, t_map *map);
 
 #endif
