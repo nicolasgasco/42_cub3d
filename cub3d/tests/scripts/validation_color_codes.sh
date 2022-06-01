@@ -19,11 +19,11 @@ executeErrorTest() {
     # Output check
     if [ "$(cat $SCRIPT_PATH$TEST_OUTPUT)" = "$1" ]
     then
-        echo "\n\n    ${GREEN}- $3 ($(cat $SCRIPT_PATH$TEST_FILE)): ok ✅${NC}"
+        echo "    ${GREEN}- $3 ($(cat $SCRIPT_PATH$TEST_FILE)): ok ✅${NC}"
         echo "        Message:"
         echo "            $1\n"
     else
-        echo "\n\n    ${RED}- $3: not ok ❌${NC}"
+        echo "    ${RED}- $3: not ok ❌${NC}"
         echo "========================================================================================="
         echo "    Expected:"
         echo "        |$1|\n"
@@ -56,7 +56,7 @@ executeErrorTest() {
         echo "\n$(less $SCRIPT_PATH$VALGRIND_OUTPUT)"
         exit 1
     fi
-    echo "\n==========================================================================================================\n"
+    echo "=========================================================================================================="
 }
 
 echo "\nCOLORS CODES ERRORS:"
@@ -101,7 +101,7 @@ ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Non-numeric color code"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 2a0,20,20"
+MAP_CONTENT="F 2a0,20,20,"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Non-numeric color code (trailing comma)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
@@ -131,7 +131,32 @@ ERR_MESSAGE="Error: invalid color statement"
 DESCRIPTION="Four color codes"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
+MAP_CONTENT="F 225,200,200,"
+ERR_MESSAGE="Error: invalid color statement"
+DESCRIPTION="Correct but trailing comma"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="F 225,200,200."
+ERR_MESSAGE="Error: invalid color code"
+DESCRIPTION="Correct but trailing period"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="F 225,200,200]"
+ERR_MESSAGE="Error: invalid color code"
+DESCRIPTION="Correct but trailing period"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="F 225,200,200,,"
+ERR_MESSAGE="Error: invalid color statement"
+DESCRIPTION="Correct but 2 trailing commas"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
 MAP_CONTENT="F 225,200,200,200,"
 ERR_MESSAGE="Error: invalid color statement"
 DESCRIPTION="Four color codes (trailing comma)"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="F ,,,"
+ERR_MESSAGE="Error: invalid color statement"
+DESCRIPTION="Correct but 2 trailing commas"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"

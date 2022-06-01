@@ -17,6 +17,7 @@ SRC_NAME =	cub3d.c\
 		utils/ft_utils.c\
 		utils/ft_utils_1.c\
 		utils/ft_common_errs.c\
+		utils/ft_free.c\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR),$(OBJ_NAME))

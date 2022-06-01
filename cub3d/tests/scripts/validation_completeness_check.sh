@@ -19,11 +19,11 @@ executeErrorTest() {
     # Output check
     if [ "$(cat $SCRIPT_PATH$TEST_OUTPUT)" = "$1" ]
     then
-        echo "\n\n    ${GREEN}- $3: ok ✅${NC}"
+        echo "    ${GREEN}- $3 (${NC}$(cat $SCRIPT_PATH$TEST_FILE)${GREEN}): ok ✅${NC}"
         echo "        Message:"
         echo "            $1\n"
     else
-        echo "\n\n    ${RED}- $3: not ok ❌${NC}"
+        echo "    ${RED}- $3 (${NC}$(cat $SCRIPT_PATH$TEST_FILE)${RED}): not ok ❌${NC}"
         echo "========================================================================================="
         echo "    Expected:"
         echo "        |$1|\n"
@@ -56,7 +56,7 @@ executeErrorTest() {
         echo "\n$(less $SCRIPT_PATH$VALGRIND_OUTPUT)"
         exit 1
     fi
-    echo "\n==========================================================================================================\n"
+    echo "=========================================================================================================="
 }
 
 echo "\nCOLORS COMPLETENESS CHECKS:"
@@ -89,16 +89,22 @@ ERR_MESSAGE="Error: incomplete scene info"
 DESCRIPTION="All orientations, F is missing"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-# MAP_CONTENT="C 255,20,20
-#             C 10,10,10"
-# ERR_MESSAGE="Error: incomplete scene info"
-# DESCRIPTION="C is duplicated"
-# executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
-
 MAP_CONTENT="F 255,20,20
              C 255,20,20"
 ERR_MESSAGE="Error: duplicated scene info"
 DESCRIPTION="C is equal F"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="F 255,20,20
+             C 255,20,20,"
+ERR_MESSAGE="Error: invalid color statement"
+DESCRIPTION="C is equal F (except for comma after C)"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="F 255,20,20,
+             C 255,20,20"
+ERR_MESSAGE="Error: invalid color statement"
+DESCRIPTION="C is equal F (except for comma after F)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="C 0,0,0
@@ -216,4 +222,30 @@ MAP_CONTENT="NO path_to_the_east_texture
             C 0,10,0"
 ERR_MESSAGE="Error: duplicated scene info"
 DESCRIPTION="Triplicated path_to_the_east_texture"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="C 255,20,20
+            C 10,10,10"
+ERR_MESSAGE="Error: duplicated scene info"
+DESCRIPTION="C is duplicated"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="C 10,10,10
+            C 10,10,10"
+ERR_MESSAGE="Error: duplicated scene info"
+DESCRIPTION="C is duplicated (+ same value)"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="F 10,20,30
+            C 255,20,20
+            C 10,10,10"
+ERR_MESSAGE="Error: duplicated scene info"
+DESCRIPTION="F correct, C is duplicated"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="F 10,20,30
+            C 10,10,10
+            C 10,10,10"
+ERR_MESSAGE="Error: duplicated scene info"
+DESCRIPTION="F correct, C is duplicated (+ same value)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
