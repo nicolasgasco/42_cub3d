@@ -14,8 +14,7 @@ void    ft_parse_colors(char *line, int *i, t_map *map)
             ft_free_allocated_map_data(map);
             free(color_char);
             free(line);
-            ft_putendl_fd("Error: duplicated scene info", STDERR_FILENO);
-            exit(10);
+            ft_duplicate_scene_info_error_exit();     
         }
         map->f_color = ft_validate_colors(color_char, line, i, map);
     }
@@ -26,8 +25,7 @@ void    ft_parse_colors(char *line, int *i, t_map *map)
             ft_free_allocated_map_data(map);
             free(color_char);
             free(line);
-            ft_putendl_fd("Error: duplicated scene info", STDERR_FILENO);
-            exit(10);
+            ft_duplicate_scene_info_error_exit();     
         }
         map->c_color = ft_validate_colors(color_char, line, i, map);
     }

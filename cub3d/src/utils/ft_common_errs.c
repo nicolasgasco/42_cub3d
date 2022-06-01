@@ -19,3 +19,9 @@ void    ft_invalid_id_error_exit(char *line)
     ft_putendl_fd("Error: invalid identifier", STDERR_FILENO);
     exit(5);
 }
+
+void    ft_duplicate_scene_info_error_exit(void)
+{
+    ft_putendl_fd("Error: duplicated scene info", STDERR_FILENO);
+    exit(10);
+}
