@@ -37,14 +37,25 @@ void    ft_completeness_check_o_paths(t_map *map)
 void    ft_check_o_paths_duplicates(t_map *map)
 {
     char    **path_arr;
-    int     i;
-    int     j;
 
-    path_arr = malloc(sizeof(char *) * 4);
+    path_arr = (char **)malloc(sizeof(char *) * 4);
+    if (!path_arr)
+    {
+        ft_free_allocated_map_data(map);
+        ft_malloc_error();
+    }
     path_arr[0] = map->no_path;
     path_arr[1] = map->ea_path;
     path_arr[2] = map->so_path;
     path_arr[3] = map->we_path;
+    ft_find_o_paths_duplicates(path_arr, map);
+}
+
+void    ft_find_o_paths_duplicates(char **path_arr, t_map *map)
+{
+    int     i;
+    int     j;
+    
     i = 0;
     while (i < 4)
     {
