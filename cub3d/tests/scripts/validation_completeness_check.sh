@@ -127,28 +127,36 @@ echo "\nORIENTATION PATHS COMPLETENESS CHECKS:"
 
 MAP_CONTENT="SO path_to_the_south_texture
             WE path_to_the_west_texture
-            EA path_to_the_east_texture"
+            EA path_to_the_east_texture
+            C 20,20,20
+            F 255,20,20"
 ERR_MESSAGE="Error: incomplete scene info"
 DESCRIPTION="NO is missing"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="NO path_to_the_south_texture
             WE path_to_the_west_texture
-            EA path_to_the_east_texture"
+            EA path_to_the_east_texture
+            C 20,20,20
+            F 255,20,20"
 ERR_MESSAGE="Error: incomplete scene info"
 DESCRIPTION="SO is missing"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="NO path_to_the_south_texture
             SO path_to_the_west_texture
-            EA path_to_the_east_texture"
+            EA path_to_the_east_texture
+            C 20,20,20
+            F 255,20,20"
 ERR_MESSAGE="Error: incomplete scene info"
 DESCRIPTION="WE is missing"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="NO path_to_the_south_texture
             SO path_to_the_west_texture
-            WE path_to_the_east_texture"
+            WE path_to_the_east_texture
+            C 20,20,20
+            F 255,20,20"
 ERR_MESSAGE="Error: incomplete scene info"
 DESCRIPTION="EA is missing"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
