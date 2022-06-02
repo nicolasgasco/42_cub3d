@@ -23,7 +23,7 @@ void    ft_type_ids_validation(char *file_path, t_map *map)
     }
     if (is_file_empty == 1)
     {
-        printf("Error: emtpy scene file\n");
+        ft_putendl_fd("Error: emtpy scene file", STDERR_FILENO);
         exit(6) ;
     }
     close(scene_file_fd);
