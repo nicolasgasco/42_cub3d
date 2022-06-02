@@ -17,6 +17,7 @@ void	ft_check_vertical_wall(int wall, t_map *map)
 	if (map->map_content[i][j] != '1')
 	{
 		ft_putendl_fd("Error. Incorrect map: not surrounded by walls.", STDERR_FILENO);
+		ft_free_allocated_map_data(map);
 	    ft_free_map_struct(map);
 	    exit(13);
 	}
@@ -44,6 +45,7 @@ void	ft_check_horizontal_wall(int wall, t_map *map)
 	if (map->map_content[j][i] != '1')
 	{
 		ft_putendl_fd("Error. Incorrect map: not surrounded by walls.", STDERR_FILENO);
+		ft_free_allocated_map_data(map);
 	    ft_free_map_struct(map);
 	    exit(13);
 	}
