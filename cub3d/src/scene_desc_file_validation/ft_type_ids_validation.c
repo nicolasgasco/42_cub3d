@@ -8,7 +8,9 @@ void    ft_type_ids_validation(char *file_path, t_map *map)
     int     is_file_empty;
     
     is_file_empty = 1;
-    scene_file_fd = ft_open_file(file_path);
+    scene_file_fd = open(file_path, O_RDONLY);
+    if (scene_file_fd == -1)
+        ft_open_file_error();
     while (1) {
         line = get_next_line(scene_file_fd);
         if (line == NULL)
