@@ -20,11 +20,11 @@ executeOrientationErrors() {
     # Output check
     if [ "$(cat $SCRIPT_PATH$TEST_OUTPUT)" = "$1" ]
     then
-        echo "\n\n    ${GREEN}- $3 ($(cat $SCRIPT_PATH$TEST_FILE)): ok ✅${NC}"
+        echo "    ${GREEN}- $3 ($(cat $SCRIPT_PATH$TEST_FILE)): ok ✅${NC}"
         echo "        Message:"
         echo "            $1\n"
     else
-        echo "\n\n    ${RED}- $3: not ok ❌${NC}"
+        echo "    ${RED}- $3: not ok ❌${NC}"
         echo "========================================================================================="
         echo "    Expected:"
         echo "        |$1|\n"
@@ -57,10 +57,47 @@ executeOrientationErrors() {
         echo "\n$(less $SCRIPT_PATH$VALGRIND_OUTPUT)"
         exit 1
     fi
-    echo "\n==========================================================================================================\n"
+    echo "=========================================================================================================="
 }
 
-echo "\n${GREEN}ORIENTATION ERRORS${NC}:\n"
+echo "\n${YELLOW}EMPTY FILE ERRORS:${NC}\n"
+
+MAP_CONTENT="\n    \n    "
+ERR_MESSAGE="Error: incomplete scene info"
+DESCRIPTION="File with only whitespaces"
+executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT=" "
+ERR_MESSAGE="Error: incomplete scene info"
+DESCRIPTION="File with only one space"
+executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="\n"
+ERR_MESSAGE="Error: incomplete scene info"
+DESCRIPTION="File with only one newline"
+executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="\t"
+ERR_MESSAGE="Error: incomplete scene info"
+DESCRIPTION="File with only one tab"
+executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="                   \n"
+ERR_MESSAGE="Error: incomplete scene info"
+DESCRIPTION="File ending in newline"
+executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT=""
+ERR_MESSAGE="Error: incomplete scene info"
+DESCRIPTION="Empty file (except newline after echo)"
+executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="\0"
+ERR_MESSAGE="Error: incomplete scene info"
+DESCRIPTION="Empty file (except newline after echo)"
+executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+echo "\n${YELLOW}ORIENTATION ERRORS${NC}:\n"
 
 MAP_CONTENT="A"
 ERR_MESSAGE="Error: invalid identifier"

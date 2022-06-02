@@ -58,6 +58,12 @@ executeFileErrorTest() {
     echo "=========================================================================================================="
 }
 
+echo "\n${YELLOW}EMPTY FILE ERROR:${NC}\n"
+
+DESC="Empty file but existing"
+ERR_MESSAGE="Error: empty scene file"
+executeFileErrorTest "$ERR_MESSAGE" "$DESC" "tests/scripts/empty_file.cub"
+
 echo "\n${YELLOW}ARGUMENTS ERRORS:${NC}\n"
 
 DESC="No arguments"
@@ -71,6 +77,10 @@ executeFileErrorTest "$ERR_MESSAGE" "$DESC" "arg1" "arg2"
 DESC="Three arguments"
 ERR_MESSAGE="Error: arguments"
 executeFileErrorTest "$ERR_MESSAGE" "$DESC" "arg1" "arg2" "arg3"
+
+DESC="One argument, invalid file"
+ERR_MESSAGE="Error: file opening failed"
+executeFileErrorTest "$ERR_MESSAGE" "$DESC" "arg1.cub"
 
 echo "\n${YELLOW}EXTENSION ERRORS:${NC}\n"
 

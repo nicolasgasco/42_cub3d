@@ -62,11 +62,6 @@ executeErrorTest() {
 
 echo "\n${YELLOW}COLORS CODES ERRORS:${NC}\n"
 
-MAP_CONTENT=" \t\t"
-ERR_MESSAGE="Error: invalid identifier"
-DESCRIPTION="No statement (spaces)"
-executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
-
 MAP_CONTENT="F"
 ERR_MESSAGE="Error: invalid color statement"
 DESCRIPTION="No color statement"
