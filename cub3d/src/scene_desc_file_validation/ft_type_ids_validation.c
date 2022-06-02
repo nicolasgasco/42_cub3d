@@ -61,6 +61,7 @@ int    ft_validate_scene_file_line(char *line, t_map *map)
         else
         {
             free(line);
+            ft_free_allocated_map_data(map);
             ft_putendl_fd("Error: invalid identifier", STDERR_FILENO);
             exit(4);
         }
