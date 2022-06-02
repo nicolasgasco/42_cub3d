@@ -15,6 +15,7 @@ void	ft_check_characters(t_map *map)
 	    if (!ft_is_valid_map_char(map->map_content[i][j]))
 	    {
 			ft_putendl_fd("Error. Allowed characters: '1' - '0' - ' ' - 'N' - 'S' - 'E' - 'W'.", STDERR_FILENO);
+			ft_free_allocated_map_data(map);
 		ft_free_map_struct(map);
 		exit(14);
 	    }
@@ -46,6 +47,7 @@ void	ft_check_player(t_map *map)
     if (player != 1)
     {
 		ft_putendl_fd("Error. Incorrect player number.", STDERR_FILENO);
+		ft_free_allocated_map_data(map);
 	ft_free_map_struct(map);
 	exit(15);
     }
