@@ -48,6 +48,7 @@ void    ft_free_map_struct(t_map *map);
 int     ft_is_player_char(char c);
 int     ft_is_valid_map_char(char c);
 void    ft_free_allocated_map_data(t_map *map);
+void    ft_write_debug_msg(char *msg);
 
 /* Common errors */
 void    ft_malloc_error(void);
