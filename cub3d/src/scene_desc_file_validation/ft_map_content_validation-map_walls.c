@@ -31,10 +31,10 @@ void	ft_check_horizontal_wall(int wall, t_map *map)
     int	j;
 
     i = 0;
-	ft_skip_to_non_space_char(map->map_content[wall], &i);
     while (i < map->width - 1)
     {
     	j = wall;
+	ft_skip_to_non_space_char(map->map_content[wall], &i);
 	while (map->map_content[j][i] == ' ')
 	{
 	    if (wall == 0)
