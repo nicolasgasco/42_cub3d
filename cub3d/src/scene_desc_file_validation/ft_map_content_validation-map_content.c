@@ -1,4 +1,5 @@
 #include "../cub3d.h"
+#include "../../Libft/libft.h"
 
 void	ft_check_characters(t_map *map)
 {
@@ -13,7 +14,8 @@ void	ft_check_characters(t_map *map)
 	{
 	    if (!ft_is_valid_map_char(map->map_content[i][j]))
 	    {
-		printf("Error. Allowed characters: '1' - '0' - ' ' - 'N' - 'S' - 'E' - 'W'.\n");
+			ft_putendl_fd("Error. Allowed characters: '1' - '0' - ' ' - 'N' - 'S' - 'E' - 'W'.", STDERR_FILENO);
+			ft_free_allocated_map_data(map);
 		ft_free_map_struct(map);
 		exit(14);
 	    }
@@ -44,7 +46,8 @@ void	ft_check_player(t_map *map)
     }
     if (player != 1)
     {
-	printf("Error. Incorrect player number.\n");
+		ft_putendl_fd("Error. Incorrect player number.", STDERR_FILENO);
+		ft_free_allocated_map_data(map);
 	ft_free_map_struct(map);
 	exit(15);
     }
@@ -63,13 +66,13 @@ void	ft_vertical_check_inner_void(t_map *map)
 	{
 	    if (map->map_content[i][j] == ' ' && map->map_content[i + 1][j] == '0')
 	    {
-		printf("Error. Incorrect map: not surrounded by walls.\n");
+			ft_putendl_fd("Error. Incorrect map: not surrounded by walls.", STDERR_FILENO);
 		ft_free_map_struct(map);
 		exit(16);
 	    }
 	    if (map->map_content[i][j] == '0' && map->map_content[i + 1][j] == ' ')
 	    {
-		printf("Error. Incorrect map: not surrounded by walls..\n");
+			ft_putendl_fd("Error. Incorrect map: not surrounded by walls..", STDERR_FILENO);
 		ft_free_map_struct(map);
 		exit(16);
 	    }
@@ -92,13 +95,13 @@ void	ft_horizontal_check_inner_void(t_map *map)
 	{
 	    if (map->map_content[i][j] == ' ' && map->map_content[i][j + 1] == '0')
 	    {
-		printf("Error. Incorrect map: not surrounded by walls.\n");
+			ft_putendl_fd("Error. Incorrect map: not surrounded by walls.", STDERR_FILENO);
 		ft_free_map_struct(map);
 		exit(16);
 	    }
 	    if (map->map_content[i][j] == '0' && map->map_content[i][j + 1] == ' ')
 	    {
-		printf("Error. Incorrect map: not surrounded by walls..\n");
+			ft_putendl_fd("Error. Incorrect map: not surrounded by walls.", STDERR_FILENO);
 		ft_free_map_struct(map);
 		exit(16);
 	    }

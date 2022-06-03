@@ -1,4 +1,5 @@
 #include "../cub3d.h"
+#include "../../Libft/libft.h"
 
 void	ft_check_vertical_wall(int wall, t_map *map)
 {
@@ -15,7 +16,8 @@ void	ft_check_vertical_wall(int wall, t_map *map)
 	    ft_skip_to_non_space_char_backwards(map->map_content[i], &j);
 	if (map->map_content[i][j] != '1')
 	{
-	    printf("Error. Incorrect map: not surrounded by walls.\n");
+		ft_putendl_fd("Error. Incorrect map: not surrounded by walls.", STDERR_FILENO);
+		ft_free_allocated_map_data(map);
 	    ft_free_map_struct(map);
 	    exit(13);
 	}
@@ -29,6 +31,7 @@ void	ft_check_horizontal_wall(int wall, t_map *map)
     int	j;
 
     i = 0;
+	ft_skip_to_non_space_char(map->map_content[wall], &i);
     while (i < map->width - 1)
     {
     	j = wall;
@@ -41,7 +44,8 @@ void	ft_check_horizontal_wall(int wall, t_map *map)
 	}
 	if (map->map_content[j][i] != '1')
 	{
-	    printf("Error. Incorrect map: not surrounded by walls.\n");
+		ft_putendl_fd("Error. Incorrect map: not surrounded by walls.", STDERR_FILENO);
+		ft_free_allocated_map_data(map);
 	    ft_free_map_struct(map);
 	    exit(13);
 	}

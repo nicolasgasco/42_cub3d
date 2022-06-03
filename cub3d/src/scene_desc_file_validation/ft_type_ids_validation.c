@@ -8,7 +8,9 @@ void    ft_type_ids_validation(char *file_path, t_map *map)
     int     is_file_empty;
     
     is_file_empty = 1;
-    scene_file_fd = ft_open_file(file_path);
+    scene_file_fd = open(file_path, O_RDONLY);
+    if (scene_file_fd == -1)
+        ft_open_file_error();
     while (1) {
         line = get_next_line(scene_file_fd);
         if (line == NULL)
@@ -23,7 +25,7 @@ void    ft_type_ids_validation(char *file_path, t_map *map)
     }
     if (is_file_empty == 1)
     {
-        printf("Error: emtpy scene file\n");
+        ft_putendl_fd("Error: empty scene file", STDERR_FILENO);
         exit(6) ;
     }
     close(scene_file_fd);
@@ -50,11 +52,18 @@ int    ft_validate_scene_file_line(char *line, t_map *map)
         }
         else if (line[i] == '1')
             return (0);
+        else if (line[i] == '\0')
+        {
+            free(line);
+            ft_putendl_fd("Error: incomplete scene info", STDERR_FILENO);
+            exit(9);
+        }
         else
         {
             free(line);
+            ft_free_allocated_map_data(map);
             ft_putendl_fd("Error: invalid identifier", STDERR_FILENO);
-            //exit(4);
+            exit(4);
         }
         i++;
     }
