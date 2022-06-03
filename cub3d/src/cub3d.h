@@ -48,6 +48,7 @@ void    ft_free_map_struct(t_map *map);
 int     ft_is_player_char(char c);
 int     ft_is_valid_map_char(char c);
 void    ft_free_allocated_map_data(t_map *map);
+void    ft_write_debug_msg(char *msg);
 
 /* Common errors */
 void    ft_malloc_error(void);
@@ -65,14 +66,15 @@ int     ft_open_scene_file(char *file_path);
 int     ft_validate_scene_file_line(char *line, t_map *map);
 void    ft_parse_orientation_path(char *line, int *i, t_map *map);
 int     ft_check_if_map_o_path_unassigned(t_map *map, char *o_path_acronym);
-char    *ft_validate_orientation_path(char *o_path_acronym, char *line, int *i);
+char    *ft_validate_orientation_path(t_map *map, char *o_path_acronym, char *line, int *i);
 int     ft_calc_path_length(char *line, int i);
 int     ft_open_file_path_validation(char *o_path, char *line, char *o_path_acronym);
 void    ft_parse_colors(char *line, int *i, t_map *map);
 char    *ft_validate_colors(char *color_char, char *line, int *i, t_map *map);
+int     ft_check_if_other_num_same_line(char *line, int iterator);
 int     ft_parse_color_codes(char *line, int *iterator, t_map *map);
-void    ft_validate_color_code_str(char *color_code_str, char *line);
-int     ft_parse_single_color_code(char *line, int *iterator);
+void    ft_validate_color_code_str(t_map *map, char *color_code_str, char *line);
+int     ft_parse_single_color_code(t_map *map, char *line, int *iterator);
 void    ft_map_content_validation(char *file_path, t_map *map);
 void	ft_validate_size(t_map *map);
 void	ft_validate_walls(t_map *map);

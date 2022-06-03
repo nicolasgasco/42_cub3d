@@ -23,6 +23,7 @@ SRC_NAME =	cub3d.c\
 		utils/ft_map_content_utils.c\
 		utils/ft_common_errs.c\
 		utils/ft_free.c\
+		utils/ft_debug.c\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR),$(OBJ_NAME))
