@@ -16,7 +16,7 @@ void    ft_type_ids_validation(char *file_path, t_map *map)
         if (line == NULL)
             break ;
         is_file_empty = 0;
-        if (*line == '\n' || !ft_validate_scene_file_line(line, map))
+        if (!ft_validate_scene_file_line(line, map))
         {
             free(line);
             return ;
