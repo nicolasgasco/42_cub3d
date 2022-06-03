@@ -163,22 +163,20 @@ ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
 DESCRIPTION="Breach in wall (bottom - left) with spaces around"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-# SEGFAULT
-# MAP_CONTENT="111
-# 101             
-# 101"
-# ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
-# DESCRIPTION="Breach in wall (bottom - middle)"
-# executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+MAP_CONTENT="111
+101             
+101"
+ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
+DESCRIPTION="Breach in wall (bottom - middle)"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-# SEGFAULT
-# MAP_CONTENT="
-# 111
-# 101             
-# 101"
-# ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
-# DESCRIPTION="Breach in wall (bottom - middle)"
-# executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+MAP_CONTENT="
+111
+101             
+101"
+ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
+DESCRIPTION="Breach in wall (bottom - middle)"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
            
@@ -259,17 +257,28 @@ ERR_MESSAGE="Error. Allowed characters: '1' - '0' - ' ' - 'N' - 'S' - 'E' - 'W'.
 DESCRIPTION="Foreign character in the middle"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
+MAP_CONTENT="
+111111111111
+100011110001
+10001L 100O1
+10001  10001
+100011110001
+100000000001
+111111111111"
+ERR_MESSAGE="Error. Allowed characters: '1' - '0' - ' ' - 'N' - 'S' - 'E' - 'W'."
+DESCRIPTION="Foreign char inside inner hole"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
 
 echo "\n${YELLOW}REPEATED PLAYER ERRORS:${NC}\n"
 
-# SEGFAULT
-# MAP_CONTENT="
-# 1111
-# 1SS1             
-# 1111"
-# ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
-# DESCRIPTION="Repeated player char (same)"
-# executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+MAP_CONTENT="
+1111
+1SS1             
+1111"
+ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
+DESCRIPTION="Repeated player char (same)"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
 111111111111
@@ -323,6 +332,6 @@ executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 
 # "
-# ERR_MESSAGE="Error. Incorrect player number."
+# ERR_MESSAGE="Error. Incorrect ."
 # DESCRIPTION="Repeated player, all chars (with nl below)"
 # executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"

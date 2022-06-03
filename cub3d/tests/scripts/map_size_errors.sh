@@ -124,13 +124,3 @@ MAP_CONTENT="11\n11\n11"
 ERR_MESSAGE="Error. Incorrect map size: width must be over 3 columns"
 DESCRIPTION="Two columns map"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
-
-
-# Segmentation fault !!!
-# MAP_CONTENT="${VALID_TYPE_IDS}
-#             11111111111111111L1111111111111111             
-#             1111111111111111111111111111111111             
-#             1111111111111111111111111111111111             "
-# ERR_MESSAGE="Error: invalid "
-# DESCRIPTION="L in map wall"
-# executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
