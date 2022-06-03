@@ -16,7 +16,7 @@ void    ft_type_ids_validation(char *file_path, t_map *map)
         if (line == NULL)
             break ;
         is_file_empty = 0;
-        if (*line == '\n' || !ft_validate_scene_file_line(line, map))
+        if (!ft_validate_scene_file_line(line, map))
         {
             free(line);
             return ;
@@ -53,11 +53,7 @@ int    ft_validate_scene_file_line(char *line, t_map *map)
         else if (line[i] == '1')
             return (0);
         else if (line[i] == '\0')
-        {
-            free(line);
-            ft_putendl_fd("Error: incomplete scene info", STDERR_FILENO);
-            exit(9);
-        }
+            break;
         else
         {
             free(line);

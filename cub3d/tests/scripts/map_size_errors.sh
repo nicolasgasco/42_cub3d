@@ -15,10 +15,14 @@ TEST_FILE="test_map.cub"
 
 VALID_TYPE_IDS="NO path_to_the_north_texture
                 SO path_to_the_south_texture
+                  
                 WE path_to_the_west_texture
+                \t\t\t
                 EA path_to_the_east_texture
                 F 0,0,0
-                C 0,10,0"
+                  
+                C 0,10,0
+                  "
 
 executeErrorTest() {
     echo "${VALID_TYPE_IDS}\n$2" > $SCRIPT_PATH$TEST_FILE
@@ -120,13 +124,3 @@ MAP_CONTENT="11\n11\n11"
 ERR_MESSAGE="Error. Incorrect map size: width must be over 3 columns"
 DESCRIPTION="Two columns map"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
-
-
-# Segmentation fault !!!
-# MAP_CONTENT="${VALID_TYPE_IDS}
-#             11111111111111111L1111111111111111             
-#             1111111111111111111111111111111111             
-#             1111111111111111111111111111111111             "
-# ERR_MESSAGE="Error: invalid "
-# DESCRIPTION="L in map wall"
-# executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"

@@ -59,7 +59,7 @@ executeFileErrorTest() {
 }
 
 echo "\n${YELLOW}EMPTY FILE ERROR:${NC}\n"
-
+touch "${SCRIPT_PATH}empty_file.cub"
 DESC="Empty file but existing"
 ERR_MESSAGE="Error: empty scene file"
 executeFileErrorTest "$ERR_MESSAGE" "$DESC" "tests/scripts/empty_file.cub"

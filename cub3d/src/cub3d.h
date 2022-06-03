@@ -64,6 +64,7 @@ void    ft_type_ids_validation(char *file_path, t_map *map);
 int     ft_open_scene_file(char *file_path);
 int     ft_validate_scene_file_line(char *line, t_map *map);
 void    ft_parse_orientation_path(char *line, int *i, t_map *map);
+int     ft_check_if_map_o_path_unassigned(t_map *map, char *o_path_acronym);
 char    *ft_validate_orientation_path(char *o_path_acronym, char *line, int *i);
 int     ft_calc_path_length(char *line, int i);
 int     ft_open_file_path_validation(char *o_path, char *line, char *o_path_acronym);

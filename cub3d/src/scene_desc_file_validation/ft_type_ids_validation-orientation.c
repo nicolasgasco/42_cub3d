@@ -7,6 +7,13 @@ void    ft_parse_orientation_path(char *line, int *i, t_map *map)
 
     o_path_acronym = ft_substr(line, *i, 2);
     *i = *i + 2;
+    if (!ft_check_if_map_o_path_unassigned(map, o_path_acronym))
+    {
+        free(o_path_acronym);
+        free(line);
+        ft_free_allocated_map_data(map);
+        ft_duplicate_scene_info_error_exit();
+    }
     if (ft_strncmp(o_path_acronym, "NO", 2) == 0)
         map->no_path = ft_validate_orientation_path(o_path_acronym, line, i);
     else if (ft_strncmp(o_path_acronym, "SO", 2) == 0)
@@ -21,6 +28,31 @@ void    ft_parse_orientation_path(char *line, int *i, t_map *map)
         ft_invalid_id_error_exit(line);
     }
     free(o_path_acronym);
+}
+
+int    ft_check_if_map_o_path_unassigned(t_map *map, char *o_path_acronym)
+{
+    if (ft_strncmp(o_path_acronym, "NO", 2) == 0)
+    {
+        if (map->no_path && ft_strlen(map->no_path))
+            return (0);
+    }
+    else if (ft_strncmp(o_path_acronym, "SO", 2) == 0)
+    {
+        if (map->so_path && ft_strlen(map->so_path))
+            return (0);
+    }
+    else if (ft_strncmp(o_path_acronym, "WE", 2) == 0)
+    {
+        if (map->we_path && ft_strlen(map->we_path))
+            return (0);
+    }
+    else if (ft_strncmp(o_path_acronym, "EA", 2) == 0)
+    {
+        if (map->ea_path && ft_strlen(map->ea_path))
+            return (0);
+    }
+    return (1);
 }
 
 char    *ft_validate_orientation_path(char *o_path_acronym, char *line, int *i)
