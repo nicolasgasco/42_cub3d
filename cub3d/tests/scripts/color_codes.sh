@@ -60,169 +60,261 @@ executeErrorTest() {
     echo "=========================================================================================================="
 }
 
+VALID_TYPE_IDS="NO path_to_the_north_texture
+                SO path_to_the_south_texture
+                  
+                WE path_to_the_west_texture
+                \t\t\t
+                EA path_to_the_east_texture
+                
+                  "
+
 echo "\n${YELLOW}COLORS CODES ERRORS:${NC}\n"
 
-MAP_CONTENT="F"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F"
 ERR_MESSAGE="Error: invalid color statement"
 DESCRIPTION="No color statement"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F ,,,"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F ,,,"
 ERR_MESSAGE="Error: invalid color statement"
 DESCRIPTION="Correct but 2 trailing commas"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F ''"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F ''"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Missing color"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F20,20,20"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F20,20,20"
 ERR_MESSAGE="Error: invalid identifier"
 DESCRIPTION="No space before color"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 20.20.20"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 20.20.20"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Separated by dots"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 20;20;20"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 20;20;20"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Separated by dots"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 20 20 20"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 20 20 20"
 ERR_MESSAGE="Error: invalid color statement"
 DESCRIPTION="Separated by spaces"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 20,,20,20"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 20,,20,20"
 ERR_MESSAGE="Error: invalid color statement"
 DESCRIPTION="Separated by double commas"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F -20,20,20"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F -20,20,20"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Negative color code (first position)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 20,-20,20"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 20,-20,20"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Negative color code (second position)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 20,20,-20"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 20,20,-20"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Negative color code (third position)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 256,20,20"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 256,20,20"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Color code > 255"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 256,20,20"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 256,20,20"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Color code > 255 (first position)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 20,256,20"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 20,256,20"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Color code > 255  (second position)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 20,20,256"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 20,20,256"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Color code > 255  (second position)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 256,20,20,"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 256,20,20,"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Color code > 255 (trailing comma)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 2a0,20,20"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 2a0,20,20"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Non-numeric color code"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 20O,20,20"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 20O,20,20"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Non-numeric color code (at end)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 2a0,20,20,"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 2a0,20,20,"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Non-numeric color code (trailing comma)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 225,200"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 225,200"
 ERR_MESSAGE="Error: invalid color statement"
 DESCRIPTION="One color code missing"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 225,200,"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 225,200,"
 ERR_MESSAGE="Error: invalid color statement"
 DESCRIPTION="One color code missing (trailing comma)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 225"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 225"
 ERR_MESSAGE="Error: invalid color statement"
 DESCRIPTION="Two color codes missing"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 225,"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 225,"
 ERR_MESSAGE="Error: invalid color statement"
 DESCRIPTION="Two color codes missing (trailing comma)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 225,200,200,200"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 225,200,200,200"
 ERR_MESSAGE="Error: invalid color statement"
-DESCRIPTION="Four color codes"
+DESCRIPTION="${VALID_TYPE_IDS}
+Four color codes"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 225,200,200,"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 225,200,200,"
 ERR_MESSAGE="Error: invalid color statement"
 DESCRIPTION="Correct but trailing comma"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 225,200,200."
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 225,200,200."
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Correct but trailing period"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 225,200,200]"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 225,200,200]"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Correct but trailing ]"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F [225,200,200]"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F [225,200,200]"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Enclosed by []"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F (225,200,200)"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F (225,200,200)"
 ERR_MESSAGE="Error: invalid color code"
 DESCRIPTION="Enclosed by ()"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 225,200,200,,"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 225,200,200,,"
 ERR_MESSAGE="Error: invalid color statement"
 DESCRIPTION="Correct but 2 trailing commas"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 225,200,200,200,"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 225,200,200,200,"
 ERR_MESSAGE="Error: invalid color statement"
-DESCRIPTION="Four color codes (trailing comma)"
+DESCRIPTION="${VALID_TYPE_IDS}
+Four color codes (trailing comma)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F ,,,"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F ,,,"
 ERR_MESSAGE="Error: invalid color statement"
 DESCRIPTION="Correct but 2 trailing commas"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="F 225, 200, 200"
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 225, 200, 200"
 ERR_MESSAGE="Error: invalid color statement"
 DESCRIPTION="Spaces between commas"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="${VALID_TYPE_IDS}
+FF 225,200,200"
+ERR_MESSAGE="Error: invalid identifier"
+DESCRIPTION="Double F"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="${VALID_TYPE_IDS}
+FFF 225,200,200"
+ERR_MESSAGE="Error: invalid identifier"
+DESCRIPTION="Triple F"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 00,200,200"
+ERR_MESSAGE="Error: invalid color code"
+DESCRIPTION="00"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 000,200,200"
+ERR_MESSAGE="Error: invalid color code"
+DESCRIPTION="000"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 0000,200,200"
+ERR_MESSAGE="Error: invalid color code"
+DESCRIPTION="0000"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 200,00,200"
+ERR_MESSAGE="Error: invalid color code"
+DESCRIPTION="00"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 001,100,200"
+ERR_MESSAGE="Error: invalid color code"
+DESCRIPTION="001"
+executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="${VALID_TYPE_IDS}
+F 100,001,200"
+ERR_MESSAGE="Error: invalid color code"
+DESCRIPTION="001"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
