@@ -15,15 +15,16 @@ void    ft_parse_orientation_path(char *line, int *i, t_map *map)
         ft_duplicate_scene_info_error_exit();
     }
     if (ft_strncmp(o_path_acronym, "NO", 2) == 0)
-        map->no_path = ft_validate_orientation_path(o_path_acronym, line, i);
+        map->no_path = ft_validate_orientation_path(map, o_path_acronym, line, i);
     else if (ft_strncmp(o_path_acronym, "SO", 2) == 0)
-        map->so_path = ft_validate_orientation_path(o_path_acronym, line, i);
+        map->so_path = ft_validate_orientation_path(map, o_path_acronym, line, i);
     else if (ft_strncmp(o_path_acronym, "WE", 2) == 0)
-        map->we_path = ft_validate_orientation_path(o_path_acronym, line, i);
+        map->we_path = ft_validate_orientation_path(map, o_path_acronym, line, i);
     else if (ft_strncmp(o_path_acronym, "EA", 2) == 0)
-        map->ea_path = ft_validate_orientation_path(o_path_acronym, line, i);
+        map->ea_path = ft_validate_orientation_path(map, o_path_acronym, line, i);
     else
     {
+        ft_free_allocated_map_data(map);
         free(o_path_acronym);
         ft_invalid_id_error_exit(line);
     }
@@ -55,7 +56,7 @@ int    ft_check_if_map_o_path_unassigned(t_map *map, char *o_path_acronym)
     return (1);
 }
 
-char    *ft_validate_orientation_path(char *o_path_acronym, char *line, int *i)
+char    *ft_validate_orientation_path(t_map *map, char *o_path_acronym, char *line, int *i)
 {
     char    *o_path;
     int     o_file_fd;
@@ -70,6 +71,7 @@ char    *ft_validate_orientation_path(char *o_path_acronym, char *line, int *i)
     {
         free(o_path_acronym);
         free(line);
+        ft_free_allocated_map_data(map);
         ft_putendl_fd("Error: missing file path", STDERR_FILENO);
         exit(7);
     }
