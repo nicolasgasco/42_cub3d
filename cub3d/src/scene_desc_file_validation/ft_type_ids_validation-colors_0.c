@@ -11,17 +11,17 @@ void	ft_parse_colors(char *line, int *i, t_map *map)
 	*i = *i + 1;
 	if (ft_strncmp(color_id, "F", 1) == 0)
 	{
-		ft_check_if_color_already_exists(map, color_id, line);
+		ft_check_if_color_exists(map, color_id, line);
 		map->f_color = ft_validate_colors(color_id, line, i, map);
 	}
 	else if (ft_strncmp(color_id, "C", 1) == 0)
 	{
-		ft_check_if_color_already_exists(map, color_id, line);
+		ft_check_if_color_exists(map, color_id, line);
 		map->c_color = ft_validate_colors(color_id, line, i, map);
 	}
 }
 
-void	ft_check_if_color_already_exists(t_map *map, char *color_id, char *line)
+void	ft_check_if_color_exists(t_map *map, char *color_id, char *line)
 {
 	if (ft_strncmp(color_id, "F", 1) == 0)
 	{

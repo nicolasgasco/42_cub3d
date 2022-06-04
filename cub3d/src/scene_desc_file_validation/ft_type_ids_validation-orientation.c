@@ -76,7 +76,7 @@ char	*ft_validate_o_path(t_map *map, char *o_path_id, char *line, int *i)
 	o_path = ft_substr(line, *i, ft_calc_path_length(line, *i));
 	*i += ft_calc_path_length(line, *i);
 	o_path = ft_strtrim_no_leaks(o_path, " \n");
-	o_file_fd = ft_validate_file_path(map, o_path, line, o_path_id);
+	o_file_fd = ft_validate_f_path(map, o_path, line, o_path_id);
 	close(o_file_fd);
 	return (o_path);
 }
@@ -94,7 +94,7 @@ int	ft_calc_path_length(char *line, int i)
 	return (len);
 }
 
-int	ft_validate_file_path(t_map *map, char *o_path, char *line, char *o_path_id)
+int	ft_validate_f_path(t_map *map, char *o_path, char *line, char *o_path_id)
 {
 	int	file_fd;
 
