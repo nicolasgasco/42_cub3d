@@ -73,7 +73,7 @@ void	ft_vertical_check_inner_void(t_map *map)
 			}
 			if (map->map_content[i][j] == '0' && map->map_content[i + 1][j] == ' ')
 			{
-				ft_putendl_fd("Error. Incorrect map: not surrounded by walls..", STDERR_FILENO);
+				ft_putendl_fd("Error. Incorrect map: not surrounded by walls.", STDERR_FILENO);
 				ft_free_allocated_map_data(map);
 				ft_free_map_struct(map);
 				exit(16);
