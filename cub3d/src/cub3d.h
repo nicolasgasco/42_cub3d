@@ -53,6 +53,7 @@ void    ft_invalid_id_error_exit(t_map *map, char *line);
 void    ft_duplicate_scene_info_error_exit(t_map *map);
 void    ft_invalid_col_statement_error_exit(t_map *map, char *line);
 void    ft_incomplete_scene_info_error_exit(t_map *map);
+void    ft_empty_scene_file_error_exit(void);
 
 /* Common errors */
 void    ft_malloc_error(void);
@@ -66,12 +67,13 @@ void    ft_type_ids_validation(char *file_path, t_map *map);
 int     ft_open_scene_file(char *file_path);
 int     ft_validate_scene_file_line(char *line, t_map *map);
 void    ft_parse_orientation_path(char *line, int *i, t_map *map);
-int     ft_check_if_map_o_path_unassigned(t_map *map, char *o_path_acronym);
-char    *ft_validate_orientation_path(t_map *map, char *o_path_acronym, char *line, int *i);
+int     ft_check_if_map_o_path_unassigned(t_map *map, char *o_path_id);
+char    *ft_validate_o_path(t_map *map, char *o_path_id, char *line, int *i);
 int     ft_calc_path_length(char *line, int i);
-int     ft_open_file_path_validation(t_map *map, char *o_path, char *line, char *o_path_acronym);
+int     ft_validate_file_path(t_map *map, char *o_path, char *line, char *o_path_id);
 void    ft_parse_colors(char *line, int *i, t_map *map);
-char    *ft_validate_colors(char *color_char, char *line, int *i, t_map *map);
+void	ft_check_if_color_already_exists(t_map *map, char *color_id, char *line);
+char    *ft_validate_colors(char *color_id, char *line, int *i, t_map *map);
 int     ft_check_if_other_num_same_line(char *line, int iterator);
 int     ft_parse_color_codes(char *line, int *iterator, t_map *map);
 void    ft_validate_color_code_str(t_map *map, char *color_code_str, char *line);
