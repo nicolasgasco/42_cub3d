@@ -38,7 +38,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C $(LIB_DIR) --silent
-	@gcc $(FLAGS) $(SANITIZE) -g -o $(NAME) $(OBJ) -L $(LIB_DIR) -lft
+	@gcc $(FLAGS) -g -o $(NAME) $(OBJ) -L $(LIB_DIR) -lft
 	@echo "##### cub3d compiling finished! #####"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
