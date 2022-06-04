@@ -33,22 +33,22 @@ int	ft_check_if_map_o_path_unassigned(t_map *map, char *o_path_id)
 {
 	if (ft_strncmp(o_path_id, "NO", 2) == 0)
 	{
-		if (map->no_path && ft_strlen(map->no_path))
+		if (map->no_path)
 			return (0);
 	}
 	else if (ft_strncmp(o_path_id, "SO", 2) == 0)
 	{
-		if (map->so_path && ft_strlen(map->so_path))
+		if (map->so_path)
 			return (0);
 	}
 	else if (ft_strncmp(o_path_id, "WE", 2) == 0)
 	{
-		if (map->we_path && ft_strlen(map->we_path))
+		if (map->we_path)
 			return (0);
 	}
 	else if (ft_strncmp(o_path_id, "EA", 2) == 0)
 	{
-		if (map->ea_path && ft_strlen(map->ea_path))
+		if (map->ea_path)
 			return (0);
 	}
 	return (1);
@@ -57,7 +57,6 @@ int	ft_check_if_map_o_path_unassigned(t_map *map, char *o_path_id)
 char	*ft_validate_o_path(t_map *map, char *o_path_id, char *line, int *i)
 {
 	char	*o_path;
-	int		o_file_fd;
 
 	if (!ft_isspace(line[*i]))
 	{
@@ -73,39 +72,6 @@ char	*ft_validate_o_path(t_map *map, char *o_path_id, char *line, int *i)
 		ft_putendl_fd("Error: missing file path", STDERR_FILENO);
 		exit(6);
 	}
-	o_path = ft_substr(line, *i, ft_calc_path_length(line, *i));
-	*i += ft_calc_path_length(line, *i);
-	o_path = ft_strtrim_no_leaks(o_path, " \n");
-	o_file_fd = ft_validate_f_path(map, o_path, line, o_path_id);
-	close(o_file_fd);
+	o_path = ft_parse_path(map, o_path_id, line, i);
 	return (o_path);
-}
-
-int	ft_calc_path_length(char *line, int i)
-{
-	int	len;
-
-	len = 0;
-	while (ft_isspace(line[i]) == 0 && line[i])
-	{
-		len++;
-		i++;
-	}
-	return (len);
-}
-
-int	ft_validate_f_path(t_map *map, char *o_path, char *line, char *o_path_id)
-{
-	int	file_fd;
-
-	file_fd = open(o_path, O_RDONLY);
-	if (file_fd == -1)
-	{
-		ft_free_allocated_map_data(map);
-		free(o_path);
-		free(line);
-		free(o_path_id);
-		ft_open_file_error();
-	}
-	return (file_fd);
 }

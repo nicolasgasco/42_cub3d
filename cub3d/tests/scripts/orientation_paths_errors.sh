@@ -214,8 +214,34 @@ ERR_MESSAGE="Error: file opening failed"
 DESCRIPTION="Invalid path (\')"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-# This case at the moment is not contemplated
-# MAP_CONTENT="NO path_to_the_east_texture path_to_file"
-# ERR_MESSAGE="Error: invalid"
-# DESCRIPTION="Double path"
-# executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+MAP_CONTENT="
+WE path_to_the_west_texture
+SO path_to_the_south_texture
+NO path_to_the_east_texture path_to_file"
+ERR_MESSAGE="Error: invalid orientation path"
+DESCRIPTION="Double path"
+executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="
+WE path_to_the_west_texture
+SO path_to_the_south_texture
+NO path_to_the_east_texture path_to_file path_to_file"
+ERR_MESSAGE="Error: invalid orientation path"
+DESCRIPTION="Triple path"
+executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="
+WE path_to_the_west_texture
+SO path_to_the_south_texture
+NO path_to_the_east_texture F 200,200,200"
+ERR_MESSAGE="Error: invalid orientation path"
+DESCRIPTION="Second path is color statement"
+executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="
+WE path_to_the_west_texture
+SO path_to_the_south_texture
+NO path_to_the_east_texture                                         path"
+ERR_MESSAGE="Error: invalid orientation path"
+DESCRIPTION="Second path with spaces"
+executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
