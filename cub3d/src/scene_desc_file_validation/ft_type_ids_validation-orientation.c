@@ -63,6 +63,7 @@ char    *ft_validate_orientation_path(t_map *map, char *o_path_acronym, char *li
 
     if (!ft_isspace(line[*i]))
     {
+        ft_free_allocated_map_data(map);
         free(o_path_acronym);
         ft_invalid_id_error_exit(line);
     }
@@ -76,8 +77,9 @@ char    *ft_validate_orientation_path(t_map *map, char *o_path_acronym, char *li
         exit(7);
     }
     o_path = ft_substr(line, *i, ft_calc_path_length(line, *i));
+    *i += ft_calc_path_length(line, *i);
     o_path = ft_strtrim_no_leaks(o_path, " \n");
-    o_file_fd = ft_open_file_path_validation(o_path, line, o_path_acronym);
+    o_file_fd = ft_open_file_path_validation(map, o_path, line, o_path_acronym);
     close(o_file_fd);
     return (o_path);
 }
@@ -95,13 +97,14 @@ int ft_calc_path_length(char *line, int i)
     return (len);
 }
 
-int ft_open_file_path_validation(char *o_path, char *line, char *o_path_acronym)
+int ft_open_file_path_validation(t_map *map, char *o_path, char *line, char *o_path_acronym)
 {
     int     file_fd;
 
     file_fd = open(o_path, O_RDONLY);
     if (file_fd == -1)
     {
+        ft_free_allocated_map_data(map);
         free(o_path);
         free(line);
         free(o_path_acronym);
