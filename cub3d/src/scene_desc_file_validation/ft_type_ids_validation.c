@@ -26,7 +26,7 @@ void    ft_type_ids_validation(char *file_path, t_map *map)
     if (is_file_empty == 1)
     {
         ft_putendl_fd("Error: empty scene file", STDERR_FILENO);
-        exit(6) ;
+        exit(5) ;
     }
     close(scene_file_fd);
 }
@@ -55,12 +55,7 @@ int    ft_validate_scene_file_line(char *line, t_map *map)
         else if (line[i] == '\0')
             break;
         else
-        {
-            free(line);
-            ft_free_allocated_map_data(map);
-            ft_putendl_fd("Error: invalid identifier", STDERR_FILENO);
-            exit(4);
-        }
+            ft_invalid_id_error_exit(map, line);
         i++;
     }
     return (1);

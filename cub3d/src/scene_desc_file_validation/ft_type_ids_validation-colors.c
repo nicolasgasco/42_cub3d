@@ -6,22 +6,16 @@ void    ft_parse_colors(char *line, int *i, t_map *map)
     char    *color_char;
 
     if (line[*i + 1] && !ft_isspace(line[*i + 1]))
-    {
-        ft_free_allocated_map_data(map);
-        free(line);
-        ft_putendl_fd("Error: invalid identifier", STDERR_FILENO);
-        exit(4);
-    }
+        ft_invalid_id_error_exit(map, line);
     color_char = ft_substr(line, *i, 1);
     *i = *i + 1;
     if (ft_strncmp(color_char, "F", 1) == 0)
     {
         if (map->f_color)
         {
-            ft_free_allocated_map_data(map);
             free(color_char);
             free(line);
-            ft_duplicate_scene_info_error_exit();     
+            ft_duplicate_scene_info_error_exit(map);     
         }
         map->f_color = ft_validate_colors(color_char, line, i, map);
     }
@@ -29,10 +23,9 @@ void    ft_parse_colors(char *line, int *i, t_map *map)
     {
         if (map->c_color)
         {
-            ft_free_allocated_map_data(map);
             free(color_char);
             free(line);
-            ft_duplicate_scene_info_error_exit();     
+            ft_duplicate_scene_info_error_exit(map);     
         }
         map->c_color = ft_validate_colors(color_char, line, i, map);
     }
@@ -46,15 +39,12 @@ char    *ft_validate_colors(char *color_char, char *line, int *i, t_map *map)
     codes_count = 0;
     free(color_char);
     if (!ft_isspace(line[*i]) && line[*i] != '\0')
-        ft_invalid_id_error_exit(line);
+        ft_invalid_id_error_exit(map, line);
     ft_skip_to_non_space_char(line, i);
     c_stat_start = *i;
     codes_count = ft_parse_color_codes(line, i, map);
     if (ft_check_if_other_num_same_line(line, *i) || codes_count != 3)
-    {
-        ft_free_allocated_map_data(map);
-        ft_invalid_col_statement_error_exit(line);
-    }
+        ft_invalid_col_statement_error_exit(map, line);
     return (ft_substr(line, c_stat_start, *i - c_stat_start));
 }
 
@@ -88,10 +78,7 @@ int ft_parse_color_codes(char *line, int *iterator, t_map *map)
         *iterator += 1;
     }
     if (!ft_isdigit(line[*iterator - 1]))
-    {
-        ft_free_allocated_map_data(map);
-        ft_invalid_col_statement_error_exit(line);
-    }
+        ft_invalid_col_statement_error_exit(map, line);
     return (counter);
 }
 
