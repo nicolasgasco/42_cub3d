@@ -33,22 +33,22 @@ int	ft_check_if_map_o_path_unassigned(t_map *map, char *o_path_id)
 {
 	if (ft_strncmp(o_path_id, "NO", 2) == 0)
 	{
-		if (map->no_path && ft_strlen(map->no_path))
+		if (map->no_path)
 			return (0);
 	}
 	else if (ft_strncmp(o_path_id, "SO", 2) == 0)
 	{
-		if (map->so_path && ft_strlen(map->so_path))
+		if (map->so_path)
 			return (0);
 	}
 	else if (ft_strncmp(o_path_id, "WE", 2) == 0)
 	{
-		if (map->we_path && ft_strlen(map->we_path))
+		if (map->we_path)
 			return (0);
 	}
 	else if (ft_strncmp(o_path_id, "EA", 2) == 0)
 	{
-		if (map->ea_path && ft_strlen(map->ea_path))
+		if (map->ea_path)
 			return (0);
 	}
 	return (1);
@@ -78,6 +78,16 @@ char	*ft_validate_o_path(t_map *map, char *o_path_id, char *line, int *i)
 	o_path = ft_strtrim_no_leaks(o_path, " \n");
 	o_file_fd = ft_validate_f_path(map, o_path, line, o_path_id);
 	close(o_file_fd);
+	ft_skip_to_non_space_char(line, i);
+	if (!ft_isspace(line[*i]) && line[*i] != '\0')
+	{
+		ft_free_allocated_map_data(map);
+		free(line);
+		free(o_path_id);
+		free(o_path);
+		ft_putendl_fd("Error: invalid orientation path statement", STDERR_FILENO);
+		exit(17);
+	}
 	return (o_path);
 }
 

@@ -39,9 +39,15 @@ int	ft_validate_scene_file_line(char *line, t_map *map)
 		ft_skip_to_non_space_char(line, &i);
 		if (line[i] == 'N' || line[i] == 'S'
 			|| line[i] == 'W' || line[i] == 'E')
+		{
 			ft_parse_orientation_path(line, &i, map);
+			break ;
+		}
 		else if (line[i] == 'F' || line[i] == 'C')
+		{
 			ft_parse_colors(line, &i, map);
+			break ;
+		}
 		else if (line[i] == '1')
 			return (0);
 		else if (line[i] == '\0')
