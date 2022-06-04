@@ -60,6 +60,9 @@ executeOrientationErrors() {
     echo "=========================================================================================================="
 }
 
+VALID_O_PATHS="EA path_to_the_east_texture
+SO path_to_the_south_texture"
+
 echo "\n${YELLOW}EMPTY FILE ERRORS:${NC}\n"
 
 MAP_CONTENT="\n    \n    "
@@ -100,128 +103,112 @@ executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 echo "\n${YELLOW}ORIENTATION ERRORS${NC}:\n"
 
 MAP_CONTENT="
-EA path_to_the_east_texture
-SO path_to_the_south_texture
+${VALID_O_PATHS}
 A"
 ERR_MESSAGE="Error: invalid identifier"
 DESCRIPTION="Wrong first letter (A)"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-EA path_to_the_east_texture
-SO path_to_the_south_texture
+${VALID_O_PATHS}
      a\t\t"
 ERR_MESSAGE="Error: invalid identifier"
 DESCRIPTION="Wrong first letter (a) with spaces"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-EA path_to_the_east_texture
-SO path_to_the_south_texture
+${VALID_O_PATHS}
 0 invalid_path"
 ERR_MESSAGE="Error: invalid identifier"
 DESCRIPTION="0 as first letter"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-EA path_to_the_east_texture
-SO path_to_the_south_texture
+${VALID_O_PATHS}
 1 invalid_path"
 ERR_MESSAGE="Error: incomplete scene info"
 DESCRIPTION="1 as first letter"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-EA path_to_the_east_texture
-SO path_to_the_south_texture
+${VALID_O_PATHS}
 SE"
 ERR_MESSAGE="Error: invalid identifier"
 DESCRIPTION="Wrong second letter"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-EA path_to_the_east_texture
-SO path_to_the_south_texture
+${VALID_O_PATHS}
    SE   \t"
 ERR_MESSAGE="Error: invalid identifier"
 DESCRIPTION="Wrong second letter (with space)"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-EA path_to_the_east_texture
-SO path_to_the_south_texture
+${VALID_O_PATHS}
 NE"
 ERR_MESSAGE="Error: invalid identifier"
 DESCRIPTION="Wrong second letter"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-EA path_to_the_east_texture
-SO path_to_the_south_texture
+${VALID_O_PATHS}
 WO"
 ERR_MESSAGE="Error: invalid identifier"
 DESCRIPTION="Wrong second letter"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-EA path_to_the_east_texture
-SO path_to_the_south_texture
+${VALID_O_PATHS}
 EO valid_path"
 ERR_MESSAGE="Error: invalid identifier"
 DESCRIPTION="Wrong second letter"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-EA path_to_the_east_texture
-SO path_to_the_south_texture
+${VALID_O_PATHS}
 NOpath_to_file"
 ERR_MESSAGE="Error: invalid identifier"
 DESCRIPTION="Path without space"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-EA path_to_the_east_texture
-SO path_to_the_south_texture
+${VALID_O_PATHS}
 NO path_to_file"
 ERR_MESSAGE="Error: file opening failed"
 DESCRIPTION="Invalid path"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-EA path_to_the_east_texture
-SO path_to_the_south_texture
+${VALID_O_PATHS}
 NO path_to_file    \t"
 ERR_MESSAGE="Error: file opening failed"
 DESCRIPTION="Invalid path (with space)"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-EA path_to_the_east_texture
-SO path_to_the_south_texture
+${VALID_O_PATHS}
 NO path_to_file\n"
 ERR_MESSAGE="Error: file opening failed"
 DESCRIPTION="Invalid path (with newline)"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-EA path_to_the_east_texture
-SO path_to_the_south_texture
+${VALID_O_PATHS}
 NO ./fold/path_to_file"
 ERR_MESSAGE="Error: file opening failed"
 DESCRIPTION="Invalid path (nested)"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-EA path_to_the_east_texture
-SO path_to_the_south_texture
+${VALID_O_PATHS}
 NO ../../../../fold/path_to_file"
 ERR_MESSAGE="Error: file opening failed"
 DESCRIPTION="Invalid path (more nested)"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-EA path_to_the_east_texture
-SO path_to_the_south_texture
+${VALID_O_PATHS}
 NO '\''"
 ERR_MESSAGE="Error: file opening failed"
 DESCRIPTION="Invalid path (\')"
