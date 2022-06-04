@@ -33,8 +33,8 @@ int	ft_validate_scene_file_line(char *line, t_map *map)
 {
 	int	i;
 
-	i = 0;
-	while (line[i] != '\0')
+	i = -1;
+	while (line[++i] != '\0')
 	{
 		ft_skip_to_non_space_char(line, &i);
 		if (line[i] == 'N' || line[i] == 'S'
@@ -54,7 +54,6 @@ int	ft_validate_scene_file_line(char *line, t_map *map)
 			break ;
 		else
 			ft_invalid_id_error_exit(map, line);
-		i++;
 	}
 	return (1);
 }
