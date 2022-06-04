@@ -11,8 +11,7 @@ void    ft_parse_orientation_path(char *line, int *i, t_map *map)
     {
         free(o_path_acronym);
         free(line);
-        ft_free_allocated_map_data(map);
-        ft_duplicate_scene_info_error_exit();
+        ft_duplicate_scene_info_error_exit(map);
     }
     if (ft_strncmp(o_path_acronym, "NO", 2) == 0)
         map->no_path = ft_validate_orientation_path(map, o_path_acronym, line, i);
@@ -24,9 +23,8 @@ void    ft_parse_orientation_path(char *line, int *i, t_map *map)
         map->ea_path = ft_validate_orientation_path(map, o_path_acronym, line, i);
     else
     {
-        ft_free_allocated_map_data(map);
         free(o_path_acronym);
-        ft_invalid_id_error_exit(line);
+        ft_invalid_id_error_exit(map, line);
     }
     free(o_path_acronym);
 }
@@ -63,9 +61,8 @@ char    *ft_validate_orientation_path(t_map *map, char *o_path_acronym, char *li
 
     if (!ft_isspace(line[*i]))
     {
-        ft_free_allocated_map_data(map);
         free(o_path_acronym);
-        ft_invalid_id_error_exit(line);
+        ft_invalid_id_error_exit(map, line);
     }
     ft_skip_to_non_space_char(line, i);
     if (line[*i] == '\0')
@@ -74,7 +71,7 @@ char    *ft_validate_orientation_path(t_map *map, char *o_path_acronym, char *li
         free(line);
         ft_free_allocated_map_data(map);
         ft_putendl_fd("Error: missing file path", STDERR_FILENO);
-        exit(7);
+        exit(6);
     }
     o_path = ft_substr(line, *i, ft_calc_path_length(line, *i));
     *i += ft_calc_path_length(line, *i);
