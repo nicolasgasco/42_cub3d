@@ -16,7 +16,7 @@ void	ft_check_vertical_wall(int wall, t_map *map)
 			ft_skip_to_non_space_char_backwards(map->map_content[i], &j);
 		if (map->map_content[i][j] == '\0')
 			break ;
-		if (map->map_content[i][j] != '1' && map->map_content[i][j] == '\n')
+		if (map->map_content[i][j] != '1' && map->map_content[i][j] != '\n')
 		{
 			ft_putendl_fd("Error. Incorrect map: not surrounded by walls.", STDERR_FILENO);
 			ft_free_allocated_map_data(map);

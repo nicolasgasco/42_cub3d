@@ -276,7 +276,7 @@ MAP_CONTENT="
 1111
 1SS1             
 1111"
-ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
+ERR_MESSAGE="Error. Incorrect player number."
 DESCRIPTION="Repeated player char (same)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
