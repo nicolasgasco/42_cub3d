@@ -10,28 +10,16 @@ void    ft_type_ids_completeness_check(t_map *map)
 void    ft_completeness_check_colors(t_map *map)
 {
     if (!map->c_color || !map->f_color)
-    {
-        ft_free_allocated_map_data(map);
-        ft_putendl_fd("Error: incomplete scene info", STDERR_FILENO);
-        exit(9);
-    }
+        ft_incomplete_scene_info_error_exit(map);
     else if (!ft_strncmp(map->c_color, map->f_color, ft_strlen(map->c_color)))
-    {
-        ft_free_allocated_map_data(map);
-        ft_duplicate_scene_info_error_exit();
-    }
+        ft_duplicate_scene_info_error_exit(map);
 }
 
 void    ft_completeness_check_o_paths(t_map *map)
 {
     if (!map->no_path || !map->ea_path || !map->so_path || !map->we_path)
-    {
-        ft_free_allocated_map_data(map);
-        ft_putendl_fd("Error: incomplete scene info", STDERR_FILENO);
-        exit(9);
-    }
+        ft_incomplete_scene_info_error_exit(map);
     ft_check_o_paths_duplicates(map);
- 
 }
 
 void    ft_check_o_paths_duplicates(t_map *map)
@@ -64,9 +52,8 @@ void    ft_find_o_paths_duplicates(char **path_arr, t_map *map)
         {
             if (j != i && !ft_strncmp(path_arr[i], path_arr[j], ft_strlen(path_arr[i])))
             {
-                ft_free_allocated_map_data(map);
                 free(path_arr);
-                ft_duplicate_scene_info_error_exit();     
+                ft_duplicate_scene_info_error_exit(map);     
             }
             j++;
         }

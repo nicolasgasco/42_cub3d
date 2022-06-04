@@ -49,13 +49,14 @@ int     ft_is_player_char(char c);
 int     ft_is_valid_map_char(char c);
 void    ft_free_allocated_map_data(t_map *map);
 void    ft_write_debug_msg(char *msg);
+void    ft_invalid_id_error_exit(t_map *map, char *line);
+void    ft_duplicate_scene_info_error_exit(t_map *map);
+void    ft_invalid_col_statement_error_exit(t_map *map, char *line);
+void    ft_incomplete_scene_info_error_exit(t_map *map);
 
 /* Common errors */
 void    ft_malloc_error(void);
 void    ft_open_file_error(void);
-void    ft_invalid_id_error_exit(char *line);
-void    ft_duplicate_scene_info_error_exit(void);
-void    ft_invalid_col_statement_error_exit(char *line);
 
 /* Scene description file validation */
 void    ft_check_num_args(int argc);
