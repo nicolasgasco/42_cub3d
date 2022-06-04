@@ -249,3 +249,91 @@ C 225,30,0"
 DEBUG_MSG="Type ids validated successfully"
 DESCRIPTION="Orientation chars separated by colors with 2 nl + spaces"
 executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="
+F 220,100,0
+C 225,30,0
+NO ./path_to_the_north_texture
+SO ./path_to_the_south_texture
+WE ./path_to_the_west_texture
+EA ./path_to_the_east_texture"
+DEBUG_MSG="Type ids validated successfully"
+DESCRIPTION="Colors first"
+executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
+
+
+MAP_CONTENT="
+C 225,30,0
+F 220,100,0
+NO ./path_to_the_north_texture
+SO ./path_to_the_south_texture
+WE ./path_to_the_west_texture
+EA ./path_to_the_east_texture"
+DEBUG_MSG="Type ids validated successfully"
+DESCRIPTION="Colors first and swapped"
+executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="
+C 225,30,0
+NO ./path_to_the_north_texture
+SO ./path_to_the_south_texture
+WE ./path_to_the_west_texture
+EA ./path_to_the_east_texture
+F 220,100,0
+"
+DEBUG_MSG="Type ids validated successfully"
+DESCRIPTION="Colors first and last"
+executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="
+NO ./path_to_the_north_texture
+C 225,30,0
+SO ./path_to_the_south_texture
+WE ./path_to_the_west_texture
+F 220,100,0
+EA ./path_to_the_east_texture
+"
+DEBUG_MSG="Type ids validated successfully"
+DESCRIPTION="Scrambled view"
+executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="
+    NO ./path_to_the_north_texture     
+     C 225,30,0             
+            SO ./path_to_the_south_texture      
+         WE ./path_to_the_west_texture   
+    F 220,100,0     
+ EA ./path_to_the_east_texture                                      
+
+
+
+
+"
+DEBUG_MSG="Type ids validated successfully"
+DESCRIPTION="Scrambled view with spaces and tabs"
+executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
+
+MAP_CONTENT="
+
+NO ./path_to_the_north_texture
+
+
+C 225,30,0
+
+
+SO ./path_to_the_south_texture
+
+
+WE ./path_to_the_west_texture
+
+
+F 220,100,0
+
+
+EA ./path_to_the_east_texture
+
+
+"
+DEBUG_MSG="Type ids validated successfully"
+DESCRIPTION="Scrambled view with nls"
+executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
