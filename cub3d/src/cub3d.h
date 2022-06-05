@@ -83,14 +83,17 @@ int		ft_parse_single_color_code(t_map *map, char *line, int *iterator);
 void	ft_validate_single_col_code(t_map *map, char *col_code_str, char *line);
 void	ft_already_existing_color_error(t_map *map, char *color_id, char *line);
 int		ft_check_if_other_num_same_line(char *line, int iterator);
-void	ft_map_content_validation(char *file_path, t_map *map);
-void	ft_validate_size(t_map *map);
-void	ft_validate_walls(t_map *map);
-void	ft_validate_content(t_map *map);
+// Type ids - Completeness check
 void	ft_type_ids_completeness_check(t_map *map);
 void	ft_completeness_check_colors(t_map *map);
 void	ft_completeness_check_o_paths(t_map *map);
 void	ft_check_o_paths_duplicates(t_map *map);
 void	ft_find_o_paths_duplicates(char **path_arr, t_map *map);
+// Map content
+void	ft_map_content_validation(char *file_path, t_map *map);
+void	ft_validate_size(t_map *map);
+void	ft_validate_walls(t_map *map);
+void	ft_validate_content(t_map *map);
+
 
 #endif
