@@ -76,13 +76,13 @@ int		ft_calc_path_length(char *line, int i);
 int		ft_check_o_path_already_assigned(t_map *map, char *o_path_id);
 int		ft_validate_f_path(t_map *map, char *o_path, char *line, char *o_p_id);
 // Type ids - Colors validation
-void	ft_parse_colors(char *line, int *i, t_map *map);
-void	ft_check_if_color_exists(t_map *map, char *color_id, char *line);
+void	ft_validate_parse_color(char *line, int *i, t_map *map);
 char	*ft_validate_colors(char *color_id, char *line, int *i, t_map *map);
-int		ft_check_if_other_num_same_line(char *line, int iterator);
 int		ft_parse_color_codes(char *line, int *iterator, t_map *map);
-void	ft_validate_col_code_str(t_map *map, char *col_code_str, char *line);
 int		ft_parse_single_color_code(t_map *map, char *line, int *iterator);
+void	ft_validate_single_col_code(t_map *map, char *col_code_str, char *line);
+void	ft_already_existing_color_error(t_map *map, char *color_id, char *line);
+int		ft_check_if_other_num_same_line(char *line, int iterator);
 void	ft_map_content_validation(char *file_path, t_map *map);
 void	ft_validate_size(t_map *map);
 void	ft_validate_walls(t_map *map);

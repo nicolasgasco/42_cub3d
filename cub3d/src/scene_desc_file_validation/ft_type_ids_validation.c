@@ -45,7 +45,7 @@ int	ft_validate_scene_file_line(char *line, t_map *map)
 		}
 		else if (line[i] == 'F' || line[i] == 'C')
 		{
-			ft_parse_colors(line, &i, map);
+			ft_validate_parse_color(line, &i, map);
 			break ;
 		}
 		else if (line[i] == '1')

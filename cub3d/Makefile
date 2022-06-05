@@ -9,8 +9,8 @@ SRC_NAME =	cub3d.c\
 		scene_desc_file_validation/ft_type_ids_validation.c\
 		scene_desc_file_validation/ft_type_ids_validation-orientation.c\
 		scene_desc_file_validation/ft_type_ids_validation-orientation_utils.c\
-		scene_desc_file_validation/ft_type_ids_validation-colors_0.c\
-		scene_desc_file_validation/ft_type_ids_validation-colors_1.c\
+		scene_desc_file_validation/ft_type_ids_validation-colors.c\
+		scene_desc_file_validation/ft_type_ids_validation-colors_utils.c\
 		scene_desc_file_validation/ft_type_ids_validation-completeness.c\
 		scene_desc_file_validation/ft_map_content_validation.c\
 		scene_desc_file_validation/ft_map_content_validation-map_size.c\
