@@ -18,8 +18,7 @@ int	main(int argc, char **argv)
 	t_map	map;
 
 	ft_memset(&map, 0, sizeof(t_map));
-	ft_check_num_args(argc);
-	ft_scene_desc_file_validation(argv[1], &map);
+	ft_scene_desc_file_validation(argc, argv[1], &map);
 	ft_free_map_struct(&map);
 	ft_free_allocated_map_data(&map);
 	return (0);
