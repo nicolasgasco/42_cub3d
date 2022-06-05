@@ -40,7 +40,7 @@ int	ft_validate_scene_file_line(char *line, t_map *map)
 		if (line[i] == 'N' || line[i] == 'S'
 			|| line[i] == 'W' || line[i] == 'E')
 		{
-			ft_parse_orientation_path(line, &i, map);
+			ft_validate_parse_o_path(line, &i, map);
 			break ;
 		}
 		else if (line[i] == 'F' || line[i] == 'C')

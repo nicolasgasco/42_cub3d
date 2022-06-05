@@ -65,15 +65,17 @@ void	ft_open_file_error(void);
 void	ft_scene_desc_file_validation(int argc, char *file_path, t_map *map);
 void	ft_check_num_args(int argc);
 void	ft_file_extension_validation(char *file_path);
+// Type ids
 void	ft_type_ids_validation(char *file_path, t_map *map);
-int		ft_open_scene_file(char *file_path);
 int		ft_validate_scene_file_line(char *line, t_map *map);
-void	ft_parse_orientation_path(char *line, int *i, t_map *map);
-int		ft_check_if_map_o_path_unassigned(t_map *map, char *o_path_id);
+// Type ids - Orientation paths
+void	ft_validate_parse_o_path(char *line, int *i, t_map *map);
 char	*ft_validate_o_path(t_map *map, char *o_path_id, char *line, int *i);
-char	*ft_parse_path(t_map *map, char *o_path_id, char *line, int *i);
+char	*ft_parse_valid_path(t_map *map, char *o_path_id, char *line, int *i);
 int		ft_calc_path_length(char *line, int i);
+int		ft_check_o_path_already_assigned(t_map *map, char *o_path_id);
 int		ft_validate_f_path(t_map *map, char *o_path, char *line, char *o_p_id);
+// Type ids - Colors validation
 void	ft_parse_colors(char *line, int *i, t_map *map);
 void	ft_check_if_color_exists(t_map *map, char *color_id, char *line);
 char	*ft_validate_colors(char *color_id, char *line, int *i, t_map *map);
