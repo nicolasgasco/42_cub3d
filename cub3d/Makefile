@@ -6,8 +6,6 @@ INC = -I%.h -I$(LIB_DIR)%.h
 
 SRC_NAME =	cub3d.c\
 		scene_desc_file_validation/ft_scene_desc_file_validation.c\
-		scene_desc_file_validation/ft_scene_desc_file_validation-num_args.c\
-		scene_desc_file_validation/ft_scene_desc_file_validation-file_ext.c\
 		scene_desc_file_validation/ft_type_ids_validation.c\
 		scene_desc_file_validation/ft_type_ids_validation-orientation_0.c\
 		scene_desc_file_validation/ft_type_ids_validation-orientation_1.c\
