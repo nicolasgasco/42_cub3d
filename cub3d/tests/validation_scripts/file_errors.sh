@@ -6,7 +6,7 @@ GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 NC='\033[0m'
 
-SCRIPT_PATH="./tests/scripts/"
+SCRIPT_PATH="./tests/validation_scripts/"
 VALGRIND="valgrind --leak-check=full --show-leak-kinds=all"
 TEST_OUTPUT="test_output"
 VALGRIND_OUTPUT="valgrind_output"
@@ -62,7 +62,7 @@ echo "\n${YELLOW}EMPTY FILE ERROR:${NC}\n"
 touch "${SCRIPT_PATH}empty_file.cub"
 DESC="Empty file but existing"
 ERR_MESSAGE="Error: empty scene file"
-executeFileErrorTest "$ERR_MESSAGE" "$DESC" "tests/scripts/empty_file.cub"
+executeFileErrorTest "$ERR_MESSAGE" "$DESC" "tests/validation_scripts/empty_file.cub"
 
 echo "\n${YELLOW}ARGUMENTS ERRORS:${NC}\n"
 
