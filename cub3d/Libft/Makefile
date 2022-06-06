@@ -10,6 +10,7 @@ SRCS =	ft_strlen.c		\
 		ft_isdigit.c    \
 		ft_memset.c     \
 		ft_strdup.c     \
+		ft_strjoin.c    \
 		
 NAME = libft.a
 
