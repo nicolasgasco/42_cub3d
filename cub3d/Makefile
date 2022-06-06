@@ -61,7 +61,8 @@ fclean: clean
 
 re: fclean all
 
-test:
+test_validation:
+	@make re > /dev/null 2> /dev/null
 	@sh tests/validation_tests.sh
 
 .PHONY: all clean fclean re test

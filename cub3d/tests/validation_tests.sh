@@ -1,6 +1,4 @@
-make re > /dev/null 2> /dev/null
-
-for file in ./tests/scripts/*.sh
+for file in ./tests/validation_scripts/*.sh
 do
     sh "$file"
     if [ "$?" = "1" ]
