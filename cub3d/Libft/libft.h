@@ -30,5 +30,6 @@ int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 char	*ft_strdup(const char *s1);
 void	*ft_memset(void *l, int c, size_t len);
+char	*ft_itoa(int n);
 
 #endif
