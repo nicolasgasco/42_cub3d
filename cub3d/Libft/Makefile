@@ -1,6 +1,7 @@
 SRCS =	ft_strlen.c		\
         ft_putchar_fd.c \
 		ft_putendl_fd.c \
+		ft_putstr_fd.c  \
 		ft_strncmp.c    \
 		ft_substr.c     \
 		ft_strtrim.c    \
@@ -10,6 +11,8 @@ SRCS =	ft_strlen.c		\
 		ft_isdigit.c    \
 		ft_memset.c     \
 		ft_strdup.c     \
+		ft_strjoin.c    \
+		ft_itoa.c       \
 		
 NAME = libft.a
 

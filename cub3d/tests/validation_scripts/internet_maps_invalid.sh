@@ -11,7 +11,7 @@ TEST_OUTPUT="test_output"
 VALGRIND_OUTPUT="valgrind_output"
 TEST_FILE="test_map.cub"
 DEBUG_FILE="debug_output"
-SCRIPT_PATH="./tests/scripts/"
+SCRIPT_PATH="./tests/validation_scripts/"
 
 internetMapsValid() {
     ./cub3d $1 > /dev/null 2> "$SCRIPT_PATH$TEST_OUTPUT"
