@@ -27,6 +27,9 @@ typedef struct s_map
 	char	*we_path;
 	char	*f_color;
 	char	*c_color;
+	int		player_y;
+	int		player_x;
+	char	player_orientation;
 	int		height;
 	int		width;
 	char	**map_content;
@@ -36,6 +39,7 @@ typedef struct s_map
 int		ft_open_file(char *file_path);
 int		ft_isspace(char c);
 void	ft_skip_to_non_space_char(char *line, int *iterator);
+int		ft_isspace_no_endl(char c);
 char	*get_next_line(int fd);
 char	*ft_substr_no_leaks(char *s, unsigned int start, size_t len);
 char	*ft_strtrim_no_leaks(char *s1, const char *set);
@@ -44,11 +48,15 @@ int		ft_is_map_start(char *line);
 void	ft_get_map_width(char *line, t_map *map);
 char	*ft_skip_to_map_start(char *line, int fd);
 void	ft_skip_to_non_space_char_backwards(char *line, int *iterator);
-void	ft_free_map_struct(t_map *map);
 int		ft_is_player_char(char c);
 int		ft_is_valid_map_char(char c);
 void	ft_free_allocated_map_data(t_map *map);
+void	ft_print_error_exit(t_map *map, char *msg, int err);
 void	ft_write_debug_msg(char *msg);
+void	ft_check_player_number(t_map *map, int player);
+void	ft_set_player_data(t_map *map, int *iterator, int *j, char c);
+char	*ft_check_to_eof(char *line, int fd, t_map *map);
+void	ft_skip_to_content(char *line, int *iterator);
 
 /* Scene desc validation errors */
 void	ft_duplicate_scene_info_error_exit(t_map *map);
@@ -91,6 +99,7 @@ void	ft_check_o_paths_duplicates(t_map *map);
 void	ft_find_o_paths_duplicates(char **path_arr, t_map *map);
 // Map content
 void	ft_map_content_validation(char *file_path, t_map *map);
+void	ft_check_characters(t_map *map);
 void	ft_validate_size(t_map *map);
 void	ft_validate_walls(t_map *map);
 void	ft_validate_content(t_map *map);

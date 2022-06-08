@@ -75,7 +75,7 @@ echo "\n${YELLOW}MAP CHARS ERRORS:${NC}\n"
 
 MAP_CONTENT="
 101
-101             
+1N1             
 111"
 ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
 DESCRIPTION="Breach in wall (top - middle)"
@@ -84,7 +84,7 @@ executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 MAP_CONTENT="
            
      101      
-     101                   
+     1N1                   
      111  
             "
 ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
@@ -93,7 +93,7 @@ executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
 110
-101             
+1N1             
 111"
 ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
 DESCRIPTION="Breach in wall (top - right)"
@@ -102,7 +102,7 @@ executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 MAP_CONTENT="
            
      110      
-     101                   
+     1N1                   
      111  
             "
 ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
@@ -111,7 +111,7 @@ executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
 111
-001             
+0N1             
 111"
 ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
 DESCRIPTION="Breach in wall (middle - left)"
@@ -120,7 +120,7 @@ executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 MAP_CONTENT="
            
      111      
-     001                   
+     0N1                   
      111  
             "
 ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
@@ -129,7 +129,7 @@ executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
 111
-100             
+1N0             
 111"
 ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
 DESCRIPTION="Breach in wall (middle - right)"
@@ -138,7 +138,7 @@ executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 MAP_CONTENT="
            
      111      
-     100                   
+     1N0                   
      111  
             "
 ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
@@ -147,7 +147,7 @@ executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
 111
-101             
+1N1             
 011"
 ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
 DESCRIPTION="Breach in wall (bottom - left)"
@@ -156,23 +156,25 @@ executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 MAP_CONTENT="
            
      111      
-     101                   
+     1N1                   
      011  
             "
 ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
 DESCRIPTION="Breach in wall (bottom - left) with spaces around"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="111
-101             
-101"
+MAP_CONTENT="
+111
+1N1             
+101
+"
 ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
 DESCRIPTION="Breach in wall (bottom - middle)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
 111
-101             
+1N1             
 101"
 ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
 DESCRIPTION="Breach in wall (bottom - middle)"
@@ -181,7 +183,7 @@ executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 MAP_CONTENT="
            
      111      
-     101                   
+     1N1                   
      101  
             "
 ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
@@ -190,7 +192,7 @@ executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
 111
-101             
+1N1             
 110"
 ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
 DESCRIPTION="Breach in wall (bottom - right)"
@@ -199,7 +201,7 @@ executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 MAP_CONTENT="
            
      111      
-     101                   
+     1N1                   
      110  
             "
 ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
@@ -223,36 +225,37 @@ echo "\n${YELLOW}FOREIGN CHARS ERRORS:${NC}\n"
 MAP_CONTENT="
 111
 1L1
+1N1
 111"
-ERR_MESSAGE="Error. Allowed characters: '1' - '0' - ' ' - 'N' - 'S' - 'E' - 'W'."
+ERR_MESSAGE="Error. Use of forbidden characters."
 DESCRIPTION="No content, foreign character"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
 111111111111
 100000000001
-1000000000O1
+10S0000000O1
 111111111111"
-ERR_MESSAGE="Error. Allowed characters: '1' - '0' - ' ' - 'N' - 'S' - 'E' - 'W'."
+ERR_MESSAGE="Error. Use of forbidden characters."
 DESCRIPTION="Foreign character in corner"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
 111111111111
 1000000000\t1
-100000000001
+10S000000001
 111111111111"
-ERR_MESSAGE="Error. Allowed characters: '1' - '0' - ' ' - 'N' - 'S' - 'E' - 'W'."
+ERR_MESSAGE="Error. Use of forbidden characters."
 DESCRIPTION="Tab in corner"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
 111111111111
-100000000001
+10S000000001
 10000a000001
 100000000001
 111111111111"
-ERR_MESSAGE="Error. Allowed characters: '1' - '0' - ' ' - 'N' - 'S' - 'E' - 'W'."
+ERR_MESSAGE="Error. Use of forbidden characters."
 DESCRIPTION="Foreign character in the middle"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
@@ -262,9 +265,9 @@ MAP_CONTENT="
 10001L 10001
 10001  10001
 100011110001
-100000000001
+10S000000001
 111111111111"
-ERR_MESSAGE="Error. Allowed characters: '1' - '0' - ' ' - 'N' - 'S' - 'E' - 'W'."
+ERR_MESSAGE="Error. Use of forbidden characters."
 DESCRIPTION="Foreign char inside inner hole"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
@@ -277,7 +280,7 @@ MAP_CONTENT="
 100011110001
 100000000001
 111111111111"
-ERR_MESSAGE="Error."
+ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
 DESCRIPTION="Foreign char inside inner hole"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
@@ -362,7 +365,7 @@ MAP_CONTENT="
 11000001110101011111011110101
 11110111 1110111 101111010001
 11111111 1111111 111111111111 "
-ERR_MESSAGE="Error. Allowed characters: '1' - '0' - ' ' - 'N' - 'S' - 'E' - 'W'."
+ERR_MESSAGE="Error. Use of forbidden characters."
 DESCRIPTION="Foreign character"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
@@ -403,14 +406,14 @@ MAP_CONTENT="
 11110111 1110111 101111010001
 11111111 1111111 111111111111
 "
-ERR_MESSAGE="Error on missing player"
+ERR_MESSAGE="Error. Incorrect player number."
 DESCRIPTION="Missing player"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
         1111111111111111111111111
-        0000002000000000000000001
-        1200000000000000000000001
+        0000000000000000000000001
+        1000000000000000000000001
         1000000000000000000000001
 111111111000000000000000000000001
 10000000000000N000000000000001111
@@ -444,8 +447,8 @@ MAP_CONTENT="
 11110111 1110111 101111010001
 11111111 1111111 111111111111
 "
-ERR_MESSAGE="Error. Incorrect map: not surrounded by walls."
-DESCRIPTION="Open wall + foreign char"
+ERR_MESSAGE="Error. Use of forbidden characters."
+DESCRIPTION="Foreign char"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 
@@ -453,7 +456,7 @@ executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 MAP_CONTENT="
         1111111111111110111111111
         1000000000000000000000001
-        1200000000000000000000001
+        1000000000000000000000001
         1000000000000000000000001
 111111111000000000000000000000001
 10000000000000N000000000000001111
@@ -486,6 +489,6 @@ MAP_CONTENT="
 11110111 1110111 101111010001
 11111111 1111111 111111111111
 "
-ERR_MESSAGE="Error. Allowed characters: '1' - '0' - ' ' - 'N' - 'S' - 'E' - 'W'."
+ERR_MESSAGE="Error. Use of forbidden characters."
 DESCRIPTION="Foreign char"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"

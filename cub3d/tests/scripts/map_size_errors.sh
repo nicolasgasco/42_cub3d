@@ -74,17 +74,17 @@ executeErrorTest() {
 echo "\n${YELLOW}MAP SIZE ERRORS:${NC}\n"
 
 MAP_CONTENT=""
-ERR_MESSAGE="Error. Incorrect map size: height must be over 3 rows"
+ERR_MESSAGE="Error. Incorrect player number."
 DESCRIPTION="Zero lines maps"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="1"
-ERR_MESSAGE="Error. Incorrect map size: height must be over 3 rows"
+ERR_MESSAGE="Error. Incorrect player number."
 DESCRIPTION="Only 1"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="1    "
-ERR_MESSAGE="Error. Incorrect map size: height must be over 3 rows"
+ERR_MESSAGE="Error. Incorrect player number."
 DESCRIPTION="Only 1 with spaces"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
@@ -99,28 +99,28 @@ DESCRIPTION="One 0 with spaces"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="1111111111111111111111111"
-ERR_MESSAGE="Error. Incorrect map size: height must be over 3 rows"
+ERR_MESSAGE="Error. Incorrect player number."
 DESCRIPTION="One line maps"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="1111111111111111111111111
 1111111111111111111111111"
-ERR_MESSAGE="Error. Incorrect map size: height must be over 3 rows"
+ERR_MESSAGE="Error. Incorrect player number."
 DESCRIPTION="Two lines maps"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="      1111111111111111111111111          
         1111111111111111111111111          "
-ERR_MESSAGE="Error. Incorrect map size: height must be over 3 rows"
+ERR_MESSAGE="Error. Incorrect player number."
 DESCRIPTION="Two lines maps (with spaces)"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="1\n1\n1"
-ERR_MESSAGE="Error. Incorrect map size: width must be over 3 columns"
+ERR_MESSAGE="Error. Incorrect player number."
 DESCRIPTION="One column map"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="11\n11\n11"
-ERR_MESSAGE="Error. Incorrect map size: width must be over 3 columns"
+ERR_MESSAGE="Error. Incorrect player number."
 DESCRIPTION="Two columns map"
 executeErrorTest "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"

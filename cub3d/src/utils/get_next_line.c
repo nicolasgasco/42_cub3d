@@ -1,31 +1,43 @@
 #include "../cub3d.h"
 
-int check_ch(char *str)
+char	*ft_malloc_char(void)
 {
-    int i;
+	char	*ret;
 
-    if (!str)
-        return (0);
-    i = 0;
-    while (str[i])
-    {
-        if (str[i] == '\n' || str[i] == '\0')
-            return (1);
-        i++;
-    }
-    return (0);
+	ret = malloc(1);
+	if (!ret)
+		return (NULL);
+	ret[0] = '\0';
+	return (ret);
 }
 
-char * ft_aux (char *s, int c)
+int	check_ch(char *str)
 {
-    char *str;
-    int i;
+	int	i;
 
-    i = 0;
-    while (s[i])
-        i++;
-    if (!(str = (char *)malloc(2 + i)))
-       return (NULL);
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n' || str[i] == '\0')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*ft_aux(char *s, int c)
+{
+	char	*str;
+	int		i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	str = (char *) malloc (2 + i);
+	if (!str)
+		return (NULL);
 	i = 0;
 	while (s[i])
 	{
@@ -35,40 +47,33 @@ char * ft_aux (char *s, int c)
 	str[i] = c;
 	str[i + 1] = '\0';
 	free(s);
-	return(str);
+	return (str);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	char *line;
-	char buff;
-	int filed;
+	char	*line;
+	char	buff;
+	int		filed;
 
 	if (fd < 0)
 		return (NULL);
-	line = malloc(1);
-	if (!line)
-		return (NULL);
+	line = ft_malloc_char();
 	line[0] = '\0';
 	filed = 1;
-	while(!(check_ch(line)) && filed != 0)
+	while (!(check_ch(line)) && filed != 0)
 	{
 		filed = read(fd, &buff, 1);
-		if (filed == 0)
+		if (filed <= 0)
 		{
-			if (line[0] == '\0')
+			if (line[0] == '\0' || filed == -1)
 			{
 				free(line);
-				return(NULL);
+				return (NULL);
 			}
 			return (line);
 		}
-		if (filed == -1)
-		{
-			free(line);
-			return (NULL);
-		}
-		line = ft_aux(line, buff);;
+		line = ft_aux(line, buff);
 	}
 	return (line);
 }
