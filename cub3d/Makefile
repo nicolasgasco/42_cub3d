@@ -3,7 +3,8 @@ FLAGS = -Wall -Wextra -Werror
 SANITIZE = -g3 -fsanitize=address
 VALGRIND = -g -Og -std=gnu99
 INC = -I%.h -I$(LIB_DIR)%.h
-MINILIB_LINUX= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz 
+MINILIB_LINUX= -Lmlx -lmlx -lXext -lX11 -lm -lz
+MINILIB_MAC = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 SRC_NAME =	cub3d.c\
 		scene_desc_file_validation/ft_scene_desc_file_validation.c\
@@ -49,7 +50,7 @@ $(NAME): $(OBJ)
 
 mac: $(OBJ)
 	@make -C $(LIB_DIR) --silent
-	@gcc $(FLAGS) $(SANITIZE) -g -o $(NAME) $(OBJ) -L $(LIB_DIR) -lft -Lmlx -lmlx -framework OpenGL -framework AppKit
+	@gcc $(FLAGS) $(SANITIZE) -g -o $(NAME) $(OBJ) -L $(LIB_DIR) -lft $(MINILIB_MAC)
 	@echo "##### cub3d compiling finished! #####"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
