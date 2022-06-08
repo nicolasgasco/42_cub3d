@@ -14,3 +14,19 @@ int	ft_str_is_numeric(char *str)
 	}
 	return (1);
 }
+
+void	ft_skip_to_content(char *line, int *iterator)
+{
+	if (line)
+	{
+		while (line[*iterator])
+		{
+			if (ft_isspace_no_endl(line[*iterator]))
+				*iterator += 1;
+			else
+				return ;
+		}
+	}
+}
+
+

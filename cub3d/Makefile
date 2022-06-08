@@ -14,6 +14,7 @@ SRC_NAME =	cub3d.c\
 		scene_desc_file_validation/ft_type_ids_validation-completeness.c\
 		scene_desc_file_validation/ft_map_content_validation.c\
 		scene_desc_file_validation/ft_map_content_validation-map_size.c\
+		scene_desc_file_validation/ft_map_content_validation-allowed_chars.c\
 		scene_desc_file_validation/ft_map_content_validation-map_walls.c\
 		scene_desc_file_validation/ft_map_content_validation-map_content.c\
 		scene_desc_file_validation/ft_type_ids_validation-errors.c\
