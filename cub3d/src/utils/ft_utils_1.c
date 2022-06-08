@@ -28,5 +28,3 @@ void	ft_skip_to_content(char *line, int *iterator)
 		}
 	}
 }
-
-
