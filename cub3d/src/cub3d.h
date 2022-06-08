@@ -104,5 +104,4 @@ void	ft_validate_size(t_map *map);
 void	ft_validate_walls(t_map *map);
 void	ft_validate_content(t_map *map);
 
-
 #endif
