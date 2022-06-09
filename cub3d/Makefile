@@ -17,9 +17,10 @@ SRC_NAME =	cub3d.c\
 		scene_desc_file_validation/ft_map_content_validation-allowed_chars.c\
 		scene_desc_file_validation/ft_map_content_validation-map_walls.c\
 		scene_desc_file_validation/ft_map_content_validation-map_content.c\
-		scene_desc_file_validation/ft_type_ids_validation-errors.c\
+		scene_desc_file_validation/ft_type_ids_validation-errors_0.c\
+		scene_desc_file_validation/ft_type_ids_validation-errors_1.c\
 		utils/get_next_line.c\
-		utils/ft_utils.c\
+		utils/ft_utils_0.c\
 		utils/ft_utils_1.c\
 		utils/ft_map_utils.c\
 		utils/ft_map_content_utils.c\
