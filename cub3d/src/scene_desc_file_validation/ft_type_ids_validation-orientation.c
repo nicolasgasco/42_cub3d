@@ -52,13 +52,7 @@ char	*ft_validate_o_path(t_map *map, char *o_path_id, char *line, int *i)
 	}
 	ft_skip_to_non_space_char(line, i);
 	if (line[*i] == '\0')
-	{
-		free(o_path_id);
-		free(line);
-		ft_free_allocated_map_data(map);
-		ft_putendl_fd("Error: missing file path", STDERR_FILENO);
-		exit(6);
-	}
+		ft_missing_file_path_error_exit(o_path_id, line, map);
 	o_path = ft_parse_valid_path(map, o_path_id, line, i);
 	return (o_path);
 }
@@ -77,11 +71,7 @@ char	*ft_parse_valid_path(t_map *map, char *o_path_id, char *line, int *i)
 	if (!ft_isspace(line[*i]) && line[*i] != '\0')
 	{
 		ft_free_allocated_map_data(map);
-		free(line);
-		free(o_path_id);
-		free(o_path);
-		ft_putendl_fd("Error: invalid orientation path", STDERR_FILENO);
-		exit(17);
+		ft_invalid_orientation_path_error_exit(line, o_path_id, o_path);
 	}
 	return (o_path);
 }
