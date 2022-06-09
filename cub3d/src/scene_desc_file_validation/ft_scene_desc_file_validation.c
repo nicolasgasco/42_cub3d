@@ -40,7 +40,7 @@ void	ft_file_extension_validation(char *file_path)
 	int		ext_start;
 	char	*file_path_ext;
 
-	ext_len = 4;
+	ext_len = ft_strlen(".cub");
 	ext_start = ft_strlen(file_path) - ext_len;
 	if (ext_start == 0)
 		ft_invalid_extension_error_exit();

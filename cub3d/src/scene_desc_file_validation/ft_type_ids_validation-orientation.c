@@ -18,7 +18,7 @@ void	ft_validate_parse_o_path(char *line, int *i, t_map *map)
 	char	*o_path_id;
 
 	o_path_id = ft_substr(line, *i, 2);
-	*i = *i + 2;
+	*i += 2;
 	if (ft_check_o_path_already_assigned(map, o_path_id) == 1)
 	{
 		free(o_path_id);
@@ -59,14 +59,14 @@ char	*ft_validate_o_path(t_map *map, char *o_path_id, char *line, int *i)
 
 char	*ft_parse_valid_path(t_map *map, char *o_path_id, char *line, int *i)
 {
-	int		o_file_fd;
 	char	*o_path;
+	int		path_len;
 
-	o_path = ft_substr(line, *i, ft_calc_path_length(line, *i));
-	*i += ft_calc_path_length(line, *i);
+	path_len = ft_calc_path_length(line, *i);
+	o_path = ft_substr(line, *i, path_len);
+	*i += path_len;
 	o_path = ft_strtrim_no_leaks(o_path, " \n");
-	o_file_fd = ft_validate_f_path(map, o_path, line, o_path_id);
-	close(o_file_fd);
+	ft_validate_f_path(map, o_path, line, o_path_id);
 	ft_skip_to_non_space_char(line, i);
 	if (!ft_isspace(line[*i]) && line[*i] != '\0')
 	{
