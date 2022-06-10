@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_scene_desc_file_validation.c                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/09 13:14:49 by ngasco            #+#    #+#             */
+/*   Updated: 2022/06/09 13:14:58 by ngasco           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
@@ -20,6 +32,7 @@ void	ft_type_ids_validation(char *file_path, t_map *map)
 		if (!ft_validate_scene_file_line(line, map))
 		{
 			free(line);
+			close(scene_file_fd);
 			return ;
 		}
 		free(line);

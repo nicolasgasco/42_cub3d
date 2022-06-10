@@ -1,22 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_scene_desc_file_validation.c                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/09 13:14:49 by ngasco            #+#    #+#             */
+/*   Updated: 2022/06/09 13:14:58 by ngasco           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-void	ft_already_existing_color_error(t_map *map, char *color_id, char *line)
+void	ft_check_col_already_assigned(t_map *map, char *color_id, char *line)
 {
 	if (ft_strncmp(color_id, "F", 1) == 0)
 	{
+		free(color_id);
 		if (map->f_color)
 		{
-			free(color_id);
 			free(line);
 			ft_duplicate_scene_info_error_exit(map);
 		}
 	}
 	else if (ft_strncmp(color_id, "C", 1) == 0)
 	{
+		free(color_id);
 		if (map->c_color)
 		{
-			free(color_id);
 			free(line);
 			ft_duplicate_scene_info_error_exit(map);
 		}

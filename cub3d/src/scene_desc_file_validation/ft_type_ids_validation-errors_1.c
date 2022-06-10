@@ -11,39 +11,36 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include "../../Libft/libft.h"
 
-int	ft_is_player_char(char c)
+void	ft_invalid_col_statement_error_exit(t_map *map, char *line)
 {
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (1);
-	return (0);
+	free(line);
+	ft_free_allocated_map_data(map);
+	ft_putendl_fd("Error: invalid color statement", STDERR_FILENO);
+	exit(8);
 }
 
-int	ft_is_valid_map_char(char c)
+void	ft_incomplete_scene_info_error_exit(t_map *map)
 {
-	if (ft_is_player_char(c) || c == '1' || c == '0' || c == ' ')
-		return (1);
-	return (0);
+	ft_free_allocated_map_data(map);
+	ft_putendl_fd("Error: incomplete scene info", STDERR_FILENO);
+	exit(9);
 }
 
-void	ft_check_player_number(t_map *map, int player)
+void	ft_duplicate_scene_info_error_exit(t_map *map)
 {
-	if (player != 1)
-		ft_print_error_exit(map, "Error. Incorrect player number.", 15);
+	ft_free_allocated_map_data(map);
+	ft_putendl_fd("Error: duplicated scene info", STDERR_FILENO);
+	exit(10);
 }
 
-void	ft_set_player_data(t_map *map, int *iterator, int *j, char c)
+void	ft_invalid_orientation_path_error_exit(char *line, char *o_path_id,
+		char *o_path)
 {
-	map->player_y = (*iterator);
-	map->player_x = (*j);
-	map->player_orientation = c;
-	map->map_content[*iterator][*j] = '0';
-}
-
-int	ft_isspace_no_endl(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\v'
-		|| c == '\f' || c == '\r')
-		return (1);
-	return (0);
+	free(line);
+	free(o_path_id);
+	free(o_path);
+	ft_putendl_fd("Error: invalid orientation path", STDERR_FILENO);
+	exit(11);
 }

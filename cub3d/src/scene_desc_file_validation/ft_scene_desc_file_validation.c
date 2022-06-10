@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_scene_desc_file_validation.c                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/09 13:14:49 by ngasco            #+#    #+#             */
+/*   Updated: 2022/06/09 13:14:58 by ngasco           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
@@ -28,19 +40,21 @@ void	ft_file_extension_validation(char *file_path)
 	int		ext_start;
 	char	*file_path_ext;
 
-	ext_len = 4;
+	ext_len = ft_strlen(".cub");
 	ext_start = ft_strlen(file_path) - ext_len;
 	if (ext_start == 0)
-	{
-		ft_putendl_fd("Error: invalid extension", STDERR_FILENO);
-		exit(2);
-	}
+		ft_invalid_extension_error_exit();
 	file_path_ext = ft_substr(file_path, ext_start, ext_len);
 	if (ft_strncmp(file_path_ext, ".cub", ext_len) != 0)
 	{
 		free(file_path_ext);
-		ft_putendl_fd("Error: invalid extension", STDERR_FILENO);
-		exit(2);
+		ft_invalid_extension_error_exit();
 	}
 	free(file_path_ext);
+}
+
+void	ft_invalid_extension_error_exit(void)
+{
+	ft_putendl_fd("Error: invalid extension", STDERR_FILENO);
+	exit(2);
 }

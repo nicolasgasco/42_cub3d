@@ -11,39 +11,54 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include "../../Libft/libft.h"
 
-int	ft_is_player_char(char c)
+int	ft_open_file(char *file_path)
 {
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	int	file_fd;
+
+	file_fd = open(file_path, O_RDONLY);
+	if (file_fd == -1)
+	{
+		free(file_path);
+		ft_open_file_error();
+	}
+	return (file_fd);
+}
+
+int	ft_isspace(char c)
+{
+	if (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\v' || c == '\f' || c == '\r')
 		return (1);
 	return (0);
 }
 
-int	ft_is_valid_map_char(char c)
+void	ft_skip_to_non_space_char(char *line, int *iterator)
 {
-	if (ft_is_player_char(c) || c == '1' || c == '0' || c == ' ')
-		return (1);
-	return (0);
+	while (line[*iterator] != '\0')
+	{
+		if (ft_isspace(line[*iterator]))
+			*iterator += 1;
+		else
+			return ;
+	}
 }
 
-void	ft_check_player_number(t_map *map, int player)
+char	*ft_substr_no_leaks(char *s, unsigned int start, size_t len)
 {
-	if (player != 1)
-		ft_print_error_exit(map, "Error. Incorrect player number.", 15);
+	char	*temp;
+
+	temp = ft_substr(s, start, len);
+	free(s);
+	return (temp);
 }
 
-void	ft_set_player_data(t_map *map, int *iterator, int *j, char c)
+char	*ft_strtrim_no_leaks(char *s1, const char *set)
 {
-	map->player_y = (*iterator);
-	map->player_x = (*j);
-	map->player_orientation = c;
-	map->map_content[*iterator][*j] = '0';
-}
+	char	*temp;
 
-int	ft_isspace_no_endl(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\v'
-		|| c == '\f' || c == '\r')
-		return (1);
-	return (0);
+	temp = ft_strtrim(s1, set);
+	free(s1);
+	return (temp);
 }

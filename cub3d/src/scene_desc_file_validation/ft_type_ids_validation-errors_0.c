@@ -11,39 +11,37 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include "../../Libft/libft.h"
 
-int	ft_is_player_char(char c)
+void	ft_invalid_id_error_exit(t_map *map, char *line)
 {
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (1);
-	return (0);
+	free(line);
+	ft_free_allocated_map_data(map);
+	ft_putendl_fd("Error: invalid identifier", STDERR_FILENO);
+	exit(4);
 }
 
-int	ft_is_valid_map_char(char c)
+void	ft_empty_scene_file_error_exit(void)
 {
-	if (ft_is_player_char(c) || c == '1' || c == '0' || c == ' ')
-		return (1);
-	return (0);
+	ft_putendl_fd("Error: empty scene file", STDERR_FILENO);
+	exit(5);
 }
 
-void	ft_check_player_number(t_map *map, int player)
+void	ft_missing_file_path_error_exit(char *o_path_id, char *line, t_map *map)
 {
-	if (player != 1)
-		ft_print_error_exit(map, "Error. Incorrect player number.", 15);
+	free(o_path_id);
+	free(line);
+	ft_free_allocated_map_data(map);
+	ft_putendl_fd("Error: missing file path", STDERR_FILENO);
+	exit(6);
 }
 
-void	ft_set_player_data(t_map *map, int *iterator, int *j, char c)
+void	ft_invalid_color_code_error_exit(t_map *map, char *line,
+	char *col_code_str)
 {
-	map->player_y = (*iterator);
-	map->player_x = (*j);
-	map->player_orientation = c;
-	map->map_content[*iterator][*j] = '0';
-}
-
-int	ft_isspace_no_endl(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\v'
-		|| c == '\f' || c == '\r')
-		return (1);
-	return (0);
+	ft_free_allocated_map_data(map);
+	free(line);
+	free(col_code_str);
+	ft_putendl_fd("Error: invalid color code", STDERR_FILENO);
+	exit(7);
 }
