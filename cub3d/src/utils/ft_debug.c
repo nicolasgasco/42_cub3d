@@ -18,6 +18,9 @@ void	ft_write_debug_msg(char *msg)
 	int	fd;
 
 	fd = open("./tests/validation_scripts/debug_output", O_WRONLY | O_TRUNC);
-	write(fd, msg, ft_strlen(msg) + 1);
+	if (fd != -1)
+	{
+		write(fd, msg, ft_strlen(msg));
+	}
 	close(fd);
 }
