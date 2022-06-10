@@ -6,7 +6,7 @@ int	ft_is_map_start(char *line)
 
 	i = 0;
 	ft_skip_to_non_space_char(line, &i);
-	if (line[i] == '1')
+	if (line[i] && line[i] == '1')
 		return (1);
 	return (0);
 }
@@ -16,7 +16,7 @@ void	ft_get_map_width(char *line, t_map *map)
 	int	i;
 
 	i = 0;
-	while (line[i] != '\n')
+	while (line[i] && line[i] != '\n')
 	{
 		i++;
 		if (i > map->width)

@@ -14,9 +14,13 @@ void	ft_check_vertical_wall(int wall, t_map *map)
 			ft_skip_to_non_space_char(map->map_content[i], &j);
 		else
 			ft_skip_to_non_space_char_backwards(map->map_content[i], &j);
-		if (map->map_content[i][j] != '1')
+		if (map->map_content[i][j] != '1' && map->map_content[i][j] != '\0' &&
+				map->map_content[i][j] != ' ')
+		{
+			printf("[%d][%d] - '%c'", i, j, map->map_content[i][j]);
 			ft_print_error_exit(map,
 				"Error. Incorrect map: not surrounded by walls.", 13);
+		}
 		i++;
 	}
 }

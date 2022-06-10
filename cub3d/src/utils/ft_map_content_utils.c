@@ -30,10 +30,8 @@ void	ft_set_player_data(t_map *map, int *iterator, int *j, char c)
 
 int	ft_isspace_no_endl(char c)
 {
-	if (c == ' ' || c == '\t' || c == '\v' ||
-		   	c == '\f' || c == '\r')
+	if (c == ' ' || c == '\t' || c == '\v'
+		|| c == '\f' || c == '\r')
 		return (1);
 	return (0);
 }
-
-
