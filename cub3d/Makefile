@@ -40,16 +40,19 @@ SCN_DIR = scene_desc_file_validation/
 RNDR_DIR = render_view
 UTL_DIR = utils/
 OBJ_DIR = ./obj/
+MLX_DIR = ./mlx/
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C $(LIB_DIR) --silent
+	@make -C $(MLX_DIR) --silent
 	@gcc $(FLAGS) $(SANITIZE) -g -o $(NAME) $(OBJ) -L $(LIB_DIR) -lft $(MINILIB_LINUX)
 	@echo "##### cub3d compiling finished! #####"
 
 mac: $(OBJ)
 	@make -C $(LIB_DIR) --silent
+	@make -C $(MLX_DIR) --silent
 	@gcc $(FLAGS) $(SANITIZE) -g -o $(NAME) $(OBJ) -L $(LIB_DIR) -lft $(MINILIB_MAC)
 	@echo "##### cub3d compiling finished! #####"
 
