@@ -21,8 +21,8 @@
 
 /* Game params */
 # define GAME_TITLE "Cub3d - Brawl Stars"
-# define GAME_WIDTH 1280
-# define GAME_HEIGHT 720
+# define GAME_WIDTH 1700
+# define GAME_HEIGHT 1050
 # define PLAY_WIDTH	900
 # define PLAY_HEIGHT 460
 
@@ -76,6 +76,7 @@ typedef struct s_view
 	int		width;
 	int		height;
 	char	*title;
+	void	*img;
 }			t_view;
 
 /* Utils */
@@ -164,5 +165,7 @@ void	ft_render_view(t_view *view);
 void	ft_view_events(t_view *view);
 int		ft_close_window(t_view *view);
 int		ft_keyboard_events(int key, t_view *view);
+
+void ft_xpm_data_poc(t_view *view, int ver);
 
 #endif
