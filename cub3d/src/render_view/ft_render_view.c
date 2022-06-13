@@ -159,18 +159,227 @@ void ft_xpm_data_poc(t_view *view, int ver)
 		mlx_put_image_to_window(view->mlx, view->mlx_win, image, 0, 0);
 		t = clock() - t;
 		double time_taken = ((double)t) / CLOCKS_PER_SEC; // calculate the elapsed time
-		printf("%f seconds to render image\n", time_taken);
+		printf("%f secs (%.0f fps) - XPM\n", time_taken, (float)1 / time_taken);
 	}
 	else
 		printf("Image not created\n");
 }
 
-void ft_pixel_put_poc(t_view *view)
+void my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	if (view)
+	char *dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
+
+void ft_image_1(t_data img)
+{
+	for (int y = 0; y < (GAME_HEIGHT); y++)
 	{
-		// Continue
+		if (y < (GAME_HEIGHT / 4))
+		{
+			for (int i = 0; i < GAME_WIDTH; i++)
+			{
+				if (i < (GAME_WIDTH / 8))
+					my_mlx_pixel_put(&img, i, y, RED);
+				else if (i < (GAME_WIDTH / 4))
+					my_mlx_pixel_put(&img, i, y, BLUE);
+				else if (i < ((GAME_WIDTH / 2) - (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, GREEN);
+				else if (i < (GAME_WIDTH / 2))
+					my_mlx_pixel_put(&img, i, y, YELLOW);
+				else if (i < ((GAME_WIDTH / 2) + (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, GREEN);
+				else if (i < (GAME_WIDTH - (GAME_WIDTH / 4)))
+					my_mlx_pixel_put(&img, i, y, YELLOW);
+				else if (i < (GAME_WIDTH - (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, RED);
+				else
+					my_mlx_pixel_put(&img, i, y, BLUE);
+			}
+		}
+		else if (y < (GAME_HEIGHT / 2))
+		{
+			for (int i = 0; i < GAME_WIDTH; i++)
+			{
+				if (i < (GAME_WIDTH / 8))
+					my_mlx_pixel_put(&img, i, y, BLUE);
+				else if (i < (GAME_WIDTH / 4))
+					my_mlx_pixel_put(&img, i, y, YELLOW);
+				else if (i < ((GAME_WIDTH / 2) - (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, RED);
+				else if (i < (GAME_WIDTH / 2))
+					my_mlx_pixel_put(&img, i, y, GREEN);
+				else if (i < ((GAME_WIDTH / 2) + (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, RED);
+				else if (i < (GAME_WIDTH - (GAME_WIDTH / 4)))
+					my_mlx_pixel_put(&img, i, y, GREEN);
+				else if (i < (GAME_WIDTH - (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, BLUE);
+				else
+					my_mlx_pixel_put(&img, i, y, YELLOW);
+			}
+		}
+		else if (y < (GAME_HEIGHT - (GAME_HEIGHT / 4)))
+		{
+			for (int i = 0; i < GAME_WIDTH; i++)
+			{
+				if (i < (GAME_WIDTH / 8))
+					my_mlx_pixel_put(&img, i, y, RED);
+				else if (i < (GAME_WIDTH / 4))
+					my_mlx_pixel_put(&img, i, y, BLUE);
+				else if (i < ((GAME_WIDTH / 2) - (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, GREEN);
+				else if (i < (GAME_WIDTH / 2))
+					my_mlx_pixel_put(&img, i, y, YELLOW);
+				else if (i < ((GAME_WIDTH / 2) + (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, GREEN);
+				else if (i < (GAME_WIDTH - (GAME_WIDTH / 4)))
+					my_mlx_pixel_put(&img, i, y, YELLOW);
+				else if (i < (GAME_WIDTH - (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, RED);
+				else
+					my_mlx_pixel_put(&img, i, y, BLUE);
+			}
+		}
+		else
+		{
+			for (int i = 0; i < GAME_WIDTH; i++)
+			{
+				if (i < (GAME_WIDTH / 8))
+					my_mlx_pixel_put(&img, i, y, BLUE);
+				else if (i < (GAME_WIDTH / 4))
+					my_mlx_pixel_put(&img, i, y, YELLOW);
+				else if (i < ((GAME_WIDTH / 2) - (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, RED);
+				else if (i < (GAME_WIDTH / 2))
+					my_mlx_pixel_put(&img, i, y, GREEN);
+				else if (i < ((GAME_WIDTH / 2) + (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, RED);
+				else if (i < (GAME_WIDTH - (GAME_WIDTH / 4)))
+					my_mlx_pixel_put(&img, i, y, GREEN);
+				else if (i < (GAME_WIDTH - (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, BLUE);
+				else
+					my_mlx_pixel_put(&img, i, y, YELLOW);
+			}
+		}
 	}
+}
+
+void ft_image_2(t_data img)
+{
+	for (int y = 0; y < (GAME_HEIGHT); y++)
+	{
+		if (y < (GAME_HEIGHT / 4))
+		{
+			for (int i = 0; i < GAME_WIDTH; i++)
+			{
+				if (i < (GAME_WIDTH / 8))
+					my_mlx_pixel_put(&img, i, y, BLUE);
+				else if (i < (GAME_WIDTH / 4))
+					my_mlx_pixel_put(&img, i, y, YELLOW);
+				else if (i < ((GAME_WIDTH / 2) - (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, RED);
+				else if (i < (GAME_WIDTH / 2))
+					my_mlx_pixel_put(&img, i, y, GREEN);
+				else if (i < ((GAME_WIDTH / 2) + (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, RED);
+				else if (i < (GAME_WIDTH - (GAME_WIDTH / 4)))
+					my_mlx_pixel_put(&img, i, y, GREEN);
+				else if (i < (GAME_WIDTH - (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, BLUE);
+				else
+					my_mlx_pixel_put(&img, i, y, YELLOW);
+			}
+		}
+		else if (y < (GAME_HEIGHT / 2))
+		{
+			for (int i = 0; i < GAME_WIDTH; i++)
+			{
+				if (i < (GAME_WIDTH / 8))
+					my_mlx_pixel_put(&img, i, y, RED);
+				else if (i < (GAME_WIDTH / 4))
+					my_mlx_pixel_put(&img, i, y, BLUE);
+				else if (i < ((GAME_WIDTH / 2) - (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, GREEN);
+				else if (i < (GAME_WIDTH / 2))
+					my_mlx_pixel_put(&img, i, y, YELLOW);
+				else if (i < ((GAME_WIDTH / 2) + (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, GREEN);
+				else if (i < (GAME_WIDTH - (GAME_WIDTH / 4)))
+					my_mlx_pixel_put(&img, i, y, YELLOW);
+				else if (i < (GAME_WIDTH - (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, RED);
+				else
+					my_mlx_pixel_put(&img, i, y, BLUE);
+			}
+		}
+		else if (y < (GAME_HEIGHT - (GAME_HEIGHT / 4)))
+		{
+			for (int i = 0; i < GAME_WIDTH; i++)
+			{
+				if (i < (GAME_WIDTH / 8))
+					my_mlx_pixel_put(&img, i, y, BLUE);
+				else if (i < (GAME_WIDTH / 4))
+					my_mlx_pixel_put(&img, i, y, YELLOW);
+				else if (i < ((GAME_WIDTH / 2) - (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, RED);
+				else if (i < (GAME_WIDTH / 2))
+					my_mlx_pixel_put(&img, i, y, GREEN);
+				else if (i < ((GAME_WIDTH / 2) + (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, RED);
+				else if (i < (GAME_WIDTH - (GAME_WIDTH / 4)))
+					my_mlx_pixel_put(&img, i, y, GREEN);
+				else if (i < (GAME_WIDTH - (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, BLUE);
+				else
+					my_mlx_pixel_put(&img, i, y, YELLOW);
+			}
+		}
+		else
+		{
+			for (int i = 0; i < GAME_WIDTH; i++)
+			{
+				if (i < (GAME_WIDTH / 8))
+					my_mlx_pixel_put(&img, i, y, RED);
+				else if (i < (GAME_WIDTH / 4))
+					my_mlx_pixel_put(&img, i, y, BLUE);
+				else if (i < ((GAME_WIDTH / 2) - (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, GREEN);
+				else if (i < (GAME_WIDTH / 2))
+					my_mlx_pixel_put(&img, i, y, YELLOW);
+				else if (i < ((GAME_WIDTH / 2) + (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, GREEN);
+				else if (i < (GAME_WIDTH - (GAME_WIDTH / 4)))
+					my_mlx_pixel_put(&img, i, y, YELLOW);
+				else if (i < (GAME_WIDTH - (GAME_WIDTH / 8)))
+					my_mlx_pixel_put(&img, i, y, RED);
+				else
+					my_mlx_pixel_put(&img, i, y, BLUE);
+			}
+		}
+	}
+}
+
+void ft_pixel_put_poc(t_view *view, int ver)
+{
+	t_data img;
+
+	img.img = mlx_new_image(view->mlx, GAME_WIDTH, GAME_HEIGHT);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+								 &img.endian);
+	if (ver == 1)
+		ft_image_1(img);
+	else
+		ft_image_2(img);
+	clock_t t;
+	t = clock();
+	mlx_put_image_to_window(view->mlx, view->mlx_win, img.img, 0, 0);
+	t = clock() - t;
+	double time_taken = ((double)t) / CLOCKS_PER_SEC; // calculate the elapsed time
+	printf("%f secs (%.0f fps) - Pixel put\n", time_taken, (float)1 / time_taken);
 }
 
 void ft_view_events(t_view *view)
@@ -188,24 +397,39 @@ int ft_close_window(t_view *view)
 
 int ft_keyboard_events(int key, t_view *view)
 {
+	static int counter = 0;
 	if (key == ESC_KEY_LINUX || key == ESC_KEY_MAC)
 		ft_close_window(view);
 	else if ((key == W_KEY_LINUX || key == UP_ARR_LINUX) || (key == W_KEY_MAC || key == UP_ARR_MAC))
 	{
-		ft_xpm_data_poc(view, 1);
+		if (counter < 10)
+			ft_xpm_data_poc(view, 1);
+		else
+			ft_pixel_put_poc(view, 1);
 	}
 	else if ((key == A_KEY_LINUX || key == LEFT_ARR_LINUX) || (key == A_KEY_MAC || key == LEFT_ARR_MAC))
 	{
-		ft_xpm_data_poc(view, 1);
+		if (counter < 10)
+			ft_xpm_data_poc(view, 1);
+		else
+			ft_pixel_put_poc(view, 1);
 	}
-	else if ((key == S_KEY_LINUX || key == DOWN_ARR_LINUX)
-		|| (key == S_KEY_LINUX || key == DOWN_ARR_MAC))
+	else if ((key == S_KEY_LINUX || key == DOWN_ARR_LINUX) || (key == S_KEY_LINUX || key == DOWN_ARR_MAC))
 	{
-		ft_xpm_data_poc(view, 2);
+		if (counter < 10)
+			ft_xpm_data_poc(view, 2);
+		else
+			ft_pixel_put_poc(view, 2);
 	}
 	else if ((key == D_KEY_LINUX || key == RIGHT_ARR_LINUX) || (key == D_KEY_LINUX || key == RIGHT_ARR_MAC))
 	{
-		ft_xpm_data_poc(view, 2);
+		if (counter < 10)
+			ft_xpm_data_poc(view, 2);
+		else
+			ft_pixel_put_poc(view, 2);
 	}
+	counter++;
+	if (counter == 20)
+		exit(1);
 	return (1);
 }
