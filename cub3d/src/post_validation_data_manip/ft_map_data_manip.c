@@ -11,46 +11,14 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include "../../Libft/libft.h"
 
-int	ft_str_is_numeric(char *str)
+void	ft_post_validation_data_manip(t_map *map, t_rdata *rdata)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (ft_isdigit(str[i]) == 0)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	ft_skip_to_content(char *line, int *iterator)
-{
-	if (line)
-	{
-		while (line[*iterator])
-		{
-			if (ft_isspace_no_endl(line[*iterator]))
-				*iterator += 1;
-			else
-				return ;
-		}
-	}
-}
-
-int	ft_str_contains_char(char *str, char c)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
+	printf("Entering in post validation data manip\n");
+	rdata->c_col_int = ft_rgb_str_to_int(map->c_color);
+	printf("Ceiling color is %s\n", map->c_color);
+	printf("Ceiling color is %x\n", rdata->c_col_int);
+	rdata->f_col_int = ft_rgb_str_to_int(map->f_color);
+	printf("Floor color is %s\n", map->f_color);
+	printf("Floor color is %x\n", rdata->f_col_int);
 }

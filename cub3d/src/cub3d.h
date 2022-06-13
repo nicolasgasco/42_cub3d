@@ -88,6 +88,13 @@ typedef struct s_slice
 	int		wall_x;
 }			t_slice;
 
+/* Struct for data necessary to render screens */
+typedef struct s_rdata
+{
+	int	c_col_int;
+	int	f_col_int;
+}		t_rdata;
+
 /* Struct for map data  */
 typedef struct s_map
 {
@@ -215,5 +222,12 @@ void	ft_render_view(t_view *view);
 void	ft_view_events(t_view *view);
 int		ft_close_window(t_view *view);
 int		ft_keyboard_events(int key, t_view *view);
+
+/* Post validation data manip */
+void	ft_post_validation_data_manip(t_map *map, t_rdata *rdata);
+/* Post validation data manip - Utils */
+int		ft_rgb_str_to_int(char *col_str);
+int		ft_substr_and_atoi(char *col_str, int start, int end);
+int		ft_rgb_to_int(int t, int r, int g, int b);
 
 #endif

@@ -22,6 +22,8 @@ SRC_NAME =	cub3d.c\
 		scene_desc_file_validation/ft_type_ids_validation-errors_0.c\
 		scene_desc_file_validation/ft_type_ids_validation-errors_1.c\
 		render_window/ft_render_view.c\
+		post_validation_data_manip/ft_map_data_manip.c\
+		post_validation_data_manip/ft_map_data_manip-utils.c\
 		utils/get_next_line.c\
 		utils/ft_utils_0.c\
 		utils/ft_utils_1.c\
@@ -43,6 +45,7 @@ SRC_DIR = ./src/
 SCN_DIR = scene_desc_file_validation/
 RCC_DIR = raycasting_calculation/
 WIN_DIR = render_window/
+DATA_MANIP_DIR = post_validation_data_manip/
 UTL_DIR = utils/
 OBJ_DIR = ./obj/
 MLX_DIR = ./mlx/
@@ -64,6 +67,7 @@ mac: $(OBJ)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)$(SCN_DIR)
+	@mkdir -p $(OBJ_DIR)$(DATA_MANIP_DIR)
 	@mkdir -p $(OBJ_DIR)$(UTL_DIR)
 	@mkdir -p $(OBJ_DIR)$(RCC_DIR)
 	@mkdir -p $(OBJ_DIR)$(WIN_DIR)
