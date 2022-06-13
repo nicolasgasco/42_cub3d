@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include "../../Libft/libft.h"
 
 int	ft_is_player_char(char c)
 {
@@ -34,9 +35,13 @@ void	ft_check_player_number(t_map *map, int player)
 
 void	ft_set_player_data(t_map *map, int *iterator, int *j, char c)
 {
-	map->player_y = (*iterator);
-	map->player_x = (*j);
-	map->player_orientation = c;
+	t_projection projection;
+
+	ft_memset(&projection, 0, sizeof(t_projection));
+	map->projection = &projection;
+	map->projection->player_y = (*iterator);
+	map->projection->player_x = (*j);
+	map->projection->player_orientation = c;
 	map->map_content[*iterator][*j] = '0';
 }
 

@@ -18,21 +18,35 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
-/* Struct for map data  */
-typedef struct s_map
+# define PROJ_PLANE_WIDTH 320.0 
+# define PROJ_PLANE_HEIGHT 200.0
+# define CUBE_SIZE 64.0
+# define FIELD_OF_VIEW 60.0
+
+/* Struct for ray calculation */
+typedef struct s_projection
 {
-	char	*no_path;
-	char	*so_path;
-	char	*ea_path;
-	char	*we_path;
-	char	*f_color;
-	char	*c_color;
 	int		player_y;
 	int		player_x;
 	char	player_orientation;
-	int		height;
-	int		width;
-	char	**map_content;
+	int		distance_player_projection;
+	int		angle_btw_rays;
+}			t_projection;
+
+/* Struct for map data  */
+typedef struct s_map
+{
+	char			*no_path;
+	char			*so_path;
+	char			*ea_path;
+	char			*we_path;
+	char			*f_color;
+	char			*c_color;
+	int				height;
+	int				width;
+	char			**map_content;
+	t_projection	*projection;
+
 }			t_map;
 
 /* Utils */
@@ -115,5 +129,8 @@ void	ft_check_characters(t_map *map);
 void	ft_validate_size(t_map *map);
 void	ft_validate_walls(t_map *map);
 void	ft_validate_content(t_map *map);
+
+/* Raycasting Calculation */
+void	ft_raycasting_calculation(t_map *map);
 
 #endif

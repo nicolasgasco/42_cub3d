@@ -27,6 +27,7 @@ SRC_NAME =	cub3d.c\
 		utils/ft_common_errs.c\
 		utils/ft_free.c\
 		utils/ft_debug.c\
+		raycasting_calculation/ft_raycasting_calculation.c\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR),$(OBJ_NAME))
@@ -34,6 +35,7 @@ OBJ = $(addprefix $(OBJ_DIR),$(OBJ_NAME))
 LIB_DIR = ./Libft/
 SRC_DIR = ./src/
 SCN_DIR = scene_desc_file_validation/
+RCC_DIR = raycasting_calculation/
 UTL_DIR = utils/
 OBJ_DIR = ./obj/
 
@@ -41,12 +43,13 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C $(LIB_DIR) --silent
-	@gcc $(FLAGS) $(SANITIZE) -o $(NAME) $(OBJ) -L $(LIB_DIR) -lft
+	@gcc $(FLAGS) $(SANITIZE) -o $(NAME) $(OBJ) -L $(LIB_DIR) -lft -lm
 	@echo "##### cub3d compiling finished! #####"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)$(SCN_DIR)
 	@mkdir -p $(OBJ_DIR)$(UTL_DIR)
+	@mkdir -p $(OBJ_DIR)$(RCC_DIR)
 	@echo "##### Creating" [ $@ ] " #####"
 	@gcc $(FLAGS) $(SANITIZE) -o $@ -c $< $(INC)
 

@@ -19,6 +19,7 @@ int	main(int argc, char **argv)
 
 	ft_memset(&map, 0, sizeof(t_map));
 	ft_scene_desc_file_validation(argc, argv[1], &map);
+	ft_raycasting_calculation(&map);
 	ft_free_allocated_map_data(&map);
 	return (0);
 }
