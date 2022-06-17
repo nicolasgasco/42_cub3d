@@ -27,6 +27,7 @@ SRC_NAME =	cub3d.c\
 		utils/ft_common_errs.c\
 		utils/ft_free.c\
 		utils/ft_debug.c\
+		utils/ft_raycast_utils.c\
 		raycasting_calculation/ft_raycasting_calculation.c\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)

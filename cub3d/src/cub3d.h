@@ -18,20 +18,30 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
-# define PROJ_PLANE_WIDTH 320.0 
-# define PROJ_PLANE_HEIGHT 200.0
-# define CUBE_SIZE 64.0
+# define PI 3.14159265359
+# define PROJ_PLANE_WIDTH 320
+# define PROJ_PLANE_HEIGHT 200
+# define CUBE_SIZE 64
 # define FIELD_OF_VIEW 60.0
+
+/*Vector Struct*/
+typedef struct s_vector
+{
+	double	x;
+	double	y;
+}			t_vector;
 
 /* Struct for ray calculation */
 typedef struct s_projection
 {
-	int		player_y;
-	int		player_x;
-	char	player_orientation;
-	int		distance_player_projection;
-	int		angle_btw_rays;
-}			t_projection;
+	char		player_orientation;
+	double		view_angle;
+	double		distance_to_pp;
+	double		angle_btw_rays;
+	t_vector	*player;
+	t_vector	*rc_horizontal;
+	t_vector	*rc_vertical;
+}				t_projection;
 
 /* Struct for map data  */
 typedef struct s_map
@@ -45,9 +55,8 @@ typedef struct s_map
 	int				height;
 	int				width;
 	char			**map_content;
-	t_projection	*projection;
-
-}			t_map;
+	t_projection	*prj;
+}					t_map;
 
 /* Utils */
 // Utils - Common error
@@ -58,6 +67,7 @@ void	ft_write_debug_msg(char *msg);
 // Utils - Free
 void	ft_free_allocated_map_data(t_map *map);
 void	ft_print_error_exit(t_map *map, char *msg, int err);
+void	ft_free_raycast_data(t_map *map);
 // Utils - Common utils
 int		ft_open_file(char *file_path);
 int		ft_isspace(char c);
@@ -72,7 +82,6 @@ char	*get_next_line(int fd);
 int		ft_is_player_char(char c);
 int		ft_is_valid_map_char(char c);
 void	ft_check_player_number(t_map *map, int player);
-void	ft_set_player_data(t_map *map, int *iterator, int *j, char c);
 int		ft_isspace_no_endl(char c);
 // Utils - Map
 int		ft_is_map_start(char *line);
@@ -80,6 +89,13 @@ void	ft_get_map_width(char *line, t_map *map);
 char	*ft_skip_to_map_start(char *line, int fd);
 void	ft_skip_to_non_space_char_backwards(char *line, int *iterator);
 char	*ft_check_to_eof(char *line, int fd, t_map *map);
+// Utils - Raycast
+void	ft_set_player_data(t_map *map, int *iterator, int *j, char c);
+double	ft_set_viewing_angle(char c);
+void	ft_convert_to_cube_position(t_map *map);
+void	ft_set_rc_structure(t_map *map);
+void	ft_set_coords_angle_direction_horizontal(t_map *map);
+void	ft_set_coords_angle_direction_vertical(t_map *map);
 
 /* Scene desc validation errors */
 void	ft_invalid_extension_error_exit(void);

@@ -17,6 +17,7 @@ void	ft_free_allocated_map_data(t_map *map)
 {
 	int	i;
 
+	ft_free_raycast_data(map);
 	i = 0;
 	while (i < map->height)
 	{
@@ -45,4 +46,16 @@ void	ft_print_error_exit(t_map *map, char *msg, int err)
 	ft_putendl_fd(msg, STDERR_FILENO);
 	ft_free_allocated_map_data(map);
 	exit(err);
+}
+
+void	ft_free_raycast_data(t_map *map)
+{
+	if (map->prj->player)
+		free(map->prj->player);
+	if (map->prj->rc_horizontal)
+		free(map->prj->rc_horizontal);
+	if (map->prj->rc_vertical)
+		free(map->prj->rc_vertical);
+	if (map->prj)
+		free(map->prj);
 }
