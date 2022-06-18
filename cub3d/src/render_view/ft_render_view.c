@@ -379,7 +379,7 @@ void ft_pixel_put_poc(t_view *view, int ver)
 	mlx_put_image_to_window(view->mlx, view->mlx_win, img.img, 0, 0);
 	t = clock() - t;
 	double time_taken = ((double)t) / CLOCKS_PER_SEC; // calculate the elapsed time
-	printf("%f secs (%.0f fps) - Pixel put\n", time_taken, (float)1 / time_taken);
+	printf("%f secs (%.0f fps) - Modify img addr\n", time_taken, (float)1 / time_taken);
 }
 
 void ft_view_events(t_view *view)
