@@ -13,52 +13,99 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-void	ft_render_view(t_view *view)
+void ft_render_view(t_view *view, t_rdata *rdata)
 {
 	view->width = WIN_WIDTH;
 	view->height = WIN_HEIGHT;
 	view->title = ft_strdup(GAME_TITLE);
 	view->mlx = mlx_init();
 	view->mlx_win = mlx_new_window(view->mlx, view->width,
-			view->height, view->title);
+								   view->height, view->title);
 	ft_view_events(view);
+	ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], 0, 0);
+	ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], TEXTURE_SIZE, 0);
+	ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], 0, TEXTURE_SIZE);
+	ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], TEXTURE_SIZE, TEXTURE_SIZE);
+
+	ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 2, 0);
+	ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 3, 0);
+	ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 2, TEXTURE_SIZE);
+	ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 3, TEXTURE_SIZE);
+
+	ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 4, 0);
+	ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 5, 0);
+	ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 4, TEXTURE_SIZE);
+	ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 5, TEXTURE_SIZE);
+
+	ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 6, 0);
+	ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 7, 0);
+	ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 6, TEXTURE_SIZE);
+	ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 7, TEXTURE_SIZE);
 	mlx_loop(view->mlx);
 }
 
-void	ft_view_events(t_view *view)
+// Test
+void ft_render_texture(t_view *view, t_tdata *texture, int win_x, int win_y)
+{
+	t_data img;
+	int y;
+	int x;
+
+	img.img = mlx_new_image(view->mlx, texture->texture_w, texture->texture_h);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+								 &img.endian);
+	y = 0;
+	while (y < texture->texture_h)
+	{
+		x = 0;
+		while (x < texture->texture_w)
+		{
+			my_mlx_pixel_put(&img, x, y, texture->texture_columns[y][x]);
+			x++;
+		}
+		y++;
+	}
+	mlx_put_image_to_window(view->mlx, view->mlx_win, img.img, win_x, win_y);
+}
+
+void my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char *dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
+
+void ft_view_events(t_view *view)
 {
 	mlx_key_hook(view->mlx_win, ft_keyboard_events, view);
 	mlx_hook(view->mlx_win, ON_DESTROY, 0, ft_close_window, view);
 }
 
-int	ft_close_window(t_view *view)
+int ft_close_window(t_view *view)
 {
 	mlx_destroy_window(view->mlx, view->mlx_win);
 	free(view->title);
-	exit (0);
+	exit(0);
 }
 
-int	ft_keyboard_events(int key, t_view *view)
+int ft_keyboard_events(int key, t_view *view)
 {
 	if (key == ESC_KEY_LINUX || key == ESC_KEY_MAC)
 		ft_close_window(view);
-	else if ((key == W_KEY_LINUX || key == UP_ARR_LINUX)
-		|| (key == W_KEY_MAC || key == UP_ARR_MAC))
+	else if ((key == W_KEY_LINUX || key == UP_ARR_LINUX) || (key == W_KEY_MAC || key == UP_ARR_MAC))
 	{
 		printf("Arrow up or W\n");
 	}
-	else if ((key == A_KEY_LINUX || key == LEFT_ARR_LINUX)
-		|| (key == A_KEY_MAC || key == LEFT_ARR_MAC))
+	else if ((key == A_KEY_LINUX || key == LEFT_ARR_LINUX) || (key == A_KEY_MAC || key == LEFT_ARR_MAC))
 	{
 		printf("Arrow left or a\n");
 	}
-	else if ((key == S_KEY_LINUX || key == DOWN_ARR_LINUX)
-		|| (key == S_KEY_MAC || key == DOWN_ARR_MAC))
+	else if ((key == S_KEY_LINUX || key == DOWN_ARR_LINUX) || (key == S_KEY_MAC || key == DOWN_ARR_MAC))
 	{
 		printf("Arrow down or S\n");
 	}
-	else if ((key == D_KEY_LINUX || key == RIGHT_ARR_LINUX)
-		|| (key == D_KEY_MAC || key == RIGHT_ARR_MAC))
+	else if ((key == D_KEY_LINUX || key == RIGHT_ARR_LINUX) || (key == D_KEY_MAC || key == RIGHT_ARR_MAC))
 	{
 		printf("Arrow right or D\n");
 	}
