@@ -12,14 +12,15 @@
 
 #include "../cub3d.h"
 
-void	ft_post_validation_data_manip(t_map *map, t_rdata *rdata)
+void ft_post_validation_data_manip(t_map *map, t_rdata *rdata)
 {
-	printf("Entering in post validation data manip\n");
 	rdata->c_col_int = ft_rgb_str_to_int(map->c_color);
-	printf("Ceiling color is %s\n", map->c_color);
-	printf("Ceiling color is %x\n", rdata->c_col_int);
+	ft_write_debug_msg_int("Ceiling color is ", rdata->c_col_int);
 	rdata->f_col_int = ft_rgb_str_to_int(map->f_color);
-	printf("Floor color is %s\n", map->f_color);
-	printf("Floor color is %x\n", rdata->f_col_int);
-	rdata->no_columns = ft_texture_file_to_columns(map->no_path, rdata);
+	ft_write_debug_msg_int("Floor color is ", rdata->f_col_int);
+	rdata->textures = (t_tdata *)malloc(sizeof(t_tdata) * NUM_TEXTURES);
+	rdata->NO_TEXTURE = ft_texture_file_to_columns(map->no_path);
+	rdata->EA_TEXTURE = ft_texture_file_to_columns(map->ea_path);
+	rdata->SO_TEXTURE = ft_texture_file_to_columns(map->so_path);
+	rdata->WE_TEXTURE = ft_texture_file_to_columns(map->we_path);
 }

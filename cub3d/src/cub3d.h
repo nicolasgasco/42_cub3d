@@ -53,6 +53,10 @@
 # define D_KEY_MAC 2
 # define S_KEY_MAC 1
 
+// Conversion
+# define DIFF_TO_NUM 55
+# define NO_TRANSPARENCY 0
+
 # define PI 3.14159265359
 # define PROJ_PLANE_WIDTH 320
 # define PROJ_PLANE_HEIGHT 200
@@ -88,6 +92,7 @@ typedef struct s_slice
 	char	*texture;
 	int		wall_x;
 }			t_slice;
+
 /* Linked list used to manipulate texture files */
 struct s_cinfo
 {
@@ -96,13 +101,21 @@ struct s_cinfo
 	struct s_cinfo	*next;
 };
 
-/* Struct for data necessary to render screens */
+/* Struct with info on single texture */
+typedef struct s_tdata
+{
+	int				texture_w;
+	int				texture_h;
+	int				**texture_columns;
+	struct s_cinfo	*col_info_list;
+}		t_tdata;
+
+/* Struct with info necessary to render textures */
 typedef struct s_rdata
 {
 	int				c_col_int;
 	int				f_col_int;
-	int				*no_columns;
-	struct s_cinfo	*col_info_list;
+	t_tdata			*textures;
 }		t_rdata;
 
 /* Struct for map data  */
@@ -138,6 +151,7 @@ void	ft_malloc_error(void);
 void	ft_open_file_error(void);
 // Utils - Debug
 void	ft_write_debug_msg(char *msg);
+void	ft_write_debug_msg_int(char *msg, int int_arg);
 // Utils - Free
 void	ft_free_allocated_map_data(t_map *map);
 void	ft_print_error_exit(t_map *map, char *msg, int err);
@@ -229,7 +243,7 @@ void	ft_raycasting_calculation(t_map *map);
 void	ft_raycast_to_slice(t_map *map);
 
 /* Render view */
-void	ft_render_view(t_view *view);
+void	ft_render_view(t_view *view, t_rdata *rdata);
 void	ft_view_events(t_view *view);
 int		ft_close_window(t_view *view);
 int		ft_keyboard_events(int key, t_view *view);
@@ -238,11 +252,22 @@ int		ft_keyboard_events(int key, t_view *view);
 void	ft_post_validation_data_manip(t_map *map, t_rdata *rdata);
 /* Post validation data manip - Colors */
 int		ft_rgb_str_to_int(char *col_str);
+void	ft_populate_rgb_int_arr(char *col_str, int *rgb);
 int		ft_substr_and_atoi(char *col_str, int start, int end);
 int		ft_rgb_to_int(int t, int r, int g, int b);
 /* Post validation data manip - Textures */
-int				*ft_texture_file_to_columns(char *texture_path, t_rdata *rdata);
-void			ft_parse_char_col(char *line, t_rdata *rdata);
+t_tdata			ft_texture_file_to_columns(char *texture_path);
+void			ft_parse_asset_sizes(char *line, t_tdata *texture);
+int				ft_calc_size_len(char *line, int i);
+void			ft_parse_char_col(char *line, t_tdata *rdata);
 struct s_cinfo	*ft_create_col_info_struct(char *line);
+int				ft_hex_str_to_int(char *hex);
+void			ft_fill_int_matrix_line(t_tdata *texture, char *line, int y);
+void			$ft_print_pixel_matrix(t_tdata *texture);
+void			$ft_print_col_info_struct(struct s_cinfo *col_info);
+
+// Test
+void			ft_render_texture(t_view *view, t_tdata *texture, int x, int y);
+void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 #endif

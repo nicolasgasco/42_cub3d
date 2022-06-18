@@ -26,9 +26,7 @@ int main(int argc, char **argv)
 	ft_memset(&player, 0, sizeof(t_vector));
 	ft_memset(&map, 0, sizeof(t_map));
 	ft_scene_desc_file_validation(argc, argv[1], &map);
-	ft_memset(&rdata, 0, sizeof(t_rdata));
-	rdata.col_info_list = malloc(sizeof(struct s_cinfo));
-	ft_memset(&rdata.col_info_list, 0, sizeof(struct s_cinfo));
+	ft_memset(&rdata, 0, sizeof(t_tdata));
 	ft_post_validation_data_manip(&map, &rdata);
 	ft_free_allocated_map_data(&map);
 	ft_memset(&view, 0, sizeof(t_view));
@@ -37,6 +35,6 @@ int main(int argc, char **argv)
 	ft_scene_desc_file_validation(argc, argv[1], &map);
 	ft_raycasting_calculation(&map);
 	ft_free_allocated_map_data(&map);
-	ft_render_view(&view);
+	ft_render_view(&view, &rdata);
 	return (0);
 }
