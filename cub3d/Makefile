@@ -23,8 +23,10 @@ SRC_NAME =	cub3d.c\
 		scene_desc_file_validation/ft_type_ids_validation-errors_1.c\
 		render_window/ft_render_view.c\
 		post_validation_data_manip/ft_map_data_manip.c\
-		post_validation_data_manip/ft_map_data_manip-colors.c\
-		post_validation_data_manip/ft_map_data_manip-texture_files.c\
+		post_validation_data_manip/ft_map_data_manip-fc-colors.c\
+		post_validation_data_manip/ft_map_data_manip-asset_sizes.c\
+		post_validation_data_manip/ft_map_data_manip-color_codes.c\
+		post_validation_data_manip/ft_map_data_manip-char_map.c\
 		utils/get_next_line.c\
 		utils/ft_utils_0.c\
 		utils/ft_utils_1.c\
@@ -86,7 +88,7 @@ fclean: clean
 	@rm -f $(NAME)
 	@echo "##### Removed binary files #####"
 
-re: fclean all
+re: fclean mac
 
 test_validation:
 	@make re > /dev/null 2> /dev/null

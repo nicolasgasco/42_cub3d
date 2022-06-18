@@ -13,53 +13,48 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-int ft_rgb_str_to_int(char *col_str)
+void	ft_readline_asset_sizes(int fd, char *line, t_tdata *texture)
 {
-	int *rgb;
-	int int_result;
-
-	rgb = (int *)malloc(sizeof(int) * 3);
-	ft_populate_rgb_int_arr(col_str, rgb);
-	int_result = ft_rgb_to_int(NO_TRANSPARENCY, rgb[0], rgb[1], rgb[2]);
-	free(rgb);
-	return (int_result);
+	line = get_next_line(fd);
+	while (line)
+	{
+		line = get_next_line(fd);
+		if (line[1] >= '1' && line[1] <= '9')
+		{
+			ft_parse_asset_sizes(line, texture);
+			free(line);
+			break ;
+		}
+		free(line);
+	}
 }
 
-void ft_populate_rgb_int_arr(char *col_str, int *rgb)
+void	ft_parse_asset_sizes(char *line, t_tdata *texture)
 {
-	int i;
-	int comma_i;
-	int rgb_counter;
+	int		i;
+	char	*num_str;
 
-	i = 0;
-	comma_i = 0;
-	rgb_counter = 0;
+	i = 1;
+	ft_skip_to_non_space_char(line, &i);
+	num_str = ft_substr(line, i, ft_calc_size_len(line, i));
+	texture->texture_w = ft_atoi(num_str);
+	free(num_str);
+	ft_skip_to_non_space_char(line, &i);
+	num_str = ft_substr(line, i, ft_calc_size_len(line, i));
+	texture->texture_h = ft_atoi(num_str);
+	free(num_str);
+}
 
-	while (col_str[i] != '\0')
+int	ft_calc_size_len(char *line, int iterator)
+{
+	int	i;
+
+	i = iterator;
+	while (line[i] != '\0')
 	{
-		if (col_str[i] == ',')
-		{
-			rgb[rgb_counter] = ft_substr_and_atoi(col_str, comma_i, i);
-			rgb_counter++;
-			comma_i = i + 1;
-		}
+		if (line[i] <= '0' || line[i] >= '9')
+			return (i);
 		i++;
 	}
-	rgb[rgb_counter] = ft_substr_and_atoi(col_str, comma_i, i);
-}
-
-int ft_substr_and_atoi(char *col_str, int start, int end)
-{
-	char *single_col_str;
-	int int_col;
-
-	single_col_str = ft_substr(col_str, start, end - start);
-	int_col = ft_atoi(single_col_str);
-	free(single_col_str);
-	return (int_col);
-}
-
-int ft_rgb_to_int(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
+	return (i);
 }

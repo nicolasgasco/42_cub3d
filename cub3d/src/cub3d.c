@@ -13,7 +13,7 @@
 #include "../Libft/libft.h"
 #include "cub3d.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_map			map;
 	t_rdata			rdata;
@@ -29,6 +29,7 @@ int main(int argc, char **argv)
 	ft_memset(&rdata, 0, sizeof(t_tdata));
 	ft_post_validation_data_manip(&map, &rdata);
 	ft_free_allocated_map_data(&map);
+	// ft_free_allocated_render_data(&rdata);
 	ft_memset(&view, 0, sizeof(t_view));
 	map.prj = &projection;
 	map.prj->player = &player;

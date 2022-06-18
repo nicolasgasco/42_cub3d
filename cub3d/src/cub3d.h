@@ -17,6 +17,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <math.h>
+# include <limits.h>
 # include "../mlx/mlx.h"
 
 /* Game params */
@@ -26,6 +28,11 @@
 # define PLAY_WIDTH	900
 # define PLAY_HEIGHT 460
 # define TEXTURE_SIZE 128
+# define NUM_TEXTURES 4
+# define NO_TEXTURE_INDEX 0
+# define EA_TEXTURE_INDEX 1
+# define SO_TEXTURE_INDEX 2
+# define WE_TEXTURE_INDEX 3
 
 /* Events */
 # define ON_DESTROY 17
@@ -134,6 +141,16 @@ typedef struct s_map
 	t_projection	*prj;
 	t_slice			*slc;
 }					t_map;
+
+/* Struct for rendering pixels */
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_data;
 
 /* Struct for mlx */
 typedef struct s_view
@@ -249,22 +266,26 @@ int		ft_close_window(t_view *view);
 int		ft_keyboard_events(int key, t_view *view);
 
 /* Post validation data manip */
-void	ft_post_validation_data_manip(t_map *map, t_rdata *rdata);
-/* Post validation data manip - Colors */
-int		ft_rgb_str_to_int(char *col_str);
-void	ft_populate_rgb_int_arr(char *col_str, int *rgb);
-int		ft_substr_and_atoi(char *col_str, int start, int end);
-int		ft_rgb_to_int(int t, int r, int g, int b);
-/* Post validation data manip - Textures */
+void			ft_post_validation_data_manip(t_map *map, t_rdata *rdata);
+void			ft_free_allocated_render_data(t_rdata *rdata);
 t_tdata			ft_texture_file_to_columns(char *texture_path);
-void			ft_parse_asset_sizes(char *line, t_tdata *texture);
-int				ft_calc_size_len(char *line, int i);
+// Post validation data manip - Floor/Ceiling Colors
+int				ft_rgb_str_to_int(char *col_str);
+void			ft_populate_rgb_int_arr(char *col_str, int *rgb);
+int				ft_substr_and_atoi(char *col_str, int start, int end);
+int				ft_rgb_to_int(int t, int r, int g, int b);
+// Post validation data manip - Color codes
+void			ft_readline_color_codes(int fd, char *line, t_tdata *texture);
 void			ft_parse_char_col(char *line, t_tdata *rdata);
 struct s_cinfo	*ft_create_col_info_struct(char *line);
 int				ft_hex_str_to_int(char *hex);
+// Post validation data manip - Asset sizes
+void			ft_readline_asset_sizes(int fd, char *line, t_tdata *texture);
+void			ft_parse_asset_sizes(char *line, t_tdata *texture);
+int				ft_calc_size_len(char *line, int i);
+// Post validation data manip - Char map
+void			ft_readline_char_map(int fd, char *line, t_tdata *texture);
 void			ft_fill_int_matrix_line(t_tdata *texture, char *line, int y);
-void			$ft_print_pixel_matrix(t_tdata *texture);
-void			$ft_print_col_info_struct(struct s_cinfo *col_info);
 
 // Test
 void			ft_render_texture(t_view *view, t_tdata *texture, int x, int y);
