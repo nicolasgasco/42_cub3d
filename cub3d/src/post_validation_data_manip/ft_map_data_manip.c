@@ -21,4 +21,5 @@ void	ft_post_validation_data_manip(t_map *map, t_rdata *rdata)
 	rdata->f_col_int = ft_rgb_str_to_int(map->f_color);
 	printf("Floor color is %s\n", map->f_color);
 	printf("Floor color is %x\n", rdata->f_col_int);
+	rdata->no_columns = ft_texture_file_to_columns(map->no_path, rdata);
 }

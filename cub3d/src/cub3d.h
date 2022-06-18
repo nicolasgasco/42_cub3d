@@ -25,6 +25,7 @@
 # define WIN_HEIGHT 720
 # define PLAY_WIDTH	900
 # define PLAY_HEIGHT 460
+# define TEXTURE_SIZE 128
 
 /* Events */
 # define ON_DESTROY 17
@@ -87,12 +88,21 @@ typedef struct s_slice
 	char	*texture;
 	int		wall_x;
 }			t_slice;
+/* Linked list used to manipulate texture files */
+struct s_cinfo
+{
+	char			col_char;
+	int				col_int;
+	struct s_cinfo	*next;
+};
 
 /* Struct for data necessary to render screens */
 typedef struct s_rdata
 {
-	int	c_col_int;
-	int	f_col_int;
+	int				c_col_int;
+	int				f_col_int;
+	int				*no_columns;
+	struct s_cinfo	*col_info_list;
 }		t_rdata;
 
 /* Struct for map data  */
@@ -141,6 +151,7 @@ char	*ft_substr_no_leaks(char *s, unsigned int start, size_t len);
 char	*ft_strtrim_no_leaks(char *s1, const char *set);
 int		ft_str_is_numeric(char *str);
 void	ft_skip_to_content(char *line, int *iterator);
+int		ft_str_contains_char(char *str, char c);
 // Utils - Get next line
 char	*get_next_line(int fd);
 // Utils - Map content
@@ -225,9 +236,13 @@ int		ft_keyboard_events(int key, t_view *view);
 
 /* Post validation data manip */
 void	ft_post_validation_data_manip(t_map *map, t_rdata *rdata);
-/* Post validation data manip - Utils */
+/* Post validation data manip - Colors */
 int		ft_rgb_str_to_int(char *col_str);
 int		ft_substr_and_atoi(char *col_str, int start, int end);
 int		ft_rgb_to_int(int t, int r, int g, int b);
+/* Post validation data manip - Textures */
+int				*ft_texture_file_to_columns(char *texture_path, t_rdata *rdata);
+void			ft_parse_char_col(char *line, t_rdata *rdata);
+struct s_cinfo	*ft_create_col_info_struct(char *line);
 
 #endif
