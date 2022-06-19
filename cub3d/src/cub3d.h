@@ -17,6 +17,40 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include "../mlx/mlx.h"
+
+/* Game params */
+# define GAME_TITLE "Cub3d - Brawl Stars"
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 720
+# define PLAY_WIDTH	900
+# define PLAY_HEIGHT 460
+
+/* Events */
+# define ON_DESTROY 17
+
+/* Key bindings */
+// Linux
+# define ESC_KEY_LINUX 65307
+# define LEFT_ARR_LINUX 65361
+# define UP_ARR_LINUX 65362
+# define RIGHT_ARR_LINUX 65363
+# define DOWN_ARR_LINUX 65364
+# define A_KEY_LINUX 97
+# define W_KEY_LINUX 119
+# define D_KEY_LINUX 100
+# define S_KEY_LINUX 115
+
+// Mac
+# define ESC_KEY_MAC 53
+# define LEFT_ARR_MAC 123
+# define UP_ARR_MAC 126
+# define RIGHT_ARR_MAC 124
+# define DOWN_ARR_MAC 125
+# define A_KEY_MAC 0
+# define W_KEY_MAC 13
+# define D_KEY_MAC 2
+# define S_KEY_MAC 1
 
 # define PI 3.14159265359
 # define PROJ_PLANE_WIDTH 320
@@ -70,6 +104,16 @@ typedef struct s_map
 	t_projection	*prj;
 	t_slice			*slc;
 }					t_map;
+
+/* Struct for mlx */
+typedef struct s_view
+{
+	void	*mlx;
+	void	*mlx_win;
+	int		width;
+	int		height;
+	char	*title;
+}			t_view;
 
 /* Utils */
 // Utils - Common error
@@ -165,5 +209,11 @@ void	ft_validate_content(t_map *map);
 /* Raycasting Calculation */
 void	ft_raycasting_calculation(t_map *map);
 void	ft_raycast_to_slice(t_map *map);
+
+/* Render view */
+void	ft_render_view(t_view *view);
+void	ft_view_events(t_view *view);
+int		ft_close_window(t_view *view);
+int		ft_keyboard_events(int key, t_view *view);
 
 #endif

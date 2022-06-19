@@ -18,6 +18,8 @@ int	main(int argc, char **argv)
 	t_map			map;
 	t_projection	projection;
 	t_vector		player;
+	t_map	map;
+	t_view	view;
 
 	ft_memset(&map, 0, sizeof(t_map));
 	ft_memset(&projection, 0, sizeof(t_projection));
@@ -27,5 +29,7 @@ int	main(int argc, char **argv)
 	ft_scene_desc_file_validation(argc, argv[1], &map);
 	ft_raycasting_calculation(&map);
 	ft_free_allocated_map_data(&map);
+	ft_memset(&view, 0, sizeof(t_view));
+	ft_render_view(&view);
 	return (0);
 }
