@@ -15,10 +15,11 @@
 
 void	ft_readline_color_codes(int fd, char *line, t_tdata *texture)
 {
-	line = get_next_line(fd);
-	while (line)
+	while (1)
 	{
 		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
 		if (ft_str_contains_char(line, '#'))
 		{
 			ft_parse_char_col(line, texture);
@@ -27,9 +28,11 @@ void	ft_readline_color_codes(int fd, char *line, t_tdata *texture)
 		}
 		free(line);
 	}
-	while (line)
+	while (1)
 	{
 		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
 		if (!ft_str_contains_char(line, '#'))
 		{
 			free(line);
@@ -65,7 +68,6 @@ struct s_cinfo	*ft_create_col_info_struct(char *line)
 	int				i;
 	char			col_char;
 	char			*col_hex;
-	struct s_cinfo	*col_info;
 
 	i = 0;
 	col_char = '\0';
@@ -74,13 +76,23 @@ struct s_cinfo	*ft_create_col_info_struct(char *line)
 	{
 		if (line[i] == '\"')
 			col_char = line[i + 1];
-		if (line[i] == '#')
+		if (line[i] == 'c')
 		{
+			while (line[i] != ' ')
+				i++;
+			ft_skip_to_non_space_char(line, &i);
 			col_hex = ft_substr(line, i + 1, 6);
 			break ;
 		}
 		i++;
 	}
+	return (ft_populate_col_info(col_char, col_hex));
+}
+
+struct s_cinfo	*ft_populate_col_info(char col_char, char *col_hex)
+{
+	struct s_cinfo	*col_info;
+
 	col_info = malloc(sizeof(struct s_cinfo));
 	col_info->col_char = col_char;
 	col_info->col_int = ft_hex_str_to_int(col_hex);
@@ -100,10 +112,14 @@ int	ft_hex_str_to_int(char *hex)
 	num_digits = ft_strlen(hex) - 1;
 	while (hex[i] != '\0')
 	{
-		if (hex[i] >= 'A' && hex[i] <= 'F')
-			curr_digit = hex[i] - DIFF_TO_NUM;
-		else
+		if ((hex[i] >= 'A' && hex[i] <= 'F'))
+			curr_digit = hex[i] - UPPERCASE_DIGIT_DIFF;
+		else if ((hex[i] >= 'a' && hex[i] <= 'f'))
+			curr_digit = hex[i] - LOWERCASE_DIGIT_DIFF;
+		else if (hex[i] >= '0' && hex[i] <= '9')
 			curr_digit = hex[i] - '0';
+		else
+			curr_digit = 0;
 		result += curr_digit * (int)pow((float)16, (float)num_digits);
 		num_digits--;
 		i++;
