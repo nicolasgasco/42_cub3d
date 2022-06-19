@@ -3,6 +3,8 @@ FLAGS = -Wall -Wextra -Werror
 SANITIZE = -g3 -fsanitize=address
 VALGRIND = -g -Og -std=gnu99
 INC = -I%.h -I$(LIB_DIR)%.h
+MINILIB_LINUX= -Lmlx -lmlx_Linux -lXext -lX11 -lm -lz
+MINILIB_MAC = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 SRC_NAME =	cub3d.c\
 		scene_desc_file_validation/ft_scene_desc_file_validation.c\
@@ -19,6 +21,7 @@ SRC_NAME =	cub3d.c\
 		scene_desc_file_validation/ft_map_content_validation-map_content.c\
 		scene_desc_file_validation/ft_type_ids_validation-errors_0.c\
 		scene_desc_file_validation/ft_type_ids_validation-errors_1.c\
+		render_window/ft_render_view.c\
 		utils/get_next_line.c\
 		utils/ft_utils_0.c\
 		utils/ft_utils_1.c\
@@ -39,20 +42,31 @@ LIB_DIR = ./Libft/
 SRC_DIR = ./src/
 SCN_DIR = scene_desc_file_validation/
 RCC_DIR = raycasting_calculation/
+WIN_DIR = render_window/
 UTL_DIR = utils/
 OBJ_DIR = ./obj/
+MLX_DIR = ./mlx/
+MLX_LINUX_DIR = ./minilibx-linux/
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C $(LIB_DIR) --silent
-	@gcc $(FLAGS) $(SANITIZE) -o $(NAME) $(OBJ) -L $(LIB_DIR) -lft -lm
+	@make -C $(MLX_LINUX_DIR) --silent
+	@gcc $(FLAGS) $(SANITIZE) -o $(NAME) $(OBJ) -L $(LIB_DIR) -lft $(MINILIB_LINUX)
+	@echo "##### cub3d compiling finished! #####"
+
+mac: $(OBJ)
+	@make -C $(LIB_DIR) --silent
+	@make -C $(MLX_DIR) --silent
+	@gcc $(FLAGS) $(SANITIZE) -o $(NAME) $(OBJ) -L $(LIB_DIR) -lft $(MINILIB_MAC)
 	@echo "##### cub3d compiling finished! #####"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)$(SCN_DIR)
 	@mkdir -p $(OBJ_DIR)$(UTL_DIR)
 	@mkdir -p $(OBJ_DIR)$(RCC_DIR)
+	@mkdir -p $(OBJ_DIR)$(WIN_DIR)
 	@echo "##### Creating" [ $@ ] " #####"
 	@gcc $(FLAGS) $(SANITIZE) -o $@ -c $< $(INC)
 
@@ -73,4 +87,4 @@ test_validation:
 	@make re > /dev/null 2> /dev/null
 	@sh tests/validation_tests.sh
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re test mac
