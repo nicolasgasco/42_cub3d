@@ -15,9 +15,15 @@
 
 int	main(int argc, char **argv)
 {
-	t_map	map;
+	t_map			map;
+	t_projection	projection;
+	t_vector		player;
 
 	ft_memset(&map, 0, sizeof(t_map));
+	ft_memset(&projection, 0, sizeof(t_projection));
+	ft_memset(&player, 0, sizeof(t_vector));
+	map.prj = &projection;
+	map.prj->player = &player;
 	ft_scene_desc_file_validation(argc, argv[1], &map);
 	ft_raycasting_calculation(&map);
 	ft_free_allocated_map_data(&map);

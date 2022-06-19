@@ -74,15 +74,6 @@ double	ft_set_viewing_angle(char c)
 
 void	ft_set_player_data(t_map *map, int *iterator, int *j, char c)
 {
-	t_projection	*projection;
-	t_vector		*player;
-
-	projection = malloc (sizeof(t_projection));
-	player = malloc (sizeof(t_vector));
-	ft_memset(projection, 0, sizeof(t_projection));
-	ft_memset(player, 0, sizeof(t_projection));
-	map->prj = projection;
-	map->prj->player = player;
 	map->prj->player->y = (*iterator);
 	map->prj->player->x = (*j);
 	map->prj->player_orientation = c;

@@ -15,8 +15,18 @@
 
 void	ft_free_allocated_map_data(t_map *map)
 {
+	int	i;
+
+	i = 0;
+	while (i < map->height)
+	{
+		if (map->map_content[i])
+			free(map->map_content[i]);
+		i++;
+	}
 	if (map->map_content)
 		free(map->map_content);
+
 	if (map->no_path)
 		free(map->no_path);
 	if (map->so_path)
@@ -29,24 +39,11 @@ void	ft_free_allocated_map_data(t_map *map)
 		free(map->f_color);
 	if (map->c_color)
 		free(map->c_color);
-	if (map->prj->player)
-		free(map->prj->player);
-	if (map->prj)
-		free(map->prj);
 }
 
 void	ft_print_error_exit(t_map *map, char *msg, int err)
 {
-	int	i;
-
 	ft_putendl_fd(msg, STDERR_FILENO);
-	i = 0;
-	while (i < map->height)
-	{
-		if (map->map_content[i])
-			free(map->map_content[i]);
-		i++;
-	}
 	ft_free_allocated_map_data(map);
 	exit(err);
 }
