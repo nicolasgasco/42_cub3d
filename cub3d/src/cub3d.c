@@ -26,10 +26,9 @@ int	main(int argc, char **argv)
 	ft_memset(&player, 0, sizeof(t_vector));
 	ft_memset(&map, 0, sizeof(t_map));
 	ft_scene_desc_file_validation(argc, argv[1], &map);
-	ft_memset(&rdata, 0, sizeof(t_tdata));
+	ft_memset(&rdata, 0, sizeof(t_rdata));
 	ft_post_validation_data_manip(&map, &rdata);
 	ft_free_allocated_map_data(&map);
-	// ft_free_allocated_render_data(&rdata);
 	ft_memset(&view, 0, sizeof(t_view));
 	map.prj = &projection;
 	map.prj->player = &player;
@@ -37,5 +36,6 @@ int	main(int argc, char **argv)
 	ft_raycasting_calculation(&map);
 	ft_free_allocated_map_data(&map);
 	ft_render_view(&view, &rdata);
+	ft_free_allocated_render_data(&rdata);
 	return (0);
 }

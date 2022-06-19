@@ -96,6 +96,7 @@ struct s_cinfo	*ft_populate_col_info(char col_char, char *col_hex)
 	col_info = malloc(sizeof(struct s_cinfo));
 	col_info->col_char = col_char;
 	col_info->col_int = ft_hex_str_to_int(col_hex);
+	free(col_hex);
 	col_info->next = NULL;
 	return (col_info);
 }

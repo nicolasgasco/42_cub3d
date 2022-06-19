@@ -19,7 +19,7 @@ void ft_post_validation_data_manip(t_map *map, t_rdata *rdata)
 	ft_write_debug_msg_int("Ceiling color is ", rdata->c_col_int);
 	rdata->f_col_int = ft_rgb_str_to_int(map->f_color);
 	ft_write_debug_msg_int("Floor color is ", rdata->f_col_int);
-	ft_validate_texture_files(map);
+	ft_validate_texture_files(map, rdata);
 	rdata->textures = (t_tdata *)malloc(sizeof(t_tdata) * NUM_TEXTURES);
 	rdata->textures[NO_TEXTURE_INDEX] = ft_parse_texture_file(map->no_path);
 	rdata->textures[EA_TEXTURE_INDEX] = ft_parse_texture_file(map->ea_path);
@@ -30,24 +30,64 @@ void ft_post_validation_data_manip(t_map *map, t_rdata *rdata)
 
 t_tdata ft_parse_texture_file(char *texture_path)
 {
-	t_tdata *texture;
-	int fd;
-	char *line;
+	t_tdata	texture;
+	int 	fd;
+	char 	*line;
 
 	fd = open(texture_path, O_RDONLY);
 	if (fd == -1)
 		ft_open_file_error();
-	texture = (t_tdata *)malloc(sizeof(t_tdata));
-	ft_memset(texture, 0, sizeof(t_tdata));
+	ft_memset(&texture, 0, sizeof(t_tdata));
 	line = NULL;
-	ft_readline_asset_sizes(fd, line, texture);
-	ft_readline_color_codes(fd, line, texture);
-	ft_readline_char_map(fd, line, texture);
-	return (*texture);
+	ft_readline_asset_sizes(fd, line, &texture);
+	ft_readline_color_codes(fd, line, &texture);
+	ft_readline_char_map(fd, line, &texture);
+	return (texture);
 }
 
 void ft_free_allocated_render_data(t_rdata *rdata)
 {
-	// Free s_cinfo
-	free(rdata);
+	int				i;
+	int				j;
+	struct s_cinfo	*curr;
+	struct s_cinfo	*temp;
+
+	i = 0;
+	j = 0;
+	if (!rdata->textures)
+	{
+		printf("No existe\n");
+		return ;
+	}
+	while (i < 4)
+	{
+		curr = rdata->textures[i].col_info_list;
+		while (curr)
+		{
+			if (curr->next)
+			{
+				temp = curr;
+				curr = temp->next;
+				free(temp);
+			}
+			else
+			{
+				free(curr);
+				break;
+			}
+		}
+		j = 0;
+		while (j < TEXTURE_SIZE)
+		{
+			if (rdata->textures[i].texture_columns[j])
+				free(rdata->textures[i].texture_columns[j]);
+			else
+				break;
+			j++;
+		}
+		free(rdata->textures[i].texture_columns);
+		i++;
+	}
+	free(rdata->textures);
 }
+

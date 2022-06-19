@@ -249,6 +249,7 @@ void	ft_completeness_check_colors(t_map *map);
 void	ft_completeness_check_o_paths(t_map *map);
 void	ft_check_o_paths_duplicates(t_map *map);
 void	ft_find_o_paths_duplicates(char **path_arr, t_map *map);
+void	ft_free_validation_path_arr(char **path_arr);
 // Map content
 void	ft_map_content_validation(char *file_path, t_map *map);
 void	ft_check_characters(t_map *map);
@@ -267,7 +268,7 @@ int		ft_close_window(t_view *view);
 int		ft_keyboard_events(int key, t_view *view);
 
 /* Post validation data manip */
-void			ft_validate_texture_files(t_map *map);
+void			ft_validate_texture_files(t_map *map, t_rdata *rdata);
 int				ft_xpm_file_is_valid(char *path, void *mlx);
 void			ft_post_validation_data_manip(t_map *map, t_rdata *rdata);
 void			ft_free_allocated_render_data(t_rdata *rdata);
