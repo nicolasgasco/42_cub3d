@@ -22,25 +22,31 @@ void ft_render_view(t_view *view, t_rdata *rdata)
 	view->mlx_win = mlx_new_window(view->mlx, view->width,
 								   view->height, view->title);
 	ft_view_events(view);
+
 	ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], 0, 0);
-	ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], TEXTURE_SIZE, 0);
-	ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], 0, TEXTURE_SIZE);
-	ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], TEXTURE_SIZE, TEXTURE_SIZE);
+	ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], TEXTURE_SIZE * 1, 0);
+	ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], TEXTURE_SIZE * 2, 0);
+	ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], TEXTURE_SIZE * 3, 0);
+	ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], TEXTURE_SIZE * 4, 0);
 
-	ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 2, 0);
-	ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 3, 0);
-	ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 2, TEXTURE_SIZE);
-	ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 3, TEXTURE_SIZE);
-
-	ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 4, 0);
 	ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 5, 0);
-	ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 4, TEXTURE_SIZE);
-	ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 5, TEXTURE_SIZE);
+	ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 6, 0);
+	ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 7, 0);
+	ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 8, 0);
+	ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 9, 0);
 
-	ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 6, 0);
-	ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 7, 0);
-	ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 6, TEXTURE_SIZE);
-	ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 7, TEXTURE_SIZE);
+	ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 0, TEXTURE_SIZE * 1);
+	ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 1, TEXTURE_SIZE * 1);
+	ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 2, TEXTURE_SIZE * 1);
+	ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 3, TEXTURE_SIZE * 1);
+	ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 4, TEXTURE_SIZE * 1);
+
+	ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 5, TEXTURE_SIZE * 1);
+	ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 6, TEXTURE_SIZE * 1);
+	ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 7, TEXTURE_SIZE * 1);
+	ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 8, TEXTURE_SIZE * 1);
+	ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 9, TEXTURE_SIZE * 1);
+
 	mlx_loop(view->mlx);
 }
 
