@@ -61,7 +61,8 @@
 # define S_KEY_MAC 1
 
 // Conversion
-# define DIFF_TO_NUM 55
+# define UPPERCASE_DIGIT_DIFF 55
+# define LOWERCASE_DIGIT_DIFF 87
 # define NO_TRANSPARENCY 0
 
 # define PI 3.14159265359
@@ -266,9 +267,11 @@ int		ft_close_window(t_view *view);
 int		ft_keyboard_events(int key, t_view *view);
 
 /* Post validation data manip */
+void			ft_validate_texture_files(t_map *map);
+int				ft_xpm_file_is_valid(char *path, void *mlx);
 void			ft_post_validation_data_manip(t_map *map, t_rdata *rdata);
 void			ft_free_allocated_render_data(t_rdata *rdata);
-t_tdata			ft_texture_file_to_columns(char *texture_path);
+t_tdata			ft_parse_texture_file(char *texture_path);
 // Post validation data manip - Floor/Ceiling Colors
 int				ft_rgb_str_to_int(char *col_str);
 void			ft_populate_rgb_int_arr(char *col_str, int *rgb);
@@ -279,6 +282,7 @@ void			ft_readline_color_codes(int fd, char *line, t_tdata *texture);
 void			ft_parse_char_col(char *line, t_tdata *rdata);
 struct s_cinfo	*ft_create_col_info_struct(char *line);
 int				ft_hex_str_to_int(char *hex);
+struct s_cinfo	*ft_populate_col_info(char col_char, char *col_hex);
 // Post validation data manip - Asset sizes
 void			ft_readline_asset_sizes(int fd, char *line, t_tdata *texture);
 void			ft_parse_asset_sizes(char *line, t_tdata *texture);

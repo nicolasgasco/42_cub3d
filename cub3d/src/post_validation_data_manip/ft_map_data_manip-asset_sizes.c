@@ -15,10 +15,11 @@
 
 void	ft_readline_asset_sizes(int fd, char *line, t_tdata *texture)
 {
-	line = get_next_line(fd);
-	while (line)
+	while (1)
 	{
 		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
 		if (line[1] >= '1' && line[1] <= '9')
 		{
 			ft_parse_asset_sizes(line, texture);

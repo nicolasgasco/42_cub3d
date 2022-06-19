@@ -27,6 +27,7 @@ SRC_NAME =	cub3d.c\
 		post_validation_data_manip/ft_map_data_manip-asset_sizes.c\
 		post_validation_data_manip/ft_map_data_manip-color_codes.c\
 		post_validation_data_manip/ft_map_data_manip-char_map.c\
+		post_validation_data_manip/ft_map_data_manip-asset_validation.c\
 		utils/get_next_line.c\
 		utils/ft_utils_0.c\
 		utils/ft_utils_1.c\

@@ -18,13 +18,14 @@ void	ft_readline_char_map(int fd, char *line, t_tdata *texture)
 	int	i;
 
 	i = 0;
-	texture->texture_columns = (int **)malloc(sizeof(sizeof(int)
-				* texture->texture_w) * texture->texture_h);
-	line = get_next_line(fd);
-	while (line)
+	texture->texture_columns = (int **)malloc(sizeof(sizeof(int) * texture->texture_w)
+						* texture->texture_h);
+	while (1)
 	{
 		line = get_next_line(fd);
-		if (i != texture->texture_h)
+		if (line == NULL)
+			break ;
+		if (i < texture->texture_h)
 			ft_fill_int_matrix_line(texture, line, i);
 		i++;
 		free(line);
