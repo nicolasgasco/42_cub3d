@@ -1,6 +1,33 @@
 #include "../cub3d.h"
 #include <math.h>
 
+/*ft_calculate_distance will calculate the distances from 
+ * the player to the horizontal & vertical intersections.*/
+
+void	ft_calculate_distance(t_map *map)
+{
+	double		distance_horizontal;
+	double		distance_vertical;
+
+	printf("-->HORIZONTAL<--Px: %f, rchx: %f, view_angle: %f\n",
+		map->prj->player->x, map->prj->rc_horizontal->x, map->prj->view_angle);
+	distance_horizontal = fabs(map->prj->player->x - map->prj->rc_horizontal->x)
+		/ cos(map->prj->view_angle * (PI / 180));
+	if (distance_horizontal <= 0)
+		distance_horizontal = fabs(map->prj->player->y
+				- map->prj->rc_horizontal->y)
+			/ sin(map->prj->view_angle * (PI / 180));
+	printf("-->VERTICAL>--Px: %f, rcvx: %f, view_angle: %f\n",
+		map->prj->player->x, map->prj->rc_horizontal->x, map->prj->view_angle);
+	distance_vertical = fabs(map->prj->player->x - map->prj->rc_vertical->y)
+		/ cos(map->prj->view_angle * (PI / 180));
+	if (distance_vertical <= 0)
+		distance_vertical = fabs(map->prj->player->y
+				- map->prj->rc_horizontal->y)
+			/ sin(map->prj->view_angle * (PI / 180));
+	ft_set_wall_to_render(map, distance_horizontal, distance_vertical);
+}
+
 /*ft_horizontal_intersection will find the hit(s) with the
  * horizontal axis of the map until there is a wall*/
 
@@ -26,8 +53,6 @@ void	ft_horizontal_intersection(t_map *map)
 		y = floor(map->prj->rc_horizontal->y / CUBE_SIZE);
 		x = floor(map->prj->rc_horizontal->x / CUBE_SIZE);
 	}
-	printf("HORIZONTAL: El %c está en la posición [%i][%i]\n",
-		map->map_content[y][x], y, x);
 }
 
 /*ft_vertical_intersection will find the hit(s) with the
@@ -48,8 +73,6 @@ void	ft_vertical_intersection(t_map *map)
 	increment_y = CUBE_SIZE * tan(map->prj->view_angle * (PI / 180));
 	y = floor(map->prj->rc_vertical->y / CUBE_SIZE);
 	x = floor(map->prj->rc_vertical->x / CUBE_SIZE);
-	printf("X: %f, x: %d, Y: %f, y: %d\n", map->prj->rc_vertical->x,
-		x, map->prj->rc_vertical->y, y);
 	while (map->map_content[y][x] != '1')
 	{
 		map->prj->rc_vertical->y += increment_y;
@@ -57,14 +80,12 @@ void	ft_vertical_intersection(t_map *map)
 		y = floor(map->prj->rc_vertical->y / CUBE_SIZE);
 		x = floor(map->prj->rc_vertical->x / CUBE_SIZE);
 	}
-	printf("VERTICAL: El %c está en la posición [%i][%i]\n",
-		map->map_content[y][x], y, x);
 }
 
 /*ft_get_ray_angle will calculate and set map->prj->Po
  * with the viewing angle for the column to raycast*/
 
-void	ft_get_ray_angle(t_map *map, int column)
+void	ft_get_ray_angle(t_map *map)
 {
 	double	deviance;
 
@@ -72,25 +93,28 @@ void	ft_get_ray_angle(t_map *map, int column)
 		- (FIELD_OF_VIEW / 2);
 	if (map->prj->view_angle < 0)
 		map->prj->view_angle += 360;
-	deviance = (column + 1) * map->prj->angle_btw_rays;
+	deviance = map->column * map->prj->angle_btw_rays;
 	map->prj->view_angle += deviance;
 }
 
+/*ft_raycasting_calculation initializes the loop to
+ * calculate & render the rays or slices.*/
+
 void	ft_raycasting_calculation(t_map *map)
 {
-	int	column;
-
-	printf("Px: %f, Py: %f, PO: %c\n, view_angle: %f, distance: %f, angle: %f\n",
-		map->prj->player->x, map->prj->player->y, map->prj->player_orientation,
-		map->prj->view_angle, map->prj->distance_to_pp,
-		map->prj->angle_btw_rays);
 	ft_convert_to_cube_position(map);
-	column = 0;
-	while (column < PROJ_PLANE_WIDTH)
+	map->column = 0;
+	while (map->column < PROJ_PLANE_WIDTH)
 	{
-		ft_get_ray_angle(map, column);
+		ft_get_ray_angle(map);
 		ft_horizontal_intersection(map);
 		ft_vertical_intersection(map);
-		column++;
+		ft_calculate_distance(map);
+		ft_raycast_to_slice(map);
+		printf("Wtr y: %f, wtr x: %f\nDistance: %f\n",
+			map->prj->wall_to_render->y, map->prj->wall_to_render->x,
+			map->prj->distance_to_wall);
+		ft_free_raycast_data(map);
+		map->column++;
 	}
 }

@@ -37,15 +37,27 @@ typedef struct s_projection
 	char		player_orientation;
 	double		view_angle;
 	double		distance_to_pp;
+	double		distance_to_wall;
 	double		angle_btw_rays;
 	t_vector	*player;
 	t_vector	*rc_horizontal;
 	t_vector	*rc_vertical;
+	t_vector	*wall_to_render;
 }				t_projection;
+
+/* Struct for each column */
+typedef struct s_slice
+{
+	int		column;
+	int		height;
+	char	*texture;
+	int		wall_x;
+}			t_slice;
 
 /* Struct for map data  */
 typedef struct s_map
 {
+	int				column;
 	char			*no_path;
 	char			*so_path;
 	char			*ea_path;
@@ -56,6 +68,7 @@ typedef struct s_map
 	int				width;
 	char			**map_content;
 	t_projection	*prj;
+	t_slice			*slc;
 }					t_map;
 
 /* Utils */
@@ -68,6 +81,7 @@ void	ft_write_debug_msg(char *msg);
 void	ft_free_allocated_map_data(t_map *map);
 void	ft_print_error_exit(t_map *map, char *msg, int err);
 void	ft_free_raycast_data(t_map *map);
+void	ft_free_slice_data(t_map *map);
 // Utils - Common utils
 int		ft_open_file(char *file_path);
 int		ft_isspace(char c);
@@ -96,6 +110,8 @@ void	ft_convert_to_cube_position(t_map *map);
 void	ft_set_rc_structure(t_map *map);
 void	ft_set_coords_angle_direction_horizontal(t_map *map);
 void	ft_set_coords_angle_direction_vertical(t_map *map);
+void	ft_set_wall_to_render(t_map *map, double dh, double dv);
+double	ft_calculate_angle(t_map *map);
 
 /* Scene desc validation errors */
 void	ft_invalid_extension_error_exit(void);
@@ -148,5 +164,6 @@ void	ft_validate_content(t_map *map);
 
 /* Raycasting Calculation */
 void	ft_raycasting_calculation(t_map *map);
+void	ft_raycast_to_slice(t_map *map);
 
 #endif

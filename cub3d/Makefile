@@ -28,7 +28,9 @@ SRC_NAME =	cub3d.c\
 		utils/ft_free.c\
 		utils/ft_debug.c\
 		utils/ft_raycast_utils.c\
+		utils/ft_raycast_to_slice_utils.c\
 		raycasting_calculation/ft_raycasting_calculation.c\
+		raycasting_calculation/ft_raycast_to_slice.c\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR),$(OBJ_NAME))
