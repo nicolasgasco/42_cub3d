@@ -32,14 +32,6 @@ void	ft_check_player_number(t_map *map, int player)
 		ft_print_error_exit(map, "Error. Incorrect player number.", 15);
 }
 
-void	ft_set_player_data(t_map *map, int *iterator, int *j, char c)
-{
-	map->player_y = (*iterator);
-	map->player_x = (*j);
-	map->player_orientation = c;
-	map->map_content[*iterator][*j] = '0';
-}
-
 int	ft_isspace_no_endl(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\v'

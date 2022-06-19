@@ -52,22 +52,58 @@
 # define D_KEY_MAC 2
 # define S_KEY_MAC 1
 
+# define PI 3.14159265359
+# define PROJ_PLANE_WIDTH 320
+# define PROJ_PLANE_HEIGHT 200
+# define CUBE_SIZE 64
+# define FIELD_OF_VIEW 60.0
+
+/*Vector Struct*/
+typedef struct s_vector
+{
+	double	x;
+	double	y;
+}			t_vector;
+
+/* Struct for ray calculation */
+typedef struct s_projection
+{
+	char		player_orientation;
+	double		view_angle;
+	double		distance_to_pp;
+	double		distance_to_wall;
+	double		angle_btw_rays;
+	t_vector	*player;
+	t_vector	*rc_horizontal;
+	t_vector	*rc_vertical;
+	t_vector	*wall_to_render;
+}				t_projection;
+
+/* Struct for each column */
+typedef struct s_slice
+{
+	int		column;
+	int		height;
+	char	*texture;
+	int		wall_x;
+}			t_slice;
+
 /* Struct for map data  */
 typedef struct s_map
 {
-	char	*no_path;
-	char	*so_path;
-	char	*ea_path;
-	char	*we_path;
-	char	*f_color;
-	char	*c_color;
-	int		player_y;
-	int		player_x;
-	char	player_orientation;
-	int		height;
-	int		width;
-	char	**map_content;
-}			t_map;
+	int				column;
+	char			*no_path;
+	char			*so_path;
+	char			*ea_path;
+	char			*we_path;
+	char			*f_color;
+	char			*c_color;
+	int				height;
+	int				width;
+	char			**map_content;
+	t_projection	*prj;
+	t_slice			*slc;
+}					t_map;
 
 /* Struct for mlx */
 typedef struct s_view
@@ -88,6 +124,8 @@ void	ft_write_debug_msg(char *msg);
 // Utils - Free
 void	ft_free_allocated_map_data(t_map *map);
 void	ft_print_error_exit(t_map *map, char *msg, int err);
+void	ft_free_raycast_data(t_map *map);
+void	ft_free_slice_data(t_map *map);
 // Utils - Common utils
 int		ft_open_file(char *file_path);
 int		ft_isspace(char c);
@@ -102,7 +140,6 @@ char	*get_next_line(int fd);
 int		ft_is_player_char(char c);
 int		ft_is_valid_map_char(char c);
 void	ft_check_player_number(t_map *map, int player);
-void	ft_set_player_data(t_map *map, int *iterator, int *j, char c);
 int		ft_isspace_no_endl(char c);
 // Utils - Map
 int		ft_is_map_start(char *line);
@@ -110,6 +147,15 @@ void	ft_get_map_width(char *line, t_map *map);
 char	*ft_skip_to_map_start(char *line, int fd);
 void	ft_skip_to_non_space_char_backwards(char *line, int *iterator);
 char	*ft_check_to_eof(char *line, int fd, t_map *map);
+// Utils - Raycast
+void	ft_set_player_data(t_map *map, int *iterator, int *j, char c);
+double	ft_set_viewing_angle(char c);
+void	ft_convert_to_cube_position(t_map *map);
+void	ft_set_rc_structure(t_map *map);
+void	ft_set_coords_angle_direction_horizontal(t_map *map);
+void	ft_set_coords_angle_direction_vertical(t_map *map);
+void	ft_set_wall_to_render(t_map *map, double dh, double dv);
+double	ft_calculate_angle(t_map *map);
 
 /* Scene desc validation errors */
 void	ft_invalid_extension_error_exit(void);
@@ -159,6 +205,10 @@ void	ft_check_characters(t_map *map);
 void	ft_validate_size(t_map *map);
 void	ft_validate_walls(t_map *map);
 void	ft_validate_content(t_map *map);
+
+/* Raycasting Calculation */
+void	ft_raycasting_calculation(t_map *map);
+void	ft_raycast_to_slice(t_map *map);
 
 /* Render view */
 void	ft_render_view(t_view *view);
