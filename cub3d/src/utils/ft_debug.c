@@ -15,12 +15,15 @@
 
 void	ft_write_debug_msg(char *msg)
 {
-	int	fd;
+	int		fd;
+	size_t	bytes;
 
 	fd = open("./tests/validation_scripts/debug_output", O_WRONLY | O_TRUNC);
 	if (fd != -1)
 	{
-		write(fd, msg, ft_strlen(msg));
+		bytes = write(fd, msg, ft_strlen(msg));
+		if (bytes != 0)
+			close(fd);
 	}
 	close(fd);
 }
