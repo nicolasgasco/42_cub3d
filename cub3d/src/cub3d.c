@@ -30,9 +30,8 @@ int	main(int argc, char **argv)
 	map.prj->player = &player;
 	ft_scene_desc_file_validation(argc, argv[1], &map);
 	ft_post_validation_data_manip(&map, &rdata);
-	ft_raycasting_calculation(&map);
-	ft_render_view(&view, &rdata);
-	// ft_free_allocated_render_data(&rdata);
+	ft_render_view(&view, &rdata, &map);
 	// ft_free_allocated_map_data(&map);
+	// ft_free_allocated_render_data(&rdata);
 	return (0);
 }

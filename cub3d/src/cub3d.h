@@ -25,8 +25,6 @@
 # define GAME_TITLE "Cub3d - Brawl Stars"
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
-# define PLAY_WIDTH	900
-# define PLAY_HEIGHT 460
 # define TEXTURE_SIZE 128
 # define NUM_TEXTURES 4
 # define NO_TEXTURE_INDEX 0
@@ -66,10 +64,10 @@
 # define NO_TRANSPARENCY 0
 
 # define PI 3.14159265359
-# define PROJ_PLANE_WIDTH 320
-# define PROJ_PLANE_HEIGHT 200
+# define PROJ_PLANE_WIDTH 1280
+# define PROJ_PLANE_HEIGHT 720
 # define CUBE_SIZE 64
-# define FIELD_OF_VIEW 60.0
+# define FIELD_OF_VIEW 90.0
 
 /*Vector Struct*/
 typedef struct s_vector
@@ -158,6 +156,7 @@ typedef struct s_view
 {
 	void	*mlx;
 	void	*mlx_win;
+	t_data	*plane_data;
 	int		width;
 	int		height;
 	char	*title;
@@ -258,11 +257,11 @@ void	ft_validate_walls(t_map *map);
 void	ft_validate_content(t_map *map);
 
 /* Raycasting Calculation */
-void	ft_raycasting_calculation(t_map *map);
-void	ft_raycast_to_slice(t_map *map);
+void	ft_raycasting_calculation(t_map *map, t_view *view);
+void	ft_raycast_to_slice(t_map *map, t_view *view);
 
 /* Render view */
-void	ft_render_view(t_view *view, t_rdata *rdata);
+void	ft_render_view(t_view *view, t_rdata *rdata, t_map *map);
 void	ft_view_events(t_view *view);
 int		ft_close_window(t_view *view);
 int		ft_keyboard_events(int key, t_view *view);
@@ -295,5 +294,7 @@ void			ft_fill_int_matrix_line(t_tdata *texture, char *line, int y);
 // Test
 void			ft_render_texture(t_view *view, t_tdata *texture, int x, int y);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void			ft_render_column(t_view *view, t_map *map);
+void			ft_render_whole_scene(t_view *view, t_map *map);
 
 #endif

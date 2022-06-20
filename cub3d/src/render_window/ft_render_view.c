@@ -13,7 +13,7 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-void ft_render_view(t_view *view, t_rdata *rdata)
+void ft_render_view(t_view *view, t_rdata *rdata, t_map *map)
 {
 	view->width = WIN_WIDTH;
 	view->height = WIN_HEIGHT;
@@ -21,57 +21,37 @@ void ft_render_view(t_view *view, t_rdata *rdata)
 	view->mlx = mlx_init();
 	view->mlx_win = mlx_new_window(view->mlx, view->width,
 								   view->height, view->title);
+	view->plane_data = malloc(sizeof(t_data));
+	ft_memset(view->plane_data, 0, sizeof(t_data)); 
 	ft_view_events(view);
 
 	ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], 0, 0);
-	ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], TEXTURE_SIZE * 1, 0);
-	ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], TEXTURE_SIZE * 2, 0);
-	ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], TEXTURE_SIZE * 3, 0);
-	ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], TEXTURE_SIZE * 4, 0);
+	// ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], TEXTURE_SIZE * 1, 0);
+	// ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], TEXTURE_SIZE * 2, 0);
+	// ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], TEXTURE_SIZE * 3, 0);
+	// ft_render_texture(view, &rdata->textures[NO_TEXTURE_INDEX], TEXTURE_SIZE * 4, 0);
 
-	ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 5, 0);
-	ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 6, 0);
-	ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 7, 0);
-	ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 8, 0);
-	ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 9, 0);
+	// ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 5, 0);
+	// ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 6, 0);
+	// ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 7, 0);
+	// ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 8, 0);
+	// ft_render_texture(view, &rdata->textures[SO_TEXTURE_INDEX], TEXTURE_SIZE * 9, 0);
 
-	ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 0, TEXTURE_SIZE * 1);
-	ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 1, TEXTURE_SIZE * 1);
-	ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 2, TEXTURE_SIZE * 1);
-	ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 3, TEXTURE_SIZE * 1);
-	ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 4, TEXTURE_SIZE * 1);
+	// ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 0, TEXTURE_SIZE * 1);
+	// ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 1, TEXTURE_SIZE * 1);
+	// ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 2, TEXTURE_SIZE * 1);
+	// ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 3, TEXTURE_SIZE * 1);
+	// ft_render_texture(view, &rdata->textures[WE_TEXTURE_INDEX], TEXTURE_SIZE * 4, TEXTURE_SIZE * 1);
 
-	ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 5, TEXTURE_SIZE * 1);
-	ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 6, TEXTURE_SIZE * 1);
-	ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 7, TEXTURE_SIZE * 1);
-	ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 8, TEXTURE_SIZE * 1);
-	ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 9, TEXTURE_SIZE * 1);
+	// ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 5, TEXTURE_SIZE * 1);
+	// ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 6, TEXTURE_SIZE * 1);
+	// ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 7, TEXTURE_SIZE * 1);
+	// ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 8, TEXTURE_SIZE * 1);
+	// ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 9, TEXTURE_SIZE * 1);
 
+	ft_render_whole_scene(view, map);
+	
 	mlx_loop(view->mlx);
-}
-
-// Test
-void ft_render_texture(t_view *view, t_tdata *texture, int win_x, int win_y)
-{
-	t_data img;
-	int y;
-	int x;
-
-	img.img = mlx_new_image(view->mlx, texture->texture_w, texture->texture_h);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								 &img.endian);
-	y = 0;
-	while (y < texture->texture_h)
-	{
-		x = 0;
-		while (x < texture->texture_w)
-		{
-			my_mlx_pixel_put(&img, x, y, texture->texture_columns[y][x]);
-			x++;
-		}
-		y++;
-	}
-	mlx_put_image_to_window(view->mlx, view->mlx_win, img.img, win_x, win_y);
 }
 
 void my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -92,6 +72,7 @@ int ft_close_window(t_view *view)
 {
 	mlx_destroy_window(view->mlx, view->mlx_win);
 	free(view->title);
+	free(view->plane_data);
 	exit(0);
 }
 
