@@ -1,3 +1,5 @@
+
+
 NAME = cub3d
 FLAGS = -Wall -Wextra -Werror
 SANITIZE = -g3 -fsanitize=address
@@ -89,7 +91,7 @@ fclean: clean
 	@rm -f $(NAME)
 	@echo "##### Removed binary files #####"
 
-re: fclean mac
+re: fclean all
 
 test_validation:
 	@make re > /dev/null 2> /dev/null

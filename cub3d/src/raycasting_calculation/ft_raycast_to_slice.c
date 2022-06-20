@@ -40,5 +40,6 @@ void	ft_raycast_to_slice(t_map *map)
 	ft_memset(slice, 0, sizeof(t_slice));
 	map->slc = slice;
 	ft_fill_slice(map);
+	printf("\x1b[33mColumn: %d; Height: %d; Texture: %s; Wall_x: %d\x1b[0m\n", map->slc->column, map->slc->height, map->slc->texture, map->slc->wall_x);
 	//Render entry point --> Nico
 }

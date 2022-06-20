@@ -30,16 +30,18 @@ void	ft_write_debug_msg(char *msg)
 
 void ft_write_debug_msg_int(char *msg, int int_arg)
 {
-	int fd;
-	char *int_str;
+	int 	fd;
+	char 	*int_str;
+	size_t	bytes;
 
+	bytes = 0;
 	int_str = ft_itoa(int_arg);
 	fd = open("./tests/validation_scripts/debug_output", O_WRONLY | O_APPEND);
 	if (fd != -1)
 	{
-		write(fd, "\n", 1);
-		write(fd, msg, ft_strlen(msg));
-		write(fd, int_str, ft_strlen(int_str));
+		bytes += write(fd, "\n", 1);
+		bytes += write(fd, msg, ft_strlen(msg));
+		bytes += write(fd, int_str, ft_strlen(int_str));
 		free(int_str);
 	}
 	else
