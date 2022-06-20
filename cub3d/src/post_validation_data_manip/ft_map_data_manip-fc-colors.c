@@ -13,38 +13,52 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-void	ft_write_debug_msg(char *msg)
+int	ft_rgb_str_to_int(char *col_str)
 {
-	int		fd;
-	size_t	bytes;
+	int	*rgb;
+	int	int_result;
 
-	fd = open("./tests/validation_scripts/debug_output", O_WRONLY | O_TRUNC);
-	if (fd != -1)
-	{
-		bytes = write(fd, msg, ft_strlen(msg));
-		if (bytes != 0)
-			close(fd);
-	}
-	close(fd);
+	rgb = (int *)malloc(sizeof(int) * 3);
+	ft_populate_rgb_int_arr(col_str, rgb);
+	int_result = ft_rgb_to_int(NO_TRANSPARENCY, rgb[0], rgb[1], rgb[2]);
+	free(rgb);
+	return (int_result);
 }
 
-void ft_write_debug_msg_int(char *msg, int int_arg)
+void	ft_populate_rgb_int_arr(char *col_str, int *rgb)
 {
-	int 	fd;
-	char 	*int_str;
-	size_t	bytes;
+	int	i;
+	int	comma_i;
+	int	rgb_counter;
 
-	bytes = 0;
-	int_str = ft_itoa(int_arg);
-	fd = open("./tests/validation_scripts/debug_output", O_WRONLY | O_APPEND);
-	if (fd != -1)
+	i = 0;
+	comma_i = 0;
+	rgb_counter = 0;
+	while (col_str[i] != '\0')
 	{
-		bytes += write(fd, "\n", 1);
-		bytes += write(fd, msg, ft_strlen(msg));
-		bytes += write(fd, int_str, ft_strlen(int_str));
-		free(int_str);
+		if (col_str[i] == ',')
+		{
+			rgb[rgb_counter] = ft_substr_and_atoi(col_str, comma_i, i);
+			rgb_counter++;
+			comma_i = i + 1;
+		}
+		i++;
 	}
-	else
-		free(int_str);
-	close(fd);
+	rgb[rgb_counter] = ft_substr_and_atoi(col_str, comma_i, i);
+}
+
+int	ft_substr_and_atoi(char *col_str, int start, int end)
+{
+	char	*single_col_str;
+	int		int_col;
+
+	single_col_str = ft_substr(col_str, start, end - start);
+	int_col = ft_atoi(single_col_str);
+	free(single_col_str);
+	return (int_col);
+}
+
+int	ft_rgb_to_int(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
 }

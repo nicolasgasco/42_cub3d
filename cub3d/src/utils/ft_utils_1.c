@@ -40,3 +40,17 @@ void	ft_skip_to_content(char *line, int *iterator)
 		}
 	}
 }
+
+int	ft_str_contains_char(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}

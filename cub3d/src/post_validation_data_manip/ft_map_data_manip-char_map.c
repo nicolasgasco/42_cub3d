@@ -13,38 +13,49 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-void	ft_write_debug_msg(char *msg)
+void	ft_readline_char_map(int fd, char *line, t_tdata *texture)
 {
-	int		fd;
-	size_t	bytes;
+	int	i;
 
-	fd = open("./tests/validation_scripts/debug_output", O_WRONLY | O_TRUNC);
-	if (fd != -1)
+	i = 0;
+	texture->texture_columns = (int **)malloc(sizeof(sizeof(int) * texture->texture_w)
+						* texture->texture_h);
+	while (1)
 	{
-		bytes = write(fd, msg, ft_strlen(msg));
-		if (bytes != 0)
-			close(fd);
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+		if (i < texture->texture_h)
+			ft_fill_int_matrix_line(texture, line, i);
+		i++;
+		free(line);
 	}
-	close(fd);
 }
 
-void ft_write_debug_msg_int(char *msg, int int_arg)
+void	ft_fill_int_matrix_line(t_tdata *texture, char *line, int y)
 {
-	int 	fd;
-	char 	*int_str;
-	size_t	bytes;
+	int				i;
+	struct s_cinfo	*curr;
+	int				*matrix_line;
 
-	bytes = 0;
-	int_str = ft_itoa(int_arg);
-	fd = open("./tests/validation_scripts/debug_output", O_WRONLY | O_APPEND);
-	if (fd != -1)
+	i = 1;
+	matrix_line = (int *)malloc(sizeof(int) * texture->texture_w);
+	while (line[i] != '\0' && line[i] != '\"')
 	{
-		bytes += write(fd, "\n", 1);
-		bytes += write(fd, msg, ft_strlen(msg));
-		bytes += write(fd, int_str, ft_strlen(int_str));
-		free(int_str);
+		curr = texture->col_info_list;
+		while (curr)
+		{
+			if (curr->col_char == line[i])
+			{
+				matrix_line[i - 1] = curr->col_int;
+				break ;
+			}
+			if (curr->next)
+				curr = curr->next;
+			else
+				break ;
+		}
+		i++;
 	}
-	else
-		free(int_str);
-	close(fd);
+	texture->texture_columns[y] = matrix_line;
 }

@@ -13,38 +13,49 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-void	ft_write_debug_msg(char *msg)
+void	ft_readline_asset_sizes(int fd, char *line, t_tdata *texture)
 {
-	int		fd;
-	size_t	bytes;
-
-	fd = open("./tests/validation_scripts/debug_output", O_WRONLY | O_TRUNC);
-	if (fd != -1)
+	while (1)
 	{
-		bytes = write(fd, msg, ft_strlen(msg));
-		if (bytes != 0)
-			close(fd);
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+		if (line[1] >= '1' && line[1] <= '9')
+		{
+			ft_parse_asset_sizes(line, texture);
+			free(line);
+			break ;
+		}
+		free(line);
 	}
-	close(fd);
 }
 
-void ft_write_debug_msg_int(char *msg, int int_arg)
+void	ft_parse_asset_sizes(char *line, t_tdata *texture)
 {
-	int 	fd;
-	char 	*int_str;
-	size_t	bytes;
+	int		i;
+	char	*num_str;
 
-	bytes = 0;
-	int_str = ft_itoa(int_arg);
-	fd = open("./tests/validation_scripts/debug_output", O_WRONLY | O_APPEND);
-	if (fd != -1)
+	i = 1;
+	ft_skip_to_non_space_char(line, &i);
+	num_str = ft_substr(line, i, ft_calc_size_len(line, i));
+	texture->texture_w = ft_atoi(num_str);
+	free(num_str);
+	ft_skip_to_non_space_char(line, &i);
+	num_str = ft_substr(line, i, ft_calc_size_len(line, i));
+	texture->texture_h = ft_atoi(num_str);
+	free(num_str);
+}
+
+int	ft_calc_size_len(char *line, int iterator)
+{
+	int	i;
+
+	i = iterator;
+	while (line[i] != '\0')
 	{
-		bytes += write(fd, "\n", 1);
-		bytes += write(fd, msg, ft_strlen(msg));
-		bytes += write(fd, int_str, ft_strlen(int_str));
-		free(int_str);
+		if (line[i] <= '0' || line[i] >= '9')
+			return (i);
+		i++;
 	}
-	else
-		free(int_str);
-	close(fd);
+	return (i);
 }
