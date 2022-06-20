@@ -2,8 +2,8 @@ NAME = cub3d
 FLAGS = -Wall -Wextra -Werror
 SANITIZE = -g3 -fsanitize=address
 VALGRIND = -g -Og -std=gnu99
-INC = -I%.h -I$(LIB_DIR)%.h
-MINILIB_LINUX= -Lmlx -lmlx_Linux -lXext -lX11 -lm -lz
+INC = -I%.h -I$(LIB_DIR)%.h -I/usr/include -Imlx_linux -O3
+MINILIB_LINUX= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 MINILIB_MAC = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 SRC_NAME =	cub3d.c\
@@ -46,7 +46,7 @@ WIN_DIR = render_window/
 UTL_DIR = utils/
 OBJ_DIR = ./obj/
 MLX_DIR = ./mlx/
-MLX_LINUX_DIR = ./minilibx-linux/
+MLX_LINUX_DIR = ./mlx_linux/
 
 all: $(NAME)
 

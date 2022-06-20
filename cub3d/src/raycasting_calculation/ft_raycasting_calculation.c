@@ -46,7 +46,7 @@ void	ft_horizontal_intersection(t_map *map)
 	increment_x = CUBE_SIZE / tan(map->prj->view_angle * (PI / 180));
 	y = floor(map->prj->rc_horizontal->y / CUBE_SIZE);
 	x = floor(map->prj->rc_horizontal->x / CUBE_SIZE);
-	while (map->map_content[y][x] != '1')
+	while (y >= 0 && x >= 0 && y < map->height && x < map->width && map->map_content[y][x] != '1')
 	{
 		map->prj->rc_horizontal->y += increment_y;
 		map->prj->rc_horizontal->x += increment_x;
@@ -73,7 +73,7 @@ void	ft_vertical_intersection(t_map *map)
 	increment_y = CUBE_SIZE * tan(map->prj->view_angle * (PI / 180));
 	y = floor(map->prj->rc_vertical->y / CUBE_SIZE);
 	x = floor(map->prj->rc_vertical->x / CUBE_SIZE);
-	while (map->map_content[y][x] != '1')
+	while (y >= 0 && x >= 0 && y < map->height && x < map->width && map->map_content[y][x] != '1')
 	{
 		map->prj->rc_vertical->y += increment_y;
 		map->prj->rc_vertical->x += increment_x;
