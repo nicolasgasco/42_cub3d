@@ -67,7 +67,7 @@
 # define PROJ_PLANE_WIDTH 1280
 # define PROJ_PLANE_HEIGHT 720
 # define CUBE_SIZE 64
-# define FIELD_OF_VIEW 90.0
+# define FIELD_OF_VIEW 120.0
 
 /*Vector Struct*/
 typedef struct s_vector
@@ -137,6 +137,7 @@ typedef struct s_map
 	int				height;
 	int				width;
 	char			**map_content;
+	t_rdata			*rdata;
 	t_projection	*prj;
 	t_slice			*slc;
 }					t_map;
