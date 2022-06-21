@@ -23,13 +23,13 @@ void    ft_render_column(t_view *view, t_map *map)
     j = 0;
 	while (j < half_h)
 	{
-		my_mlx_pixel_put(view->plane_data, map->slc->column, j, 0x00FF00);
+		my_mlx_pixel_put(view->plane_data, map->slc->column, j, map->rdata->c_col_int);
 		j++;
 	}
 	i = 0;
 	while (i < map->slc->height && j < PROJ_PLANE_HEIGHT)
 	{
-		my_mlx_pixel_put(view->plane_data, map->slc->column, j, 0xFF0000);
+		my_mlx_pixel_put(view->plane_data, map->slc->column, j, 0x22E100);
 		i++;
 		j++;
 	}
@@ -37,7 +37,7 @@ void    ft_render_column(t_view *view, t_map *map)
 		j = half_h; // TBD - Only for debug
 	while (j < PROJ_PLANE_HEIGHT)
 	{
-		my_mlx_pixel_put(view->plane_data, map->slc->column, j, 0x0000FF);
+		my_mlx_pixel_put(view->plane_data, map->slc->column, j, map->rdata->f_col_int);
 		j++;
 	}
 }
