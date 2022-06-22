@@ -66,8 +66,8 @@
 # define PI 3.14159265359
 # define PROJ_PLANE_WIDTH 1280
 # define PROJ_PLANE_HEIGHT 720
-# define CUBE_SIZE 64
-# define FIELD_OF_VIEW 120.0
+# define CUBE_SIZE 128
+# define FIELD_OF_VIEW 60.0
 
 /*Vector Struct*/
 typedef struct s_vector
@@ -293,9 +293,16 @@ void			ft_readline_char_map(int fd, char *line, t_tdata *texture);
 void			ft_fill_int_matrix_line(t_tdata *texture, char *line, int y);
 
 // Test
-void			ft_render_texture(t_view *view, t_tdata *texture, int x, int y);
+void			ft_render_raycasting_column(t_view *view, t_map *map);
+void			ft_render_ceiling(t_view *view, t_map *map, int *y);
+void			ft_render_floor(t_view *view, t_map *map, int *y);
+void			ft_render_scaled_texture(t_view *view, t_map *map, int *y);
+void			ft_render_downscaled_texture(t_view *view, t_map *map, int *y);
+void			ft_render_downscaled_first_half(t_view *view, t_map *map, int *y, int divider);
+void			ft_render_downscaled_second_half(t_view *view, t_map *map, int *y, int divider);
+void			ft_render_texture(t_view *view, t_tdata *texture, int x, int y); // Testing only
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void			ft_render_column(t_view *view, t_map *map);
-void			ft_render_whole_scene(t_view *view, t_map *map);
+void			ft_render_solid_color(t_view *view, t_map *map, int *y); // Testing color
+void			ft_render_game_scene(t_view *view, t_map *map);
 
 #endif

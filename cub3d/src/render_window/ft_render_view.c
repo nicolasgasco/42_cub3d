@@ -49,8 +49,8 @@ void ft_render_view(t_view *view, t_rdata *rdata, t_map *map)
 	// ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 8, TEXTURE_SIZE * 1);
 	// ft_render_texture(view, &rdata->textures[EA_TEXTURE_INDEX], TEXTURE_SIZE * 9, TEXTURE_SIZE * 1);
 
-	ft_render_whole_scene(view, map);
-	
+	ft_render_game_scene(view, map);
+
 	mlx_loop(view->mlx);
 }
 
