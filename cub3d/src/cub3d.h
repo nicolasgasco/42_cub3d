@@ -124,24 +124,6 @@ typedef struct s_rdata
 	t_tdata			*textures;
 }		t_rdata;
 
-/* Struct for map data  */
-typedef struct s_map
-{
-	int				column;
-	char			*no_path;
-	char			*so_path;
-	char			*ea_path;
-	char			*we_path;
-	char			*f_color;
-	char			*c_color;
-	int				height;
-	int				width;
-	char			**map_content;
-	t_rdata			*rdata;
-	t_projection	*prj;
-	t_slice			*slc;
-}					t_map;
-
 /* Struct for rendering pixels */
 typedef struct s_data
 {
@@ -162,6 +144,25 @@ typedef struct s_view
 	int		height;
 	char	*title;
 }			t_view;
+
+/* Struct for map data  */
+typedef struct s_map
+{
+	int				column;
+	char			*no_path;
+	char			*so_path;
+	char			*ea_path;
+	char			*we_path;
+	char			*f_color;
+	char			*c_color;
+	int				height;
+	int				width;
+	char			**map_content;
+	t_rdata			*rdata;
+	t_projection	*prj;
+	t_slice			*slc;
+	t_view			*view;
+}					t_map;
 
 /* Utils */
 // Utils - Common error
@@ -258,8 +259,8 @@ void	ft_validate_walls(t_map *map);
 void	ft_validate_content(t_map *map);
 
 /* Raycasting Calculation */
-void	ft_raycasting_calculation(t_map *map, t_view *view);
-void	ft_raycast_to_slice(t_map *map, t_view *view);
+void	ft_raycasting_calculation(t_map *map);
+void	ft_raycast_to_slice(t_map *map);
 
 /* Render view */
 void	ft_render_view(t_view *view, t_rdata *rdata, t_map *map);
@@ -293,16 +294,16 @@ void			ft_readline_char_map(int fd, char *line, t_tdata *texture);
 void			ft_fill_int_matrix_line(t_tdata *texture, char *line, int y);
 
 // Test
-void			ft_render_raycasting_column(t_view *view, t_map *map);
-void			ft_render_ceiling(t_view *view, t_map *map, int *y);
-void			ft_render_floor(t_view *view, t_map *map, int *y);
-void			ft_render_scaled_texture(t_view *view, t_map *map, int *y);
-void			ft_render_downscaled_texture(t_view *view, t_map *map, int *y);
-void			ft_render_downscaled_first_half(t_view *view, t_map *map, int *y, int divider);
-void			ft_render_downscaled_second_half(t_view *view, t_map *map, int *y, int divider);
+void			ft_render_raycasting_column(t_map *map);
+void			ft_render_ceiling(t_map *map, int *y);
+void			ft_render_floor(t_map *map, int *y);
+void			ft_render_scaled_texture(t_map *map, int *y);
+void			ft_render_downscaled_texture(t_map *map, int *y);
+void			ft_render_downscaled_first_half(t_map *map, int *y, int divider);
+void			ft_render_downscaled_second_half(t_map *map, int *y, int divider);
 void			ft_render_texture(t_view *view, t_tdata *texture, int x, int y); // Testing only
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void			ft_render_solid_color(t_view *view, t_map *map, int *y); // Testing color
+void			ft_render_solid_color(t_map *map, int *y); // Testing color
 void			ft_render_game_scene(t_view *view, t_map *map);
 
 #endif

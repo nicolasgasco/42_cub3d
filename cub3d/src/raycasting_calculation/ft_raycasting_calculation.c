@@ -100,7 +100,7 @@ void	ft_get_ray_angle(t_map *map)
 /*ft_raycasting_calculation initializes the loop to
  * calculate & render the rays or slices.*/
 
-void	ft_raycasting_calculation(t_map *map, t_view *view)
+void	ft_raycasting_calculation(t_map *map)
 {
 	ft_convert_to_cube_position(map);
 	map->column = 0;
@@ -110,12 +110,13 @@ void	ft_raycasting_calculation(t_map *map, t_view *view)
 		ft_horizontal_intersection(map);
 		ft_vertical_intersection(map);
 		ft_calculate_distance(map);
-		ft_raycast_to_slice(map, view);
+		ft_raycast_to_slice(map);
 		printf("Wtr y: %f, wtr x: %f\nDistance: %f\n",
 			map->prj->wall_to_render->y, map->prj->wall_to_render->x,
 			map->prj->distance_to_wall);
 		ft_free_raycast_data(map);
 		map->column++;
 	}
-	mlx_put_image_to_window(view->mlx, view->mlx_win, view->plane_data->img, 0, 0);
+	mlx_put_image_to_window(map->view->mlx, map->view->mlx_win,
+		map->view->plane_data->img, 0, 0);
 }
