@@ -32,7 +32,7 @@ void	ft_fill_slice(t_map *map)
 /*ft_raycast_to_slice will perform calculations to 
  * provide the data per slice for rendering*/
 
-void	ft_raycast_to_slice(t_map *map, t_view *view)
+void	ft_raycast_to_slice(t_map *map)
 {
 	t_slice	*slice;
 
@@ -41,5 +41,5 @@ void	ft_raycast_to_slice(t_map *map, t_view *view)
 	map->slc = slice;
 	ft_fill_slice(map);
 	//Render entry point --> Nico
-	ft_render_raycasting_column(view, map);
+	ft_render_raycasting_column(map);
 }
