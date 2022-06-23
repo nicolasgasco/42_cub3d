@@ -308,5 +308,10 @@ void			ft_render_texture(t_view *view, t_tdata *texture, int x, int y); // Testi
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			ft_render_solid_color(t_map *map, int *y); // Testing color
 void			ft_render_game_scene(t_view *view, t_map *map);
+void			ft_render_upscaled_texture(t_map *map);
+void			ft_render_upscaled_first_half(t_map *map, int divider);
+void			ft_render_upscaled_first_half_pixel_put(t_map *map, int divider, int *i, int *x);
+void			ft_render_upscaled_second_half(t_map *map, int divider);
+void			ft_render_upscaled_second_half_pixel_put(t_map *map, int divider, int *i, int *x);
 
 #endif
