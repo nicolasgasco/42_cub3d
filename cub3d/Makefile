@@ -28,6 +28,7 @@ SRC_NAME =	cub3d.c\
 		render_window/ft_render_scene-texture.c\
 		render_window/ft_render_scene-upscale.c\
 		render_window/ft_render_scene-downscale.c\
+		render_window/ft_render_scene-multiply.c\
 		post_validation_data_manip/ft_map_data_manip.c\
 		post_validation_data_manip/ft_map_data_manip-fc-colors.c\
 		post_validation_data_manip/ft_map_data_manip-asset_sizes.c\

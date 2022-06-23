@@ -313,5 +313,10 @@ void			ft_render_upscaled_first_half(t_map *map, int divider);
 void			ft_render_upscaled_first_half_pixel_put(t_map *map, int divider, int *i, int *x);
 void			ft_render_upscaled_second_half(t_map *map, int divider);
 void			ft_render_upscaled_second_half_pixel_put(t_map *map, int divider, int *i, int *x);
+void			ft_render_multiply_first_half(t_map *map, int divider);
+void			ft_render_multiply_first_half(t_map *map, int divider);
+void			ft_render_multiply_first_half_pixel_put(t_map *map, int divider, int *x, int *i);
+void			ft_render_multiply_second_half(t_map *map, int divider);
+void			ft_render_multiply_second_half_pixel_put(t_map *map, int divider, int *x, int *i);
 
 #endif
