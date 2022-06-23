@@ -23,7 +23,6 @@ void	ft_render_game_scene(t_view *view, t_map *map)
 
 void	ft_render_raycasting_column(t_map *map)
 {
-	int		y;
 	t_data	*plane;
 
 	plane = map->view->plane_data;
@@ -32,11 +31,11 @@ void	ft_render_raycasting_column(t_map *map)
 	printf("\x1b[33mColumn is %d, Height is %d\x1b[0m\n", map->slc->column, map->slc->height); // TBD - Only for debug
 	if (map->slc->height < 0) // TBD - Only for debug
 		map->slc->height = 0; // TBD - Only for debug
-	y = 0;
-	ft_render_ceiling(map, &y);
-	ft_render_scaled_texture(map, &y); // Commented if you want to see raycasting without textures
+	map->y = 0;
+	ft_render_ceiling(map, &map->y);
+	ft_render_scaled_texture(map); // Commented if you want to see raycasting without textures
 	// ft_render_solid_color(map, &y); // Uncommented if you want to see raycasting without textures
-	ft_render_floor(map, &y);
+	ft_render_floor(map, &map->y);
 }
 
 void	ft_render_ceiling(t_map *map, int *y)
@@ -76,28 +75,4 @@ void	ft_render_solid_color(t_map *map, int *y)
 		i += 1;
 		*y += 1;
 	}
-}
-
-/* Used for testing only. Renders one texture in 2d */
-void	ft_render_texture(t_view *view, t_tdata *texture, int win_x, int win_y)
-{
-	t_data	img;
-	int		y;
-	int		x;
-
-	img.img = mlx_new_image(view->mlx, texture->texture_w, texture->texture_h);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-			&img.endian);
-	y = 0;
-	while (y < texture->texture_h)
-	{
-		x = 0;
-		while (x < texture->texture_w)
-		{
-			my_mlx_pixel_put(&img, x, y, texture->texture_columns[y][x]);
-			x++;
-		}
-		y++;
-	}
-	mlx_put_image_to_window(view->mlx, view->mlx_win, img.img, win_x, win_y);
 }

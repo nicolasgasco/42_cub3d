@@ -158,6 +158,7 @@ typedef struct s_map
 	int				height;
 	int				width;
 	char			**map_content;
+	int				y;
 	t_rdata			*rdata;
 	t_projection	*prj;
 	t_slice			*slc;
@@ -297,10 +298,12 @@ void			ft_fill_int_matrix_line(t_tdata *texture, char *line, int y);
 void			ft_render_raycasting_column(t_map *map);
 void			ft_render_ceiling(t_map *map, int *y);
 void			ft_render_floor(t_map *map, int *y);
-void			ft_render_scaled_texture(t_map *map, int *y);
-void			ft_render_downscaled_texture(t_map *map, int *y);
-void			ft_render_downscaled_first_half(t_map *map, int *y, int divider);
-void			ft_render_downscaled_second_half(t_map *map, int *y, int divider);
+void			ft_render_scaled_texture(t_map *map);
+void			ft_render_downscaled_texture(t_map *map);
+void			ft_render_downscaled_first_half(t_map *map, int divider);
+void			ft_render_downscaled_first_half_pixel_put(t_map *map, int divider, int *i, int *x);
+void			ft_render_downscaled_second_half(t_map *map, int divider);
+void			ft_render_downscaled_second_half_pixel_put(t_map *map, int divider, int *i, int *x);
 void			ft_render_texture(t_view *view, t_tdata *texture, int x, int y); // Testing only
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			ft_render_solid_color(t_map *map, int *y); // Testing color
