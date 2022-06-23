@@ -26,6 +26,8 @@ SRC_NAME =	cub3d.c\
 		render_window/ft_render_view.c\
 		render_window/ft_render_scene.c\
 		render_window/ft_render_scene-texture.c\
+		render_window/ft_render_scene-upscale.c\
+		render_window/ft_render_scene-downscale.c\
 		post_validation_data_manip/ft_map_data_manip.c\
 		post_validation_data_manip/ft_map_data_manip-fc-colors.c\
 		post_validation_data_manip/ft_map_data_manip-asset_sizes.c\
@@ -93,7 +95,7 @@ fclean: clean
 	@rm -f $(NAME)
 	@echo "##### Removed binary files #####"
 
-re: fclean all
+re: fclean mac
 
 test_validation:
 	@make re > /dev/null 2> /dev/null
