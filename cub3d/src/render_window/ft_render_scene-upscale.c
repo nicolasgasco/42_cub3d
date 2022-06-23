@@ -17,11 +17,22 @@ void	ft_render_upscaled_texture(t_map *map)
 {
 	int	divider;
 
-	divider = TEXTURE_SIZE / (map->slc->height - TEXTURE_SIZE);
-	if (divider == 1)
-		divider++;
-	ft_render_upscaled_first_half(map, divider);
-	ft_render_upscaled_second_half(map, divider);
+	if ((map->slc->height / TEXTURE_SIZE) > 0)
+	{
+		divider = (map->slc->height / TEXTURE_SIZE) + 1;
+		printf("Multiplier\n");
+		ft_render_multiply_first_half(map, divider);
+		ft_render_multiply_second_half(map, divider);
+		// ft_render_solid_color(map, &map->y);
+	}
+	else
+	{
+		divider = TEXTURE_SIZE / (map->slc->height - TEXTURE_SIZE);
+		if (divider == 1)
+			divider++;
+		ft_render_upscaled_first_half(map, divider);
+		ft_render_upscaled_second_half(map, divider);
+	}
 }
 
 void	ft_render_upscaled_first_half(t_map *map, int divider)

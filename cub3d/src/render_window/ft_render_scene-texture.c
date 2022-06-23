@@ -15,8 +15,11 @@
 
 void	ft_render_scaled_texture(t_map *map)
 {
-	if (map->slc->height <= 0) // TBD - Only for debug
+	if (map->slc->height <= 0 || map->slc->height > PROJ_PLANE_HEIGHT) // TBD - Only for debug
+	{
+		printf("Problem with height\n");
 		return ; // TBD - Only for debug
+	}
 	if (map->slc->height > TEXTURE_SIZE)
 	{
 		printf("Texture must be upscaled\n"); // TBD - Only for debug
