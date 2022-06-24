@@ -17,7 +17,7 @@ void	ft_render_upscaled_texture(t_map *map)
 {
 	int	divider;
 
-	if ((map->slc->height / TEXTURE_SIZE) > 0)
+	if ((map->slc->height / TEXTURE_SIZE) > 1)
 	{
 		divider = (map->slc->height / TEXTURE_SIZE) + 1;
 		printf("Multiplier\n");
