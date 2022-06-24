@@ -23,7 +23,7 @@ void	ft_render_upscaled_texture(t_map *map)
 		printf("Multiplier\n");
 		ft_render_multiply_first_half(map, divider);
 		ft_render_multiply_second_half(map, divider);
-		// ft_render_solid_color(map, &map->y);
+		// ft_render_solid_color(map);
 	}
 	else
 	{

@@ -34,7 +34,7 @@ void	ft_render_raycasting_column(t_map *map)
 	map->y = 0;
 	ft_render_ceiling(map, &map->y);
 	ft_render_scaled_texture(map); // Commented if you want to see raycasting without textures
-	// ft_render_solid_color(map, &y); // Uncommented if you want to see raycasting without textures
+	// ft_render_solid_color(map); // Uncommented if you want to see raycasting without textures
 	ft_render_floor(map, &map->y);
 }
 
@@ -64,15 +64,15 @@ void	ft_render_floor(t_map *map, int *y)
 }
 
 /* Use this if you want to see raycasting without textures */
-void	ft_render_solid_color(t_map *map, int *y)
+void	ft_render_solid_color(t_map *map)
 {
 	int	i;
 
 	i = 0;
-	while (i < map->slc->height && *y < PROJ_PLANE_HEIGHT)
+	while (i < map->slc->height && map->y < PROJ_PLANE_HEIGHT)
 	{
-		my_mlx_pixel_put(map->view->plane_data, map->slc->column, *y, 0x22E100);
+		my_mlx_pixel_put(map->view->plane_data, map->slc->column, map->y, 0x22E100);
 		i += 1;
-		*y += 1;
+		map->y += 1;
 	}
 }
