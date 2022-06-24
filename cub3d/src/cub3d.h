@@ -186,7 +186,7 @@ char	*ft_strtrim_no_leaks(char *s1, const char *set);
 int		ft_str_is_numeric(char *str);
 void	ft_skip_to_content(char *line, int *iterator);
 int		ft_str_contains_char(char *str, char c);
-int		ft_str_contains_str(char *s1, char* s2);
+int		ft_str_is_not_hex(char *str, int start);
 int		ft_str_contains_spaced_char(char *str, char c);
 // Utils - Get next line
 char	*get_next_line(int fd);
