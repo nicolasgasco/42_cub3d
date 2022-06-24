@@ -54,3 +54,40 @@ int	ft_str_contains_char(char *str, char c)
 	}
 	return (0);
 }
+
+int	ft_str_contains_str(char *s1, char *s2)
+{
+	int		len;
+	int		i;
+	char	*substr;
+
+	i = 0;
+	len = ft_strlen(s2);
+	while (s1[i + len] != '\0')
+	{
+		substr = ft_substr(s1, i, len);
+		if (ft_strncmp(substr, s2, len) == 0)
+		{
+			free(substr);
+			return (1);
+		}
+		free(substr);
+		i++;
+	}
+	return (0);
+}
+
+/* Search for a char surronded by x number of spaces */
+int	ft_str_contains_spaced_char(char *str, char c)
+{
+	int	i;
+
+	i = 1;
+	while (str[i] != '\0')
+	{
+		if (str[i] == c && ft_isspace(str[i - 1]) && ft_isspace(str[i + 1]))
+			return (1);
+		i++;
+	}
+	return (0);
+}

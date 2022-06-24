@@ -20,7 +20,7 @@ void	ft_readline_color_codes(int fd, char *line, t_tdata *texture)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		if (ft_str_contains_char(line, '#'))
+		if (ft_str_contains_spaced_char(line, 'c'))
 		{
 			ft_parse_char_col(line, texture);
 			free(line);
@@ -33,7 +33,7 @@ void	ft_readline_color_codes(int fd, char *line, t_tdata *texture)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		if (!ft_str_contains_char(line, '#'))
+		if (!ft_str_contains_spaced_char(line, 'c'))
 		{
 			free(line);
 			break ;
@@ -81,6 +81,11 @@ struct s_cinfo	*ft_create_col_info_struct(char *line)
 			while (line[i] != ' ')
 				i++;
 			ft_skip_to_non_space_char(line, &i);
+			if (line[i] != '#' || !ft_isalpha(line[i + 1]))
+			{
+				ft_putendl_fd("Color not numeric", STDERR_FILENO);
+				exit(9999);
+			}
 			col_hex = ft_substr(line, i + 1, 6);
 			break ;
 		}
