@@ -13,44 +13,85 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-void	ft_multiplied_texture_loop(t_map *map, int divider)
+void	ft_multiplied_texture_loop(t_map *map, int multiplier)
 {
 	int	x;
 	int	i;
-	int	limit;
+	int	*dividers;
 
 	x = 0;
 	i = 0;
-	limit = map->slc->height / 4;
-	while (i < limit)
-		ft_multiplied_texture_loop_pixel_put(map, divider, &x, &i);
-	x = (TEXTURE_SIZE / 4);
-	limit = map->slc->height / 2;
-	while (i < limit)
-		ft_multiplied_texture_loop_pixel_put(map, divider, &x, &i);
-	x = (TEXTURE_SIZE / 2);
-	limit = map->slc->height / 4 * 3;
-	while (i < limit)
-		ft_multiplied_texture_loop_pixel_put(map, divider, &x, &i);
-	x = (TEXTURE_SIZE / 4) * 3;
-	limit = map->slc->height;
-	while (i < limit)
-		ft_multiplied_texture_loop_pixel_put(map, divider, &x, &i);
+	dividers = (int *)malloc(sizeof(int) * 50);
+	ft_memset(dividers, 0, sizeof(dividers));
+	dividers[0] = multiplier;
+	ft_populate_dividers_array(dividers, multiplier, map->slc->height);
+	while (i < map->slc->height && map->y < (PROJ_PLANE_HEIGHT - 1))
+		ft_multiplied_texture_loop_pixel_put(map, dividers, &x, &i);
 }
 
-void	ft_multiplied_texture_loop_pixel_put(t_map *map, int divider,
-	int *x, int *i)
+void	ft_populate_dividers_array(int *dividers, int multiplier, int height)
+{
+	int	i;
+	int	already_rendered;
+
+	i = 1;
+	already_rendered = (height - TEXTURE_SIZE * multiplier);
+	while (1)
+	{
+		dividers[i] = TEXTURE_SIZE / (already_rendered) + 1;
+		if (dividers[i] <= 0 || dividers[i] >= TEXTURE_SIZE)
+		{
+			dividers[i] = 15;
+			dividers[i + 1] = 0;
+			break ;
+		}
+		already_rendered -= TEXTURE_SIZE / dividers[i];
+		i++;
+	}
+}
+
+void	ft_multiplied_texture_loop_pixel_put(t_map *map, int *dividers,
+			int *x, int *i)
+{
+	ft_render_multiplied_texture(map, dividers, x, i);
+	ft_render_remaining_multiplied_pixels(map, dividers, x, i);
+	if (*x < (TEXTURE_SIZE - 2))
+		*x += 1;
+}
+
+void	ft_render_multiplied_texture(t_map *map, int *dividers,
+			int *x, int *i)
 {
 	int	j;
 
 	j = 0;
-	while (j < divider)
+	while (j < dividers[0] && map->y < PROJ_PLANE_HEIGHT)
 	{
-		my_mlx_pixel_put(map->view->plane_data, map->slc->column, map->y,
-			map->rdata->textures[NO_TEXTURE_INDEX].texture_columns[*x][0]);
-		*i += 1;
+		if (map->y < PROJ_PLANE_HEIGHT) // TBD
+			my_mlx_pixel_put(map->view->plane_data, map->slc->column, map->y,
+				map->rdata->textures[NO_TEXTURE_INDEX].texture_columns[*x][0]);
 		map->y += 1;
+		*i += 1;
 		j++;
 	}
-	*x += 1;
+}
+
+void	ft_render_remaining_multiplied_pixels(t_map *map, int *dividers,
+			int *x, int *i)
+{
+	int	j;
+
+	j = 1;
+	while (dividers[j] != 0)
+	{
+		if ((((*x + 1) % dividers[j]) == 0))
+		{
+			if (map->y < PROJ_PLANE_HEIGHT) // TBD
+				my_mlx_pixel_put(map->view->plane_data, map->slc->column, map->y,
+					map->rdata->textures[NO_TEXTURE_INDEX].texture_columns[*x][0]);
+			map->y += 1;
+			*i += 1;
+		}
+		j++;
+	}
 }
