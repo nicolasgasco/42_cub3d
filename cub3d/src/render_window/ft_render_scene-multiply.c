@@ -21,21 +21,28 @@ void	ft_multiplied_texture_loop(t_map *map, int multiplier)
 
 	x = 0;
 	i = 0;
-	dividers = (int *)malloc(sizeof(int) * 50);
-	ft_memset(dividers, 0, sizeof(dividers));
-	dividers[0] = multiplier;
-	ft_populate_dividers_array(dividers, multiplier, map->slc->height);
+	dividers = ft_populate_dividers_multiplier(multiplier, map->slc->height);
 	while (i < map->slc->height && map->y < (PROJ_PLANE_HEIGHT - 1))
-		ft_multiplied_texture_loop_pixel_put(map, dividers, &x, &i);
+	{
+		ft_render_multiplied_pixels(map, dividers, &x, &i);
+		ft_render_remaining_multiplied_pixels(map, dividers, &x, &i);
+		if (x < (TEXTURE_SIZE - 2))
+			x += 1;
+	}
+	free(dividers);
 }
 
-void	ft_populate_dividers_array(int *dividers, int multiplier, int height)
+int	*ft_populate_dividers_multiplier(int multiplier, int height)
 {
 	int	i;
 	int	already_rendered;
+	int	*dividers;
 
-	i = 1;
+	dividers = (int *)malloc(sizeof(int) * 50);
+	ft_memset(dividers, 0, sizeof(dividers));
 	already_rendered = (height - TEXTURE_SIZE * multiplier);
+	dividers[0] = multiplier;
+	i = 1;
 	while (1)
 	{
 		dividers[i] = TEXTURE_SIZE / (already_rendered) + 1;
@@ -48,18 +55,10 @@ void	ft_populate_dividers_array(int *dividers, int multiplier, int height)
 		already_rendered -= TEXTURE_SIZE / dividers[i];
 		i++;
 	}
+	return (dividers);
 }
 
-void	ft_multiplied_texture_loop_pixel_put(t_map *map, int *dividers,
-			int *x, int *i)
-{
-	ft_render_multiplied_texture(map, dividers, x, i);
-	ft_render_remaining_multiplied_pixels(map, dividers, x, i);
-	if (*x < (TEXTURE_SIZE - 2))
-		*x += 1;
-}
-
-void	ft_render_multiplied_texture(t_map *map, int *dividers,
+void	ft_render_multiplied_pixels(t_map *map, int *dividers,
 			int *x, int *i)
 {
 	int	j;
