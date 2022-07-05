@@ -316,7 +316,9 @@ void			ft_downscaled_texture_loop_pixel_put(t_map *map, int divider, int *i, int
 void			ft_render_upscaled_texture(t_map *map);
 // Upscale (< x2)
 void			ft_upscaled_texture_loop(t_map *map, int divider);
-void			ft_upscaled_texture_loop_pixel_put(t_map *map, int divider, int rest, int rest2, int *i, int *x);
+int				*ft_populate_dividers_upscale(int divider, int height);
+void			ft_render_standard_pixels(t_map *map, int *x, int *i);
+void			ft_render_upscaled_pixels(t_map *map, int *dividers, int *x, int *i);
 // Multiply (> x2)
 void			ft_multiplied_texture_loop(t_map *map, int divider);
 int				*ft_populate_dividers_multiplier(int multiplier, int height);
