@@ -305,11 +305,13 @@ void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			ft_render_solid_color(t_map *map); // Testing color
 void			ft_render_game_scene(t_view *view, t_map *map);
 
+/* render actual-size texture */
+void			ft_render_actual_size_texture(t_map *map);
 /* scaling textures */
 void			ft_render_scaled_texture(t_map *map);
 // Scale downwards
 void			ft_render_downscaled_texture(t_map *map);
-// Downscale
+// Scale downwards - Downscale
 void			ft_downscaled_texture_loop(t_map *map, int divider);
 void			ft_downscaled_texture_loop_pixel_put(t_map *map, int divider, int *i, int *x);
 // Scale upwards
