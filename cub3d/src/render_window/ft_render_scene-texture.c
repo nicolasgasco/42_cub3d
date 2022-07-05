@@ -15,20 +15,39 @@
 
 void	ft_render_scaled_texture(t_map *map)
 {
-	if (map->slc->height <= 0 || map->slc->height > PROJ_PLANE_HEIGHT) // TBD - Only for debug
+	printf("map->slc->height is %d\n", map->slc->height);
+	if (map->slc->height <= 0) // TBD - Only for debug
 	{
 		printf("Problem with height\n");
-		return ; // TBD - Only for debug
 	}
 	if (map->slc->height > TEXTURE_SIZE)
 	{
-		printf("Texture must be upscaled\n"); // TBD - Only for debug
 		ft_render_upscaled_texture(map);
 	}
 	else if (map->slc->height < TEXTURE_SIZE)
 	{
 		printf("Texture must be downscaled\n"); // TBD - Only for debug
 		ft_render_downscaled_texture(map);
+	}
+	else
+		ft_render_actual_size_texture(map);
+}
+
+void	ft_render_actual_size_texture(t_map *map)
+{
+	int	x;
+	int	i;
+
+	x = 0;
+	i = 0;
+	while (i < map->slc->height)
+	{
+		my_mlx_pixel_put(map->view->plane_data, map->slc->column, map->y,
+			map->rdata->textures[NO_TEXTURE_INDEX].texture_columns[x][0]);
+		map->y += 1;
+		i += 1;
+		if (x < (TEXTURE_SIZE - 1)) // TBD - if possible
+			x += 1;
 	}
 }
 
