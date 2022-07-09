@@ -312,8 +312,9 @@ void			ft_render_scaled_texture(t_map *map);
 // Scale downwards
 void			ft_render_downscaled_texture(t_map *map);
 // Scale downwards - Downscale
-void			ft_downscaled_texture_loop(t_map *map, int divider);
+void			ft_downscaled_texture_loop(t_map *map, int *dividers);
 void			ft_downscaled_texture_loop_pixel_put(t_map *map, int divider, int *i, int *x);
+int				module_not_zero_for_all(int *dividers, int x);
 // Scale upwards
 void			ft_render_upscaled_texture(t_map *map);
 // Upscale (< x2)
