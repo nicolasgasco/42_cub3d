@@ -1,48 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_raycast_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jsolinis <jsolinis@student.42urduliz.com>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/04 17:32:42 by jsolinis          #+#    #+#             */
+/*   Updated: 2022/07/07 19:19:18 by jsolinis         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
-#include "../../Libft/libft.h"
 #include <math.h>
 
-/*ft_set_coords_angle_direction_horizontal sets the starting values 
- * for rc->horizontal y & x based on the angle orientation*/
+/*ft_is_facing_down returns 1 if the angle is facing down or 0 if 
+ * the angle is facing up*/
 
-void	ft_set_coords_angle_direction_horizontal(t_map *map)
+int	ft_is_facing_down(double angle)
 {
-	t_vector	*horizontal;
-
-	horizontal = malloc(sizeof(t_vector));
-	ft_memset(horizontal, 0, sizeof(t_vector));
-	map->prj->rc_horizontal = horizontal;
-	if (map->prj->view_angle > 0
-		&& map->prj->view_angle < 180)
-		map->prj->rc_horizontal->y = floor(map->prj->player->y
-				/ CUBE_SIZE) * (CUBE_SIZE) - 1;
+	if (angle < 0 && angle > 180)
+		return (1);
 	else
-		map->prj->rc_horizontal->y = floor(map->prj->player->y
-				/ CUBE_SIZE) * (CUBE_SIZE) + CUBE_SIZE;
-	map->prj->rc_horizontal->x = map->prj->player->x
-		+ (map->prj->player->y - map->prj->rc_horizontal->y)
-		/ tan(map->prj->view_angle * (PI / 180));
+		return (0);
 }
 
-/*ft_set_coords_angle_direction_vertical sets the starting values 
- * for rc->vertical y & x based on the angle orientation*/
+/*ft_is_facing_right returns 1 if the angle is facing right or 0 if 
+ * the angle is facing left*/
 
-void	ft_set_coords_angle_direction_vertical(t_map *map)
+int	ft_is_facing_right(double angle)
 {
-	t_vector	*vertical;
-
-	vertical = malloc(sizeof(t_vector));
-	ft_memset(vertical, 0, sizeof(t_vector));
-	map->prj->rc_vertical = vertical;
-	if (map->prj->view_angle > 270 && map->prj->view_angle < 90)
-		map->prj->rc_vertical->x = floor(map->prj->player->x
-				/ CUBE_SIZE) * (CUBE_SIZE) + CUBE_SIZE;
+	if (angle < 270 || angle > 90)
+		return (1);
 	else
-		map->prj->rc_vertical->x = floor(map->prj->player->x
-				/ CUBE_SIZE) * (CUBE_SIZE) - 1;
-	map->prj->rc_vertical->y = map->prj->player->y
-		+ (map->prj->player->x - map->prj->rc_vertical->x)
-		/ tan(map->prj->view_angle * (PI / 180));
+		return (0);
 }
 
 /*ft_convert_to_cube_position sets the player position in the 

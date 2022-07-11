@@ -6,7 +6,7 @@
 /*   By: jsolinis <jsolinis@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 23:29:00 by jsolinis          #+#    #+#             */
-/*   Updated: 2022/05/18 23:30:22 by jsolinis         ###   ########.fr       */
+/*   Updated: 2022/07/10 19:46:53 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,9 @@ void	ft_set_coords_angle_direction_horizontal(t_map *map);
 void	ft_set_coords_angle_direction_vertical(t_map *map);
 void	ft_set_wall_to_render(t_map *map, double dh, double dv);
 double	ft_calculate_angle(t_map *map);
+int		ft_is_facing_down(double angle);
+int		ft_is_facing_right(double angle);
+double	ft_tangent_sign_per_quadrant(double angle, double tangent);
 
 /* Scene desc validation errors */
 void	ft_invalid_extension_error_exit(void);
