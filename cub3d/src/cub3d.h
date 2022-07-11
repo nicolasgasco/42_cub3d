@@ -17,14 +17,20 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <math.h>
+# include <limits.h>
 # include "../mlx/mlx.h"
 
 /* Game params */
 # define GAME_TITLE "Cub3d - Brawl Stars"
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
-# define PLAY_WIDTH	900
-# define PLAY_HEIGHT 460
+# define TEXTURE_SIZE 128
+# define NUM_TEXTURES 4
+# define NO_TEXTURE_INDEX 0
+# define EA_TEXTURE_INDEX 1
+# define SO_TEXTURE_INDEX 2
+# define WE_TEXTURE_INDEX 3
 
 /* Events */
 # define ON_DESTROY 17
@@ -52,10 +58,15 @@
 # define D_KEY_MAC 2
 # define S_KEY_MAC 1
 
+// Conversion
+# define UPPERCASE_DIGIT_DIFF 55
+# define LOWERCASE_DIGIT_DIFF 87
+# define NO_TRANSPARENCY 0
+
 # define PI 3.14159265359
-# define PROJ_PLANE_WIDTH 320
-# define PROJ_PLANE_HEIGHT 200
-# define CUBE_SIZE 64
+# define PROJ_PLANE_WIDTH 1280
+# define PROJ_PLANE_HEIGHT 720
+# define CUBE_SIZE 128
 # define FIELD_OF_VIEW 60.0
 
 /*Vector Struct*/
@@ -88,6 +99,52 @@ typedef struct s_slice
 	int		wall_x;
 }			t_slice;
 
+/* Linked list used to manipulate texture files */
+struct s_cinfo
+{
+	char			col_char;
+	int				col_int;
+	struct s_cinfo	*next;
+};
+
+/* Struct with info on single texture */
+typedef struct s_tdata
+{
+	int				texture_w;
+	int				texture_h;
+	int				**texture_columns;
+	struct s_cinfo	*col_info_list;
+}		t_tdata;
+
+/* Struct with info necessary to render textures */
+typedef struct s_rdata
+{
+	int				c_col_int;
+	int				f_col_int;
+	t_tdata			*textures;
+}		t_rdata;
+
+/* Struct for rendering pixels */
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_data;
+
+/* Struct for mlx */
+typedef struct s_view
+{
+	void	*mlx;
+	void	*mlx_win;
+	t_data	*plane_data;
+	int		width;
+	int		height;
+	char	*title;
+}			t_view;
+
 /* Struct for map data  */
 typedef struct s_map
 {
@@ -101,19 +158,12 @@ typedef struct s_map
 	int				height;
 	int				width;
 	char			**map_content;
+	int				y;
+	t_rdata			*rdata;
 	t_projection	*prj;
 	t_slice			*slc;
+	t_view			*view;
 }					t_map;
-
-/* Struct for mlx */
-typedef struct s_view
-{
-	void	*mlx;
-	void	*mlx_win;
-	int		width;
-	int		height;
-	char	*title;
-}			t_view;
 
 /* Utils */
 // Utils - Common error
@@ -121,6 +171,7 @@ void	ft_malloc_error(void);
 void	ft_open_file_error(void);
 // Utils - Debug
 void	ft_write_debug_msg(char *msg);
+void	ft_write_debug_msg_int(char *msg, int int_arg);
 // Utils - Free
 void	ft_free_allocated_map_data(t_map *map);
 void	ft_print_error_exit(t_map *map, char *msg, int err);
@@ -134,6 +185,9 @@ char	*ft_substr_no_leaks(char *s, unsigned int start, size_t len);
 char	*ft_strtrim_no_leaks(char *s1, const char *set);
 int		ft_str_is_numeric(char *str);
 void	ft_skip_to_content(char *line, int *iterator);
+int		ft_str_contains_char(char *str, char c);
+int		ft_str_is_not_hex(char *str, int start);
+int		ft_str_contains_spaced_char(char *str, char c);
 // Utils - Get next line
 char	*get_next_line(int fd);
 // Utils - Map content
@@ -202,6 +256,7 @@ void	ft_completeness_check_colors(t_map *map);
 void	ft_completeness_check_o_paths(t_map *map);
 void	ft_check_o_paths_duplicates(t_map *map);
 void	ft_find_o_paths_duplicates(char **path_arr, t_map *map);
+void	ft_free_validation_path_arr(char **path_arr);
 // Map content
 void	ft_map_content_validation(char *file_path, t_map *map);
 void	ft_check_characters(t_map *map);
@@ -214,9 +269,66 @@ void	ft_raycasting_calculation(t_map *map);
 void	ft_raycast_to_slice(t_map *map);
 
 /* Render view */
-void	ft_render_view(t_view *view);
+void	ft_render_view(t_view *view, t_rdata *rdata, t_map *map);
 void	ft_view_events(t_view *view);
 int		ft_close_window(t_view *view);
 int		ft_keyboard_events(int key, t_view *view);
+
+/* Post validation data manip */
+void			ft_validate_texture_files(t_map *map, t_rdata *rdata);
+int				ft_xpm_file_is_valid(char *path, void *mlx);
+void			ft_post_validation_data_manip(t_map *map, t_rdata *rdata);
+void			ft_free_allocated_render_data(t_rdata *rdata);
+t_tdata			ft_parse_texture_file(char *texture_path);
+// Post validation data manip - Floor/Ceiling Colors
+int				ft_rgb_str_to_int(char *col_str);
+void			ft_populate_rgb_int_arr(char *col_str, int *rgb);
+int				ft_substr_and_atoi(char *col_str, int start, int end);
+int				ft_rgb_to_int(int t, int r, int g, int b);
+// Post validation data manip - Color codes
+void			ft_readline_color_codes(int fd, char *line, t_tdata *texture);
+void			ft_parse_char_col(char *line, t_tdata *rdata);
+struct s_cinfo	*ft_create_col_info_struct(char *line);
+int				ft_hex_str_to_int(char *hex);
+struct s_cinfo	*ft_populate_col_info(char col_char, char *col_hex);
+// Post validation data manip - Asset sizes
+void			ft_readline_asset_sizes(int fd, char *line, t_tdata *texture);
+void			ft_parse_asset_sizes(char *line, t_tdata *texture);
+int				ft_calc_size_len(char *line, int i);
+// Post validation data manip - Char map
+void			ft_readline_char_map(int fd, char *line, t_tdata *texture);
+void			ft_fill_int_matrix_line(t_tdata *texture, char *line, int y);
+
+/* Rendering textures */
+void			ft_render_raycasting_column(t_map *map);
+void			ft_render_ceiling(t_map *map, int *y);
+void			ft_render_floor(t_map *map, int *y);
+void			ft_render_texture(t_view *view, t_tdata *texture, int x, int y); // Testing only
+void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void			ft_render_solid_color(t_map *map); // Testing color
+void			ft_render_game_scene(t_view *view, t_map *map);
+
+/* render actual-size texture */
+void			ft_render_actual_size_texture(t_map *map);
+/* scaling textures */
+void			ft_render_scaled_texture(t_map *map);
+// Scale downwards
+void			ft_render_downscaled_texture(t_map *map);
+// Scale downwards - Downscale
+void			ft_downscaled_texture_loop(t_map *map, int *dividers);
+void			ft_downscaled_texture_loop_pixel_put(t_map *map, int divider, int *i, int *x);
+int				module_not_zero_for_all(int *dividers, int x);
+// Scale upwards
+void			ft_render_upscaled_texture(t_map *map);
+// Upscale (< x2)
+void			ft_upscaled_texture_loop(t_map *map, int divider);
+int				*ft_populate_dividers_upscale(int divider, int height);
+void			ft_render_standard_pixels(t_map *map, int *x, int *i);
+void			ft_render_upscaled_pixels(t_map *map, int *dividers, int *x, int *i);
+// Multiply (> x2)
+void			ft_multiplied_texture_loop(t_map *map, int divider);
+int				*ft_populate_dividers_multiplier(int multiplier, int height);
+void			ft_render_multiplied_pixels(t_map *map, int *dividers, int *x, int *i);
+void			ft_render_remaining_multiplied_pixels(t_map *map, int *dividers, int *x, int *i);
 
 #endif

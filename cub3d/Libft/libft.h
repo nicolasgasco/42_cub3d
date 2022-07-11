@@ -28,6 +28,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *s, int c);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
+int     ft_isalpha(int c);
 char	*ft_strdup(const char *s1);
 void	*ft_memset(void *l, int c, size_t len);
 char	*ft_itoa(int n);

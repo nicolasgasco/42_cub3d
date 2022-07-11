@@ -55,4 +55,5 @@ void	ft_raycast_to_slice(t_map *map)
 	map->slc = slice;
 	ft_fill_slice(map);
 	//Render entry point --> Nico
+	ft_render_raycasting_column(map);
 }

@@ -138,4 +138,6 @@ void	ft_raycasting_calculation(t_map *map)
 		ft_free_raycast_data(map);
 		map->column++;
 	}
+	mlx_put_image_to_window(map->view->mlx, map->view->mlx_win,
+		map->view->plane_data->img, 0, 0);
 }

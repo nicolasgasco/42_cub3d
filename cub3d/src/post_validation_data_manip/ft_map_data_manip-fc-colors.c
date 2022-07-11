@@ -13,78 +13,52 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-int	ft_str_is_numeric(char *str)
+int	ft_rgb_str_to_int(char *col_str)
+{
+	int	*rgb;
+	int	int_result;
+
+	rgb = (int *)malloc(sizeof(int) * 3);
+	ft_populate_rgb_int_arr(col_str, rgb);
+	int_result = ft_rgb_to_int(NO_TRANSPARENCY, rgb[0], rgb[1], rgb[2]);
+	free(rgb);
+	return (int_result);
+}
+
+void	ft_populate_rgb_int_arr(char *col_str, int *rgb)
 {
 	int	i;
+	int	comma_i;
+	int	rgb_counter;
 
 	i = 0;
-	while (str[i] != '\0')
+	comma_i = 0;
+	rgb_counter = 0;
+	while (col_str[i] != '\0')
 	{
-		if (ft_isdigit(str[i]) == 0)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	ft_skip_to_content(char *line, int *iterator)
-{
-	if (line)
-	{
-		while (line[*iterator])
+		if (col_str[i] == ',')
 		{
-			if (ft_isspace_no_endl(line[*iterator]))
-				*iterator += 1;
-			else
-				return ;
-		}
-	}
-}
-
-int	ft_str_contains_char(char *str, char c)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-/* Search for a char surronded by x number of spaces */
-int	ft_str_contains_spaced_char(char *str, char c)
-{
-	int	i;
-
-	i = 1;
-	while (str[i] != '\0')
-	{
-		if (str[i] == c && ft_isspace(str[i - 1]) && ft_isspace(str[i + 1]))
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	ft_str_is_not_hex(char *str, int start)
-{
-	int	i;
-
-	i = start;
-	while (str[i] != '\0' && i < 6)
-	{
-		if (ft_isalpha(str[i]))
-		{
-			if (str[i] < 'A' && str[i] > 'F')
-				return (1);
-			else if (str[i] < 'a' && str[i] > 'f')
-				return (1);
+			rgb[rgb_counter] = ft_substr_and_atoi(col_str, comma_i, i);
+			rgb_counter++;
+			comma_i = i + 1;
 		}
 		i++;
 	}
-	return (0);
+	rgb[rgb_counter] = ft_substr_and_atoi(col_str, comma_i, i);
+}
+
+int	ft_substr_and_atoi(char *col_str, int start, int end)
+{
+	char	*single_col_str;
+	int		int_col;
+
+	single_col_str = ft_substr(col_str, start, end - start);
+	int_col = ft_atoi(single_col_str);
+	free(single_col_str);
+	return (int_col);
+}
+
+int	ft_rgb_to_int(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
 }
