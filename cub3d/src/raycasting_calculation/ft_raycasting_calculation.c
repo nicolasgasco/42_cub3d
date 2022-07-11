@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_raycasting_calculation.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jsolinis <jsolinis@student.42urduliz.com>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/10 19:56:57 by jsolinis          #+#    #+#             */
+/*   Updated: 2022/07/10 20:06:21 by jsolinis         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 #include <math.h>
 
@@ -9,23 +21,24 @@ void	ft_calculate_distance(t_map *map)
 	double		distance_horizontal;
 	double		distance_vertical;
 
-	printf("-->HORIZONTAL<--Px: %f, rchx: %f, view_angle: %f\n",
-		map->prj->player->x, map->prj->rc_horizontal->x, map->prj->view_angle);
-	distance_horizontal = fabs(map->prj->player->x - map->prj->rc_horizontal->x)
-		/ cos(map->prj->view_angle * (PI / 180));
-	if (distance_horizontal <= 0)
-		distance_horizontal = fabs(map->prj->player->y
-				- map->prj->rc_horizontal->y)
-			/ sin(map->prj->view_angle * (PI / 180));
-	printf("-->VERTICAL>--Px: %f, rcvx: %f, view_angle: %f\n",
-		map->prj->player->x, map->prj->rc_horizontal->x, map->prj->view_angle);
-	distance_vertical = fabs(map->prj->player->x - map->prj->rc_vertical->y)
-		/ cos(map->prj->view_angle * (PI / 180));
-	if (distance_vertical <= 0)
-		distance_vertical = fabs(map->prj->player->y
-				- map->prj->rc_horizontal->y)
-			/ sin(map->prj->view_angle * (PI / 180));
+	distance_horizontal = sqrt((map->prj->rc_horizontal->x
+				- map->prj->player->x)
+			* (map->prj->rc_horizontal->x - map->prj->player->x)
+			+ (map->prj->rc_horizontal->y - map->prj->player->y)
+			* (map->prj->rc_horizontal->y - map->prj->player->y));
+	printf("%f, %f\n", map->prj->rc_horizontal->y, map->prj->rc_horizontal->x);
+	printf("[%d][%d]\n", ((int)(map->prj->rc_horizontal->y / CUBE_SIZE)),
+		((int)(map->prj->rc_horizontal->x / CUBE_SIZE)));
+	distance_vertical = sqrt((map->prj->rc_vertical->x - map->prj->player->x)
+			* (map->prj->rc_vertical->x - map->prj->player->x)
+			+ (map->prj->rc_vertical->y - map->prj->player->y)
+			* (map->prj->rc_vertical->y - map->prj->player->y));
+	printf("%f, %f\n", map->prj->rc_vertical->y, map->prj->rc_vertical->x);
+	printf("[%d][%d]\n", ((int)(map->prj->rc_vertical->y / CUBE_SIZE)),
+		((int)(map->prj->rc_vertical->x / CUBE_SIZE)));
 	ft_set_wall_to_render(map, distance_horizontal, distance_vertical);
+	printf("Horizontal distance: %f\nVertical distance: %f\n",
+		distance_horizontal, distance_vertical);
 }
 
 /*ft_horizontal_intersection will find the hit(s) with the
@@ -39,19 +52,26 @@ void	ft_horizontal_intersection(t_map *map)
 	int		y;
 
 	ft_set_coords_angle_direction_horizontal(map);
-	if (map->prj->view_angle > 0 && map->prj->view_angle < 180)
-		increment_y = (CUBE_SIZE) * (-1);
-	else
-		increment_y = CUBE_SIZE;
-	increment_x = CUBE_SIZE / tan(map->prj->view_angle * (PI / 180));
+	increment_y = CUBE_SIZE;
+	if (ft_is_facing_down(map->prj->view_angle) == 0)
+		increment_y *= -1;
+	increment_x = ft_tangent_sign_per_quadrant(map->prj->view_angle,
+			CUBE_SIZE / tan(map->prj->view_angle * (PI / 180)));
 	y = floor(map->prj->rc_horizontal->y / CUBE_SIZE);
 	x = floor(map->prj->rc_horizontal->x / CUBE_SIZE);
-	while (y >= 0 && x >= 0 && y < map->height && x < map->width && map->map_content[y][x] != '1')
+	printf("height: %d, width: %d\n", map->height, map->width);
+	while (y >= 0 && x >= 0 && y < map->height && x < map->width)
 	{
-		map->prj->rc_horizontal->y += increment_y;
-		map->prj->rc_horizontal->x += increment_x;
-		y = floor(map->prj->rc_horizontal->y / CUBE_SIZE);
-		x = floor(map->prj->rc_horizontal->x / CUBE_SIZE);
+		printf("y: %d, x: %d\n", y, x);
+		if (map->map_content[y][x] == '1')
+			break ;
+		else
+		{
+			map->prj->rc_horizontal->y += increment_y;
+			map->prj->rc_horizontal->x += increment_x;
+			y = floor(map->prj->rc_horizontal->y / CUBE_SIZE);
+			x = floor(map->prj->rc_horizontal->x / CUBE_SIZE);
+		}
 	}
 }
 
@@ -66,19 +86,25 @@ void	ft_vertical_intersection(t_map *map)
 	int		y;
 
 	ft_set_coords_angle_direction_vertical(map);
-	if (map->prj->view_angle < 270 && map->prj->view_angle < 90)
-		increment_x = CUBE_SIZE * -1;
-	else
-		increment_x = (CUBE_SIZE);
-	increment_y = CUBE_SIZE * tan(map->prj->view_angle * (PI / 180));
+	increment_x = CUBE_SIZE;
+	if (ft_is_facing_right(map->prj->view_angle) == 0)
+		increment_x *= -1;
+	increment_y = ft_tangent_sign_per_quadrant(map->prj->view_angle,
+			CUBE_SIZE * tan(map->prj->view_angle * (PI / 180)));
 	y = floor(map->prj->rc_vertical->y / CUBE_SIZE);
 	x = floor(map->prj->rc_vertical->x / CUBE_SIZE);
-	while (y >= 0 && x >= 0 && y < map->height && x < map->width && map->map_content[y][x] != '1')
+	while (y >= 0 && x >= 0 && y < map->height && x < map->width)
 	{
-		map->prj->rc_vertical->y += increment_y;
-		map->prj->rc_vertical->x += increment_x;
-		y = floor(map->prj->rc_vertical->y / CUBE_SIZE);
-		x = floor(map->prj->rc_vertical->x / CUBE_SIZE);
+		printf("y: %d, x: %d\n", y, x);
+		if (map->map_content[y][x] == '1')
+			break ;
+		else
+		{
+			map->prj->rc_vertical->y += increment_y;
+			map->prj->rc_vertical->x += increment_x;
+			y = floor(map->prj->rc_vertical->y / CUBE_SIZE);
+			x = floor(map->prj->rc_vertical->x / CUBE_SIZE);
+		}
 	}
 }
 
@@ -87,14 +113,12 @@ void	ft_vertical_intersection(t_map *map)
 
 void	ft_get_ray_angle(t_map *map)
 {
-	double	deviance;
-
 	map->prj->view_angle = ft_set_viewing_angle(map->prj->player_orientation)
-		- (FIELD_OF_VIEW / 2);
+		- (map->column * map->prj->angle_btw_rays) + (FIELD_OF_VIEW / 2);
 	if (map->prj->view_angle < 0)
 		map->prj->view_angle += 360;
-	deviance = map->column * map->prj->angle_btw_rays;
-	map->prj->view_angle += deviance;
+	if (map->prj->view_angle > 360)
+		map->prj->view_angle -= 360;
 }
 
 /*ft_raycasting_calculation initializes the loop to
@@ -111,9 +135,6 @@ void	ft_raycasting_calculation(t_map *map)
 		ft_vertical_intersection(map);
 		ft_calculate_distance(map);
 		ft_raycast_to_slice(map);
-		printf("Wtr y: %f, wtr x: %f\nDistance: %f\n",
-			map->prj->wall_to_render->y, map->prj->wall_to_render->x,
-			map->prj->distance_to_wall);
 		ft_free_raycast_data(map);
 		map->column++;
 	}

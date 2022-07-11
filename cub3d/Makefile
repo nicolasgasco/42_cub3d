@@ -31,6 +31,7 @@ SRC_NAME =	cub3d.c\
 		utils/ft_free.c\
 		utils/ft_debug.c\
 		utils/ft_raycast_utils.c\
+		utils/ft_raycast_utils1.c\
 		utils/ft_raycast_to_slice_utils.c\
 		raycasting_calculation/ft_raycasting_calculation.c\
 		raycasting_calculation/ft_raycast_to_slice.c\

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_scene_desc_file_validation.c                    :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:14:49 by ngasco            #+#    #+#             */
-/*   Updated: 2022/06/09 13:14:58 by ngasco           ###   ########.fr       */
+/*   Updated: 2022/07/11 13:39:10 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	ft_free_allocated_map_data(t_map *map)
 	}
 	if (map->map_content)
 		free(map->map_content);
-
 	if (map->no_path)
 		free(map->no_path);
 	if (map->so_path)
