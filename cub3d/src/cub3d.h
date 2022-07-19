@@ -6,7 +6,7 @@
 /*   By: jsolinis <jsolinis@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 23:29:00 by jsolinis          #+#    #+#             */
-/*   Updated: 2022/07/10 19:46:53 by jsolinis         ###   ########.fr       */
+/*   Updated: 2022/07/19 11:27:00 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 
 /* Game params */
 # define GAME_TITLE "Cub3d - Brawl Stars"
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 720
-# define TEXTURE_SIZE 128
+# define WIN_WIDTH 320
+# define WIN_HEIGHT 200
+# define TEXTURE_SIZE 64
 # define NUM_TEXTURES 4
 # define NO_TEXTURE_INDEX 0
 # define EA_TEXTURE_INDEX 1
@@ -64,10 +64,10 @@
 # define NO_TRANSPARENCY 0
 
 # define PI 3.14159265359
-# define PROJ_PLANE_WIDTH 1280
-# define PROJ_PLANE_HEIGHT 720
-# define CUBE_SIZE 128
-# define FIELD_OF_VIEW 60.0
+# define PROJ_PLANE_WIDTH 320
+# define PROJ_PLANE_HEIGHT 200
+# define CUBE_SIZE 64
+# define FIELD_OF_VIEW 60
 
 /*Vector Struct*/
 typedef struct s_vector
@@ -80,20 +80,19 @@ typedef struct s_vector
 typedef struct s_projection
 {
 	char		player_orientation;
-	double		view_angle;
+	int			view_angle;
 	double		distance_to_pp;
-	double		distance_to_wall;
 	double		angle_btw_rays;
 	t_vector	*player;
-	t_vector	*rc_horizontal;
-	t_vector	*rc_vertical;
 	t_vector	*wall_to_render;
 }				t_projection;
 
 /* Struct for each column */
 typedef struct s_slice
 {
+	int		angle;
 	int		column;
+	double	distance_to_wall;
 	int		height;
 	char	*texture;
 	int		wall_x;
@@ -148,7 +147,6 @@ typedef struct s_view
 /* Struct for map data  */
 typedef struct s_map
 {
-	int				column;
 	char			*no_path;
 	char			*so_path;
 	char			*ea_path;
@@ -157,8 +155,8 @@ typedef struct s_map
 	char			*c_color;
 	int				height;
 	int				width;
-	char			**map_content;
 	int				y;
+	char			**map_content;
 	t_rdata			*rdata;
 	t_projection	*prj;
 	t_slice			*slc;
@@ -202,17 +200,20 @@ char	*ft_skip_to_map_start(char *line, int fd);
 void	ft_skip_to_non_space_char_backwards(char *line, int *iterator);
 char	*ft_check_to_eof(char *line, int fd, t_map *map);
 // Utils - Raycast
-void	ft_set_player_data(t_map *map, int *iterator, int *j, char c);
-double	ft_set_viewing_angle(char c);
-void	ft_convert_to_cube_position(t_map *map);
-void	ft_set_rc_structure(t_map *map);
-void	ft_set_coords_angle_direction_horizontal(t_map *map);
-void	ft_set_coords_angle_direction_vertical(t_map *map);
-void	ft_set_wall_to_render(t_map *map, double dh, double dv);
-double	ft_calculate_angle(t_map *map);
-int		ft_is_facing_down(double angle);
-int		ft_is_facing_right(double angle);
-double	ft_tangent_sign_per_quadrant(double angle, double tangent);
+void		ft_set_player_data(t_map *map, int *iterator, int *j, char c);
+void		ft_set_viewing_angle(t_map *map);
+void		ft_convert_to_cube_position(t_map *map);
+int			ft_is_facing_down(double angle);
+int			ft_is_facing_right(double angle);
+int			ft_transform_angle(int angle);
+t_vector	ft_increment(t_vector position, t_vector increment);
+int			ft_hit(t_map *map, t_vector position, int angle);
+//Raycast tables
+t_vector	ft_horizontal_increment(int angle);
+t_vector	ft_vertical_increment(int angle);
+double		ft_cosine(int angle);
+double		ft_sine(int angle);
+double		ft_tangent(int angle);
 
 /* Scene desc validation errors */
 void	ft_invalid_extension_error_exit(void);

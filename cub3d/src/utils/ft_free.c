@@ -6,7 +6,7 @@
 /*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:14:49 by ngasco            #+#    #+#             */
-/*   Updated: 2022/07/11 13:39:10 by jsolinis         ###   ########.fr       */
+/*   Updated: 2022/07/19 12:33:57 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	ft_free_allocated_map_data(t_map *map)
 		free(map->f_color);
 	if (map->c_color)
 		free(map->c_color);
+	if (map->slc)
+		free(map->slc);
 }
 
 void	ft_print_error_exit(t_map *map, char *msg, int err)
@@ -49,10 +51,6 @@ void	ft_print_error_exit(t_map *map, char *msg, int err)
 
 void	ft_free_raycast_data(t_map *map)
 {
-	if (map->prj->rc_horizontal)
-		free(map->prj->rc_horizontal);
-	if (map->prj->rc_vertical)
-		free(map->prj->rc_vertical);
 	if (map->prj->wall_to_render)
 		free(map->prj->wall_to_render);
 	if (map->slc)

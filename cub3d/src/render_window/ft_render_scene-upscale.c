@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_scene_desc_file_validation.c                    :+:      :+:    :+:   */
+/*   ft_render_scene-upscale.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:14:49 by ngasco            #+#    #+#             */
-/*   Updated: 2022/06/09 13:14:58 by ngasco           ###   ########.fr       */
+/*   Updated: 2022/07/16 21:19:02 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ int	*ft_populate_dividers_upscale(int divider, int height)
 	i = 1;
 	while (1)
 	{
-		dividers[i] = TEXTURE_SIZE / (height
+		if (height - (TEXTURE_SIZE + already_rendered) != 0)
+			dividers[i] = TEXTURE_SIZE / (height
 				- (TEXTURE_SIZE + already_rendered)) + 1;
 		if (dividers[i] <= 1)
 		{
