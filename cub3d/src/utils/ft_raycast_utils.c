@@ -6,7 +6,7 @@
 /*   By: jsolinis <jsolinis@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 17:32:42 by jsolinis          #+#    #+#             */
-/*   Updated: 2022/07/07 19:19:18 by jsolinis         ###   ########.fr       */
+/*   Updated: 2022/07/19 11:17:26 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 int	ft_is_facing_down(double angle)
 {
-	if (angle < 0 && angle > 180)
+	if (angle < 0 && angle > ft_transform_angle(180))
 		return (1);
 	else
 		return (0);
@@ -29,10 +29,10 @@ int	ft_is_facing_down(double angle)
 
 int	ft_is_facing_right(double angle)
 {
-	if (angle < 270 || angle > 90)
-		return (1);
-	else
+	if (angle < ft_transform_angle(270) && angle > ft_transform_angle(90))
 		return (0);
+	else
+		return (1);
 }
 
 /*ft_convert_to_cube_position sets the player position in the 
@@ -47,16 +47,19 @@ void	ft_convert_to_cube_position(t_map *map)
 /*ft_set_viewing_angle returns the angle of the view based on 
  * the player orientation*/
 
-double	ft_set_viewing_angle(char c)
+void	ft_set_viewing_angle(t_map *map)
 {
+	char c;
+
+	c = map->prj->player_orientation;
 	if (c == 'E')
-		return (0);
+		map->prj->view_angle = ft_transform_angle(0);
 	else if (c == 'N')
-		return (90);
+		map->prj->view_angle = ft_transform_angle(90);
 	else if (c == 'W')
-		return (180);
+		map->prj->view_angle = ft_transform_angle(180);
 	else
-		return (270);
+		map->prj->view_angle = ft_transform_angle(270);
 }
 
 /*ft_set_player_data creates and fills the structure for the 
@@ -67,9 +70,8 @@ void	ft_set_player_data(t_map *map, int *iterator, int *j, char c)
 	map->prj->player->y = (*iterator);
 	map->prj->player->x = (*j);
 	map->prj->player_orientation = c;
-	map->prj->view_angle = ft_set_viewing_angle(c);
+	ft_set_viewing_angle(map);
 	map->prj->distance_to_pp = (PROJ_PLANE_WIDTH / 2)
 		/ tan((FIELD_OF_VIEW / 2) * (PI / 180));
-	map->prj->angle_btw_rays = FIELD_OF_VIEW / PROJ_PLANE_WIDTH;
 	map->map_content[*iterator][*j] = '0';
 }

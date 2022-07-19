@@ -1,7 +1,5 @@
-
-
 NAME = cub3d
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -Wno-unused-result
 SANITIZE = -g3 -fsanitize=address
 VALGRIND = -g -Og -std=gnu99
 INC = -I%.h -I$(LIB_DIR)%.h -I/usr/include -Imlx_linux -O3
@@ -45,9 +43,9 @@ SRC_NAME =	cub3d.c\
 		utils/ft_debug.c\
 		utils/ft_raycast_utils.c\
 		utils/ft_raycast_utils1.c\
-		utils/ft_raycast_to_slice_utils.c\
 		raycasting_calculation/ft_raycasting_calculation.c\
-		raycasting_calculation/ft_raycast_to_slice.c\
+		raycasting_calculation/ft_trigonometric_table.c\
+		raycasting_calculation/ft_increment_table.c\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR),$(OBJ_NAME))

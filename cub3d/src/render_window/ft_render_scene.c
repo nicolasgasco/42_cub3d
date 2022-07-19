@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_scene_desc_file_validation.c                    :+:      :+:    :+:   */
+/*   ft_render_scene.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:14:49 by ngasco            #+#    #+#             */
-/*   Updated: 2022/06/09 13:14:58 by ngasco           ###   ########.fr       */
+/*   Updated: 2022/07/19 13:35:50 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_render_raycasting_column(t_map *map)
 	if (map->y < 0) // TBD - Only for debug
 		map->y = 0;
 	ft_render_scaled_texture(map); // Commented if you want to see raycasting without textures
-	// ft_render_solid_color(map); // Uncommented if you want to see raycasting without textures
+//	ft_render_solid_color(map); // Uncommented if you want to see raycasting without textures
 	ft_render_floor(map, &map->y);
 }
 
