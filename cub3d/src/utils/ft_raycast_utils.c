@@ -6,7 +6,7 @@
 /*   By: jsolinis <jsolinis@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 17:32:42 by jsolinis          #+#    #+#             */
-/*   Updated: 2022/07/19 11:17:26 by jsolinis         ###   ########.fr       */
+/*   Updated: 2022/07/24 12:57:28 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 int	ft_is_facing_down(double angle)
 {
-	if (angle < 0 && angle > ft_transform_angle(180))
+	if (angle > ft_transform_angle(180))
 		return (1);
 	else
 		return (0);
