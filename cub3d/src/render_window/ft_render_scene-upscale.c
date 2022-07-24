@@ -83,7 +83,7 @@ int	*ft_populate_dividers_upscale(int divider, int height)
 void	ft_render_standard_pixels(t_map *map, int *x, int *i)
 {
 	my_mlx_pixel_put(map->view->plane_data, map->slc->column, map->y,
-		map->rdata->textures[NO_TEXTURE_INDEX].texture_columns[*x][0]);
+		map->rdata->textures[WE_TEXTURE_INDEX].texture_columns[*x][map->slc->wall_x]);
 	map->y += 1;
 	*i += 1;
 }
@@ -99,7 +99,7 @@ void	ft_render_upscaled_pixels(t_map *map, int *dividers,
 		if (((*x + 1) % dividers[j]) == 0)
 		{
 			my_mlx_pixel_put(map->view->plane_data, map->slc->column, map->y,
-				map->rdata->textures[NO_TEXTURE_INDEX].texture_columns[*x][0]);
+				map->rdata->textures[WE_TEXTURE_INDEX].texture_columns[*x][map->slc->wall_x]);
 			map->y += 1;
 			*i += 1;
 		}

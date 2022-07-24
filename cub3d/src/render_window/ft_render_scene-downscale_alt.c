@@ -68,7 +68,7 @@ void	ft_downscaled_texture_loop(t_map *map, int *dividers)
 		if (modulo_not_zero == 1)
 		{
 			my_mlx_pixel_put(map->view->plane_data, map->slc->column, map->y,
-				map->rdata->textures[NO_TEXTURE_INDEX].texture_columns[x][0]);
+				map->rdata->textures[WE_TEXTURE_INDEX].texture_columns[x][0]);
 			i += 1;
 			map->y += 1;
 		}

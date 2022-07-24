@@ -69,7 +69,7 @@ void	ft_render_multiplied_pixels(t_map *map, int *dividers,
 	{
 		if (map->y < PROJ_PLANE_HEIGHT) // TBD
 			my_mlx_pixel_put(map->view->plane_data, map->slc->column, map->y,
-				map->rdata->textures[NO_TEXTURE_INDEX].texture_columns[*x][0]);
+				map->rdata->textures[WE_TEXTURE_INDEX].texture_columns[*x][map->slc->wall_x]);
 		map->y += 1;
 		*i += 1;
 		j++;
@@ -88,7 +88,7 @@ void	ft_render_remaining_multiplied_pixels(t_map *map, int *dividers,
 		{
 			if (map->y < PROJ_PLANE_HEIGHT) // TBD
 				my_mlx_pixel_put(map->view->plane_data, map->slc->column, map->y,
-					map->rdata->textures[NO_TEXTURE_INDEX].texture_columns[*x][0]);
+					map->rdata->textures[WE_TEXTURE_INDEX].texture_columns[*x][map->slc->wall_x]);
 			map->y += 1;
 			*i += 1;
 		}

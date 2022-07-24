@@ -43,7 +43,7 @@ void	ft_render_actual_size_texture(t_map *map)
 	while (i < map->slc->height)
 	{
 		my_mlx_pixel_put(map->view->plane_data, map->slc->column, map->y,
-			map->rdata->textures[NO_TEXTURE_INDEX].texture_columns[x][0]);
+			map->rdata->textures[WE_TEXTURE_INDEX].texture_columns[x][0]);
 		map->y += 1;
 		i += 1;
 		if (x < (TEXTURE_SIZE - 1)) // TBD - if possible
