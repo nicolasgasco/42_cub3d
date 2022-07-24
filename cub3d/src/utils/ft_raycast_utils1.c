@@ -6,7 +6,7 @@
 /*   By: jsolinis <jsolinis@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 17:32:27 by jsolinis          #+#    #+#             */
-/*   Updated: 2022/07/19 11:18:23 by jsolinis         ###   ########.fr       */
+/*   Updated: 2022/07/24 13:05:01 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	ft_transform_angle(int angle)
 	return ((angle * PROJ_PLANE_WIDTH) / FIELD_OF_VIEW);
 }
 
+/* ft_increment adds the increment vector to the current position */
+
 t_vector	ft_increment(t_vector position, t_vector increment)
 {
 	t_vector	ret;
@@ -31,12 +33,15 @@ t_vector	ft_increment(t_vector position, t_vector increment)
 	return (ret);
 }
 
+/* ft_hit verifies if the new position is within the map and if there is 
+ * a wall in that position */
+
 int	ft_hit(t_map *map, t_vector position, int angle)
 {
 	int	y;
 	int	x;
 
-	if (position.y < 0 || position.x < 0 || (position.y / CUBE_SIZE) >= map->height
+	if (position.y < 0 || position.x < 0 || (position.y / CUBE_SIZE) >= (map->height - 1)
 		|| (position.x / CUBE_SIZE) >= map->width)
 		return (1);
 	if (ft_is_facing_down(angle) == 0)

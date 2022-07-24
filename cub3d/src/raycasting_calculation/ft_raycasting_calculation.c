@@ -6,7 +6,7 @@
 /*   By: jsolinis <jsolinis@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 19:56:57 by jsolinis          #+#    #+#             */
-/*   Updated: 2022/07/19 13:33:33 by jsolinis         ###   ########.fr       */
+/*   Updated: 2022/07/24 13:36:25 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ double	ft_horizontal_intersection(t_map *map, int current_angle)
 	if (intersection.y < 0 || intersection.x < 0 || intersection.y / CUBE_SIZE
 		> map->height || intersection.x / CUBE_SIZE > map->width)
 		return (2147483647);
+	map->slc->h_wall_x = (int)(intersection.x) % CUBE_SIZE;
 	return (fabs(fabs(map->prj->player->y - intersection.y) / ft_sine(current_angle)));
 }
 
@@ -59,6 +60,7 @@ double	ft_vertical_intersection(t_map *map, int current_angle)
 	if (intersection.y < 0 || intersection.x < 0 || intersection.y / CUBE_SIZE
 		> map->height || intersection.x / CUBE_SIZE > map->width)
 		return (2147483647);
+	map->slc->v_wall_x = (int)(intersection.x) % CUBE_SIZE;
 	return (fabs(fabs(map->prj->player->x - intersection.x) / ft_cosine(current_angle)));
 }
 
@@ -79,9 +81,15 @@ double	ft_calculate_distance(t_map *map)
 	distance_horizontal = ft_horizontal_intersection(map, current_angle); 
 	distance_vertical = ft_vertical_intersection(map, current_angle);
 	if (distance_horizontal < distance_vertical)
+	{
+		map->slc->wall_x = map->slc->h_wall_x;
 		return (distance_horizontal);
+	}
 	else
+	{
+		map->slc->wall_x = map->slc->h_wall_x;
 		return (distance_vertical);
+	}
 }
 
 /*ft_raycasting_calculation initializes the loop to
@@ -102,8 +110,9 @@ void	ft_raycasting_calculation(t_map *map)
 		map->slc->distance_to_wall = ft_calculate_distance(map);
 		map->slc->height = map->slc->distance_to_wall * ft_cosine(abs(map->slc->angle));
 		map->slc->height = (((double)(CUBE_SIZE)) / map->slc->height) * map->prj->distance_to_pp;
-		printf("The NEW calc height %d\n", map->slc->height);
 		ft_render_raycasting_column(map);
+		map->slc->wall_x = map->slc->h_wall_x;
+		printf("wall_x : %d\n", map->slc->wall_x);
 		map->slc->column++;
 		map->slc->angle--;
 	}

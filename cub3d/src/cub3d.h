@@ -6,7 +6,7 @@
 /*   By: jsolinis <jsolinis@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 23:29:00 by jsolinis          #+#    #+#             */
-/*   Updated: 2022/07/19 11:27:00 by jsolinis         ###   ########.fr       */
+/*   Updated: 2022/07/24 13:26:15 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 
 /* Game params */
 # define GAME_TITLE "Cub3d - Brawl Stars"
-# define WIN_WIDTH 320
-# define WIN_HEIGHT 200
-# define TEXTURE_SIZE 64
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 1024
+# define TEXTURE_SIZE 128
 # define NUM_TEXTURES 4
 # define NO_TEXTURE_INDEX 0
 # define EA_TEXTURE_INDEX 1
@@ -64,9 +64,9 @@
 # define NO_TRANSPARENCY 0
 
 # define PI 3.14159265359
-# define PROJ_PLANE_WIDTH 320
-# define PROJ_PLANE_HEIGHT 200
-# define CUBE_SIZE 64
+# define PROJ_PLANE_WIDTH 1280
+# define PROJ_PLANE_HEIGHT 1024
+# define CUBE_SIZE 128
 # define FIELD_OF_VIEW 60
 
 /*Vector Struct*/
@@ -95,6 +95,8 @@ typedef struct s_slice
 	double	distance_to_wall;
 	int		height;
 	char	*texture;
+	int		v_wall_x;
+	int		h_wall_x;
 	int		wall_x;
 }			t_slice;
 
