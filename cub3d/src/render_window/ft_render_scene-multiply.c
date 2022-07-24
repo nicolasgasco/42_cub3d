@@ -17,12 +17,23 @@ void	ft_multiplied_texture_loop(t_map *map, int multiplier)
 {
 	int	x;
 	int	i;
+	int	limit;
 	int	*dividers;
 
-	x = 0;
+	if (map->slc->height <= PROJ_PLANE_HEIGHT)
+	{
+		x = 0;
+		limit = map->slc->height;
+		dividers = ft_populate_dividers_multiplier(multiplier, map->slc->height);
+	}
+	else
+	{
+		x = (map->slc->height - PROJ_PLANE_HEIGHT) / 2;
+		limit = PROJ_PLANE_HEIGHT - 1;
+		dividers = ft_populate_dividers_multiplier(multiplier, PROJ_PLANE_HEIGHT);
+	}
 	i = 0;
-	dividers = ft_populate_dividers_multiplier(multiplier, map->slc->height);
-	while (i < map->slc->height && map->y < (PROJ_PLANE_HEIGHT - 1))
+	while (i < limit && map->y < (PROJ_PLANE_HEIGHT - 2))
 	{
 		ft_render_multiplied_pixels(map, dividers, &x, &i);
 		ft_render_remaining_multiplied_pixels(map, dividers, &x, &i);
@@ -48,8 +59,8 @@ int	*ft_populate_dividers_multiplier(int multiplier, int height)
 		dividers[i] = TEXTURE_SIZE / (already_rendered) + 1;
 		if (dividers[i] <= 0 || dividers[i] >= TEXTURE_SIZE)
 		{
-			dividers[i] = 15;
-			dividers[i + 1] = 0;
+			dividers[i] = 0;
+			// dividers[i + 1] = 0;
 			break ;
 		}
 		already_rendered -= TEXTURE_SIZE / dividers[i];
@@ -64,7 +75,7 @@ void	ft_render_multiplied_pixels(t_map *map, int *dividers,
 	int	j;
 
 	j = 0;
-	while (j < dividers[0] && map->y < PROJ_PLANE_HEIGHT)
+	while (j < dividers[0] && map->y < PROJ_PLANE_HEIGHT - 1)
 	{
 		if (map->y < PROJ_PLANE_HEIGHT) // TBD
 			my_mlx_pixel_put(map->view->plane_data, map->slc->column, map->y,

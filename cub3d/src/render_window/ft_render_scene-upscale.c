@@ -17,12 +17,7 @@ void	ft_render_upscaled_texture(t_map *map)
 {
 	int	divider;
 
-	if ((map->slc->height / TEXTURE_SIZE) > 1)
-	{
-		divider = (map->slc->height / TEXTURE_SIZE);
-		ft_multiplied_texture_loop(map, divider);
-	}
-	else
+	if ((map->slc->height / TEXTURE_SIZE) == 1)
 	{
 		divider = TEXTURE_SIZE / (map->slc->height - TEXTURE_SIZE);
 		divider += 1;
@@ -31,6 +26,14 @@ void	ft_render_upscaled_texture(t_map *map)
 			divider = TEXTURE_SIZE / (map->slc->height - TEXTURE_SIZE);
 		}
 		ft_upscaled_texture_loop(map, divider);
+	}
+	else
+	{
+		if (map->slc->height <= PROJ_PLANE_HEIGHT)
+			divider = (map->slc->height / TEXTURE_SIZE);
+		else
+			divider = (PROJ_PLANE_HEIGHT / TEXTURE_SIZE);
+		ft_multiplied_texture_loop(map, divider);
 	}
 }
 
