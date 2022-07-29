@@ -76,7 +76,7 @@ struct s_cinfo	*ft_create_col_info_struct(char *line)
 	{
 		if (line[i] == '\"')
 			col_char = line[i + 1];
-		if (line[i] == 'c')
+		if (line[i] == 'c' && i != 1)
 		{
 			while (line[i] != ' ')
 				i++;
