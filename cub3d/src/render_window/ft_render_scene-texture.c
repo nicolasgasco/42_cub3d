@@ -15,39 +15,20 @@
 
 void	ft_render_scaled_texture(t_map *map)
 {
-	printf("map->slc->height is %d\n", map->slc->height);
-	if (map->slc->height <= 0) // TBD - Only for debug
-	{
-		printf("Problem with height\n");
-	}
-	if (map->slc->height > TEXTURE_SIZE)
-	{
-		ft_render_upscaled_texture(map);
-	}
-	else if (map->slc->height < TEXTURE_SIZE)
-	{
-		printf("Texture must be downscaled\n"); // TBD - Only for debug
-		ft_render_downscaled_texture(map);
-	}
-	else
-		ft_render_actual_size_texture(map);
-}
+	float	divider;
+	float	x;
+	
 
-void	ft_render_actual_size_texture(t_map *map)
-{
-	int	x;
-	int	i;
-
+	divider = (float)TEXTURE_SIZE / (float)map->slc->height;
+	// printf("%f / %f\n", (float)TEXTURE_SIZE, (float)map->slc->height);
 	x = 0;
-	i = 0;
-	while (i < map->slc->height)
+	while (x < TEXTURE_SIZE)
 	{
+		// printf("y is %d, x is %d, color is %d\n", (int)x, map->slc->wall_x, map->rdata->textures[NO_TEXTURE_INDEX].texture_columns[(int)x][map->slc->wall_x]);
 		my_mlx_pixel_put(map->view->plane_data, map->slc->column, map->y,
-			map->rdata->textures[NO_TEXTURE_INDEX].texture_columns[x][0]);
+			map->rdata->textures[NO_TEXTURE_INDEX].texture_columns[(int)x][map->slc->wall_x]);
 		map->y += 1;
-		i += 1;
-		if (x < (TEXTURE_SIZE - 1)) // TBD - if possible
-			x += 1;
+		x += divider;
 	}
 }
 

@@ -311,27 +311,8 @@ void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			ft_render_solid_color(t_map *map); // Testing color
 void			ft_render_game_scene(t_view *view, t_map *map);
 
-/* render actual-size texture */
-void			ft_render_actual_size_texture(t_map *map);
 /* scaling textures */
 void			ft_render_scaled_texture(t_map *map);
-// Scale downwards
-void			ft_render_downscaled_texture(t_map *map);
-// Scale downwards - Downscale
-void			ft_downscaled_texture_loop(t_map *map, int *dividers);
-void			ft_downscaled_texture_loop_pixel_put(t_map *map, int divider, int *i, int *x);
-int				module_not_zero_for_all(int *dividers, int x);
-// Scale upwards
-void			ft_render_upscaled_texture(t_map *map);
-// Upscale (< x2)
-void			ft_upscaled_texture_loop(t_map *map, int divider);
-int				*ft_populate_dividers_upscale(int divider, int height);
-void			ft_render_standard_pixels(t_map *map, int *x, int *i);
-void			ft_render_upscaled_pixels(t_map *map, int *dividers, int *x, int *i);
-// Multiply (> x2)
-void			ft_multiplied_texture_loop(t_map *map, int divider);
-int				*ft_populate_dividers_multiplier(int multiplier, int height);
-void			ft_render_multiplied_pixels(t_map *map, int *dividers, int *x, int *i);
-void			ft_render_remaining_multiplied_pixels(t_map *map, int *dividers, int *x, int *i);
+
 
 #endif
