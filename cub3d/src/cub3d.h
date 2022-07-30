@@ -272,7 +272,7 @@ void	ft_raycasting_calculation(t_map *map);
 void	ft_raycast_to_slice(t_map *map);
 
 /* Render view */
-void	ft_render_view(t_view *view, t_rdata *rdata, t_map *map);
+void	ft_render_view(t_view *view, t_map *map);
 void	ft_view_events(t_view *view);
 int		ft_close_window(t_view *view);
 int		ft_keyboard_events(int key, t_view *view);
@@ -306,9 +306,7 @@ void			ft_fill_int_matrix_line(t_tdata *texture, char *line, int y);
 void			ft_render_raycasting_column(t_map *map);
 void			ft_render_ceiling(t_map *map, int *y);
 void			ft_render_floor(t_map *map, int *y);
-void			ft_render_texture(t_view *view, t_tdata *texture, int x, int y); // Testing only
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void			ft_render_solid_color(t_map *map); // Testing color
 void			ft_render_game_scene(t_view *view, t_map *map);
 
 /* scaling textures */

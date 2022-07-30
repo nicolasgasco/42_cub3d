@@ -57,27 +57,3 @@ void	ft_render_texture_bigger_than_screen(t_map *map)
 		texture_y += divider;
 	}
 }
-
-/* Used for testing only. Renders one texture in 2d */
-void	ft_render_texture(t_view *view, t_tdata *texture, int win_x, int win_y)
-{
-	t_data	img;
-	int		y;
-	int		x;
-
-	img.img = mlx_new_image(view->mlx, texture->texture_w, texture->texture_h);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-			&img.endian);
-	y = 0;
-	while (y < texture->texture_h)
-	{
-		x = 0;
-		while (x < texture->texture_w)
-		{
-			my_mlx_pixel_put(&img, x, y, texture->texture_columns[y][x]);
-			x++;
-		}
-		y++;
-	}
-	mlx_put_image_to_window(view->mlx, view->mlx_win, img.img, win_x, win_y);
-}
