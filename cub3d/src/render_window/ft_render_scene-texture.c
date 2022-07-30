@@ -15,20 +15,46 @@
 
 void	ft_render_scaled_texture(t_map *map)
 {
+	if (map->slc->height <= PROJ_PLANE_HEIGHT)
+		ft_render_texture_smaller_than_screen(map);
+	else
+		ft_render_texture_bigger_than_screen(map);
+}
+
+void	ft_render_texture_smaller_than_screen(t_map *map)
+{
 	float	divider;
-	float	x;
-	
+	float	y;
 
 	divider = (float)TEXTURE_SIZE / (float)map->slc->height;
-	// printf("%f / %f\n", (float)TEXTURE_SIZE, (float)map->slc->height);
-	x = 0;
-	while (x < TEXTURE_SIZE)
+	y = 0;
+	while (y < TEXTURE_SIZE)
 	{
-		// printf("y is %d, x is %d, color is %d\n", (int)x, map->slc->wall_x, map->rdata->textures[NO_TEXTURE_INDEX].texture_columns[(int)x][map->slc->wall_x]);
 		my_mlx_pixel_put(map->view->plane_data, map->slc->column, map->y,
-			map->rdata->textures[NO_TEXTURE_INDEX].texture_columns[(int)x][map->slc->wall_x]);
+			map->rdata->textures[NO_TEXTURE_INDEX].texture_columns[(int)y]
+		[map->slc->wall_x]);
 		map->y += 1;
-		x += divider;
+		y += divider;
+	}
+}
+
+void	ft_render_texture_bigger_than_screen(t_map *map)
+{
+	float	divider;
+	float	y;
+	float	texture_y;
+
+	texture_y = (float)((map->slc->height - PROJ_PLANE_HEIGHT) / 2);
+	y = (texture_y * (float)TEXTURE_SIZE) / (float)map->slc->height;
+	divider = ((float)TEXTURE_SIZE - (y * 2.0f)) / (float)PROJ_PLANE_HEIGHT;
+	while (map->y < PROJ_PLANE_HEIGHT)
+	{
+		my_mlx_pixel_put(map->view->plane_data, map->slc->column, map->y,
+			map->rdata->textures[NO_TEXTURE_INDEX].texture_columns[(int)y]
+		[map->slc->wall_x]);
+		map->y += 1;
+		y += divider;
+		texture_y += divider;
 	}
 }
 
