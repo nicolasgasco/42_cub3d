@@ -313,6 +313,7 @@ void			ft_render_game_scene(t_view *view, t_map *map);
 
 /* scaling textures */
 void			ft_render_scaled_texture(t_map *map);
-
+void			ft_render_texture_smaller_than_screen(t_map *map);
+void			ft_render_texture_bigger_than_screen(t_map *map);
 
 #endif
