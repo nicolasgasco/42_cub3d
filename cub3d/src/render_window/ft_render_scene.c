@@ -13,11 +13,12 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-void	ft_render_game_scene(t_view *view, t_map *map)
+void	ft_render_game_scene(t_map *map)
 {
-	if (view->plane_data->img)
-		mlx_destroy_image(view->mlx, view->plane_data->img);
-	view->plane_data->img = mlx_new_image(view->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (map->view->plane_data->img)
+		mlx_destroy_image(map->view->mlx, map->view->plane_data->img);
+	map->view->plane_data->img = mlx_new_image(map->view->mlx,
+			WIN_WIDTH, WIN_HEIGHT);
 	ft_raycasting_calculation(map);
 }
 
