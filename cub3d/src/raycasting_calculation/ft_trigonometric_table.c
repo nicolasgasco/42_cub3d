@@ -17,7 +17,7 @@
 
 double	ft_cosine(int angle)
 {
-	static double	cosine[360 * PROJ_PLANE_WIDTH / FIELD_OF_VIEW];
+	static double	cosine[360 * WIN_WIDTH / FIELD_OF_VIEW];
 	int				i;
 
 	if (angle < 0 || angle >= ft_transform_angle(360))
@@ -37,7 +37,7 @@ double	ft_cosine(int angle)
 
 double	ft_sine(int angle)
 {
-	static double	sine[360 * PROJ_PLANE_WIDTH / FIELD_OF_VIEW];
+	static double	sine[360 * WIN_WIDTH / FIELD_OF_VIEW];
 	int				i;
 
 	if (angle < 0 || angle >= ft_transform_angle(360))
@@ -57,7 +57,7 @@ double	ft_sine(int angle)
 
 double	ft_tangent(int angle)
 {
-	static double	tangent[360 * PROJ_PLANE_WIDTH / FIELD_OF_VIEW];
+	static double	tangent[360 * WIN_WIDTH / FIELD_OF_VIEW];
 	int				i;
 
 	if (angle < 0 || angle >= ft_transform_angle(360))

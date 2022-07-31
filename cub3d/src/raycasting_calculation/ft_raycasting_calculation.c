@@ -22,20 +22,20 @@ double	ft_horizontal_intersection(t_map *map, int current_angle)
 	t_vector	intersection;
 	t_vector	increment;
 
-	intersection.y = floor(map->prj->player->y / CUBE_SIZE) * CUBE_SIZE;
+	intersection.y = floor(map->prj->player->y / TEXTURE_SIZE) * TEXTURE_SIZE;
 	if (ft_is_facing_down(current_angle) == 0)
 		intersection.y -= 1;
 	else
-		intersection.y += CUBE_SIZE;
+		intersection.y += TEXTURE_SIZE;
 	intersection.x = map->prj->player->x
 		+ (map->prj->player->y - intersection.y) / ft_tangent(current_angle);
 	increment = ft_horizontal_increment(current_angle);
 	while (ft_hit(map, intersection, current_angle) == 0)
 		intersection = ft_increment(intersection, increment);
-	if (intersection.y < 0 || intersection.x < 0 || intersection.y / CUBE_SIZE
-		> map->height || intersection.x / CUBE_SIZE > map->width)
+	if (intersection.y < 0 || intersection.x < 0 || intersection.y / TEXTURE_SIZE
+		> map->height || intersection.x / TEXTURE_SIZE > map->width)
 		return (2147483647);
-	map->slc->h_wall_x = (int)(intersection.x) % CUBE_SIZE;
+	map->slc->h_wall_x = (int)(intersection.x) % TEXTURE_SIZE;
 	return (fabs(fabs(map->prj->player->y - intersection.y) / ft_sine(current_angle)));
 }
 
@@ -47,20 +47,20 @@ double	ft_vertical_intersection(t_map *map, int current_angle)
 	t_vector	intersection;
 	t_vector	increment;
 
-	intersection.x = floor(map->prj->player->x / CUBE_SIZE) * CUBE_SIZE;
+	intersection.x = floor(map->prj->player->x / TEXTURE_SIZE) * TEXTURE_SIZE;
 	if (ft_is_facing_right(current_angle) == 0)
 		intersection.x -= 1;
 	else
-		intersection.x += CUBE_SIZE;
+		intersection.x += TEXTURE_SIZE;
 	intersection.y = map->prj->player->y
 		+ (map->prj->player->x - intersection.x) * ft_tangent(current_angle);
 	increment = ft_vertical_increment(current_angle);
 	while (ft_hit(map, intersection, current_angle) == 0)
 		intersection = ft_increment(intersection, increment);
-	if (intersection.y < 0 || intersection.x < 0 || intersection.y / CUBE_SIZE
-		> map->height || intersection.x / CUBE_SIZE > map->width)
+	if (intersection.y < 0 || intersection.x < 0 || intersection.y / TEXTURE_SIZE
+		> map->height || intersection.x / TEXTURE_SIZE > map->width)
 		return (2147483647);
-	map->slc->v_wall_x = (int)(intersection.y) % CUBE_SIZE;
+	map->slc->v_wall_x = (int)(intersection.y) % TEXTURE_SIZE;
 	return (fabs(fabs(map->prj->player->x - intersection.x) / ft_cosine(current_angle)));
 }
 
@@ -105,11 +105,11 @@ void	ft_raycasting_calculation(t_map *map)
 	ft_convert_to_cube_position(map);
 	map->slc->angle = ft_transform_angle(30);
 	while (map->slc->angle > (ft_transform_angle(30) * -1) 
-			&& map->slc->column < PROJ_PLANE_WIDTH)
+			&& map->slc->column < WIN_WIDTH)
 	{
 		map->slc->distance_to_wall = ft_calculate_distance(map);
 		map->slc->height = map->slc->distance_to_wall * ft_cosine(abs(map->slc->angle));
-		map->slc->height = (((double)(CUBE_SIZE)) / map->slc->height) * map->prj->distance_to_pp;
+		map->slc->height = (((double)(TEXTURE_SIZE)) / map->slc->height) * map->prj->distance_to_pp;
 		ft_render_raycasting_column(map);
 		printf("wall_x : %d\n", map->slc->wall_x);
 		map->slc->column++;
