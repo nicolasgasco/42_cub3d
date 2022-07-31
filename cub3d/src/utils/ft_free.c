@@ -43,7 +43,7 @@ void	ft_free_allocated_map_data(t_map *map)
 	ft_free_allocated_render_data(map->rdata);
 }
 
-void ft_free_allocated_render_data(t_rdata *rdata)
+void	ft_free_allocated_render_data(t_rdata *rdata)
 {
 	int				i;
 	int				j;
@@ -71,7 +71,7 @@ void ft_free_allocated_render_data(t_rdata *rdata)
 			else
 			{
 				free(curr);
-				break;
+				break ;
 			}
 		}
 		j = 0;
@@ -80,7 +80,7 @@ void ft_free_allocated_render_data(t_rdata *rdata)
 			if (rdata->textures[i].texture_columns[j])
 				free(rdata->textures[i].texture_columns[j]);
 			else
-				break;
+				break ;
 			j++;
 		}
 		free(rdata->textures[i].texture_columns);

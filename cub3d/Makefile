@@ -22,11 +22,12 @@ SRC_NAME =	cub3d.c\
 		scene_desc_file_validation/ft_type_ids_validation-errors_0.c\
 		scene_desc_file_validation/ft_type_ids_validation-errors_1.c\
 		post_validation_data_manip/ft_map_data_manip.c\
-		post_validation_data_manip/ft_map_data_manip-fc-colors.c\
+		post_validation_data_manip/ft_map_data_manip-fc_colors.c\
 		post_validation_data_manip/ft_map_data_manip-asset_sizes.c\
 		post_validation_data_manip/ft_map_data_manip-color_codes.c\
 		post_validation_data_manip/ft_map_data_manip-char_map.c\
 		post_validation_data_manip/ft_map_data_manip-asset_validation.c\
+		post_validation_data_manip/ft_map_data_manip-errors.c\
 		render_window/ft_render_view.c\
 		render_window/ft_render_scene.c\
 		render_window/ft_render_scene-texture.c\

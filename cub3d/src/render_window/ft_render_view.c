@@ -30,4 +30,3 @@ void	ft_render_view(t_map *map)
 	ft_view_events(map);
 	mlx_loop(map->view->mlx);
 }
-
