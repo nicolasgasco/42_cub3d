@@ -40,6 +40,53 @@ void	ft_free_allocated_map_data(t_map *map)
 		free(map->c_color);
 	if (map->slc)
 		free(map->slc);
+	ft_free_allocated_render_data(map->rdata);
+}
+
+void ft_free_allocated_render_data(t_rdata *rdata)
+{
+	int				i;
+	int				j;
+	struct s_cinfo	*curr;
+	struct s_cinfo	*temp;
+
+	i = 0;
+	j = 0;
+	if (!rdata->textures)
+	{
+		printf("No existe\n");
+		return ;
+	}
+	while (i < 4)
+	{
+		curr = rdata->textures[i].col_info_list;
+		while (curr)
+		{
+			if (curr->next)
+			{
+				temp = curr;
+				curr = temp->next;
+				free(temp);
+			}
+			else
+			{
+				free(curr);
+				break;
+			}
+		}
+		j = 0;
+		while (j < TEXTURE_SIZE)
+		{
+			if (rdata->textures[i].texture_columns[j])
+				free(rdata->textures[i].texture_columns[j]);
+			else
+				break;
+			j++;
+		}
+		free(rdata->textures[i].texture_columns);
+		i++;
+	}
+	free(rdata->textures);
 }
 
 void	ft_print_error_exit(t_map *map, char *msg, int err)
