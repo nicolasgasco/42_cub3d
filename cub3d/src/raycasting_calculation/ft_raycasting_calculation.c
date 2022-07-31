@@ -60,7 +60,7 @@ double	ft_vertical_intersection(t_map *map, int current_angle)
 	if (intersection.y < 0 || intersection.x < 0 || intersection.y / CUBE_SIZE
 		> map->height || intersection.x / CUBE_SIZE > map->width)
 		return (2147483647);
-	map->slc->v_wall_x = (int)(intersection.x) % CUBE_SIZE;
+	map->slc->v_wall_x = (int)(intersection.y) % CUBE_SIZE;
 	return (fabs(fabs(map->prj->player->x - intersection.x) / ft_cosine(current_angle)));
 }
 
@@ -87,7 +87,7 @@ double	ft_calculate_distance(t_map *map)
 	}
 	else
 	{
-		map->slc->wall_x = map->slc->h_wall_x;
+		map->slc->wall_x = map->slc->v_wall_x;
 		return (distance_vertical);
 	}
 }
@@ -111,7 +111,6 @@ void	ft_raycasting_calculation(t_map *map)
 		map->slc->height = map->slc->distance_to_wall * ft_cosine(abs(map->slc->angle));
 		map->slc->height = (((double)(CUBE_SIZE)) / map->slc->height) * map->prj->distance_to_pp;
 		ft_render_raycasting_column(map);
-		map->slc->wall_x = map->slc->h_wall_x;
 		printf("wall_x : %d\n", map->slc->wall_x);
 		map->slc->column++;
 		map->slc->angle--;
