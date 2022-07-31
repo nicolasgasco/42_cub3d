@@ -54,5 +54,5 @@ int	ft_hit(t_map *map, t_vector position, int angle)
 		x = floor(position.x) / CUBE_SIZE;
 	if (map->map_content[y][x] == '1')
 		return (1);
-	return (0);	
+	return (0);
 }

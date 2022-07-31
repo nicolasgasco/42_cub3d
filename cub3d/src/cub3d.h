@@ -27,10 +27,10 @@
 # define WIN_HEIGHT 1024
 # define TEXTURE_SIZE 128
 # define NUM_TEXTURES 4
-# define NO_TEXTURE_INDEX 0
-# define EA_TEXTURE_INDEX 1
-# define SO_TEXTURE_INDEX 2
-# define WE_TEXTURE_INDEX 3
+# define NO_TEXTURE_I 0
+# define EA_TEXTURE_I 1
+# define SO_TEXTURE_I 2
+# define WE_TEXTURE_I 3
 
 /* Events */
 # define ON_DESTROY 17
@@ -275,6 +275,7 @@ void			ft_post_validation_data_manip(t_map *map);
 void			ft_parse_all_texture_files(t_map *map);
 void			ft_free_allocated_render_data(t_rdata *rdata);
 t_tdata			ft_parse_texture_file(char *texture_path);
+void   			ft_color_not_numeric_error(void);
 // Post validation data manip - Floor/Ceiling Colors
 int				ft_rgb_str_to_int(char *col_str);
 void			ft_populate_rgb_int_arr(char *col_str, int *rgb);

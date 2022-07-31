@@ -13,7 +13,7 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-void ft_post_validation_data_manip(t_map *map)
+void	ft_post_validation_data_manip(t_map *map)
 {
 	map->rdata->c_col_int = ft_rgb_str_to_int(map->c_color);
 	ft_write_debug_msg_int("Ceiling color is ", map->rdata->c_col_int);
@@ -26,18 +26,18 @@ void ft_post_validation_data_manip(t_map *map)
 void	ft_parse_all_texture_files(t_map *map)
 {
 	map->rdata->textures = (t_tdata *)malloc(sizeof(t_tdata) * NUM_TEXTURES);
-	map->rdata->textures[NO_TEXTURE_INDEX] = ft_parse_texture_file(map->no_path);
-	map->rdata->textures[EA_TEXTURE_INDEX] = ft_parse_texture_file(map->ea_path);
-	map->rdata->textures[SO_TEXTURE_INDEX] = ft_parse_texture_file(map->so_path);
-	map->rdata->textures[WE_TEXTURE_INDEX] = ft_parse_texture_file(map->we_path);
-	ft_write_debug_msg_int("All textures parsed ", 0);	
+	map->rdata->textures[NO_TEXTURE_I] = ft_parse_texture_file(map->no_path);
+	map->rdata->textures[EA_TEXTURE_I] = ft_parse_texture_file(map->ea_path);
+	map->rdata->textures[SO_TEXTURE_I] = ft_parse_texture_file(map->so_path);
+	map->rdata->textures[WE_TEXTURE_I] = ft_parse_texture_file(map->we_path);
+	ft_write_debug_msg_int("All textures parsed ", 0);
 }
 
-t_tdata ft_parse_texture_file(char *texture_path)
+t_tdata	ft_parse_texture_file(char *texture_path)
 {
 	t_tdata	texture;
-	int 	fd;
-	char 	*line;
+	int		fd;
+	char	*line;
 
 	fd = open(texture_path, O_RDONLY);
 	if (fd == -1)
@@ -48,50 +48,4 @@ t_tdata ft_parse_texture_file(char *texture_path)
 	ft_readline_color_codes(fd, line, &texture);
 	ft_readline_char_map(fd, line, &texture);
 	return (texture);
-}
-
-void ft_free_allocated_render_data(t_rdata *rdata)
-{
-	int				i;
-	int				j;
-	struct s_cinfo	*curr;
-	struct s_cinfo	*temp;
-
-	i = 0;
-	j = 0;
-	if (!rdata->textures)
-	{
-		printf("No existe\n");
-		return ;
-	}
-	while (i < 4)
-	{
-		curr = rdata->textures[i].col_info_list;
-		while (curr)
-		{
-			if (curr->next)
-			{
-				temp = curr;
-				curr = temp->next;
-				free(temp);
-			}
-			else
-			{
-				free(curr);
-				break;
-			}
-		}
-		j = 0;
-		while (j < TEXTURE_SIZE)
-		{
-			if (rdata->textures[i].texture_columns[j])
-				free(rdata->textures[i].texture_columns[j]);
-			else
-				break;
-			j++;
-		}
-		free(rdata->textures[i].texture_columns);
-		i++;
-	}
-	free(rdata->textures);
 }
