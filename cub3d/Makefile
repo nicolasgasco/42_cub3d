@@ -21,15 +21,19 @@ SRC_NAME =	cub3d.c\
 		scene_desc_file_validation/ft_map_content_validation-map_content.c\
 		scene_desc_file_validation/ft_type_ids_validation-errors_0.c\
 		scene_desc_file_validation/ft_type_ids_validation-errors_1.c\
-		render_window/ft_render_view.c\
-		render_window/ft_render_scene.c\
-		render_window/ft_render_scene-texture.c\
 		post_validation_data_manip/ft_map_data_manip.c\
 		post_validation_data_manip/ft_map_data_manip-fc-colors.c\
 		post_validation_data_manip/ft_map_data_manip-asset_sizes.c\
 		post_validation_data_manip/ft_map_data_manip-color_codes.c\
 		post_validation_data_manip/ft_map_data_manip-char_map.c\
 		post_validation_data_manip/ft_map_data_manip-asset_validation.c\
+		render_window/ft_render_view.c\
+		render_window/ft_render_scene.c\
+		render_window/ft_render_scene-texture.c\
+		render_window/ft_scene_events.c\
+		raycasting_calculation/ft_raycasting_calculation.c\
+		raycasting_calculation/ft_trigonometric_table.c\
+		raycasting_calculation/ft_increment_table.c\
 		utils/get_next_line.c\
 		utils/ft_utils_0.c\
 		utils/ft_utils_1.c\
@@ -40,9 +44,7 @@ SRC_NAME =	cub3d.c\
 		utils/ft_debug.c\
 		utils/ft_raycast_utils.c\
 		utils/ft_raycast_utils1.c\
-		raycasting_calculation/ft_raycasting_calculation.c\
-		raycasting_calculation/ft_trigonometric_table.c\
-		raycasting_calculation/ft_increment_table.c\
+		utils/ft_render_utils.c\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR),$(OBJ_NAME))
