@@ -82,7 +82,6 @@ typedef struct s_projection
 	char		player_orientation;
 	int			view_angle;
 	double		distance_to_pp;
-	double		angle_btw_rays;
 	t_vector	*player;
 	t_vector	*wall_to_render;
 }				t_projection;
@@ -90,15 +89,15 @@ typedef struct s_projection
 /* Struct for each column */
 typedef struct s_slice
 {
-	int		angle;
-	int		column;
-	double	distance_to_wall;
-	int		height;
-	char	*texture;
-	int		v_wall_x;
-	int		h_wall_x;
-	int		wall_x;
-}			t_slice;
+	int			angle;
+	int			column;
+	double		distance_to_wall;
+	int			height;
+	char		*texture;
+	int			v_wall_x;
+	int			h_wall_x;
+	int			wall_x;
+}				t_slice;
 
 /* Linked list used to manipulate texture files */
 struct s_cinfo
@@ -141,8 +140,6 @@ typedef struct s_view
 	void	*mlx;
 	void	*mlx_win;
 	t_data	*plane_data;
-	int		width;
-	int		height;
 	char	*title;
 }			t_view;
 
@@ -271,12 +268,6 @@ void	ft_validate_content(t_map *map);
 void	ft_raycasting_calculation(t_map *map);
 void	ft_raycast_to_slice(t_map *map);
 
-/* Render view */
-void	ft_render_view(t_map *map);
-void	ft_view_events(t_map *map);
-int		ft_close_window(t_map *map);
-int		ft_keyboard_events(int key, t_map *map);
-
 /* Post validation data manip */
 void			ft_validate_texture_files(t_map *map, t_rdata *rdata);
 int				ft_xpm_file_is_valid(char *path, void *mlx);
@@ -301,6 +292,12 @@ int				ft_calc_size_len(char *line, int i);
 // Post validation data manip - Char map
 void			ft_readline_char_map(int fd, char *line, t_tdata *texture);
 void			ft_fill_int_matrix_line(t_tdata *texture, char *line, int y);
+
+/* Render view */
+void			ft_render_view(t_map *map);
+void			ft_view_events(t_map *map);
+int				ft_close_window(t_map *map);
+int				ft_keyboard_events(int key, t_map *map);
 
 /* Rendering textures */
 void			ft_render_raycasting_column(t_map *map);

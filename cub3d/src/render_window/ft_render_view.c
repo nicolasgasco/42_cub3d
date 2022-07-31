@@ -15,17 +15,19 @@
 
 void	ft_render_view(t_map *map)
 {
+	t_view	view;
+	t_data	plane_data;
 
-	map->view->width = WIN_WIDTH;
-	map->view->height = WIN_HEIGHT;
-	map->view->title = ft_strdup(GAME_TITLE);
-	map->view->mlx = mlx_init();
-	map->view->mlx_win = mlx_new_window(map->view->mlx, map->view->width,
-			map->view->height, map->view->title);
-	map->view->plane_data = malloc(sizeof(t_data));
-	ft_memset(map->view->plane_data, 0, sizeof(t_data));
+	ft_memset(&view, 0, sizeof(t_view));
+	view.title = ft_strdup(GAME_TITLE);
+	view.mlx = mlx_init();
+	view.mlx_win = mlx_new_window(view.mlx, WIN_WIDTH,
+			WIN_HEIGHT, view.title);
+	ft_memset(&plane_data, 0, sizeof(t_data));
+	plane_data.img = NULL;
+	view.plane_data = &plane_data;
+	map->view = &view;
 	ft_view_events(map);
-	ft_render_game_scene(map);
 	mlx_loop(map->view->mlx);
 }
 
@@ -39,15 +41,14 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 void	ft_view_events(t_map *map)
 {
-	mlx_key_hook(map->view->mlx_win, ft_keyboard_events, map->view);
-	mlx_hook(map->view->mlx_win, ON_DESTROY, 0, ft_close_window, map->view);
+	mlx_key_hook(map->view->mlx_win, ft_keyboard_events, map);
+	mlx_hook(map->view->mlx_win, ON_DESTROY, 0, ft_close_window, map);
 }
 
 int	ft_close_window(t_map *map)
 {
 	mlx_destroy_window(map->view->mlx, map->view->mlx_win);
 	free(map->view->title);
-	free(map->view->plane_data);
 	exit(0);
 }
 
@@ -75,5 +76,6 @@ int	ft_keyboard_events(int key, t_map *map)
 	{
 		printf("Arrow right or D\n");
 	}
+	ft_render_game_scene(map);
 	return (1);
 }
