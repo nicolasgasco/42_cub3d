@@ -49,7 +49,7 @@ void	ft_convert_to_cube_position(t_map *map)
 
 void	ft_set_viewing_angle(t_map *map)
 {
-	char c;
+	char	c;
 
 	c = map->prj->player_orientation;
 	if (c == 'E')

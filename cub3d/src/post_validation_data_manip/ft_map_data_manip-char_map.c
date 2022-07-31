@@ -18,8 +18,8 @@ void	ft_readline_char_map(int fd, char *line, t_tdata *texture)
 	int	i;
 
 	i = 0;
-	texture->texture_columns = (int **)malloc(sizeof(sizeof(int) * texture->texture_w)
-						* texture->texture_h);
+	texture->texture_columns = (int **)malloc(sizeof(sizeof(int)
+				* texture->texture_w) * texture->texture_h);
 	while (1)
 	{
 		line = get_next_line(fd);
