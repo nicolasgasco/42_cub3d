@@ -19,7 +19,7 @@ int	ft_transform_angle(int angle)
 {
 	if (angle == 0)
 		return (0);
-	return ((angle * PROJ_PLANE_WIDTH) / FIELD_OF_VIEW);
+	return ((angle * WIN_WIDTH) / FIELD_OF_VIEW);
 }
 
 /* ft_increment adds the increment vector to the current position */
@@ -41,17 +41,17 @@ int	ft_hit(t_map *map, t_vector position, int angle)
 	int	y;
 	int	x;
 
-	if (position.y < 0 || position.x < 0 || (position.y / CUBE_SIZE) >= (map->height - 1)
-		|| (position.x / CUBE_SIZE) >= map->width)
+	if (position.y < 0 || position.x < 0 || (position.y / TEXTURE_SIZE) >= (map->height - 1)
+		|| (position.x / TEXTURE_SIZE) >= map->width)
 		return (1);
 	if (ft_is_facing_down(angle) == 0)
-		y = ceil(position.y) / CUBE_SIZE;
+		y = ceil(position.y) / TEXTURE_SIZE;
 	else
-		y = floor(position.y) / CUBE_SIZE;
+		y = floor(position.y) / TEXTURE_SIZE;
 	if (ft_is_facing_right(angle))
-		x = ceil(position.x) / CUBE_SIZE;
+		x = ceil(position.x) / TEXTURE_SIZE;
 	else
-		x = floor(position.x) / CUBE_SIZE;
+		x = floor(position.x) / TEXTURE_SIZE;
 	if (map->map_content[y][x] == '1')
 		return (1);
 	return (0);

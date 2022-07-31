@@ -40,8 +40,8 @@ int	ft_is_facing_right(double angle)
 
 void	ft_convert_to_cube_position(t_map *map)
 {
-	map->prj->player->y = (map->prj->player->y * CUBE_SIZE) + (CUBE_SIZE / 2);
-	map->prj->player->x = (map->prj->player->x * CUBE_SIZE) + (CUBE_SIZE / 2);
+	map->prj->player->y = (map->prj->player->y * TEXTURE_SIZE) + (TEXTURE_SIZE / 2);
+	map->prj->player->x = (map->prj->player->x * TEXTURE_SIZE) + (TEXTURE_SIZE / 2);
 }
 
 /*ft_set_viewing_angle returns the angle of the view based on 
@@ -71,7 +71,7 @@ void	ft_set_player_data(t_map *map, int *iterator, int *j, char c)
 	map->prj->player->x = (*j);
 	map->prj->player_orientation = c;
 	ft_set_viewing_angle(map);
-	map->prj->distance_to_pp = (PROJ_PLANE_WIDTH / 2)
+	map->prj->distance_to_pp = (WIN_WIDTH / 2)
 		/ tan((FIELD_OF_VIEW / 2) * (PI / 180));
 	map->map_content[*iterator][*j] = '0';
 }

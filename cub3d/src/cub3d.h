@@ -64,9 +64,6 @@
 # define NO_TRANSPARENCY 0
 
 # define PI 3.14159265359
-# define PROJ_PLANE_WIDTH 1280
-# define PROJ_PLANE_HEIGHT 1024
-# define CUBE_SIZE 128
 # define FIELD_OF_VIEW 60
 
 /*Vector Struct*/
