@@ -22,13 +22,13 @@ int	main(int argc, char **argv)
 
 	ft_memset(&map, 0, sizeof(t_map));
 	ft_memset(&projection, 0, sizeof(t_projection));
-	ft_memset(&player, 0, sizeof(t_vector));
-	ft_memset(&rdata, 0, sizeof(t_rdata));
 	map.prj = &projection;
+	ft_memset(&player, 0, sizeof(t_vector));
 	map.prj->player = &player;
+	ft_memset(&rdata, 0, sizeof(t_rdata));
 	map.rdata = &rdata;
 	ft_scene_desc_file_validation(argc, argv[1], &map);
-	ft_post_validation_data_manip(&map, map.rdata);
+	ft_post_validation_data_manip(&map);
 	ft_render_view(&map);
 	// ft_free_allocated_map_data(&map);
 	// ft_free_allocated_render_data(&rdata);

@@ -269,9 +269,10 @@ void	ft_raycasting_calculation(t_map *map);
 void	ft_raycast_to_slice(t_map *map);
 
 /* Post validation data manip */
-void			ft_validate_texture_files(t_map *map, t_rdata *rdata);
+void			ft_validate_texture_files(t_map *map);
 int				ft_xpm_file_is_valid(char *path, void *mlx);
-void			ft_post_validation_data_manip(t_map *map, t_rdata *rdata);
+void			ft_post_validation_data_manip(t_map *map);
+void			ft_parse_all_texture_files(t_map *map);
 void			ft_free_allocated_render_data(t_rdata *rdata);
 t_tdata			ft_parse_texture_file(char *texture_path);
 // Post validation data manip - Floor/Ceiling Colors

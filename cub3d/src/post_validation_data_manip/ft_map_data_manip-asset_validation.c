@@ -13,7 +13,7 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-void ft_validate_texture_files(t_map *map, t_rdata *rdata)
+void ft_validate_texture_files(t_map *map)
 {
     void    *mlx;
     int     is_error;
@@ -31,7 +31,7 @@ void ft_validate_texture_files(t_map *map, t_rdata *rdata)
     if (is_error == 1)
     {
         ft_free_allocated_map_data(map);
-        ft_free_allocated_render_data(rdata);
+        ft_free_allocated_render_data(map->rdata);
         ft_putendl_fd("Error: texture file is invalid", STDERR_FILENO);
         exit(1000);
     }
