@@ -304,7 +304,7 @@ int				ft_keyboard_events(int key, t_map *map);
 void			ft_render_raycasting_column(t_map *map);
 void			ft_render_ceiling(t_map *map, int *y);
 void			ft_render_floor(t_map *map, int *y);
-void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void			ft_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			ft_render_game_scene(t_map *map);
 
 /* scaling textures */

@@ -44,7 +44,7 @@ void	ft_render_ceiling(t_map *map, int *y)
 	offset = (PROJ_PLANE_HEIGHT - map->slc->height) / 2;
 	while (*y < offset)
 	{
-		my_mlx_pixel_put(map->view->plane_data, map->slc->column,
+		ft_mlx_pixel_put(map->view->plane_data, map->slc->column,
 			*y, map->rdata->c_col_int);
 		*y += 1;
 	}
@@ -54,7 +54,7 @@ void	ft_render_floor(t_map *map, int *y)
 {
 	while (*y < PROJ_PLANE_HEIGHT)
 	{
-		my_mlx_pixel_put(map->view->plane_data, map->slc->column,
+		ft_mlx_pixel_put(map->view->plane_data, map->slc->column,
 			*y, map->rdata->f_col_int);
 		*y += 1;
 	}
