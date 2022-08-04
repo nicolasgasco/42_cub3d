@@ -206,8 +206,8 @@ int			ft_transform_angle(int angle);
 t_vector	ft_increment(t_vector position, t_vector increment);
 int			ft_hit(t_map *map, t_vector position, int angle);
 //Raycast tables
-t_vector	ft_horizontal_increment(int angle);
-t_vector	ft_vertical_increment(int angle);
+t_vector	ft_horizontal_increment(int texture_size, int angle);
+t_vector	ft_vertical_increment(int texture_size, int angle);
 double		ft_cosine(int angle);
 double		ft_sine(int angle);
 double		ft_tangent(int angle);
