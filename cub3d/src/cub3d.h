@@ -25,7 +25,6 @@
 # define GAME_TITLE "Cub3d - Brawl Stars"
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 1024
-# define TEXTURE_SIZE 128
 # define NUM_TEXTURES 4
 # define NO_TEXTURE_I 0
 # define EA_TEXTURE_I 1
@@ -153,6 +152,7 @@ typedef struct s_map
 	int				width;
 	int				y;
 	char			**map_content;
+	int				texture_size;
 	t_rdata			*rdata;
 	t_projection	*prj;
 	t_slice			*slc;
@@ -205,8 +205,8 @@ int			ft_transform_angle(int angle);
 t_vector	ft_increment(t_vector position, t_vector increment);
 int			ft_hit(t_map *map, t_vector position, int angle);
 //Raycast tables
-t_vector	ft_horizontal_increment(int angle);
-t_vector	ft_vertical_increment(int angle);
+t_vector	ft_horizontal_increment(int texture_size, int angle);
+t_vector	ft_vertical_increment(int texture_size, int angle);
 double		ft_cosine(int angle);
 double		ft_sine(int angle);
 double		ft_tangent(int angle);
@@ -267,12 +267,16 @@ void	ft_raycast_to_slice(t_map *map);
 
 /* Post validation data manip */
 void			ft_validate_texture_files(t_map *map);
-int				ft_xpm_file_is_valid(char *path, void *mlx);
+int				ft_get_texture_size(t_map *map, char *path);
+int				ft_parse_texture_size(char *line);
+int				ft_xpm_file_is_valid(t_map *map, char *path, void *mlx);
 void			ft_post_validation_data_manip(t_map *map);
 void			ft_parse_all_texture_files(t_map *map);
-void			ft_free_allocated_render_data(t_rdata *rdata);
+void			ft_free_allocated_render_data(t_map *map, t_rdata *rdata);
 t_tdata			ft_parse_texture_file(char *texture_path);
+// Post validation data manip - Errros
 void   			ft_color_not_numeric_error(void);
+void			ft_texture_file_invalid(t_map *map);
 // Post validation data manip - Floor/Ceiling Colors
 int				ft_rgb_str_to_int(char *col_str);
 void			ft_populate_rgb_int_arr(char *col_str, int *rgb);

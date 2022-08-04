@@ -40,8 +40,11 @@ int	ft_is_facing_right(double angle)
 
 void	ft_convert_to_cube_position(t_map *map)
 {
-	map->prj->player->y = (map->prj->player->y * TEXTURE_SIZE) + (TEXTURE_SIZE / 2);
-	map->prj->player->x = (map->prj->player->x * TEXTURE_SIZE) + (TEXTURE_SIZE / 2);
+	static int i = 0;
+
+	if (i == 0) {
+	map->prj->player->y = (map->prj->player->y * map->texture_size) + (map->texture_size / 2);
+	map->prj->player->x = (map->prj->player->x * map->texture_size) + (map->texture_size / 2);
 }
 
 /*ft_set_viewing_angle returns the angle of the view based on 
