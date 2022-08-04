@@ -25,7 +25,6 @@
 # define GAME_TITLE "Cub3d - Brawl Stars"
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 1024
-# define TEXTURE_SIZE 128
 # define NUM_TEXTURES 4
 # define NO_TEXTURE_I 0
 # define EA_TEXTURE_I 1
