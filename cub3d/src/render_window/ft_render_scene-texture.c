@@ -26,9 +26,9 @@ void	ft_render_texture_smaller_than_screen(t_map *map)
 	float	divider;
 	float	y;
 
-	divider = (float)TEXTURE_SIZE / (float)map->slc->height;
+	divider = (float)map->texture_size / (float)map->slc->height;
 	y = 0;
-	while (y < TEXTURE_SIZE)
+	while (y < map->texture_size)
 	{
 		ft_mlx_pixel_put(map->view->plane_data, map->slc->column, map->y,
 			map->rdata->textures[NO_TEXTURE_I].texture_columns[(int)y]
@@ -45,8 +45,8 @@ void	ft_render_texture_bigger_than_screen(t_map *map)
 	float	texture_y;
 
 	texture_y = (float)((map->slc->height - WIN_HEIGHT) / 2);
-	y = (texture_y * (float)TEXTURE_SIZE) / (float)map->slc->height;
-	divider = ((float)TEXTURE_SIZE - (y * 2.0f)) / (float)WIN_HEIGHT;
+	y = (texture_y * (float)map->texture_size) / (float)map->slc->height;
+	divider = ((float)map->texture_size - (y * 2.0f)) / (float)WIN_HEIGHT;
 	while (map->y < WIN_HEIGHT)
 	{
 		ft_mlx_pixel_put(map->view->plane_data, map->slc->column, map->y,

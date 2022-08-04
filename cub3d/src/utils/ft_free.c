@@ -40,10 +40,10 @@ void	ft_free_allocated_map_data(t_map *map)
 		free(map->c_color);
 	if (map->slc)
 		free(map->slc);
-	ft_free_allocated_render_data(map->rdata);
+	ft_free_allocated_render_data(map, map->rdata);
 }
 
-void	ft_free_allocated_render_data(t_rdata *rdata)
+void	ft_free_allocated_render_data(t_map *map, t_rdata *rdata)
 {
 	int				i;
 	int				j;
@@ -75,7 +75,7 @@ void	ft_free_allocated_render_data(t_rdata *rdata)
 			}
 		}
 		j = 0;
-		while (j < TEXTURE_SIZE)
+		while (j < map->texture_size)
 		{
 			if (rdata->textures[i].texture_columns[j])
 				free(rdata->textures[i].texture_columns[j]);

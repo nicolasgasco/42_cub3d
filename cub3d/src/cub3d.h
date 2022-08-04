@@ -153,6 +153,7 @@ typedef struct s_map
 	int				width;
 	int				y;
 	char			**map_content;
+	int				texture_size;
 	t_rdata			*rdata;
 	t_projection	*prj;
 	t_slice			*slc;
@@ -267,12 +268,16 @@ void	ft_raycast_to_slice(t_map *map);
 
 /* Post validation data manip */
 void			ft_validate_texture_files(t_map *map);
-int				ft_xpm_file_is_valid(char *path, void *mlx);
+int				ft_get_texture_size(t_map *map, char *path);
+int				ft_parse_texture_size(char *line);
+int				ft_xpm_file_is_valid(t_map *map, char *path, void *mlx);
 void			ft_post_validation_data_manip(t_map *map);
 void			ft_parse_all_texture_files(t_map *map);
-void			ft_free_allocated_render_data(t_rdata *rdata);
+void			ft_free_allocated_render_data(t_map *map, t_rdata *rdata);
 t_tdata			ft_parse_texture_file(char *texture_path);
+// Post validation data manip - Errros
 void   			ft_color_not_numeric_error(void);
+void			ft_texture_file_invalid(t_map *map);
 // Post validation data manip - Floor/Ceiling Colors
 int				ft_rgb_str_to_int(char *col_str);
 void			ft_populate_rgb_int_arr(char *col_str, int *rgb);
