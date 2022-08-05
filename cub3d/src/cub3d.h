@@ -319,6 +319,9 @@ void    		ft_rotate_leftwards(t_map *map);
 void    		ft_rotate_rightwards(t_map *map);
 /* Player movements - Utils */
 int     		ft_angle_to_degrees(int angle);
+char    		ft_get_current_map_char(t_map *map, double x, double y);
+double  		ft_forward_movement_hits_wall(t_map *map, double v_increase, double l_increase);
+double  		ft_backward_movement_hits_wall(t_map *map, double v_increase, double l_increase);
 
 /* scaling textures */
 void			ft_render_scaled_texture(t_map *map);
