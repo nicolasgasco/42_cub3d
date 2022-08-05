@@ -33,6 +33,7 @@
 
 /* Events */
 # define ON_DESTROY 17
+# define ON_KEY_DOWN 2
 
 /* Key bindings */
 // Linux
@@ -64,6 +65,8 @@
 
 # define PI 3.14159265359
 # define FIELD_OF_VIEW 60
+# define V_MOVEMENT_INCREMENT 55
+# define L_MOVEMENT_INCREMENT 30
 
 /*Vector Struct*/
 typedef struct s_vector
@@ -308,6 +311,14 @@ void			ft_render_ceiling(t_map *map, int *y);
 void			ft_render_floor(t_map *map, int *y);
 void			ft_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			ft_render_game_scene(t_map *map);
+
+/* Player movements */
+void    		ft_move_forward(t_map *map);
+void			ft_move_back(t_map *map);
+void    		ft_rotate_leftwards(t_map *map);
+void    		ft_rotate_rightwards(t_map *map);
+/* Player movements - Utils */
+int     		ft_angle_to_degrees(int angle);
 
 /* scaling textures */
 void			ft_render_scaled_texture(t_map *map);

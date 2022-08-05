@@ -42,9 +42,12 @@ void	ft_convert_to_cube_position(t_map *map)
 {
 	static int i = 0;
 
-	if (i == 0) {
-	map->prj->player->y = (map->prj->player->y * map->texture_size) + (map->texture_size / 2);
-	map->prj->player->x = (map->prj->player->x * map->texture_size) + (map->texture_size / 2);
+	if (i == 0)
+	{
+		map->prj->player->y = (map->prj->player->y * map->texture_size) + (map->texture_size / 2);
+		map->prj->player->x = (map->prj->player->x * map->texture_size) + (map->texture_size / 2);
+	}
+	i++;
 }
 
 /*ft_set_viewing_angle returns the angle of the view based on 

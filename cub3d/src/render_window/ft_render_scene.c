@@ -29,8 +29,8 @@ void	ft_render_raycasting_column(t_map *map)
 	plane = map->view->plane_data;
 	plane->addr = mlx_get_data_addr(plane->img, &plane->bits_per_pixel,
 			&plane->line_length, &plane->endian);
-	printf("\x1b[33mColumn is %d, Height is %d\x1b[0m\n",
-		map->slc->column, map->slc->height);
+	// printf("\x1b[33mColumn is %d, Height is %d\x1b[0m\n",
+	// 	map->slc->column, map->slc->height);
 	map->y = 0;
 	ft_render_ceiling(map, &map->y);
 	ft_render_scaled_texture(map);
