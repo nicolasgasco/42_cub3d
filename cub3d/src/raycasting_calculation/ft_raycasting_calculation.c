@@ -73,7 +73,7 @@ double	ft_calculate_distance(t_map *map)
 	double	distance_horizontal;
 	double	distance_vertical;
 
-	current_angle = map->prj->view_angle + map->slc->angle;
+	current_angle = ft_transform_angle(map->prj->view_angle) + map->slc->angle;
 	if (current_angle < 0)
 		current_angle += ft_transform_angle(360);
 	if (current_angle >= ft_transform_angle(360))

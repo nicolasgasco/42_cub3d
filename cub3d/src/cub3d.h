@@ -65,8 +65,8 @@
 
 # define PI 3.14159265359
 # define FIELD_OF_VIEW 60
-# define V_MOVEMENT_INCREMENT 55
-# define L_MOVEMENT_INCREMENT 30
+# define V_MOVEMENT_INCREMENT 70
+# define L_MOVEMENT_INCREMENT 15
 
 /*Vector Struct*/
 typedef struct s_vector

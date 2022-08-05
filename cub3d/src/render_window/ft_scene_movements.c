@@ -17,7 +17,7 @@ void    ft_move_forward(t_map *map)
 {
     int is_facing_down;
 
-    is_facing_down = ft_is_facing_down(map->prj->view_angle);
+    is_facing_down = ft_is_facing_down(ft_transform_angle(map->prj->view_angle));
     if (is_facing_down)
         map->prj->player->y += V_MOVEMENT_INCREMENT;
     else
@@ -28,7 +28,7 @@ void    ft_move_back(t_map *map)
 {
    int is_facing_down;
 
-    is_facing_down = ft_is_facing_down(map->prj->view_angle);
+    is_facing_down = ft_is_facing_down(ft_transform_angle(map->prj->view_angle));
     if (is_facing_down)
         map->prj->player->y -= V_MOVEMENT_INCREMENT;
     else
@@ -39,8 +39,8 @@ void    ft_rotate_leftwards(t_map *map)
 {
     int  new_angle;
 
-    new_angle = (ft_angle_to_degrees(map->prj->view_angle) + L_MOVEMENT_INCREMENT) % 360;
-    map->prj->view_angle = ft_transform_angle(new_angle);
+    new_angle = (map->prj->view_angle + L_MOVEMENT_INCREMENT) % 360;
+    map->prj->view_angle = new_angle;
 }
 
 void    ft_rotate_rightwards(t_map *map)
@@ -48,11 +48,13 @@ void    ft_rotate_rightwards(t_map *map)
     int new_angle;
     int current_angle;
 
-    current_angle = ft_angle_to_degrees(map->prj->view_angle);
+    current_angle = map->prj->view_angle;
     if (current_angle == 0)
         current_angle = 360;
+    else if (current_angle < 0)
+        current_angle = 360 - abs(current_angle);
     new_angle = current_angle - L_MOVEMENT_INCREMENT;
-    map->prj->view_angle = ft_transform_angle(new_angle);
+    map->prj->view_angle = new_angle;
 }
 
 int     ft_angle_to_degrees(int angle)
