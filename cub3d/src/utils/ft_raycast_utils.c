@@ -42,9 +42,12 @@ void	ft_convert_to_cube_position(t_map *map)
 {
 	static int i = 0;
 
-	if (i == 0) {
-	map->prj->player->y = (map->prj->player->y * map->texture_size) + (map->texture_size / 2);
-	map->prj->player->x = (map->prj->player->x * map->texture_size) + (map->texture_size / 2);
+	if (i == 0)
+	{
+		map->prj->player->y = (map->prj->player->y * map->texture_size) + (map->texture_size / 2);
+		map->prj->player->x = (map->prj->player->x * map->texture_size) + (map->texture_size / 2);
+	}
+	i++;
 }
 
 /*ft_set_viewing_angle returns the angle of the view based on 
@@ -56,13 +59,13 @@ void	ft_set_viewing_angle(t_map *map)
 
 	c = map->prj->player_orientation;
 	if (c == 'E')
-		map->prj->view_angle = ft_transform_angle(0);
+		map->prj->view_angle = 0;
 	else if (c == 'N')
-		map->prj->view_angle = ft_transform_angle(90);
+		map->prj->view_angle = 90;
 	else if (c == 'W')
-		map->prj->view_angle = ft_transform_angle(180);
+		map->prj->view_angle = 180;
 	else
-		map->prj->view_angle = ft_transform_angle(270);
+		map->prj->view_angle = 270;
 }
 
 /*ft_set_player_data creates and fills the structure for the 

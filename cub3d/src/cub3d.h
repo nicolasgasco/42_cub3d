@@ -33,6 +33,7 @@
 
 /* Events */
 # define ON_DESTROY 17
+# define ON_KEY_DOWN 2
 
 /* Key bindings */
 // Linux
@@ -57,6 +58,9 @@
 # define D_KEY_MAC 2
 # define S_KEY_MAC 1
 
+/* Mouse bindings */
+# define LEFT_CLICK 1
+
 // Conversion
 # define UPPERCASE_DIGIT_DIFF 55
 # define LOWERCASE_DIGIT_DIFF 87
@@ -64,6 +68,8 @@
 
 # define PI 3.14159265359
 # define FIELD_OF_VIEW 60
+# define V_MOVEMENT_INCREMENT 70
+# define L_MOVEMENT_INCREMENT 15
 
 /*Vector Struct*/
 typedef struct s_vector
@@ -301,6 +307,7 @@ void			ft_render_view(t_map *map);
 void			ft_view_events(t_map *map);
 int				ft_close_window(t_map *map);
 int				ft_keyboard_events(int key, t_map *map);
+int				ft_mouse_events(int button, int x, int y, t_map *map);
 
 /* Rendering textures */
 void			ft_render_raycasting_column(t_map *map);
@@ -308,6 +315,17 @@ void			ft_render_ceiling(t_map *map, int *y);
 void			ft_render_floor(t_map *map, int *y);
 void			ft_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			ft_render_game_scene(t_map *map);
+
+/* Player movements */
+void			ft_move_forward(t_map *map, int increment);
+void			ft_move_back(t_map *map, int increment);
+void			ft_rotate_leftwards(t_map *map, int increment);
+void    		ft_rotate_rightwards(t_map *map, int increment);
+/* Player movements - Utils */
+int     		ft_angle_to_degrees(int angle);
+char    		ft_get_current_map_char(t_map *map, double x, double y);
+double  		ft_forward_movement_hits_wall(t_map *map, double v_increase, double l_increase);
+double  		ft_backward_movement_hits_wall(t_map *map, double v_increase, double l_increase);
 
 /* scaling textures */
 void			ft_render_scaled_texture(t_map *map);

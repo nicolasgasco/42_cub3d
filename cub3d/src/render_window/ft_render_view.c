@@ -27,6 +27,7 @@ void	ft_render_view(t_map *map)
 	plane_data.img = NULL;
 	view.plane_data = &plane_data;
 	map->view = &view;
+	ft_render_game_scene(map);
 	ft_view_events(map);
 	mlx_loop(map->view->mlx);
 }

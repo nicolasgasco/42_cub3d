@@ -73,7 +73,7 @@ double	ft_calculate_distance(t_map *map)
 	double	distance_horizontal;
 	double	distance_vertical;
 
-	current_angle = map->prj->view_angle + map->slc->angle;
+	current_angle = ft_transform_angle(map->prj->view_angle) + map->slc->angle;
 	if (current_angle < 0)
 		current_angle += ft_transform_angle(360);
 	if (current_angle >= ft_transform_angle(360))
@@ -111,7 +111,7 @@ void	ft_raycasting_calculation(t_map *map)
 		map->slc->height = map->slc->distance_to_wall * ft_cosine(abs(map->slc->angle));
 		map->slc->height = (((double)(map->texture_size)) / map->slc->height) * map->prj->distance_to_pp;
 		ft_render_raycasting_column(map);
-		printf("wall_x : %d\n", map->slc->wall_x);
+		// printf("wall_x : %d\n", map->slc->wall_x);
 		map->slc->column++;
 		map->slc->angle--;
 	}
