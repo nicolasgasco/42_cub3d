@@ -30,7 +30,7 @@ executeErrorTest() {
     ./cub3d "$SCRIPT_PATH$TEST_FILE" > /dev/null 2> "$SCRIPT_PATH$TEST_OUTPUT"
 
     # Output check
-    if [ "$(cat $SCRIPT_PATH$DEBUG_FILE)" = "$1" ]
+    if [ "$(head -n 1 $SCRIPT_PATH$DEBUG_FILE)" = "$1" ]
     then
         echo "    ${GREEN}- Valid map (${NC}$(cat $SCRIPT_PATH$TEST_FILE)${GREEN}): ok ✅${NC}"
         echo "        Message:"
