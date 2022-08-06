@@ -43,7 +43,8 @@ SRC_NAME =	cub3d.c\
 		utils/ft_map_utils.c\
 		utils/ft_map_content_utils.c\
 		utils/ft_common_errs.c\
-		utils/ft_free.c\
+		utils/ft_free_0.c\
+		utils/ft_free_1.c\
 		utils/ft_debug.c\
 		utils/ft_raycast_utils.c\
 		utils/ft_raycast_utils1.c\

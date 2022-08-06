@@ -30,6 +30,7 @@
 # define EA_TEXTURE_I 1
 # define SO_TEXTURE_I 2
 # define WE_TEXTURE_I 3
+# define NUM_OF_TEXTURES 4
 
 /* Events */
 # define ON_DESTROY 17
@@ -169,12 +170,16 @@ typedef struct s_map
 // Utils - Common error
 void	ft_malloc_error(void);
 void	ft_open_file_error(void);
+void	ft_print_error_exit(t_map *map, char *msg, int err);
 // Utils - Debug
 void	ft_write_debug_msg(char *msg);
 void	ft_write_debug_msg_int(char *msg, int int_arg);
 // Utils - Free
 void	ft_free_allocated_map_data(t_map *map);
-void	ft_print_error_exit(t_map *map, char *msg, int err);
+void	ft_free_allocated_render_data(t_map *map, t_rdata *rdata);
+void	ft_free_map_content(t_map *map);
+void	ft_free_col_info_list(t_map *map, int *i);
+void	ft_free_texture_columns(t_map *map, int *i);
 void	ft_free_raycast_data(t_map *map);
 void	ft_free_slice_data(t_map *map);
 // Utils - Common utils
@@ -278,7 +283,6 @@ int				ft_parse_texture_size(char *line);
 int				ft_xpm_file_is_valid(t_map *map, char *path, void *mlx);
 void			ft_post_validation_data_manip(t_map *map);
 void			ft_parse_all_texture_files(t_map *map);
-void			ft_free_allocated_render_data(t_map *map, t_rdata *rdata);
 t_tdata			ft_parse_texture_file(char *texture_path);
 // Post validation data manip - Errros
 void   			ft_color_not_numeric_error(void);
