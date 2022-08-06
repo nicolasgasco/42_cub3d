@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_scene_desc_file_validation.c                    :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:14:49 by ngasco            #+#    #+#             */
-/*   Updated: 2022/06/09 13:14:58 by ngasco           ###   ########.fr       */
+/*   Updated: 2022/07/19 12:33:57 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-void	ft_malloc_error(void)
+void	ft_free_raycast_data(t_map *map)
 {
-	ft_putendl_fd("Error: memory error", STDERR_FILENO);
-	exit(100);
-}
-
-void	ft_open_file_error(void)
-{
-	ft_putendl_fd("Error: file opening failed", STDERR_FILENO);
-	exit(3);
-}
-
-void	ft_print_error_exit(t_map *map, char *msg, int err)
-{
-	ft_putendl_fd(msg, STDERR_FILENO);
-	ft_free_allocated_map_data(map);
-	exit(err);
+	if (map->prj->wall_to_render)
+		free(map->prj->wall_to_render);
+	if (map->slc)
+		free(map->slc);
 }

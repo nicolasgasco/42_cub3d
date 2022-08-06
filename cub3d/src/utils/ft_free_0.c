@@ -15,17 +15,8 @@
 
 void	ft_free_allocated_map_data(t_map *map)
 {
-	int	i;
-
-	i = 0;
-	while (i < map->height)
-	{
-		if (map->map_content[i])
-			free(map->map_content[i]);
-		i++;
-	}
 	if (map->map_content)
-		free(map->map_content);
+		ft_free_map_content(map);
 	if (map->no_path)
 		free(map->no_path);
 	if (map->so_path)
@@ -40,66 +31,74 @@ void	ft_free_allocated_map_data(t_map *map)
 		free(map->c_color);
 	if (map->slc)
 		free(map->slc);
-	ft_free_allocated_render_data(map, map->rdata);
+	if (map->rdata)
+		ft_free_allocated_render_data(map, map->rdata);
+}
+
+void	ft_free_map_content(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i < map->height)
+	{
+		if (map->map_content[i])
+			free(map->map_content[i]);
+		i++;
+	}
+	free(map->map_content);
 }
 
 void	ft_free_allocated_render_data(t_map *map, t_rdata *rdata)
 {
 	int				i;
-	int				j;
-	struct s_cinfo	*curr;
-	struct s_cinfo	*temp;
 
 	i = 0;
-	j = 0;
 	if (!rdata->textures)
-	{
-		printf("No existe\n");
 		return ;
-	}
-	while (i < 4)
+	while (i < NUM_OF_TEXTURES)
 	{
-		curr = rdata->textures[i].col_info_list;
-		while (curr)
-		{
-			if (curr->next)
-			{
-				temp = curr;
-				curr = temp->next;
-				free(temp);
-			}
-			else
-			{
-				free(curr);
-				break ;
-			}
-		}
-		j = 0;
-		while (j < map->texture_size)
-		{
-			if (rdata->textures[i].texture_columns[j])
-				free(rdata->textures[i].texture_columns[j]);
-			else
-				break ;
-			j++;
-		}
-		free(rdata->textures[i].texture_columns);
+		ft_free_col_info_list(map, &i);
+		ft_free_texture_columns(map, &i);
 		i++;
 	}
 	free(rdata->textures);
 }
 
-void	ft_print_error_exit(t_map *map, char *msg, int err)
+void	ft_free_col_info_list(t_map *map, int *i)
 {
-	ft_putendl_fd(msg, STDERR_FILENO);
-	ft_free_allocated_map_data(map);
-	exit(err);
+	struct s_cinfo	*curr;
+	struct s_cinfo	*temp;
+
+	curr = map->rdata->textures[*i].col_info_list;
+	while (curr)
+	{
+		if (curr->next)
+		{
+			temp = curr;
+			curr = temp->next;
+			free(temp);
+		}
+		else
+		{
+			free(curr);
+			break ;
+		}
+	}
 }
 
-void	ft_free_raycast_data(t_map *map)
+void	ft_free_texture_columns(t_map *map, int *i)
 {
-	if (map->prj->wall_to_render)
-		free(map->prj->wall_to_render);
-	if (map->slc)
-		free(map->slc);
+	int	j;
+
+	j = 0;
+	while (j < map->texture_size)
+	{
+		if (map->rdata->textures[*i].texture_columns[j])
+			free(map->rdata->textures[*i].texture_columns[j]);
+		else
+			break ;
+		j++;
+	}
+	free(map->rdata->textures[*i].texture_columns);
 }
