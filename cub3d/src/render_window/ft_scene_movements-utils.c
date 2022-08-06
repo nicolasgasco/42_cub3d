@@ -38,10 +38,10 @@ double	ft_forward_movement_hits_wall(t_map *map, double v_increase,
 
 	player_pos = map->prj->player;
 	i = 0;
-	while (i <= 10)
+	while (i <= V_MOVEMENT_INCREMENT)
 	{
-		new_v_value = player_pos->y - (v_increase / (double)10 * i);
-		new_l_value = player_pos->x + (l_increase / (double)10 * i);
+		new_v_value = player_pos->y - (v_increase / (double)V_MOVEMENT_INCREMENT * i);
+		new_l_value = player_pos->x + (l_increase / (double)V_MOVEMENT_INCREMENT * i);
 		if (ft_get_current_map_char(map, new_l_value, new_v_value) != '0')
 			return (1);
 		i++;
@@ -59,10 +59,10 @@ double	ft_backward_movement_hits_wall(t_map *map, double v_increase,
 
 	player_pos = map->prj->player;
 	i = 0;
-	while (i <= 10)
+	while (i <= V_MOVEMENT_INCREMENT)
 	{
-		new_v_value = player_pos->y + (v_increase / (double)10 * i);
-		new_l_value = player_pos->x - (l_increase / (double)10 * i);
+		new_v_value = player_pos->y + (v_increase / (double)V_MOVEMENT_INCREMENT * i);
+		new_l_value = player_pos->x - (l_increase / (double)V_MOVEMENT_INCREMENT * i);
 		if (ft_get_current_map_char(map, new_l_value, new_v_value) != '0')
 			return (1);
 		i++;
