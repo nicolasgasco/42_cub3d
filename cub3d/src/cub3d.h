@@ -31,6 +31,7 @@
 # define SO_TEXTURE_I 2
 # define WE_TEXTURE_I 3
 # define NUM_OF_TEXTURES 4
+# define XPM_SIZE_LINE_NUM 3
 
 /* Events */
 # define ON_DESTROY 17

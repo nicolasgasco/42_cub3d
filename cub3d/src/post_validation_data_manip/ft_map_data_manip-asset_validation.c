@@ -57,6 +57,7 @@ int	ft_get_texture_size(t_map *map, char *path)
 {
 	int		file_fd;
 	char	*line;
+	int		result;
 	int		i;
 
 	file_fd = open(path, O_RDONLY);
@@ -69,16 +70,20 @@ int	ft_get_texture_size(t_map *map, char *path)
 	while (1)
 	{
 		line = get_next_line(file_fd);
-		if (i == 3)
-			break;
+		if (i == XPM_SIZE_LINE_NUM)
+			break ;
 		if (line == NULL)
+		{
+			close(file_fd);
 			return (0);
+		}
 		free(line);
 		i++;
 	}
-	return (ft_parse_texture_size(line));
+	result = ft_parse_texture_size(line);
 	free(line);
 	close(file_fd);
+	return (result);
 }
 
 int	ft_parse_texture_size(char *line)
@@ -91,7 +96,7 @@ int	ft_parse_texture_size(char *line)
 	while (line[i] != '0')
 	{
 		if (ft_isspace(line[i]))
-			break;
+			break ;
 		i++;
 	}
 	result_string = ft_substr(line, 1, i - 1);

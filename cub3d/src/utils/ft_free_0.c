@@ -29,8 +29,6 @@ void	ft_free_allocated_map_data(t_map *map)
 		free(map->f_color);
 	if (map->c_color)
 		free(map->c_color);
-	if (map->slc)
-		free(map->slc);
 	if (map->rdata)
 		ft_free_allocated_render_data(map, map->rdata);
 }
