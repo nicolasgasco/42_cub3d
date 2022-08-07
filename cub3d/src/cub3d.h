@@ -25,13 +25,13 @@
 # define GAME_TITLE "Cub3d - Brawl Stars"
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 1024
-# define NUM_TEXTURES 4
 # define NO_TEXTURE_I 0
 # define EA_TEXTURE_I 1
 # define SO_TEXTURE_I 2
 # define WE_TEXTURE_I 3
 # define NUM_OF_TEXTURES 4
-# define XPM_SIZE_LINE_NUM 3
+# define TEXTURE_MIN_SIZE 32
+# define TEXTURE_MAX_SIZE 512
 
 /* Events */
 # define ON_DESTROY 17
@@ -279,15 +279,10 @@ void	ft_raycast_to_slice(t_map *map);
 
 /* Post validation data manip */
 void			ft_validate_texture_files(t_map *map);
-int				ft_get_texture_size(t_map *map, char *path);
-int				ft_parse_texture_size(char *line);
-int				ft_xpm_file_is_valid(t_map *map, char *path, void *mlx);
 void			ft_post_validation_data_manip(t_map *map);
-void			ft_parse_all_texture_files(t_map *map);
-t_tdata			ft_parse_texture_file(char *texture_path);
 // Post validation data manip - Errros
 void   			ft_color_not_numeric_error(void);
-void			ft_texture_file_invalid(t_map *map);
+void			ft_texture_file_invalid(t_map *map, void *mlx);
 // Post validation data manip - Floor/Ceiling Colors
 int				ft_rgb_str_to_int(char *col_str);
 void			ft_populate_rgb_int_arr(char *col_str, int *rgb);
@@ -303,6 +298,12 @@ struct s_cinfo	*ft_populate_col_info(char col_char, char *col_hex);
 void			ft_readline_asset_sizes(int fd, char *line, t_tdata *texture);
 void			ft_parse_asset_sizes(char *line, t_tdata *texture);
 int				ft_calc_size_len(char *line, int i);
+void			ft_parse_all_texture_files(t_map *map);
+t_tdata			ft_parse_texture_file(char *texture_path);
+int				ft_get_texture_sizes(t_map *map, char *path, int *width, int *height);
+void			ft_parse_texture_sizes(char *line, int *width, int *height);
+int				ft_xpm_file_is_valid(t_map *map, char *path, void *mlx);
+void			ft_asset_file_error(int	file_fd, t_map *map);
 // Post validation data manip - Char map
 void			ft_readline_char_map(int fd, char *line, t_tdata *texture);
 void			ft_fill_int_matrix_line(t_tdata *texture, char *line, int y);
