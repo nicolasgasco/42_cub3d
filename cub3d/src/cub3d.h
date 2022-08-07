@@ -301,6 +301,7 @@ int				ft_rgb_to_int(int t, int r, int g, int b);
 void			ft_readline_color_codes(int fd, char *line, t_tdata *texture);
 void			ft_parse_char_col(char *line, t_tdata *rdata);
 struct s_cinfo	*ft_create_col_info_struct(char *line);
+void			ft_double_color_id_error(void);
 int				ft_hex_str_to_int(char *hex);
 struct s_cinfo	*ft_populate_col_info(char col_char, char *col_hex);
 // Post validation data manip - Asset sizes

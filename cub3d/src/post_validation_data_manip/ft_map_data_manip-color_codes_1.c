@@ -1,4 +1,3 @@
-/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_scene_desc_file_validation.c                    :+:      :+:    :+:   */
@@ -13,56 +12,6 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-void	ft_readline_color_codes(int fd, char *line, t_tdata *texture)
-{
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
-		if (ft_str_contains_spaced_char(line, 'c'))
-		{
-			ft_parse_char_col(line, texture);
-			free(line);
-			break ;
-		}
-		free(line);
-	}
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
-		if (!ft_str_contains_spaced_char(line, 'c'))
-		{
-			free(line);
-			break ;
-		}
-		ft_parse_char_col(line, texture);
-		free(line);
-	}
-}
-
-void	ft_parse_char_col(char *line, t_tdata *texture)
-{
-	struct s_cinfo	*curr;
-
-	curr = texture->col_info_list;
-	if (!curr)
-	{
-		texture->col_info_list = ft_create_col_info_struct(line);
-		return ;
-	}
-	while (curr)
-	{
-		if (curr->next)
-			curr = curr->next;
-		else
-			break ;
-	}
-	curr->next = ft_create_col_info_struct(line);
-}
-
 struct s_cinfo	*ft_create_col_info_struct(char *line)
 {
 	int				i;
@@ -70,12 +19,12 @@ struct s_cinfo	*ft_create_col_info_struct(char *line)
 	char			*col_hex;
 
 	i = 0;
-	col_char = '\0';
 	col_hex = NULL;
+	col_char = line[i + 1];
+	if (!ft_isspace(line[i + 2]))
+		ft_double_color_id_error();
 	while (line[i] != '\0')
 	{
-		if (line[i] == '\"')
-			col_char = line[i + 1];
 		if (line[i] == 'c' && i != 1)
 		{
 			while (line[i] != ' ')
@@ -89,6 +38,12 @@ struct s_cinfo	*ft_create_col_info_struct(char *line)
 		i++;
 	}
 	return (ft_populate_col_info(col_char, col_hex));
+}
+
+void	ft_double_color_id_error(void)
+{
+	ft_putendl_fd("Error: texture file is invalid", STDERR_FILENO);
+	exit(1000);
 }
 
 struct s_cinfo	*ft_populate_col_info(char col_char, char *col_hex)
