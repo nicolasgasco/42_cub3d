@@ -6,7 +6,7 @@
 /*   By: jsolinis <jsolinis@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 19:56:57 by jsolinis          #+#    #+#             */
-/*   Updated: 2022/08/07 18:29:17 by jsolinis         ###   ########.fr       */
+/*   Updated: 2022/08/07 19:52:34 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,19 @@ double	ft_calculate_distance(t_map *map)
 	if (distance_horizontal < distance_vertical)
 	{
 		map->slc->wall_x = map->slc->h_wall_x;
+		if (ft_is_facing_down(current_angle))
+			map->slc->texture = 0;
+		else
+			map->slc->texture = 2;
 		return (distance_horizontal);
 	}
 	else
 	{
 		map->slc->wall_x = map->slc->v_wall_x;
+		if (ft_is_facing_right(current_angle))
+			map->slc->texture = 3;
+		else
+			map->slc->texture = 1;
 		return (distance_vertical);
 	}
 }

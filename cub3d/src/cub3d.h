@@ -6,7 +6,7 @@
 /*   By: jsolinis <jsolinis@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 23:29:00 by jsolinis          #+#    #+#             */
-/*   Updated: 2022/07/24 13:26:15 by jsolinis         ###   ########.fr       */
+/*   Updated: 2022/08/07 19:44:26 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ typedef struct s_slice
 	int			column;
 	double		distance_to_wall;
 	int			height;
-	char		*texture;
+	int			texture;
 	int			v_wall_x;
 	int			h_wall_x;
 	int			wall_x;
