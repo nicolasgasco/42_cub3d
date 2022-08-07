@@ -59,8 +59,6 @@ void	ft_rotate_rightwards(t_map *map, int increment)
 	current_angle = map->prj->view_angle;
 	if (current_angle == 0)
 		current_angle = 360;
-	else if (current_angle < 0)
-		current_angle = 360 - abs(current_angle);
 	new_angle = current_angle - increment;
 	map->prj->view_angle = new_angle;
 }
