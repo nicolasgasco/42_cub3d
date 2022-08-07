@@ -1,7 +1,7 @@
-NO ./assets/no_texture.xpm
-EA ./assets/ea_texture.xpm
-WE ./assets/we_texture.xpm
-SO ./assets/so_texture.xpm
+NO ./assets/128x128/no_texture.xpm
+EA ./assets/128x128/ea_texture.xpm
+WE ./assets/128x128/we_texture.xpm
+SO ./assets/128x128/so_texture.xpm
 F 135,111,82
 C 109,109,109
 

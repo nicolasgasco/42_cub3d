@@ -6,7 +6,7 @@
 /*   By: jsolinis <jsolinis@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 19:56:57 by jsolinis          #+#    #+#             */
-/*   Updated: 2022/07/24 13:36:25 by jsolinis         ###   ########.fr       */
+/*   Updated: 2022/08/07 18:29:17 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,10 @@ void	ft_raycasting_calculation(t_map *map)
 		map->slc->height = map->slc->distance_to_wall * ft_cosine(abs(map->slc->angle));
 		map->slc->height = (((double)(map->texture_size)) / map->slc->height) * map->prj->distance_to_pp;
 		ft_render_raycasting_column(map);
-		// printf("wall_x : %d\n", map->slc->wall_x);
 		map->slc->column++;
 		map->slc->angle--;
 	}
 	mlx_put_image_to_window(map->view->mlx, map->view->mlx_win,
 		map->view->plane_data->img, 0, 0);
+	free(map->slc);
 }
