@@ -72,6 +72,7 @@
 # define FIELD_OF_VIEW 60
 # define V_MOVEMENT_INCREMENT 70
 # define L_MOVEMENT_INCREMENT 15
+# define MIN_DISTANCE_TO_OBSTACLES 50
 
 /*Vector Struct*/
 typedef struct s_vector

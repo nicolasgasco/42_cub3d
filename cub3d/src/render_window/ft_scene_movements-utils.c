@@ -38,7 +38,7 @@ double	ft_forward_movement_hits_wall(t_map *map, double v_increase,
 
 	player_pos = map->prj->player;
 	i = 0;
-	while (i <= V_MOVEMENT_INCREMENT)
+	while (i <= (V_MOVEMENT_INCREMENT + MIN_DISTANCE_TO_OBSTACLES))
 	{
 		new_v_value = player_pos->y - (v_increase / (double)V_MOVEMENT_INCREMENT * i);
 		new_l_value = player_pos->x + (l_increase / (double)V_MOVEMENT_INCREMENT * i);
@@ -59,7 +59,7 @@ double	ft_backward_movement_hits_wall(t_map *map, double v_increase,
 
 	player_pos = map->prj->player;
 	i = 0;
-	while (i <= V_MOVEMENT_INCREMENT)
+	while (i <= (V_MOVEMENT_INCREMENT + MIN_DISTANCE_TO_OBSTACLES))
 	{
 		new_v_value = player_pos->y + (v_increase / (double)V_MOVEMENT_INCREMENT * i);
 		new_l_value = player_pos->x - (l_increase / (double)V_MOVEMENT_INCREMENT * i);
