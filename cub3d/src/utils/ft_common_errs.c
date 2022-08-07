@@ -24,3 +24,10 @@ void	ft_open_file_error(void)
 	ft_putendl_fd("Error: file opening failed", STDERR_FILENO);
 	exit(3);
 }
+
+void	ft_print_error_exit(t_map *map, char *msg, int err)
+{
+	ft_putendl_fd(msg, STDERR_FILENO);
+	ft_free_allocated_map_data(map);
+	exit(err);
+}

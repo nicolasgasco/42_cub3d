@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_scene_desc_file_validation.c                    :+:      :+:    :+:   */
+/*   ft_map_content_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -30,14 +30,6 @@ void	ft_check_player_number(t_map *map, int player)
 {
 	if (player != 1)
 		ft_print_error_exit(map, "Error. Incorrect player number.", 15);
-}
-
-void	ft_set_player_data(t_map *map, int *iterator, int *j, char c)
-{
-	map->player_y = (*iterator);
-	map->player_x = (*j);
-	map->player_orientation = c;
-	map->map_content[*iterator][*j] = '0';
 }
 
 int	ft_isspace_no_endl(char c)

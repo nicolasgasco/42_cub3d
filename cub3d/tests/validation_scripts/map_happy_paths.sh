@@ -30,7 +30,7 @@ executeErrorTest() {
     ./cub3d "$SCRIPT_PATH$TEST_FILE" > /dev/null 2> "$SCRIPT_PATH$TEST_OUTPUT"
 
     # Output check
-    if [ "$(cat $SCRIPT_PATH$DEBUG_FILE)" = "$1" ]
+    if [ "$(grep "$1" $SCRIPT_PATH$DEBUG_FILE | wc -l)" -eq 1 ]
     then
         echo "    ${GREEN}- Valid map (${NC}$(cat $SCRIPT_PATH$TEST_FILE)${GREEN}): ok ✅${NC}"
         echo "        Message:"
@@ -49,20 +49,9 @@ executeErrorTest() {
         exit 1
     fi
 
-    ERRS_FOUND=$(cat ${SCRIPT_PATH}${TEST_OUTPUT} | grep 'AddressSanitizer' | wc -l)
-    # Sanitizer checker
-    if [ $ERRS_FOUND -eq 0 ]
-    then
-        echo "        ${GREEN}No Sanitizer errors detected 👍${NC}"
-    else
-        echo "        ${RED}Sanitizer errors detected ⛔${NC}"
-        echo "\n$(less $SCRIPT_PATH$TEST_OUTPUT)"
-        exit 1
-    fi
-
     # Leaks check
     $VALGRIND ./cub3d "$SCRIPT_PATH$TEST_FILE" > /dev/null 2> "$SCRIPT_PATH$VALGRIND_OUTPUT"
-    VALGRIND_ERRORS=$(cat $SCRIPT_PATH$VALGRIND_OUTPUT | grep "in use at exit: 0 bytes in 0 blocks" | wc -l)
+    VALGRIND_ERRORS=$(cat $SCRIPT_PATH$VALGRIND_OUTPUT | grep "definitely lost: 0 bytes in 0 blocks" | wc -l)
     if [ $VALGRIND_ERRORS -eq  1 ]
     then
         echo "        ${GREEN}No memory leaks detected 👍${NC}"

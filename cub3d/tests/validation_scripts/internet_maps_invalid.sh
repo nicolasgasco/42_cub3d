@@ -51,17 +51,6 @@ internetMapsValid() {
         exit 1
     fi
 
-    ERRS_FOUND=$(cat ${SCRIPT_PATH}${TEST_OUTPUT} | grep 'AddressSanitizer' | wc -l)
-    # Sanitizer checker
-    if [ $ERRS_FOUND -eq 0 ]
-    then
-        echo "\n        ${GREEN}No Sanitizer errors detected 👍${NC}"
-    else
-        echo "        ${RED}Sanitizer errors detected ⛔${NC}"
-        echo "\n$(less $SCRIPT_PATH$TEST_OUTPUT)"
-        exit 1
-    fi
-
     # Leaks check
     $VALGRIND ./cub3d $1 > /dev/null 2> "$SCRIPT_PATH$VALGRIND_OUTPUT"
     VALGRIND_ERRORS=$(cat $SCRIPT_PATH$VALGRIND_OUTPUT | grep "in use at exit: 0 bytes in 0 blocks" | wc -l)

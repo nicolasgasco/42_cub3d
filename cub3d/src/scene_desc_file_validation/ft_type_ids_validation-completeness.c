@@ -44,11 +44,12 @@ void	ft_check_o_paths_duplicates(t_map *map)
 		ft_free_allocated_map_data(map);
 		ft_malloc_error();
 	}
-	path_arr[0] = map->no_path;
-	path_arr[1] = map->ea_path;
-	path_arr[2] = map->so_path;
-	path_arr[3] = map->we_path;
+	path_arr[0] = ft_strdup(map->no_path);
+	path_arr[1] = ft_strdup(map->ea_path);
+	path_arr[2] = ft_strdup(map->so_path);
+	path_arr[3] = ft_strdup(map->we_path);
 	ft_find_o_paths_duplicates(path_arr, map);
+	ft_free_validation_path_arr(path_arr);
 }
 
 void	ft_find_o_paths_duplicates(char **path_arr, t_map *map)
@@ -65,11 +66,23 @@ void	ft_find_o_paths_duplicates(char **path_arr, t_map *map)
 			if (j != i && !ft_strncmp(path_arr[i], path_arr[j],
 					ft_strlen(path_arr[i])))
 			{
-				free(path_arr);
+				ft_free_validation_path_arr(path_arr);
 				ft_duplicate_scene_info_error_exit(map);
 			}
 			j++;
 		}
+		i++;
+	}
+}
+
+void	ft_free_validation_path_arr(char **path_arr)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		free(path_arr[i]);
 		i++;
 	}
 	free(path_arr);
