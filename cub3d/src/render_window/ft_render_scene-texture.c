@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_scene_desc_file_validation.c                    :+:      :+:    :+:   */
+/*   ft_render_scene-texture.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:14:49 by ngasco            #+#    #+#             */
-/*   Updated: 2022/06/09 13:14:58 by ngasco           ###   ########.fr       */
+/*   Updated: 2022/08/07 19:53:23 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_render_texture_smaller_than_screen(t_map *map)
 	while (y < map->texture_size)
 	{
 		ft_mlx_pixel_put(map->view->plane_data, map->slc->column, map->y,
-			map->rdata->textures[NO_TEXTURE_I].texture_columns[(int)y]
+			map->rdata->textures[map->slc->texture].texture_columns[(int)y]
 		[map->slc->wall_x]);
 		map->y += 1;
 		y += divider;
@@ -50,7 +50,7 @@ void	ft_render_texture_bigger_than_screen(t_map *map)
 	while (map->y < WIN_HEIGHT)
 	{
 		ft_mlx_pixel_put(map->view->plane_data, map->slc->column, map->y,
-			map->rdata->textures[NO_TEXTURE_I].texture_columns[(int)y]
+			map->rdata->textures[map->slc->texture].texture_columns[(int)y]
 		[map->slc->wall_x]);
 		map->y += 1;
 		y += divider;
