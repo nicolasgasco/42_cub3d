@@ -13,52 +13,58 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-void	ft_readline_asset_sizes(int fd, char *line, t_tdata *texture)
+int	ft_get_texture_sizes(t_map *map, char *path, int *width, int *height)
 {
+	int		file_fd;
+	char	*line;
+	int		result;
+
+	file_fd = open(path, O_RDONLY);
+	ft_asset_file_error(file_fd, map);
 	while (1)
 	{
-		line = get_next_line(fd);
+		line = get_next_line(file_fd);
 		if (line == NULL)
-			break ;
-		if (line[1] >= '1' && line[1] <= '9')
 		{
-			ft_parse_asset_sizes(line, texture);
-			free(line);
-			break ;
+			close(file_fd);
+			return (0);
 		}
+		if (line[1] >= '1' && line[1] <= '9')
+			break ;
 		free(line);
 	}
+	ft_parse_texture_sizes(line, width, height);
+	free(line);
+	close(file_fd);
+	return (result);
 }
 
-void	ft_parse_asset_sizes(char *line, t_tdata *texture)
+void	ft_parse_texture_sizes(char *line, int *width, int *height)
 {
 	int		i;
-	int		len;
 	char	*num_str;
+	int		len;
 
 	i = 1;
 	ft_skip_to_non_space_char(line, &i);
 	len = ft_calc_size_len(line, i);
 	num_str = ft_substr(line, i, len);
-	texture->texture_w = ft_atoi(num_str);
+	*width = ft_atoi(num_str);
 	free(num_str);
 	i += len;
 	ft_skip_to_non_space_char(line, &i);
 	num_str = ft_substr(line, i, ft_calc_size_len(line, i));
-	texture->texture_h = ft_atoi(num_str);
+	*height = ft_atoi(num_str);
 	free(num_str);
+	return;
 }
 
-int	ft_calc_size_len(char *line, int iterator)
+void	ft_asset_file_error(int file_fd, t_map *map)
 {
-	int	i;
-
-	i = iterator;
-	while (line[i] != '\0')
+	if (file_fd == -1)
 	{
-		if (line[i] <= '0' || line[i] >= '9')
-			return (i);
-		i++;
+		ft_free_allocated_map_data(map);
+		ft_open_file_error();
 	}
-	return (i);
 }
+

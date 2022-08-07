@@ -19,10 +19,11 @@ void	ft_color_not_numeric_error(void)
 	exit(9999);
 }
 
-void	ft_texture_file_invalid(t_map *map)
+void	ft_texture_file_invalid(t_map *map, void *mlx)
 {
 	ft_free_allocated_map_data(map);
+	if (mlx)
+		free(mlx);
 	ft_putendl_fd("Error: texture file is invalid", STDERR_FILENO);
 	exit(1000);
 }
-

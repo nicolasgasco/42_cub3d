@@ -28,6 +28,8 @@ SRC_NAME =	cub3d.c\
 		post_validation_data_manip/ft_map_data_manip-char_map.c\
 		post_validation_data_manip/ft_map_data_manip-asset_validation.c\
 		post_validation_data_manip/ft_map_data_manip-errors.c\
+		post_validation_data_manip/ft_map_data_manip-texture_files.c\
+		post_validation_data_manip/ft_map_data_manip-asset_sizes_validation.c\
 		render_window/ft_render_view.c\
 		render_window/ft_render_scene.c\
 		render_window/ft_render_scene-texture.c\
