@@ -6,7 +6,7 @@
 /*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:14:49 by ngasco            #+#    #+#             */
-/*   Updated: 2022/07/19 12:52:06 by jsolinis         ###   ########.fr       */
+/*   Updated: 2022/08/07 20:24:59 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	ft_parse_all_texture_files(t_map *map)
 {
 	map->rdata->textures = (t_tdata *)malloc(sizeof(t_tdata) * NUM_OF_TEXTURES);
-    ft_memset(map->rdata->textures, 0, sizeof(t_tdata *));
+	ft_memset(map->rdata->textures, 0, sizeof(t_tdata *));
 	map->rdata->textures[NO_TEXTURE_I] = ft_parse_texture_file(map->no_path);
 	map->rdata->textures[EA_TEXTURE_I] = ft_parse_texture_file(map->ea_path);
 	map->rdata->textures[SO_TEXTURE_I] = ft_parse_texture_file(map->so_path);

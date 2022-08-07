@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_scene_desc_file_validation.c                    :+:      :+:    :+:   */
+/*   ft_map_data_manip-asset_sizes_validation.c         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:14:49 by ngasco            #+#    #+#             */
-/*   Updated: 2022/06/09 13:14:58 by ngasco           ###   ########.fr       */
+/*   Updated: 2022/08/07 20:25:49 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_parse_texture_sizes(char *line, int *width, int *height)
 	num_str = ft_substr(line, i, ft_calc_size_len(line, i));
 	*height = ft_atoi(num_str);
 	free(num_str);
-	return;
+	return ;
 }
 
 void	ft_asset_file_error(int file_fd, t_map *map)
@@ -67,4 +67,3 @@ void	ft_asset_file_error(int file_fd, t_map *map)
 		ft_open_file_error();
 	}
 }
-

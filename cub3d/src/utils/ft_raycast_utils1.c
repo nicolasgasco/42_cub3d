@@ -6,11 +6,33 @@
 /*   By: jsolinis <jsolinis@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 17:32:27 by jsolinis          #+#    #+#             */
-/*   Updated: 2022/07/24 13:05:01 by jsolinis         ###   ########.fr       */
+/*   Updated: 2022/08/07 20:23:00 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+/* ft_get_texture receives map & a char (H or V), depending on whether
+ * the closest hit was on the horizontal or the vertical axis, and sets
+ * the correct texture based on the player orientation */
+
+void	ft_get_texture(t_map *map, int angle, char axis)
+{
+	if (axis == 'H')
+	{
+		if (ft_is_facing_down(angle))
+			map->slc->texture = 0;
+		else
+			map->slc->texture = 2;
+	}
+	else
+	{	
+		if (ft_is_facing_right(angle))
+			map->slc->texture = 3;
+		else
+			map->slc->texture = 1;
+	}
+}
 
 /* ft_transform_angle converts the angle value to the rendered plane angle
  * based on projection plane width and the field of view */
@@ -41,7 +63,8 @@ int	ft_hit(t_map *map, t_vector position, int angle)
 	int	y;
 	int	x;
 
-	if (position.y < 0 || position.x < 0 || (position.y / map->texture_size) >= (map->height - 1)
+	if (position.y < 0 || position.x < 0
+		|| (position.y / map->texture_size) >= (map->height - 1)
 		|| (position.x / map->texture_size) >= map->width)
 		return (1);
 	if (ft_is_facing_down(angle) == 0)

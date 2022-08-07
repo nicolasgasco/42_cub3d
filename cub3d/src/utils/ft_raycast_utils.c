@@ -6,7 +6,7 @@
 /*   By: jsolinis <jsolinis@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 17:32:42 by jsolinis          #+#    #+#             */
-/*   Updated: 2022/07/24 12:57:28 by jsolinis         ###   ########.fr       */
+/*   Updated: 2022/08/07 20:22:09 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,14 @@ int	ft_is_facing_right(double angle)
 
 void	ft_convert_to_cube_position(t_map *map)
 {
-	static int i = 0;
+	static int	i = 0;
 
 	if (i == 0)
 	{
-		map->prj->player->y = (map->prj->player->y * map->texture_size) + (map->texture_size / 2);
-		map->prj->player->x = (map->prj->player->x * map->texture_size) + (map->texture_size / 2);
+		map->prj->player->y = (map->prj->player->y * map->texture_size)
+			+ (map->texture_size / 2);
+		map->prj->player->x = (map->prj->player->x * map->texture_size)
+			+ (map->texture_size / 2);
 	}
 	i++;
 }

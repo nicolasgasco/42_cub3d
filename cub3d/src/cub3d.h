@@ -6,7 +6,7 @@
 /*   By: jsolinis <jsolinis@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 23:29:00 by jsolinis          #+#    #+#             */
-/*   Updated: 2022/08/07 19:44:26 by jsolinis         ###   ########.fr       */
+/*   Updated: 2022/08/07 20:20:34 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,119 +170,127 @@ typedef struct s_map
 
 /* Utils */
 // Utils - Common error
-void	ft_malloc_error(void);
-void	ft_open_file_error(void);
-void	ft_print_error_exit(t_map *map, char *msg, int err);
+void			ft_malloc_error(void);
+void			ft_open_file_error(void);
+void			ft_print_error_exit(t_map *map, char *msg, int err);
 // Utils - Debug
-void	ft_write_debug_msg(char *msg);
-void	ft_write_debug_msg_int(char *msg, int int_arg);
+void			ft_write_debug_msg(char *msg);
+void			ft_write_debug_msg_int(char *msg, int int_arg);
 // Utils - Free
-void	ft_free_allocated_map_data(t_map *map);
-void	ft_free_allocated_render_data(t_map *map, t_rdata *rdata);
-void	ft_free_map_content(t_map *map);
-void	ft_free_col_info_list(t_map *map, int *i);
-void	ft_free_texture_columns(t_map *map, int *i);
-void	ft_free_raycast_data(t_map *map);
-void	ft_free_slice_data(t_map *map);
+void			ft_free_allocated_map_data(t_map *map);
+void			ft_free_allocated_render_data(t_map *map, t_rdata *rdata);
+void			ft_free_map_content(t_map *map);
+void			ft_free_col_info_list(t_map *map, int *i);
+void			ft_free_texture_columns(t_map *map, int *i);
+void			ft_free_raycast_data(t_map *map);
+void			ft_free_slice_data(t_map *map);
 // Utils - Common utils
-int		ft_open_file(char *file_path);
-int		ft_isspace(char c);
-void	ft_skip_to_non_space_char(char *line, int *iterator);
-char	*ft_substr_no_leaks(char *s, unsigned int start, size_t len);
-char	*ft_strtrim_no_leaks(char *s1, const char *set);
-int		ft_str_is_numeric(char *str);
-void	ft_skip_to_content(char *line, int *iterator);
-int		ft_str_contains_char(char *str, char c);
-int		ft_str_is_not_hex(char *str, int start);
-int		ft_str_contains_spaced_char(char *str, char c);
+int				ft_open_file(char *file_path);
+int				ft_isspace(char c);
+void			ft_skip_to_non_space_char(char *line, int *iterator);
+char			*ft_substr_no_leaks(char *s, unsigned int start, size_t len);
+char			*ft_strtrim_no_leaks(char *s1, const char *set);
+int				ft_str_is_numeric(char *str);
+void			ft_skip_to_content(char *line, int *iterator);
+int				ft_str_contains_char(char *str, char c);
+int				ft_str_is_not_hex(char *str, int start);
+int				ft_str_contains_spaced_char(char *str, char c);
 // Utils - Get next line
-char	*get_next_line(int fd);
+char			*get_next_line(int fd);
 // Utils - Map content
-int		ft_is_player_char(char c);
-int		ft_is_valid_map_char(char c);
-void	ft_check_player_number(t_map *map, int player);
-int		ft_isspace_no_endl(char c);
+int				ft_is_player_char(char c);
+int				ft_is_valid_map_char(char c);
+void			ft_check_player_number(t_map *map, int player);
+int				ft_isspace_no_endl(char c);
 // Utils - Map
-int		ft_is_map_start(char *line);
-void	ft_get_map_width(char *line, t_map *map);
-char	*ft_skip_to_map_start(char *line, int fd);
-void	ft_skip_to_non_space_char_backwards(char *line, int *iterator);
-char	*ft_check_to_eof(char *line, int fd, t_map *map);
+int				ft_is_map_start(char *line);
+void			ft_get_map_width(char *line, t_map *map);
+char			*ft_skip_to_map_start(char *line, int fd);
+void			ft_skip_to_non_space_char_backwards(char *line, int *iterator);
+char			*ft_check_to_eof(char *line, int fd, t_map *map);
 // Utils - Raycast
-void		ft_set_player_data(t_map *map, int *iterator, int *j, char c);
-void		ft_set_viewing_angle(t_map *map);
-void		ft_convert_to_cube_position(t_map *map);
-int			ft_is_facing_down(double angle);
-int			ft_is_facing_right(double angle);
-int			ft_transform_angle(int angle);
-t_vector	ft_increment(t_vector position, t_vector increment);
-int			ft_hit(t_map *map, t_vector position, int angle);
+void			ft_set_player_data(t_map *map, int *iterator, int *j, char c);
+void			ft_set_viewing_angle(t_map *map);
+void			ft_convert_to_cube_position(t_map *map);
+int				ft_is_facing_down(double angle);
+int				ft_is_facing_right(double angle);
+int				ft_transform_angle(int angle);
+t_vector		ft_increment(t_vector position, t_vector increment);
+int				ft_hit(t_map *map, t_vector position, int angle);
 //Raycast tables
-t_vector	ft_horizontal_increment(int texture_size, int angle);
-t_vector	ft_vertical_increment(int texture_size, int angle);
-double		ft_cosine(int angle);
-double		ft_sine(int angle);
-double		ft_tangent(int angle);
+t_vector		ft_horizontal_increment(int texture_size, int angle);
+t_vector		ft_vertical_increment(int texture_size, int angle);
+double			ft_cosine(int angle);
+double			ft_sine(int angle);
+double			ft_tangent(int angle);
+void			ft_get_texture(t_map *map, int angle, char axis);
 
 /* Scene desc validation errors */
-void	ft_invalid_extension_error_exit(void);
-void	ft_invalid_id_error_exit(t_map *map, char *line);
-void	ft_empty_scene_file_error_exit(void);
-void	ft_missing_file_path_error_exit(char *o_path_id, char *line,
-			t_map *map);
-void	ft_invalid_color_code_error_exit(t_map *map, char *line,
-			char *col_code_str);
-void	ft_invalid_col_statement_error_exit(t_map *map, char *line);
-void	ft_incomplete_scene_info_error_exit(t_map *map);
-void	ft_duplicate_scene_info_error_exit(t_map *map);
-void	ft_invalid_orientation_path_error_exit(char *line,
-			char *o_path_id, char *o_path);
+void			ft_invalid_extension_error_exit(void);
+void			ft_invalid_id_error_exit(t_map *map, char *line);
+void			ft_empty_scene_file_error_exit(void);
+void			ft_missing_file_path_error_exit(char *o_path_id, char *line,
+					t_map *map);
+void			ft_invalid_color_code_error_exit(t_map *map, char *line,
+					char *col_code_str);
+void			ft_invalid_col_statement_error_exit(t_map *map, char *line);
+void			ft_incomplete_scene_info_error_exit(t_map *map);
+void			ft_duplicate_scene_info_error_exit(t_map *map);
+void			ft_invalid_orientation_path_error_exit(char *line,
+					char *o_path_id, char *o_path);
 
 /* Scene description file validation */
-void	ft_scene_desc_file_validation(int argc, char *file_path, t_map *map);
-void	ft_check_num_args(int argc);
-void	ft_file_extension_validation(char *file_path);
+void			ft_scene_desc_file_validation(int argc, char *file_path,
+					t_map *map);
+void			ft_check_num_args(int argc);
+void			ft_file_extension_validation(char *file_path);
 // Type ids
-void	ft_type_ids_validation(char *file_path, t_map *map);
-int		ft_validate_scene_file_line(char *line, t_map *map);
+void			ft_type_ids_validation(char *file_path, t_map *map);
+int				ft_validate_scene_file_line(char *line, t_map *map);
 // Type ids - Orientation paths
-void	ft_validate_parse_o_path(char *line, int *i, t_map *map);
-char	*ft_validate_o_path(t_map *map, char *o_path_id, char *line, int *i);
-char	*ft_parse_valid_path(t_map *map, char *o_path_id, char *line, int *i);
-int		ft_calc_path_length(char *line, int i);
-int		ft_check_o_path_already_assigned(t_map *map, char *o_path_id);
-int		ft_validate_f_path(t_map *map, char *o_path, char *line, char *o_p_id);
+void			ft_validate_parse_o_path(char *line, int *i, t_map *map);
+char			*ft_validate_o_path(t_map *map, char *o_path_id,
+					char *line, int *i);
+char			*ft_parse_valid_path(t_map *map, char *o_path_id,
+					char *line, int *i);
+int				ft_calc_path_length(char *line, int i);
+int				ft_check_o_path_already_assigned(t_map *map, char *o_path_id);
+int				ft_validate_f_path(t_map *map, char *o_path, char *line,
+					char *o_p_id);
 // Type ids - Colors validation
-void	ft_validate_parse_color(char *line, int *i, t_map *map);
-char	*ft_validate_color_codes(char *line, int *i, t_map *map);
-int		ft_parse_color_codes(char *line, int *iterator, t_map *map);
-int		ft_parse_single_color_code(t_map *map, char *line, int *iterator);
-void	ft_validate_single_col_code(t_map *map, char *col_code_str, char *line);
-void	ft_check_col_already_assigned(t_map *map, char *color_id, char *line);
-int		ft_check_if_other_num_same_line(char *line, int iterator);
+void			ft_validate_parse_color(char *line, int *i, t_map *map);
+char			*ft_validate_color_codes(char *line, int *i, t_map *map);
+int				ft_parse_color_codes(char *line, int *iterator, t_map *map);
+int				ft_parse_single_color_code(t_map *map, char *line,
+					int *iterator);
+void			ft_validate_single_col_code(t_map *map, char *col_code_str,
+					char *line);
+void			ft_check_col_already_assigned(t_map *map, char *color_id,
+					char *line);
+int				ft_check_if_other_num_same_line(char *line, int iterator);
 // Type ids - Completeness check
-void	ft_type_ids_completeness_check(t_map *map);
-void	ft_completeness_check_colors(t_map *map);
-void	ft_completeness_check_o_paths(t_map *map);
-void	ft_check_o_paths_duplicates(t_map *map);
-void	ft_find_o_paths_duplicates(char **path_arr, t_map *map);
-void	ft_free_validation_path_arr(char **path_arr);
+void			ft_type_ids_completeness_check(t_map *map);
+void			ft_completeness_check_colors(t_map *map);
+void			ft_completeness_check_o_paths(t_map *map);
+void			ft_check_o_paths_duplicates(t_map *map);
+void			ft_find_o_paths_duplicates(char **path_arr, t_map *map);
+void			ft_free_validation_path_arr(char **path_arr);
 // Map content
-void	ft_map_content_validation(char *file_path, t_map *map);
-void	ft_check_characters(t_map *map);
-void	ft_validate_size(t_map *map);
-void	ft_validate_walls(t_map *map);
-void	ft_validate_content(t_map *map);
+void			ft_map_content_validation(char *file_path, t_map *map);
+void			ft_check_characters(t_map *map);
+void			ft_validate_size(t_map *map);
+void			ft_validate_walls(t_map *map);
+void			ft_validate_content(t_map *map);
 
 /* Raycasting Calculation */
-void	ft_raycasting_calculation(t_map *map);
-void	ft_raycast_to_slice(t_map *map);
+void			ft_raycasting_calculation(t_map *map);
+void			ft_raycast_to_slice(t_map *map);
 
 /* Post validation data manip */
 void			ft_validate_texture_files(t_map *map);
 void			ft_post_validation_data_manip(t_map *map);
 // Post validation data manip - Errros
-void   			ft_color_not_numeric_error(void);
+void			ft_color_not_numeric_error(void);
 void			ft_texture_file_invalid(t_map *map, void *mlx);
 // Post validation data manip - Floor/Ceiling Colors
 int				ft_rgb_str_to_int(char *col_str);
@@ -301,10 +309,11 @@ void			ft_parse_asset_sizes(char *line, t_tdata *texture);
 int				ft_calc_size_len(char *line, int i);
 void			ft_parse_all_texture_files(t_map *map);
 t_tdata			ft_parse_texture_file(char *texture_path);
-int				ft_get_texture_sizes(t_map *map, char *path, int *width, int *height);
+int				ft_get_texture_sizes(t_map *map, char *path, int *width,
+					int *height);
 void			ft_parse_texture_sizes(char *line, int *width, int *height);
 int				ft_xpm_file_is_valid(t_map *map, char *path, void *mlx);
-void			ft_asset_file_error(int	file_fd, t_map *map);
+void			ft_asset_file_error(int file_fd, t_map *map);
 // Post validation data manip - Char map
 void			ft_readline_char_map(int fd, char *line, t_tdata *texture);
 void			ft_fill_int_matrix_line(t_tdata *texture, char *line, int y);
@@ -315,7 +324,7 @@ void			ft_view_events(t_map *map);
 int				ft_close_window(t_map *map);
 int				ft_keyboard_events(int key, t_map *map);
 int				ft_mouse_events(int button, int x, int y, t_map *map);
-void 			ft_mouse_rotation(int x, t_map *map);
+void			ft_mouse_rotation(int x, t_map *map);
 void			ft_mouse_v_movement(int y, t_map *map);
 
 /* Rendering textures */
@@ -329,12 +338,14 @@ void			ft_render_game_scene(t_map *map);
 void			ft_move_forward(t_map *map, int increment);
 void			ft_move_back(t_map *map, int increment);
 void			ft_rotate_leftwards(t_map *map, int increment);
-void    		ft_rotate_rightwards(t_map *map, int increment);
+void			ft_rotate_rightwards(t_map *map, int increment);
 /* Player movements - Utils */
-int     		ft_angle_to_degrees(int angle);
-char    		ft_get_current_map_char(t_map *map, double x, double y);
-double  		ft_forward_movement_hits_wall(t_map *map, double v_increase, double l_increase);
-double  		ft_backward_movement_hits_wall(t_map *map, double v_increase, double l_increase);
+int				ft_angle_to_degrees(int angle);
+char			ft_get_current_map_char(t_map *map, double x, double y);
+double			ft_forward_movement_hits_wall(t_map *map, double v_increase,
+					double l_increase);
+double			ft_backward_movement_hits_wall(t_map *map, double v_increase,
+					double l_increase);
 
 /* scaling textures */
 void			ft_render_scaled_texture(t_map *map);

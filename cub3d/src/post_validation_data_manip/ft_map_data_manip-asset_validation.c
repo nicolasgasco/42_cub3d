@@ -6,7 +6,7 @@
 /*   By: ngasco <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:14:49 by ngasco            #+#    #+#             */
-/*   Updated: 2022/07/19 12:51:49 by jsolinis         ###   ########.fr       */
+/*   Updated: 2022/08/07 20:23:51 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,3 @@ int	ft_xpm_file_is_valid(t_map *map, char *path, void *mlx)
 		mlx_destroy_image(mlx, img);
 	return (1);
 }
-
