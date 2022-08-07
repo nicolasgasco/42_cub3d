@@ -178,10 +178,10 @@ void			ft_write_debug_msg(char *msg);
 void			ft_write_debug_msg_int(char *msg, int int_arg);
 // Utils - Free
 void			ft_free_allocated_map_data(t_map *map);
-void			ft_free_allocated_render_data(t_map *map, t_rdata *rdata);
+void			ft_free_allocated_render_data(t_map *map);
 void			ft_free_map_content(t_map *map);
-void			ft_free_col_info_list(t_map *map, int *i);
-void			ft_free_texture_columns(t_map *map, int *i);
+void			ft_free_col_info_list(t_tdata *texture);
+void			ft_free_texture_columns(t_map *map, t_tdata *texture);
 void			ft_free_raycast_data(t_map *map);
 void			ft_free_slice_data(t_map *map);
 // Utils - Common utils

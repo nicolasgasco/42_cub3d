@@ -30,7 +30,7 @@ void	ft_free_allocated_map_data(t_map *map)
 	if (map->c_color)
 		free(map->c_color);
 	if (map->rdata)
-		ft_free_allocated_render_data(map, map->rdata);
+		ft_free_allocated_render_data(map);
 }
 
 void	ft_free_map_content(t_map *map)
@@ -47,28 +47,30 @@ void	ft_free_map_content(t_map *map)
 	free(map->map_content);
 }
 
-void	ft_free_allocated_render_data(t_map *map, t_rdata *rdata)
+void	ft_free_allocated_render_data(t_map *map)
 {
-	int				i;
+	int		i;
+	t_tdata	*texture;
 
 	i = 0;
-	if (!rdata->textures)
+	if (!map->rdata->textures)
 		return ;
 	while (i < NUM_OF_TEXTURES)
 	{
-		ft_free_col_info_list(map, &i);
-		ft_free_texture_columns(map, &i);
+		texture = &map->rdata->textures[i];
+		ft_free_col_info_list(texture);
+		ft_free_texture_columns(map, texture);
 		i++;
 	}
-	free(rdata->textures);
+	free(map->rdata->textures);
 }
 
-void	ft_free_col_info_list(t_map *map, int *i)
+void	ft_free_col_info_list(t_tdata *texture)
 {
 	struct s_cinfo	*curr;
 	struct s_cinfo	*temp;
 
-	curr = map->rdata->textures[*i].col_info_list;
+	curr = texture->col_info_list;
 	while (curr)
 	{
 		if (curr->next)
@@ -85,18 +87,18 @@ void	ft_free_col_info_list(t_map *map, int *i)
 	}
 }
 
-void	ft_free_texture_columns(t_map *map, int *i)
+void	ft_free_texture_columns(t_map *map, t_tdata *texture)
 {
 	int	j;
 
 	j = 0;
 	while (j < map->texture_size)
 	{
-		if (map->rdata->textures[*i].texture_columns[j])
-			free(map->rdata->textures[*i].texture_columns[j]);
+		if (texture->texture_columns[j])
+			free(texture->texture_columns[j]);
 		else
 			break ;
 		j++;
 	}
-	free(map->rdata->textures[*i].texture_columns);
+	free(texture->texture_columns);
 }

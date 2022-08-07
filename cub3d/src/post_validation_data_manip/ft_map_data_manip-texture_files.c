@@ -38,5 +38,6 @@ t_tdata	ft_parse_texture_file(char *texture_path)
 	ft_readline_asset_sizes(fd, line, &texture);
 	ft_readline_color_codes(fd, line, &texture);
 	ft_readline_char_map(fd, line, &texture);
+	close(fd);
 	return (texture);
 }
