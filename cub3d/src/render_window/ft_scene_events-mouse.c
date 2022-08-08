@@ -13,47 +13,32 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-int	ft_mouse_events(int button, int x, int y, t_map *map)
+int	ft_mouse_events(int x, int y, t_map *map)
 {
-	if (button != LEFT_CLICK && y)
-		return (1);
-	ft_mouse_rotation(x, map);
-	ft_mouse_v_movement(y, map);
+	ft_mouse_rotation(x, y, map);
 	ft_render_game_scene(map);
 	return (0);
 }
 
-void	ft_mouse_rotation(int x, t_map *map)
+void	ft_mouse_rotation(int x, int y, t_map *map)
 {
-	int	win_half;
-	int	degrees;
+	int	win_quarter;
+	int	win_eighth;
+	int	increment;
 
-	win_half = WIN_WIDTH / 2;
-	if (x >= win_half)
+	win_quarter = WIN_WIDTH / 4;
+	win_eighth = WIN_WIDTH / 8;
+	increment = 1;
+	if (x <= win_quarter && y)
 	{
-		x -= win_half;
-		degrees = x * (FIELD_OF_VIEW / 2) / win_half;
-		if (degrees > L_MOVEMENT_INCREMENT)
-			degrees = L_MOVEMENT_INCREMENT;
-		ft_rotate_rightward(map, map->prj->view_angle, degrees);
+		if (x <= win_eighth)
+			increment = 3;
+		ft_rotate_leftward(map, map->prj->view_angle, increment);
 	}
-	else
+	else if (x >= (WIN_WIDTH - win_quarter))
 	{
-		x = win_half - x;
-		degrees = x * (FIELD_OF_VIEW / 2) / win_half;
-		if (degrees > L_MOVEMENT_INCREMENT)
-			degrees = L_MOVEMENT_INCREMENT;
-		ft_rotate_leftward(map, map->prj->view_angle, degrees);
+		if (x >= (WIN_WIDTH - win_eighth))
+			increment = 3;
+		ft_rotate_rightward(map, map->prj->view_angle, 1);
 	}
-}
-
-void	ft_mouse_v_movement(int y, t_map *map)
-{
-	int	win_half;
-
-	win_half = WIN_WIDTH / 2;
-	if (y <= win_half)
-		ft_move_forward(map, map->prj->view_angle, V_MOVEMENT_INCREMENT);
-	else
-		ft_move_backward(map, map->prj->view_angle, V_MOVEMENT_INCREMENT);
 }
