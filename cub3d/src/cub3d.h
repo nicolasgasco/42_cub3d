@@ -308,7 +308,7 @@ void			ft_parse_asset_sizes(char *line, t_tdata *texture);
 int				ft_calc_size_len(char *line, int i);
 void			ft_parse_all_texture_files(t_map *map);
 t_tdata			ft_parse_texture_file(char *texture_path);
-int				ft_get_texture_sizes(t_map *map, char *path, int *width,
+void			ft_get_texture_sizes(t_map *map, char *path, int *width,
 					int *height);
 void			ft_parse_texture_sizes(char *line, int *width, int *height);
 int				ft_xpm_file_is_valid(t_map *map, char *path, void *mlx);
