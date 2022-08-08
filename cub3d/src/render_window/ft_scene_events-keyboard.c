@@ -37,5 +37,6 @@ int	ft_close_window(t_map *map)
 {
 	mlx_destroy_window(map->view->mlx, map->view->mlx_win);
 	ft_free_allocated_map_data(map);
+	ft_free_raycast_data(map);
 	exit (0);
 }

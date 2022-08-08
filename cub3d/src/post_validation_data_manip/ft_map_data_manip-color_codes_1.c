@@ -44,7 +44,7 @@ struct s_cinfo	*ft_create_col_info_struct(char *line)
 void	ft_double_color_id_error(void)
 {
 	ft_putendl_fd("Error: texture file is invalid", STDERR_FILENO);
-	exit(1000);
+	exit(12);
 }
 
 struct s_cinfo	*ft_populate_col_info(char col_char, char *col_hex)
