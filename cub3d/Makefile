@@ -35,7 +35,8 @@ SRC_NAME =	cub3d.c\
 		render_window/ft_render_scene.c\
 		render_window/ft_render_scene-texture.c\
 		render_window/ft_scene_events.c\
-		render_window/ft_scene_movements.c\
+		render_window/ft_scene_movements_linear.c\
+		render_window/ft_scene_movements_rotation.c\
 		render_window/ft_scene_movements-utils.c\
 		render_window/ft_scene_events-mouse.c\
 		render_window/ft_scene_events-keyboard.c\

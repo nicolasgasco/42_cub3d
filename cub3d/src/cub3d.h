@@ -71,6 +71,7 @@
 # define PI 3.14159265359
 # define FIELD_OF_VIEW 60
 # define V_MOVEMENT_INCREMENT 70
+# define H_MOVEMENT_INCREMENT 50
 # define L_MOVEMENT_INCREMENT 15
 # define MIN_DISTANCE_TO_OBSTACLES 50
 
@@ -334,10 +335,12 @@ void			ft_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			ft_render_game_scene(t_map *map);
 
 /* Player movements */
-void			ft_move_forward(t_map *map, int increment);
-void			ft_move_back(t_map *map, int increment);
-void			ft_rotate_leftwards(t_map *map, int increment);
-void			ft_rotate_rightwards(t_map *map, int increment);
+void			ft_move_forward(t_map *map, double angle, int increment);
+void			ft_move_backward(t_map *map, double angle, int increment);
+void			ft_move_leftward(t_map *map, double angle, int increment);
+void			ft_move_rightward(t_map *map, double angle, int increment);
+void			ft_rotate_leftward(t_map *map, double angle, int increment);
+void			ft_rotate_rightward(t_map *map, double angle, int increment);
 /* Player movements - Utils */
 int				ft_angle_to_degrees(int angle);
 char			ft_get_current_map_char(t_map *map, double x, double y);
