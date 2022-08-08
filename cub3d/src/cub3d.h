@@ -31,7 +31,7 @@
 # define WE_TEXTURE_I 3
 # define NUM_OF_TEXTURES 4
 # define TEXTURE_MIN_SIZE 32
-# define TEXTURE_MAX_SIZE 512
+# define TEXTURE_MAX_SIZE 256
 
 /* Events */
 # define ON_DESTROY 17
