@@ -75,8 +75,10 @@ int	ft_str_is_not_hex(char *str, int start)
 	int	i;
 
 	i = start;
-	while (str[i] != '\0' && i < 6)
+	while (str[i] != '\0' && str[i] != '\"')
 	{
+		if (i > (start + 5))
+			return (1);
 		if (ft_isalpha(str[i]))
 		{
 			if (str[i] < 'A' && str[i] > 'F')

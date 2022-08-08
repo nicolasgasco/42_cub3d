@@ -13,9 +13,9 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-void	ft_color_not_numeric_error(void)
+void	ft_color_not_valid_error(void)
 {
-	ft_putendl_fd("Color not numeric", STDERR_FILENO);
+	ft_putendl_fd("Error: color code not valid", STDERR_FILENO);
 	exit(9999);
 }
 
