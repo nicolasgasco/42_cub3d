@@ -13,11 +13,10 @@
 #include "../cub3d.h"
 #include "../../Libft/libft.h"
 
-int	ft_get_texture_sizes(t_map *map, char *path, int *width, int *height)
+void	ft_get_texture_sizes(t_map *map, char *path, int *width, int *height)
 {
 	int		file_fd;
 	char	*line;
-	int		result;
 
 	file_fd = open(path, O_RDONLY);
 	ft_asset_file_error(file_fd, map);
@@ -27,7 +26,7 @@ int	ft_get_texture_sizes(t_map *map, char *path, int *width, int *height)
 		if (line == NULL)
 		{
 			close(file_fd);
-			return (0);
+			return ;
 		}
 		if (line[1] >= '1' && line[1] <= '9')
 			break ;
@@ -36,7 +35,6 @@ int	ft_get_texture_sizes(t_map *map, char *path, int *width, int *height)
 	ft_parse_texture_sizes(line, width, height);
 	free(line);
 	close(file_fd);
-	return (result);
 }
 
 void	ft_parse_texture_sizes(char *line, int *width, int *height)
