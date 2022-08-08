@@ -17,18 +17,18 @@ int	ft_keyboard_events(int key, t_map *map)
 {
 	if (key == ESC_KEY_LINUX || key == ESC_KEY_MAC)
 		ft_close_window(map);
-	else if ((key == W_KEY_LINUX || key == UP_ARR_LINUX)
-		|| (key == W_KEY_MAC || key == UP_ARR_MAC))
-		ft_move_forward(map, V_MOVEMENT_INCREMENT);
-	else if ((key == A_KEY_LINUX || key == LEFT_ARR_LINUX)
-		|| (key == A_KEY_MAC || key == LEFT_ARR_MAC))
-		ft_rotate_leftwards(map, L_MOVEMENT_INCREMENT);
-	else if ((key == S_KEY_LINUX || key == DOWN_ARR_LINUX)
-		|| (key == S_KEY_MAC || key == DOWN_ARR_MAC))
-		ft_move_back(map, V_MOVEMENT_INCREMENT);
-	else if ((key == D_KEY_LINUX || key == RIGHT_ARR_LINUX)
-		|| (key == D_KEY_MAC || key == RIGHT_ARR_MAC))
-		ft_rotate_rightwards(map, L_MOVEMENT_INCREMENT);
+	else if (key == W_KEY_LINUX || key == W_KEY_MAC)
+		ft_move_forward(map, map->prj->view_angle, V_MOVEMENT_INCREMENT);
+	else if (key == S_KEY_LINUX || key == S_KEY_MAC)
+		ft_move_backward(map, map->prj->view_angle, V_MOVEMENT_INCREMENT);
+	else if (key == A_KEY_LINUX || key == A_KEY_MAC)
+		ft_move_leftward(map, map->prj->view_angle, H_MOVEMENT_INCREMENT);
+	else if (key == D_KEY_LINUX || key == D_KEY_MAC)
+		ft_move_rightward(map, map->prj->view_angle, H_MOVEMENT_INCREMENT);
+	else if (key == LEFT_ARR_LINUX || key == LEFT_ARR_MAC)
+		ft_rotate_leftward(map, map->prj->view_angle, L_MOVEMENT_INCREMENT);
+	else if (key == RIGHT_ARR_LINUX || key == RIGHT_ARR_MAC)
+		ft_rotate_rightward(map, map->prj->view_angle, L_MOVEMENT_INCREMENT);
 	ft_render_game_scene(map);
 	return (1);
 }

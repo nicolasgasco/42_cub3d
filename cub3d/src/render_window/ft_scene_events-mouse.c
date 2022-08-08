@@ -35,7 +35,7 @@ void	ft_mouse_rotation(int x, t_map *map)
 		degrees = x * (FIELD_OF_VIEW / 2) / win_half;
 		if (degrees > L_MOVEMENT_INCREMENT)
 			degrees = L_MOVEMENT_INCREMENT;
-		ft_rotate_rightwards(map, degrees);
+		ft_rotate_rightward(map, map->prj->view_angle, degrees);
 	}
 	else
 	{
@@ -43,7 +43,7 @@ void	ft_mouse_rotation(int x, t_map *map)
 		degrees = x * (FIELD_OF_VIEW / 2) / win_half;
 		if (degrees > L_MOVEMENT_INCREMENT)
 			degrees = L_MOVEMENT_INCREMENT;
-		ft_rotate_leftwards(map, degrees);
+		ft_rotate_leftward(map, map->prj->view_angle, degrees);
 	}
 }
 
@@ -53,7 +53,7 @@ void	ft_mouse_v_movement(int y, t_map *map)
 
 	win_half = WIN_WIDTH / 2;
 	if (y <= win_half)
-		ft_move_forward(map, V_MOVEMENT_INCREMENT);
+		ft_move_forward(map, map->prj->view_angle, V_MOVEMENT_INCREMENT);
 	else
-		ft_move_back(map, V_MOVEMENT_INCREMENT);
+		ft_move_backward(map, map->prj->view_angle, V_MOVEMENT_INCREMENT);
 }
