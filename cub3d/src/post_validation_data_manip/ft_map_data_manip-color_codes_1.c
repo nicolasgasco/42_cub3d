@@ -32,7 +32,7 @@ struct s_cinfo	*ft_create_col_info_struct(char *line)
 				i++;
 			ft_skip_to_non_space_char(line, &i);
 			if (line[i] != '#' || ft_str_is_not_hex(line, i + 1))
-				ft_color_not_numeric_error();
+				ft_color_not_valid_error();
 			col_hex = ft_substr(line, i + 1, 6);
 			break ;
 		}

@@ -288,7 +288,7 @@ void			ft_raycast_to_slice(t_map *map);
 void			ft_validate_texture_files(t_map *map);
 void			ft_post_validation_data_manip(t_map *map);
 // Post validation data manip - Errros
-void			ft_color_not_numeric_error(void);
+void			ft_color_not_valid_error(void);
 void			ft_texture_file_invalid(t_map *map, void *mlx);
 // Post validation data manip - Floor/Ceiling Colors
 int				ft_rgb_str_to_int(char *col_str);
