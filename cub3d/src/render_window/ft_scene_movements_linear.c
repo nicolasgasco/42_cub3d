@@ -48,6 +48,8 @@ void	ft_move_leftward(t_map *map, double angle, int increment)
 	double	new_angle;
 
 	new_angle = angle - 90;
+	if (new_angle < 0)
+		new_angle = 360 + new_angle;
 	ft_move_backward(map, new_angle, increment);
 }
 
@@ -56,5 +58,7 @@ void	ft_move_rightward(t_map *map, double angle, int increment)
 	double	new_angle;
 
 	new_angle = angle - 90;
+	if (new_angle < 0)
+		new_angle = 360 + new_angle;
 	ft_move_forward(map, new_angle, increment);
 }
