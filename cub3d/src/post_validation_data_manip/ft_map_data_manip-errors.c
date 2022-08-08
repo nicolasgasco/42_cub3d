@@ -16,7 +16,7 @@
 void	ft_color_not_valid_error(void)
 {
 	ft_putendl_fd("Error: color code not valid", STDERR_FILENO);
-	exit(9999);
+	exit(13);
 }
 
 void	ft_texture_file_invalid(t_map *map, void *mlx)
@@ -25,5 +25,5 @@ void	ft_texture_file_invalid(t_map *map, void *mlx)
 	if (mlx)
 		free(mlx);
 	ft_putendl_fd("Error: texture file is invalid", STDERR_FILENO);
-	exit(1000);
+	exit(14);
 }

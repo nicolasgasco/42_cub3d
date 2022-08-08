@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cub3D
 FLAGS = -Wall -Wextra -Werror -Wno-unused-result
 SANITIZE = -g3 -fsanitize=address
 VALGRIND = -g -Og -std=gnu99
