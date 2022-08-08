@@ -79,13 +79,9 @@ int	ft_str_is_not_hex(char *str, int start)
 	{
 		if (i > (start + 5))
 			return (1);
-		if (ft_isalpha(str[i]))
-		{
-			if (str[i] < 'A' && str[i] > 'F')
-				return (1);
-			else if (str[i] < 'a' && str[i] > 'f')
-				return (1);
-		}
+		if (str[i] < '0' || (str[i] > '9' && str[i] < 'A')
+			|| (str[i] > 'F' && str[i] < 'a') || str[i] > 'f')
+			return (1);
 		i++;
 	}
 	return (0);
