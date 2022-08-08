@@ -36,6 +36,7 @@
 /* Events */
 # define ON_DESTROY 17
 # define ON_KEY_DOWN 2
+# define ON_MOUSE_MOVE 6
 
 /* Key bindings */
 // Linux
@@ -323,9 +324,8 @@ void			ft_render_view(t_map *map);
 void			ft_view_events(t_map *map);
 int				ft_close_window(t_map *map);
 int				ft_keyboard_events(int key, t_map *map);
-int				ft_mouse_events(int button, int x, int y, t_map *map);
-void			ft_mouse_rotation(int x, t_map *map);
-void			ft_mouse_v_movement(int y, t_map *map);
+int				ft_mouse_events(int x, int y, t_map *map);
+void			ft_mouse_rotation(int x, int y, t_map *map);
 
 /* Rendering textures */
 void			ft_render_raycasting_column(t_map *map);
