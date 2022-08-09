@@ -28,17 +28,17 @@ void	ft_mouse_rotation(int x, int y, t_map *map)
 
 	win_quarter = WIN_WIDTH / 4;
 	win_eighth = WIN_WIDTH / 8;
-	increment = 1;
+	increment = 2;
 	if (x <= win_quarter && y)
 	{
 		if (x <= win_eighth)
-			increment = 3;
+			increment = 4;
 		ft_rotate_leftward(map, map->prj->view_angle, increment);
 	}
 	else if (x >= (WIN_WIDTH - win_quarter))
 	{
 		if (x >= (WIN_WIDTH - win_eighth))
-			increment = 3;
-		ft_rotate_rightward(map, map->prj->view_angle, 1);
+			increment = 4;
+		ft_rotate_rightward(map, map->prj->view_angle, increment);
 	}
 }
