@@ -18,7 +18,7 @@ void	ft_render_game_scene(t_map *map)
 	if (map->view->plane_data->img)
 		mlx_destroy_image(map->view->mlx, map->view->plane_data->img);
 	map->view->plane_data->img = mlx_new_image(map->view->mlx,
-			WIN_WIDTH, WIN_HEIGHT);
+			WIN_WIDTH + 1, WIN_HEIGHT + 1);
 	ft_raycasting_calculation(map);
 }
 
