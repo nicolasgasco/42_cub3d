@@ -1,21 +1,21 @@
 
 
-NO ./path_to_the_north_texture
+NO ./tests/textures/path_to_the_north_texture
 
 
 C 225,30,0
 
 
-SO ./path_to_the_south_texture
+SO ./tests/textures/path_to_the_south_texture
 
 
-WE ./path_to_the_west_texture
+WE ./tests/textures/path_to_the_west_texture
 
 
 F 220,100,0
 
 
-EA ./path_to_the_east_texture
+EA ./tests/textures/path_to_the_east_texture
 
 
 
