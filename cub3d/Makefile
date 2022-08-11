@@ -38,8 +38,6 @@ SRC_NAME =	cub3d.c\
 		render_window/ft_scene_movements-linear.c\
 		render_window/ft_scene_movements-rotation.c\
 		render_window/ft_scene_movements-utils.c\
-		render_window/ft_scene_events-mouse_bonus.c\
-		render_window/ft_scene_movements-linear_bonus.c\
 		render_window/ft_scene_events-keyboard.c\
 		raycasting_calculation/ft_raycasting_calculation.c\
 		raycasting_calculation/ft_trigonometric_table.c\
@@ -75,15 +73,16 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C $(LIB_DIR) --silent
+	@make -C $(MLX_DIR) --silent
+	@gcc $(FLAGS) $(SANITIZE) -o $(NAME) $(OBJ) -L $(LIB_DIR) -lft $(MINILIB_MAC)
+	@echo "##### cub3d compiling finished! #####"
+
+linux: $(OBJ)
+	@make -C $(LIB_DIR) --silent
 	@make -C $(MLX_LINUX_DIR) --silent
 	@gcc $(FLAGS) $(SANITIZE) -o $(NAME) $(OBJ) -L $(LIB_DIR) -lft $(MINILIB_LINUX)
 	@echo "##### cub3d compiling finished! #####"
 
-mac: $(OBJ)
-	@make -C $(LIB_DIR) --silent
-	@make -C $(MLX_DIR) --silent
-	@gcc $(FLAGS) $(SANITIZE) -o $(NAME) $(OBJ) -L $(LIB_DIR) -lft $(MINILIB_MAC)
-	@echo "##### cub3d compiling finished! #####"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)$(SCN_DIR)
@@ -105,7 +104,7 @@ fclean: clean
 	@rm -f $(NAME)
 	@echo "##### Removed binary files #####"
 
-re: fclean mac
+re: fclean all
 
 test_validation:
 	@make re > /dev/null 2> /dev/null
