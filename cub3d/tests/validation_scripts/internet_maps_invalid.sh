@@ -14,7 +14,7 @@ DEBUG_FILE="debug_output"
 SCRIPT_PATH="./tests/validation_scripts/"
 
 internetMapsValid() {
-    ./cub3d $1 > /dev/null 2> "$SCRIPT_PATH$TEST_OUTPUT"
+    ./cub3D $1 > /dev/null 2> "$SCRIPT_PATH$TEST_OUTPUT"
 
     if [ $2 = "FC" ]
     then
@@ -51,29 +51,29 @@ internetMapsValid() {
         exit 1
     fi
 
-    # Leaks check
-    $VALGRIND ./cub3d $1 > /dev/null 2> "$SCRIPT_PATH$VALGRIND_OUTPUT"
-    VALGRIND_ERRORS=$(cat $SCRIPT_PATH$VALGRIND_OUTPUT | grep "in use at exit: 0 bytes in 0 blocks" | wc -l)
-    if [ $VALGRIND_ERRORS -eq  1 ]
-    then
-        echo "        ${GREEN}No memory leaks detected 👍${NC}"
-    else
-        echo "        ${RED}Memory leaks detected ⛔${NC}"
-        echo "\n$(less $SCRIPT_PATH$VALGRIND_OUTPUT)"
-        exit 1
-    fi
+    # # Leaks check
+    # $VALGRIND ./cub3D $1 > /dev/null 2> "$SCRIPT_PATH$VALGRIND_OUTPUT"
+    # VALGRIND_ERRORS=$(cat $SCRIPT_PATH$VALGRIND_OUTPUT | grep "in use at exit: 0 bytes in 0 blocks" | wc -l)
+    # if [ $VALGRIND_ERRORS -eq  1 ]
+    # then
+    #     echo "        ${GREEN}No memory leaks detected 👍${NC}"
+    # else
+    #     echo "        ${RED}Memory leaks detected ⛔${NC}"
+    #     echo "\n$(less $SCRIPT_PATH$VALGRIND_OUTPUT)"
+    #     exit 1
+    # fi
     
-    # Errors check
-    VALGRIND_ERRORS=$(cat $SCRIPT_PATH$VALGRIND_OUTPUT | grep "ERROR SUMMARY: 0 errors from 0 contexts" | wc -l)
-    if [ $VALGRIND_ERRORS -eq  1 ]
-    then
-        echo "        ${GREEN}No Valgrind errors found 👍${NC}"
-    else
-        echo "        ${RED}Valgrind errors found ⛔${NC}"
-        echo "\n$(less $SCRIPT_PATH$VALGRIND_OUTPUT)"
-        exit 1
-    fi
-    echo "=========================================================================================================="
+    # # Errors check
+    # VALGRIND_ERRORS=$(cat $SCRIPT_PATH$VALGRIND_OUTPUT | grep "ERROR SUMMARY: 0 errors from 0 contexts" | wc -l)
+    # if [ $VALGRIND_ERRORS -eq  1 ]
+    # then
+    #     echo "        ${GREEN}No Valgrind errors found 👍${NC}"
+    # else
+    #     echo "        ${RED}Valgrind errors found ⛔${NC}"
+    #     echo "\n$(less $SCRIPT_PATH$VALGRIND_OUTPUT)"
+    #     exit 1
+    # fi
+    # echo "=========================================================================================================="
 }
 
 for file in ./tests/maps/invalid_maps/*

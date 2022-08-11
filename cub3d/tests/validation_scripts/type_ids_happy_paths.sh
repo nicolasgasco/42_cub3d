@@ -13,10 +13,11 @@ TEST_OUTPUT="test_output"
 VALGRIND_OUTPUT="valgrind_output"
 TEST_FILE="test_map.cub"
 DEBUG_FILE="debug_output"
+TEXTURE_PATH="./tests/textures/"
 
 executeErrorTest() {
     echo "$2" > $SCRIPT_PATH$TEST_FILE
-    ./cub3d "$SCRIPT_PATH$TEST_FILE" > /dev/null 2> "$SCRIPT_PATH$TEST_OUTPUT"
+    ./cub3D "$SCRIPT_PATH$TEST_FILE" > /dev/null 2> "$SCRIPT_PATH$TEST_OUTPUT"
 
     # Output check
     if [ "$(cat $SCRIPT_PATH$DEBUG_FILE)" = "$1" ]
@@ -36,37 +37,37 @@ executeErrorTest() {
         exit 1
     fi
 
-    # Leaks check
-    $VALGRIND ./cub3d "$SCRIPT_PATH$TEST_FILE" > /dev/null 2> "$SCRIPT_PATH$VALGRIND_OUTPUT"
-    VALGRIND_ERRORS=$(cat $SCRIPT_PATH$VALGRIND_OUTPUT | grep "in use at exit: 0 bytes in 0 blocks" | wc -l)
-    if [ $VALGRIND_ERRORS -eq  1 ]
-    then
-        echo "        ${GREEN}No memory leaks detected 👍${NC}"
-    else
-        echo "        ${RED}Memory leaks detected ⛔${NC}"
-        echo "\n$(less $SCRIPT_PATH$VALGRIND_OUTPUT)"
-        exit 1
-    fi
+    # # Leaks check
+    # $VALGRIND ./cub3D "$SCRIPT_PATH$TEST_FILE" > /dev/null 2> "$SCRIPT_PATH$VALGRIND_OUTPUT"
+    # VALGRIND_ERRORS=$(cat $SCRIPT_PATH$VALGRIND_OUTPUT | grep "in use at exit: 0 bytes in 0 blocks" | wc -l)
+    # if [ $VALGRIND_ERRORS -eq  1 ]
+    # then
+    #     echo "        ${GREEN}No memory leaks detected 👍${NC}"
+    # else
+    #     echo "        ${RED}Memory leaks detected ⛔${NC}"
+    #     echo "\n$(less $SCRIPT_PATH$VALGRIND_OUTPUT)"
+    #     exit 1
+    # fi
     
-    # Errors check
-    VALGRIND_ERRORS=$(cat $SCRIPT_PATH$VALGRIND_OUTPUT | grep "ERROR SUMMARY: 0 errors from 0 contexts" | wc -l)
-    if [ $VALGRIND_ERRORS -eq  1 ]
-    then
-        echo "        ${GREEN}No Valgrind errors found 👍${NC}"
-    else
-        echo "        ${RED}Valgrind errors found ⛔${NC}"
-        echo "\n$(less $SCRIPT_PATH$VALGRIND_OUTPUT)"
-        exit 1
-    fi
-    echo "=========================================================================================================="
+    # # Errors check
+    # VALGRIND_ERRORS=$(cat $SCRIPT_PATH$VALGRIND_OUTPUT | grep "ERROR SUMMARY: 0 errors from 0 contexts" | wc -l)
+    # if [ $VALGRIND_ERRORS -eq  1 ]
+    # then
+    #     echo "        ${GREEN}No Valgrind errors found 👍${NC}"
+    # else
+    #     echo "        ${RED}Valgrind errors found ⛔${NC}"
+    #     echo "\n$(less $SCRIPT_PATH$VALGRIND_OUTPUT)"
+    #     exit 1
+    # fi
+    # echo "=========================================================================================================="
 }
 
 echo "\n${YELLOW}TYPE IDS HAPPY PATH:${NC}\n"
 
-MAP_CONTENT="NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+MAP_CONTENT="NO ${TEXTURE_PATH}path_to_the_north_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture
+WE ${TEXTURE_PATH}path_to_the_west_texture
+EA ${TEXTURE_PATH}path_to_the_east_texture
 F 220,100,0
 C 225,30,0"
 DEBUG_MSG="Type ids validated successfully"
@@ -75,10 +76,10 @@ executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
 
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ${TEXTURE_PATH}path_to_the_north_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture
+WE ${TEXTURE_PATH}path_to_the_west_texture
+EA ${TEXTURE_PATH}path_to_the_east_texture
 F 220,100,0
 C 225,30,0
 
@@ -87,10 +88,10 @@ DEBUG_MSG="Type ids validated successfully"
 DESCRIPTION="Regular file with newlines"
 executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="   NO ./path_to_the_north_texture
-   SO ./path_to_the_south_texture
-   WE ./path_to_the_west_texture
-   EA ./path_to_the_east_texture
+MAP_CONTENT="   NO ${TEXTURE_PATH}path_to_the_north_texture
+   SO ${TEXTURE_PATH}path_to_the_south_texture
+   WE ${TEXTURE_PATH}path_to_the_west_texture
+   EA ${TEXTURE_PATH}path_to_the_east_texture
    F 220,100,0
    C 225,30,0
    
@@ -99,10 +100,10 @@ DEBUG_MSG="Type ids validated successfully"
 DESCRIPTION="Regular file with spaces before"
 executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="NO ./path_to_the_north_texture   
-SO ./path_to_the_south_texture   
-WE ./path_to_the_west_texture   
-EA ./path_to_the_east_texture   
+MAP_CONTENT="NO ${TEXTURE_PATH}path_to_the_north_texture   
+SO ${TEXTURE_PATH}path_to_the_south_texture   
+WE ${TEXTURE_PATH}path_to_the_west_texture   
+EA ${TEXTURE_PATH}path_to_the_east_texture   
 F 220,100,0   
 C 225,30,0   
       
@@ -111,10 +112,10 @@ DEBUG_MSG="Type ids validated successfully"
 DESCRIPTION="Regular file with spaces after"
 executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="   NO ./path_to_the_north_texture   
-   SO ./path_to_the_south_texture   
-   WE ./path_to_the_west_texture   
-   EA ./path_to_the_east_texture   
+MAP_CONTENT="   NO ${TEXTURE_PATH}path_to_the_north_texture   
+   SO ${TEXTURE_PATH}path_to_the_south_texture   
+   WE ${TEXTURE_PATH}path_to_the_west_texture   
+   EA ${TEXTURE_PATH}path_to_the_east_texture   
    F 220,100,0   
    C 225,30,0   
    
@@ -123,13 +124,13 @@ DEBUG_MSG="Type ids validated successfully"
 DESCRIPTION="Regular file with spaces before and after"
 executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="NO ./path_to_the_north_texture
+MAP_CONTENT="NO ${TEXTURE_PATH}path_to_the_north_texture
 
-SO ./path_to_the_south_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture
 
-WE ./path_to_the_west_texture
+WE ${TEXTURE_PATH}path_to_the_west_texture
 
-EA ./path_to_the_east_texture
+EA ${TEXTURE_PATH}path_to_the_east_texture
 
 F 220,100,0
 
@@ -138,13 +139,13 @@ DEBUG_MSG="Type ids validated successfully"
 DESCRIPTION="Regular file with 1 nl inbetween"
 executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="NO ./path_to_the_north_texture
+MAP_CONTENT="NO ${TEXTURE_PATH}path_to_the_north_texture
    
-SO ./path_to_the_south_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture
    
-WE ./path_to_the_west_texture
+WE ${TEXTURE_PATH}path_to_the_west_texture
    
-EA ./path_to_the_east_texture
+EA ${TEXTURE_PATH}path_to_the_east_texture
    
 F 220,100,0
    
@@ -153,16 +154,16 @@ DEBUG_MSG="Type ids validated successfully"
 DESCRIPTION="Regular file with 1 nl + spaces inbetween"
 executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="NO ./path_to_the_north_texture
+MAP_CONTENT="NO ${TEXTURE_PATH}path_to_the_north_texture
 
 
-SO ./path_to_the_south_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture
 
 
-WE ./path_to_the_west_texture
+WE ${TEXTURE_PATH}path_to_the_west_texture
 
 
-EA ./path_to_the_east_texture
+EA ${TEXTURE_PATH}path_to_the_east_texture
 
 
 F 220,100,0
@@ -173,16 +174,16 @@ DEBUG_MSG="Type ids validated successfully"
 DESCRIPTION="Regular file with 2 nl inbetween"
 executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="NO ./path_to_the_north_texture
+MAP_CONTENT="NO ${TEXTURE_PATH}path_to_the_north_texture
    
 
-SO ./path_to_the_south_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture
    
 
-WE ./path_to_the_west_texture
+WE ${TEXTURE_PATH}path_to_the_west_texture
    
 
-EA ./path_to_the_east_texture
+EA ${TEXTURE_PATH}path_to_the_east_texture
    
 
 F 220,100,0
@@ -193,10 +194,10 @@ DEBUG_MSG="Type ids validated successfully"
 DESCRIPTION="Regular file with 2 nl + spaces inbetween"
 executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+MAP_CONTENT="NO ${TEXTURE_PATH}path_to_the_north_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture
+WE ${TEXTURE_PATH}path_to_the_west_texture
+EA ${TEXTURE_PATH}path_to_the_east_texture
 
 F 220,100,0
 C 225,30,0"
@@ -204,10 +205,10 @@ DEBUG_MSG="Type ids validated successfully"
 DESCRIPTION="Orientation chars separated by colors with nl"
 executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+MAP_CONTENT="NO ${TEXTURE_PATH}path_to_the_north_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture
+WE ${TEXTURE_PATH}path_to_the_west_texture
+EA ${TEXTURE_PATH}path_to_the_east_texture
 
 F 220,100,0
 C 225,30,0"
@@ -215,10 +216,10 @@ DEBUG_MSG="Type ids validated successfully"
 DESCRIPTION="Orientation chars separated by colors with nl + spaces"
 executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+MAP_CONTENT="NO ${TEXTURE_PATH}path_to_the_north_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture
+WE ${TEXTURE_PATH}path_to_the_west_texture
+EA ${TEXTURE_PATH}path_to_the_east_texture
 
 
 F 220,100,0
@@ -227,10 +228,10 @@ DEBUG_MSG="Type ids validated successfully"
 DESCRIPTION="Orientation chars separated by colors with 2 nl"
 executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
 
-MAP_CONTENT="NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+MAP_CONTENT="NO ${TEXTURE_PATH}path_to_the_north_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture
+WE ${TEXTURE_PATH}path_to_the_west_texture
+EA ${TEXTURE_PATH}path_to_the_east_texture
    
    
 F 220,100,0
@@ -242,10 +243,10 @@ executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
 MAP_CONTENT="
 F 220,100,0
 C 225,30,0
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture"
+NO ${TEXTURE_PATH}path_to_the_north_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture
+WE ${TEXTURE_PATH}path_to_the_west_texture
+EA ${TEXTURE_PATH}path_to_the_east_texture"
 DEBUG_MSG="Type ids validated successfully"
 DESCRIPTION="Colors first"
 executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
@@ -254,20 +255,20 @@ executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
 MAP_CONTENT="
 C 225,30,0
 F 220,100,0
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture"
+NO ${TEXTURE_PATH}path_to_the_north_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture
+WE ${TEXTURE_PATH}path_to_the_west_texture
+EA ${TEXTURE_PATH}path_to_the_east_texture"
 DEBUG_MSG="Type ids validated successfully"
 DESCRIPTION="Colors first and swapped"
 executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
 C 225,30,0
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ${TEXTURE_PATH}path_to_the_north_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture
+WE ${TEXTURE_PATH}path_to_the_west_texture
+EA ${TEXTURE_PATH}path_to_the_east_texture
 F 220,100,0
 "
 DEBUG_MSG="Type ids validated successfully"
@@ -275,24 +276,24 @@ DESCRIPTION="Colors first and last"
 executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-NO ./path_to_the_north_texture
+NO ${TEXTURE_PATH}path_to_the_north_texture
 C 225,30,0
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture
+WE ${TEXTURE_PATH}path_to_the_west_texture
 F 220,100,0
-EA ./path_to_the_east_texture
+EA ${TEXTURE_PATH}path_to_the_east_texture
 "
 DEBUG_MSG="Type ids validated successfully"
 DESCRIPTION="Scrambled view"
 executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-    NO ./path_to_the_north_texture     
+    NO ${TEXTURE_PATH}path_to_the_north_texture     
      C 225,30,0             
-            SO ./path_to_the_south_texture      
-         WE ./path_to_the_west_texture   
+            SO ${TEXTURE_PATH}path_to_the_south_texture      
+         WE ${TEXTURE_PATH}path_to_the_west_texture   
     F 220,100,0     
- EA ./path_to_the_east_texture                                      
+ EA ${TEXTURE_PATH}path_to_the_east_texture                                      
 
 
 
@@ -304,22 +305,22 @@ executeErrorTest "$DEBUG_MSG" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
 
-NO ./path_to_the_north_texture
+NO ${TEXTURE_PATH}path_to_the_north_texture
 
 
 C 225,30,0
 
 
-SO ./path_to_the_south_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture
 
 
-WE ./path_to_the_west_texture
+WE ${TEXTURE_PATH}path_to_the_west_texture
 
 
 F 220,100,0
 
 
-EA ./path_to_the_east_texture
+EA ${TEXTURE_PATH}path_to_the_east_texture
 
 
 "
