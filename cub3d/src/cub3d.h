@@ -325,8 +325,6 @@ void			ft_render_view(t_map *map);
 void			ft_view_events(t_map *map);
 int				ft_close_window(t_map *map);
 int				ft_keyboard_events(int key, t_map *map);
-int				ft_mouse_events(int x, int y, t_map *map);
-void			ft_mouse_rotation(int x, int y, t_map *map);
 
 /* Rendering textures */
 void			ft_render_raycasting_column(t_map *map);
@@ -344,11 +342,6 @@ void			ft_rotate_leftward(t_map *map, double angle, int increment);
 void			ft_rotate_rightward(t_map *map, double angle, int increment);
 /* Player movements - Utils */
 int				ft_angle_to_degrees(int angle);
-char			ft_get_current_map_char(t_map *map, double x, double y);
-double			ft_forward_movement_hits_wall(t_map *map, double v_increase,
-					double l_increase);
-double			ft_backward_movement_hits_wall(t_map *map, double v_increase,
-					double l_increase);
 
 /* scaling textures */
 void			ft_render_scaled_texture(t_map *map);
