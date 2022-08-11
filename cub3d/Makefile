@@ -1,6 +1,6 @@
 NAME = cub3D
 FLAGS = -Wall -Wextra -Werror -Wno-unused-result
-SANITIZE = -g3 -fsanitize=address
+SANITIZE =
 VALGRIND = -g -Og -std=gnu99
 INC = -I%.h -I$(LIB_DIR)%.h -I/usr/include -Imlx_linux -O3
 MINILIB_LINUX= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
@@ -35,10 +35,11 @@ SRC_NAME =	cub3d.c\
 		render_window/ft_render_scene.c\
 		render_window/ft_render_scene-texture.c\
 		render_window/ft_scene_events.c\
-		render_window/ft_scene_movements_linear.c\
-		render_window/ft_scene_movements_rotation.c\
+		render_window/ft_scene_movements-linear.c\
+		render_window/ft_scene_movements-rotation.c\
 		render_window/ft_scene_movements-utils.c\
-		render_window/ft_scene_events-mouse.c\
+		render_window/ft_scene_events-mouse_bonus.c\
+		render_window/ft_scene_movements-linear_bonus.c\
 		render_window/ft_scene_events-keyboard.c\
 		raycasting_calculation/ft_raycasting_calculation.c\
 		raycasting_calculation/ft_trigonometric_table.c\
