@@ -16,6 +16,5 @@
 void	ft_view_events(t_map *map)
 {
 	mlx_hook(map->view->mlx_win, ON_KEY_DOWN, 1L << 0, ft_keyboard_events, map);
-	mlx_hook(map->view->mlx_win, ON_MOUSE_MOVE, 1L << 6, ft_mouse_events, map); // Remove for mandatory
 	mlx_hook(map->view->mlx_win, ON_DESTROY, 1L << 0, ft_close_window, map);
 }
