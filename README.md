@@ -1,8 +1,9 @@
+
 # 42_cube3d
 # cube3d
 42 group project done by [@nicolasgasco](https://github.com/nicolasgasco) and [@isolinis](https://github.com/isolinis). A small 3D video game inspired by Wolfenstein 3D that leverages raycasting to create a false sense of tridimensionality. Written in C using 42 homebrewed graphical API [miniLibX](https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html).
 
-<img width="1500" src="https://res.cloudinary.com/ngasco/image/upload/v1660320174/42/screencast-nimbus-capture-2022.08.12-17_53_56_lqj089.gif" />
+![screencast-nimbus-capture-2022_08_12-17_53_56_lqj089](https://user-images.githubusercontent.com/73175085/184505477-a271ac22-ed26-4a7a-bd68-f12efd6a4ced.gif)
 
 The map to render is represented by a scene description file that is passed as argument to the program. It roughly follows this scheme:
 ```
