@@ -6,7 +6,7 @@
 /*   By: jsolinis <jsolinis@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 17:32:27 by jsolinis          #+#    #+#             */
-/*   Updated: 2022/08/07 20:23:00 by jsolinis         ###   ########.fr       */
+/*   Updated: 2022/08/14 20:41:00 by jsolinis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_hit(t_map *map, t_vector position, int angle)
 		y = ceil(position.y) / map->texture_size;
 	else
 		y = floor(position.y) / map->texture_size;
-	if (ft_is_facing_right(angle))
+	if (ft_is_facing_right(angle) == 0)
 		x = ceil(position.x) / map->texture_size;
 	else
 		x = floor(position.x) / map->texture_size;
