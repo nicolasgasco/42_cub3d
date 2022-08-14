@@ -12,10 +12,11 @@ VALGRIND="valgrind --leak-check=full --show-leak-kinds=all"
 TEST_OUTPUT="test_output"
 VALGRIND_OUTPUT="valgrind_output"
 TEST_FILE="test_map.cub"
+TEXTURE_PATH="./tests/textures/"
 
 executeOrientationErrors() {
     echo "$2" > $SCRIPT_PATH$TEST_FILE
-    ./cub3d "$SCRIPT_PATH$TEST_FILE" > /dev/null 2> "$SCRIPT_PATH$TEST_OUTPUT"
+    ./cub3D "$SCRIPT_PATH$TEST_FILE" > /dev/null 2> "$SCRIPT_PATH$TEST_OUTPUT"
 
     # Output check
     if [ "$(cat $SCRIPT_PATH$TEST_OUTPUT)" = "$1" ]
@@ -35,33 +36,33 @@ executeOrientationErrors() {
         exit 1
     fi
 
-    # Leaks check
-    $VALGRIND ./cub3d "$SCRIPT_PATH$TEST_FILE" > /dev/null 2> "$SCRIPT_PATH$VALGRIND_OUTPUT"
-    VALGRIND_ERRORS=$(cat $SCRIPT_PATH$VALGRIND_OUTPUT | grep "in use at exit: 0 bytes in 0 blocks" | wc -l)
-    if [ $VALGRIND_ERRORS -eq  1 ]
-    then
-        echo "        ${GREEN}No memory leaks detected 👍${NC}"
-    else
-        echo "        ${RED}Memory leaks detected ⛔${NC}"
-        echo "\n$(less $SCRIPT_PATH$VALGRIND_OUTPUT)"
-        exit 1
-    fi
+    # # Leaks check
+    # $VALGRIND ./cub3D "$SCRIPT_PATH$TEST_FILE" > /dev/null 2> "$SCRIPT_PATH$VALGRIND_OUTPUT"
+    # VALGRIND_ERRORS=$(cat $SCRIPT_PATH$VALGRIND_OUTPUT | grep "in use at exit: 0 bytes in 0 blocks" | wc -l)
+    # if [ $VALGRIND_ERRORS -eq  1 ]
+    # then
+    #     echo "        ${GREEN}No memory leaks detected 👍${NC}"
+    # else
+    #     echo "        ${RED}Memory leaks detected ⛔${NC}"
+    #     echo "\n$(less $SCRIPT_PATH$VALGRIND_OUTPUT)"
+    #     exit 1
+    # fi
     
-    # Errors check
-    VALGRIND_ERRORS=$(cat $SCRIPT_PATH$VALGRIND_OUTPUT | grep "ERROR SUMMARY: 0 errors from 0 contexts" | wc -l)
-    if [ $VALGRIND_ERRORS -eq  1 ]
-    then
-        echo "        ${GREEN}No Valgrind errors found 👍${NC}"
-    else
-        echo "        ${RED}Valgrind errors found ⛔${NC}"
-        echo "\n$(less $SCRIPT_PATH$VALGRIND_OUTPUT)"
-        exit 1
-    fi
-    echo "=========================================================================================================="
+    # # Errors check
+    # VALGRIND_ERRORS=$(cat $SCRIPT_PATH$VALGRIND_OUTPUT | grep "ERROR SUMMARY: 0 errors from 0 contexts" | wc -l)
+    # if [ $VALGRIND_ERRORS -eq  1 ]
+    # then
+    #     echo "        ${GREEN}No Valgrind errors found 👍${NC}"
+    # else
+    #     echo "        ${RED}Valgrind errors found ⛔${NC}"
+    #     echo "\n$(less $SCRIPT_PATH$VALGRIND_OUTPUT)"
+    #     exit 1
+    # fi
+    # echo "=========================================================================================================="
 }
 
-VALID_O_PATHS="EA path_to_the_east_texture
-SO path_to_the_south_texture"
+VALID_O_PATHS="EA ${TEXTURE_PATH}path_to_the_east_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture"
 
 echo "\n${YELLOW}EMPTY FILE ERRORS:${NC}\n"
 
@@ -215,33 +216,33 @@ DESCRIPTION="Invalid path (\')"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-WE path_to_the_west_texture
-SO path_to_the_south_texture
-NO path_to_the_east_texture path_to_file"
+WE ${TEXTURE_PATH}path_to_the_west_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture
+NO ${TEXTURE_PATH}path_to_the_east_texture path_to_file"
 ERR_MESSAGE="Error: invalid orientation path"
 DESCRIPTION="Double path"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-WE path_to_the_west_texture
-SO path_to_the_south_texture
-NO path_to_the_east_texture path_to_file path_to_file"
+WE ${TEXTURE_PATH}path_to_the_west_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture
+NO ${TEXTURE_PATH}path_to_the_east_texture path_to_file path_to_file"
 ERR_MESSAGE="Error: invalid orientation path"
 DESCRIPTION="Triple path"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-WE path_to_the_west_texture
-SO path_to_the_south_texture
-NO path_to_the_east_texture F 200,200,200"
+WE ${TEXTURE_PATH}path_to_the_west_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture
+NO ${TEXTURE_PATH}path_to_the_east_texture F 200,200,200"
 ERR_MESSAGE="Error: invalid orientation path"
 DESCRIPTION="Second path is color statement"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"
 
 MAP_CONTENT="
-WE path_to_the_west_texture
-SO path_to_the_south_texture
-NO path_to_the_east_texture                                         path"
+WE ${TEXTURE_PATH}path_to_the_west_texture
+SO ${TEXTURE_PATH}path_to_the_south_texture
+NO ${TEXTURE_PATH}path_to_the_east_texture                                         path"
 ERR_MESSAGE="Error: invalid orientation path"
 DESCRIPTION="Second path with spaces"
 executeOrientationErrors "$ERR_MESSAGE" "$MAP_CONTENT" "$DESCRIPTION"

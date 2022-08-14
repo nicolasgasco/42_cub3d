@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-wE ./path_to_the_west_texture
-SO ./path_to_the_south_texture
-EA ./path_to_the_east_texture
+NO ./tests/textures/path_to_the_north_texture
+wE ./tests/textures/path_to_the_west_texture
+SO ./tests/textures/path_to_the_south_texture
+EA ./tests/textures/path_to_the_east_texture
 F 00,153,15
 C 255,255,255
 

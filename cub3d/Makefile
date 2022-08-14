@@ -1,8 +1,10 @@
-NAME = cub3d
-FLAGS = -Wall -Wextra -Werror
-SANITIZE = -g3 -fsanitize=address
+NAME = cub3D
+FLAGS = -Wall -Wextra -Werror -Wno-unused-result
+SANITIZE =
 VALGRIND = -g -Og -std=gnu99
-INC = -I%.h -I$(LIB_DIR)%.h
+INC = -I%.h -I$(LIB_DIR)%.h -I/usr/include -Imlx_linux -O3
+MINILIB_LINUX= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+MINILIB_MAC = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 SRC_NAME =	cub3d.c\
 		scene_desc_file_validation/ft_scene_desc_file_validation.c\
@@ -19,14 +21,40 @@ SRC_NAME =	cub3d.c\
 		scene_desc_file_validation/ft_map_content_validation-map_content.c\
 		scene_desc_file_validation/ft_type_ids_validation-errors_0.c\
 		scene_desc_file_validation/ft_type_ids_validation-errors_1.c\
+		post_validation_data_manip/ft_map_data_manip.c\
+		post_validation_data_manip/ft_map_data_manip-fc_colors.c\
+		post_validation_data_manip/ft_map_data_manip-asset_sizes.c\
+		post_validation_data_manip/ft_map_data_manip-color_codes_0.c\
+		post_validation_data_manip/ft_map_data_manip-color_codes_1.c\
+		post_validation_data_manip/ft_map_data_manip-char_map.c\
+		post_validation_data_manip/ft_map_data_manip-asset_validation.c\
+		post_validation_data_manip/ft_map_data_manip-errors.c\
+		post_validation_data_manip/ft_map_data_manip-texture_files.c\
+		post_validation_data_manip/ft_map_data_manip-asset_sizes_validation.c\
+		render_window/ft_render_view.c\
+		render_window/ft_render_scene.c\
+		render_window/ft_render_scene-texture.c\
+		render_window/ft_scene_events.c\
+		render_window/ft_scene_movements-linear.c\
+		render_window/ft_scene_movements-rotation.c\
+		render_window/ft_scene_movements-utils.c\
+		render_window/ft_scene_events-keyboard.c\
+		render_window/ft_scene_movements-collisions.c\
+		raycasting_calculation/ft_raycasting_calculation.c\
+		raycasting_calculation/ft_trigonometric_table.c\
+		raycasting_calculation/ft_increment_table.c\
 		utils/get_next_line.c\
 		utils/ft_utils_0.c\
 		utils/ft_utils_1.c\
 		utils/ft_map_utils.c\
 		utils/ft_map_content_utils.c\
 		utils/ft_common_errs.c\
-		utils/ft_free.c\
+		utils/ft_free_0.c\
+		utils/ft_free_1.c\
 		utils/ft_debug.c\
+		utils/ft_raycast_utils.c\
+		utils/ft_raycast_utils1.c\
+		utils/ft_render_utils.c\
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ = $(addprefix $(OBJ_DIR),$(OBJ_NAME))
@@ -34,19 +62,35 @@ OBJ = $(addprefix $(OBJ_DIR),$(OBJ_NAME))
 LIB_DIR = ./Libft/
 SRC_DIR = ./src/
 SCN_DIR = scene_desc_file_validation/
+RCC_DIR = raycasting_calculation/
+WIN_DIR = render_window/
+DATA_MANIP_DIR = post_validation_data_manip/
 UTL_DIR = utils/
 OBJ_DIR = ./obj/
+MLX_DIR = ./mlx/
+MLX_LINUX_DIR = ./mlx_linux/
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C $(LIB_DIR) --silent
-	@gcc $(FLAGS) $(SANITIZE) -o $(NAME) $(OBJ) -L $(LIB_DIR) -lft
+	@make -C $(MLX_DIR) --silent
+	@gcc $(FLAGS) $(SANITIZE) -o $(NAME) $(OBJ) -L $(LIB_DIR) -lft $(MINILIB_MAC)
 	@echo "##### cub3d compiling finished! #####"
+
+linux: $(OBJ)
+	@make -C $(LIB_DIR) --silent
+	@make -C $(MLX_LINUX_DIR) --silent
+	@gcc $(FLAGS) $(SANITIZE) -o $(NAME) $(OBJ) -L $(LIB_DIR) -lft $(MINILIB_LINUX)
+	@echo "##### cub3d compiling finished! #####"
+
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)$(SCN_DIR)
+	@mkdir -p $(OBJ_DIR)$(DATA_MANIP_DIR)
 	@mkdir -p $(OBJ_DIR)$(UTL_DIR)
+	@mkdir -p $(OBJ_DIR)$(RCC_DIR)
+	@mkdir -p $(OBJ_DIR)$(WIN_DIR)
 	@echo "##### Creating" [ $@ ] " #####"
 	@gcc $(FLAGS) $(SANITIZE) -o $@ -c $< $(INC)
 
@@ -67,4 +111,4 @@ test_validation:
 	@make re > /dev/null 2> /dev/null
 	@sh tests/validation_tests.sh
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re test mac

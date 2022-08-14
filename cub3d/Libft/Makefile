@@ -13,6 +13,7 @@ SRCS =	ft_strlen.c		\
 		ft_strdup.c     \
 		ft_strjoin.c    \
 		ft_itoa.c       \
+		ft_isalpha.c    \
 		
 NAME = libft.a
 
