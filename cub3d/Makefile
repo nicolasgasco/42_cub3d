@@ -39,6 +39,7 @@ SRC_NAME =	cub3d.c\
 		render_window/ft_scene_movements-rotation.c\
 		render_window/ft_scene_movements-utils.c\
 		render_window/ft_scene_events-keyboard.c\
+		render_window/ft_scene_movements-collisions.c\
 		raycasting_calculation/ft_raycasting_calculation.c\
 		raycasting_calculation/ft_trigonometric_table.c\
 		raycasting_calculation/ft_increment_table.c\
