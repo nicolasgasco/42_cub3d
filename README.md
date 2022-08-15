@@ -26,4 +26,19 @@ The project roughly involved:
 ## Features
 - Different texture for each orientation (North, South, West, East)
 - Customizable ceiling and floor colors
-- Player movement (vertical with `W` and `S`, horizontal with `A` and `D`, and view rotation with left and right arrow keys.
+- Player movement (vertical with `W` and `S`, horizontal with `A` and `D`)
+- View rotation with left and right arrow keys in mandatory (`src` folder) and by moving the mouse horizontally in bonus (`bonus` folder).
+
+## Run the program
+```
+git clone https://github.com/nicolasgasco/42_cub3d.git
+cd 42_cub3d
+
+# For mandatory
+make
+./cub3D /maps/scene.cub
+
+# For bonus
+make bonus
+./cub3D_bonus /maps/scene.cub
+```
