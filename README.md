@@ -28,7 +28,7 @@ The project roughly involved:
 - Adding player movement
 
 ## Features
-- Different texture for each orientation (North, South, West, East)
+- Customizable textures (XPM) that vary according to orientation (North, South, West, East)
 - Customizable ceiling and floor colors
 - Player movement (vertical with `W` and `S`, horizontal with `A` and `D`)
 - View rotation with left and right arrow keys in mandatory (`src` folder) and by moving the mouse horizontally in bonus (`bonus` folder).
