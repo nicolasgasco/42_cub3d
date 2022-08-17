@@ -24,7 +24,8 @@ The project roughly involved:
   111111
   ```
 - Transforming the data in a way that can be easily fed to the graphical API
-- Doing the raycasting calculation to render the scene and adding player movement
+- Doing the raycasting calculation to render the scene
+- Adding player movement
 
 ## Features
 - Different texture for each orientation (North, South, West, East)
