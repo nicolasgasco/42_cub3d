@@ -1,6 +1,6 @@
 
 # Cube3D
-42 group project done by [@nicolasgasco](https://github.com/nicolasgasco) and [@isolinis](https://github.com/isolinis). Small 3D video game inspired by _Wolfenstein 3D_ that leverages [raycasting](https://en.wikipedia.org/wiki/Ray_casting) to create a sense of tridimensionality. Written in C using 42 homebrewed graphical API [miniLibX](https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html).
+42 group project done by [@nicolasgasco](https://github.com/nicolasgasco) and [@isolinis](https://github.com/isolinis). Small 3D video game inspired by _Wolfenstein 3D_ that leverages [raycasting](https://en.wikipedia.org/wiki/Ray_casting) to create a sense of tridimensionality. Written in C using 42's own graphical API [miniLibX](https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html).
 
 ![screencast-nimbus-capture-2022_08_12-17_53_56_lqj089](https://user-images.githubusercontent.com/73175085/184505477-a271ac22-ed26-4a7a-bd68-f12efd6a4ced.gif)
 
