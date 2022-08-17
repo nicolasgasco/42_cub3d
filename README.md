@@ -33,7 +33,7 @@ The project roughly involved:
 - Player movement (vertical with `W` and `S`, horizontal with `A` and `D`)
 - View rotation with left and right arrow keys in mandatory (`src` folder) and by moving the mouse horizontally in bonus (`bonus` folder).
 
-## Run the program
+## Run the program (macOs only)
 ```
 git clone https://github.com/nicolasgasco/42_cub3d.git
 cd 42_cub3d
