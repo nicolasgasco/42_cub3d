@@ -8,12 +8,17 @@
 The project roughly involved:
 - Parsing and validating the scene description file passed as argument to the program, as shown in this example:
   ```
+  // Textures according to orientation
   NO ./path_to_the_north_texture
   SO ./path_to_the_south_texture
   WE ./path_to_the_west_texture
   EA ./path_to_the_east_texture
+  
+  // Floor and ceiling colors
   F 220,100,0
   C 225,30,0
+  
+  // Map
   111111
   100001
   111111
