@@ -34,11 +34,11 @@ The project roughly involved:
 git clone https://github.com/nicolasgasco/42_cub3d.git
 cd 42_cub3d
 
-# For mandatory
+# For mandatory (player rotation with arrow keys)
 make
 ./cub3D /maps/scene.cub
 
-# For bonus
+# For bonus (player rotation with mouse)
 make bonus
 ./cub3D_bonus /maps/scene.cub
 ```
